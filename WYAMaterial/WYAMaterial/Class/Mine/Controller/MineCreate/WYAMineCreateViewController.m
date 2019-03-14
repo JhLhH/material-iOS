@@ -1,34 +1,33 @@
 //
-//  WYAMaterialViewController.m
+//  WYAMineCreateViewController.m
 //  WYAMaterial
 //
 //  Created by 李俊恒 on 2019/3/14.
 //  Copyright © 2019 WeiYiAn. All rights reserved.
 //
 
-#import "WYAMaterialViewController.h"
+#import "WYAMineCreateViewController.h"
+#import "WYAMineCreateMaterialViewController.h"
+#import "WYAMineCreateDynamicViewController.h"
 
-#import "WYAImgTextViewController.h"
-#import "WYAArticleViewController.h"
-
-@interface WYAMaterialViewController ()<WYANavBarDelegate>
+@interface WYAMineCreateViewController ()<WYANavBarDelegate,UIGestureRecognizerDelegate>
 
 @end
 
-@implementation WYAMaterialViewController
-
+@implementation WYAMineCreateViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navBar.backgroundColor = [UIColor yellowColor];
     self.navBar = [[WYANavBar alloc] init];
-    self.navBar.navTitle = @"图文";
+    self.navBar.navTitle = @"动态";
     self.navBar.delegate = self;
-    [self.navBar wya_addRightNavBarButtonWithNormalTitle:@[@"筛选"]];
+    [self.navBar wya_goBackButtonWithImage:@"返回"];
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
     [self.view addSubview:self.navBar];
 }
 
-- (void)wya_rightBarButtonItemPressed:(UIButton *)sender{
-    NSLog(@"筛选");
+- (void)wya_goBackPressed:(UIButton *)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark ======= delegate
@@ -41,9 +40,9 @@
 - (NSString *)wya_pageController:(WYAPageController *)pageController titleAtIndex:(NSInteger)index {
     switch (index % 2) {
         case 0:
-            return @"图文";
+            return @"动态";
         case 1:
-            return @"文章";
+            return @"素材";
     }
     return @"NONE";
 }
@@ -52,22 +51,24 @@
                    viewControllerAtIndex:(NSInteger)index {
     switch (index % 2) {
         case 0:
-            return [[WYAImgTextViewController alloc] init];
+            return [[WYAMineCreateDynamicViewController alloc] init];
         case 1:
-            return [[WYAArticleViewController alloc] init];
+            return [[WYAMineCreateMaterialViewController alloc] init];
     }
     return [[UIViewController alloc] init];
 }
 
-- (void)wya_pageController:(WYAPageController *)pageController didEnterViewController:(nonnull __kindof UIViewController *)viewController withInfo:(nonnull NSDictionary *)info{
-    if ([NSStringFromClass([viewController class]) isEqualToString:@"WYAArticleViewController"]) {
-        self.navBar.navTitle = @"文章";
+- (void)wya_pageController:(WYAPageController *)pageController
+   willEnterViewController:(__kindof UIViewController *)viewController
+                  withInfo:(NSDictionary *)info{
+    if ([NSStringFromClass([viewController class]) isEqualToString:@"WYAMineCreateDynamicViewController"]) {
+        self.navBar.navTitle = @"动态";
         [self.navBar wya_addRightNavBarButtonWithNormalTitle:@[]];
     }else{
-        self.navBar.navTitle = @"图文";
-        [self.navBar wya_addRightNavBarButtonWithNormalTitle:@[@"筛选"]];
+        self.navBar.navTitle = @"素材";
     }
 }
+
 
 - (CGFloat)wya_menuView:(WYAMenuView *)menu widthForItemAtIndex:(NSInteger)index {
     CGFloat width = [super wya_menuView:menu widthForItemAtIndex:index];
@@ -86,6 +87,6 @@
    preferredFrameContentView:(WYAPageScrollView *)contentView {
 
     return CGRectMake(0, WYATopHeight + 44 , ScreenWidth,
-                      ScreenHeight- (WYATopHeight + 44) - WYATabBarHeight );
+                      ScreenHeight- (WYATopHeight + 44));
 }
 @end

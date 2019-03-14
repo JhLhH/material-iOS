@@ -11,3 +11,15 @@
 @implementation WYAMineModel
 
 @end
+
+@implementation WYAMineUserInfoModel
+
++ (instancetype)initWithResults:(id)results{
+    WYAMineUserInfoModel * model = [[WYAMineUserInfoModel alloc]init];
+    model.userInfoString = @"联创";
+    model.userNameString = @"楚留香";
+    model.userIconUrlString = @" ";
+    return model;
+}
+
+@end

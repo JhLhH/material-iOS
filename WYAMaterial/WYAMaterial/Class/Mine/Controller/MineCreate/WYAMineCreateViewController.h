@@ -1,5 +1,5 @@
 //
-//  WYAMaterialViewController.h
+//  WYAMineCreateViewController.h
 //  WYAMaterial
 //
 //  Created by 李俊恒 on 2019/3/14.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WYAMaterialViewController : WYAPageController
+@interface WYAMineCreateViewController : WYAPageController
 
 @end
 

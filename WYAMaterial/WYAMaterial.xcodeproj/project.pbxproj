@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		21271DD220F59341008EBAD1 /* BaseNetWorking.m in Sources */ = {isa = PBXBuildFile; fileRef = 21271DD120F59341008EBAD1 /* BaseNetWorking.m */; };
+		952DE2B9223A074B0098B208 /* WYAMineHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 952DE2B8223A074B0098B208 /* WYAMineHeaderView.m */; };
+		952DE2BC223A2A300098B208 /* WYAMineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 952DE2BB223A2A300098B208 /* WYAMineTableViewCell.m */; };
+		952DE2C6223A46730098B208 /* WYAArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 952DE2C5223A46730098B208 /* WYAArticleViewController.m */; };
+		952DE2C9223A46800098B208 /* WYAImgTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 952DE2C8223A46800098B208 /* WYAImgTextViewController.m */; };
 		958FB47620F0574A00F44489 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 958FB47520F0574A00F44489 /* Assets.xcassets */; };
 		95C2FEDB20F0528C00ED829B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95C2FED920F0528C00ED829B /* LaunchScreen.storyboard */; };
 		95C2FEDE20F0528C00ED829B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 95C2FEDD20F0528C00ED829B /* main.m */; };
@@ -30,10 +34,15 @@
 		95DD8CD82239E6AF00731A7E /* WYALoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD8CD72239E6AF00731A7E /* WYALoginViewModel.m */; };
 		95DD8CDB2239E6BC00731A7E /* WYAHomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD8CDA2239E6BC00731A7E /* WYAHomeViewModel.m */; };
 		95DD8CDE2239E6CE00731A7E /* WYAMineViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD8CDD2239E6CE00731A7E /* WYAMineViewModel.m */; };
-		95DD8CE12239E6F000731A7E /* WYAMineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD8CE02239E6F000731A7E /* WYAMineView.m */; };
 		95DD8CE42239E6FB00731A7E /* WYAHomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD8CE32239E6FB00731A7E /* WYAHomeView.m */; };
 		95DD8CE72239E70900731A7E /* WYALoginVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD8CE62239E70900731A7E /* WYALoginVIew.m */; };
 		95DE135021ECB55700B5867B /* UIColor+WYAColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DE134F21ECB55700B5867B /* UIColor+WYAColor.m */; };
+		95F6322E223A592800BFC68C /* WYAMineCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95F6322D223A592800BFC68C /* WYAMineCreateViewController.m */; };
+		95F63231223A597600BFC68C /* WYAMineCreateMaterialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95F63230223A597600BFC68C /* WYAMineCreateMaterialViewController.m */; };
+		95F63234223A599F00BFC68C /* WYAMineCreateDynamicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95F63233223A599F00BFC68C /* WYAMineCreateDynamicViewController.m */; };
+		95F63237223A5FE600BFC68C /* WYAMineCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95F63236223A5FE600BFC68C /* WYAMineCollectionViewController.m */; };
+		95F6323A223A609300BFC68C /* WYAMineCollectionMaterialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95F63239223A609300BFC68C /* WYAMineCollectionMaterialViewController.m */; };
+		95F6323D223A613B00BFC68C /* WYAMineCollectionDynamicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95F6323C223A613B00BFC68C /* WYAMineCollectionDynamicViewController.m */; };
 		F2D65C53BEA9A4821E1FFEDD /* libPods-WYAMaterial.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E5C09EEF13ED37F442242C6C /* libPods-WYAMaterial.a */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +68,14 @@
 		21271DD120F59341008EBAD1 /* BaseNetWorking.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseNetWorking.m; sourceTree = "<group>"; };
 		4C7029995E79562742AF7EB9 /* Pods-WYAMaterial.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYAMaterial.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WYAMaterial/Pods-WYAMaterial.debug.xcconfig"; sourceTree = "<group>"; };
 		6E595E41FAC2B4D66BC88E36 /* Pods-WYAMaterial.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYAMaterial.release.xcconfig"; path = "Pods/Target Support Files/Pods-WYAMaterial/Pods-WYAMaterial.release.xcconfig"; sourceTree = "<group>"; };
+		952DE2B7223A074B0098B208 /* WYAMineHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAMineHeaderView.h; sourceTree = "<group>"; };
+		952DE2B8223A074B0098B208 /* WYAMineHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAMineHeaderView.m; sourceTree = "<group>"; };
+		952DE2BA223A2A300098B208 /* WYAMineTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAMineTableViewCell.h; sourceTree = "<group>"; };
+		952DE2BB223A2A300098B208 /* WYAMineTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAMineTableViewCell.m; sourceTree = "<group>"; };
+		952DE2C4223A46730098B208 /* WYAArticleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAArticleViewController.h; sourceTree = "<group>"; };
+		952DE2C5223A46730098B208 /* WYAArticleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAArticleViewController.m; sourceTree = "<group>"; };
+		952DE2C7223A46800098B208 /* WYAImgTextViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAImgTextViewController.h; sourceTree = "<group>"; };
+		952DE2C8223A46800098B208 /* WYAImgTextViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAImgTextViewController.m; sourceTree = "<group>"; };
 		958FB47520F0574A00F44489 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		95C2FECB20F0528B00ED829B /* WYAMaterial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WYAMaterial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95C2FEDA20F0528C00ED829B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -109,14 +126,24 @@
 		95DD8CDA2239E6BC00731A7E /* WYAHomeViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAHomeViewModel.m; sourceTree = "<group>"; };
 		95DD8CDC2239E6CE00731A7E /* WYAMineViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAMineViewModel.h; sourceTree = "<group>"; };
 		95DD8CDD2239E6CE00731A7E /* WYAMineViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAMineViewModel.m; sourceTree = "<group>"; };
-		95DD8CDF2239E6F000731A7E /* WYAMineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAMineView.h; sourceTree = "<group>"; };
-		95DD8CE02239E6F000731A7E /* WYAMineView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAMineView.m; sourceTree = "<group>"; };
 		95DD8CE22239E6FB00731A7E /* WYAHomeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAHomeView.h; sourceTree = "<group>"; };
 		95DD8CE32239E6FB00731A7E /* WYAHomeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAHomeView.m; sourceTree = "<group>"; };
 		95DD8CE52239E70900731A7E /* WYALoginVIew.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYALoginVIew.h; sourceTree = "<group>"; };
 		95DD8CE62239E70900731A7E /* WYALoginVIew.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYALoginVIew.m; sourceTree = "<group>"; };
 		95DE134E21ECB55700B5867B /* UIColor+WYAColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+WYAColor.h"; sourceTree = "<group>"; };
 		95DE134F21ECB55700B5867B /* UIColor+WYAColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+WYAColor.m"; sourceTree = "<group>"; };
+		95F6322C223A592800BFC68C /* WYAMineCreateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAMineCreateViewController.h; sourceTree = "<group>"; };
+		95F6322D223A592800BFC68C /* WYAMineCreateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAMineCreateViewController.m; sourceTree = "<group>"; };
+		95F6322F223A597600BFC68C /* WYAMineCreateMaterialViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAMineCreateMaterialViewController.h; sourceTree = "<group>"; };
+		95F63230223A597600BFC68C /* WYAMineCreateMaterialViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAMineCreateMaterialViewController.m; sourceTree = "<group>"; };
+		95F63232223A599F00BFC68C /* WYAMineCreateDynamicViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAMineCreateDynamicViewController.h; sourceTree = "<group>"; };
+		95F63233223A599F00BFC68C /* WYAMineCreateDynamicViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAMineCreateDynamicViewController.m; sourceTree = "<group>"; };
+		95F63235223A5FE600BFC68C /* WYAMineCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAMineCollectionViewController.h; sourceTree = "<group>"; };
+		95F63236223A5FE600BFC68C /* WYAMineCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAMineCollectionViewController.m; sourceTree = "<group>"; };
+		95F63238223A609300BFC68C /* WYAMineCollectionMaterialViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAMineCollectionMaterialViewController.h; sourceTree = "<group>"; };
+		95F63239223A609300BFC68C /* WYAMineCollectionMaterialViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAMineCollectionMaterialViewController.m; sourceTree = "<group>"; };
+		95F6323B223A613B00BFC68C /* WYAMineCollectionDynamicViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAMineCollectionDynamicViewController.h; sourceTree = "<group>"; };
+		95F6323C223A613B00BFC68C /* WYAMineCollectionDynamicViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAMineCollectionDynamicViewController.m; sourceTree = "<group>"; };
 		E5C09EEF13ED37F442242C6C /* libPods-WYAMaterial.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WYAMaterial.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -153,6 +180,60 @@
 				6E595E41FAC2B4D66BC88E36 /* Pods-WYAMaterial.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		952DE2BE223A419F0098B208 /* MineCreate */ = {
+			isa = PBXGroup;
+			children = (
+				95F63229223A58C600BFC68C /* MineCreateMaterial */,
+				95F63228223A589600BFC68C /* MineCreateDynamic */,
+				95F6322C223A592800BFC68C /* WYAMineCreateViewController.h */,
+				95F6322D223A592800BFC68C /* WYAMineCreateViewController.m */,
+			);
+			path = MineCreate;
+			sourceTree = "<group>";
+		};
+		952DE2BF223A42480098B208 /* MineCollection */ = {
+			isa = PBXGroup;
+			children = (
+				95F6322B223A58FB00BFC68C /* MineCollectionMaterial */,
+				95F6322A223A58EC00BFC68C /* MineCollectionDynamic */,
+				95F63235223A5FE600BFC68C /* WYAMineCollectionViewController.h */,
+				95F63236223A5FE600BFC68C /* WYAMineCollectionViewController.m */,
+			);
+			path = MineCollection;
+			sourceTree = "<group>";
+		};
+		952DE2C0223A42550098B208 /* MineNotice */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MineNotice;
+			sourceTree = "<group>";
+		};
+		952DE2C1223A426A0098B208 /* MineSetting */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MineSetting;
+			sourceTree = "<group>";
+		};
+		952DE2C2223A464C0098B208 /* ImgTextController */ = {
+			isa = PBXGroup;
+			children = (
+				952DE2C7223A46800098B208 /* WYAImgTextViewController.h */,
+				952DE2C8223A46800098B208 /* WYAImgTextViewController.m */,
+			);
+			path = ImgTextController;
+			sourceTree = "<group>";
+		};
+		952DE2C3223A46570098B208 /* ArticleController */ = {
+			isa = PBXGroup;
+			children = (
+				952DE2C4223A46730098B208 /* WYAArticleViewController.h */,
+				952DE2C5223A46730098B208 /* WYAArticleViewController.m */,
+			);
+			path = ArticleController;
 			sourceTree = "<group>";
 		};
 		9592DAAC2239E0D800DAB8B7 /* Login */ = {
@@ -310,6 +391,10 @@
 		95C2FF5120F0533500ED829B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				952DE2C1223A426A0098B208 /* MineSetting */,
+				952DE2C0223A42550098B208 /* MineNotice */,
+				952DE2BF223A42480098B208 /* MineCollection */,
+				952DE2BE223A419F0098B208 /* MineCreate */,
 				95C2FF5320F0533500ED829B /* WYAMineViewController.h */,
 				95C2FF5220F0533500ED829B /* WYAMineViewController.m */,
 			);
@@ -355,6 +440,8 @@
 		95DD8CAA2239E23800731A7E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				952DE2C3223A46570098B208 /* ArticleController */,
+				952DE2C2223A464C0098B208 /* ImgTextController */,
 				95DD8CC72239E65400731A7E /* WYAMaterialViewController.h */,
 				95DD8CC82239E65400731A7E /* WYAMaterialViewController.m */,
 			);
@@ -472,8 +559,10 @@
 		95DD8CBD2239E26900731A7E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				95DD8CDF2239E6F000731A7E /* WYAMineView.h */,
-				95DD8CE02239E6F000731A7E /* WYAMineView.m */,
+				952DE2B7223A074B0098B208 /* WYAMineHeaderView.h */,
+				952DE2B8223A074B0098B208 /* WYAMineHeaderView.m */,
+				952DE2BA223A2A300098B208 /* WYAMineTableViewCell.h */,
+				952DE2BB223A2A300098B208 /* WYAMineTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -485,6 +574,42 @@
 				95DE134F21ECB55700B5867B /* UIColor+WYAColor.m */,
 			);
 			path = UIColor;
+			sourceTree = "<group>";
+		};
+		95F63228223A589600BFC68C /* MineCreateDynamic */ = {
+			isa = PBXGroup;
+			children = (
+				95F63232223A599F00BFC68C /* WYAMineCreateDynamicViewController.h */,
+				95F63233223A599F00BFC68C /* WYAMineCreateDynamicViewController.m */,
+			);
+			path = MineCreateDynamic;
+			sourceTree = "<group>";
+		};
+		95F63229223A58C600BFC68C /* MineCreateMaterial */ = {
+			isa = PBXGroup;
+			children = (
+				95F6322F223A597600BFC68C /* WYAMineCreateMaterialViewController.h */,
+				95F63230223A597600BFC68C /* WYAMineCreateMaterialViewController.m */,
+			);
+			path = MineCreateMaterial;
+			sourceTree = "<group>";
+		};
+		95F6322A223A58EC00BFC68C /* MineCollectionDynamic */ = {
+			isa = PBXGroup;
+			children = (
+				95F6323B223A613B00BFC68C /* WYAMineCollectionDynamicViewController.h */,
+				95F6323C223A613B00BFC68C /* WYAMineCollectionDynamicViewController.m */,
+			);
+			path = MineCollectionDynamic;
+			sourceTree = "<group>";
+		};
+		95F6322B223A58FB00BFC68C /* MineCollectionMaterial */ = {
+			isa = PBXGroup;
+			children = (
+				95F63238223A609300BFC68C /* WYAMineCollectionMaterialViewController.h */,
+				95F63239223A609300BFC68C /* WYAMineCollectionMaterialViewController.m */,
+			);
+			path = MineCollectionMaterial;
 			sourceTree = "<group>";
 		};
 		D83764D07F0DA6788B0B7539 /* Frameworks */ = {
@@ -507,6 +632,7 @@
 				95C2FEC820F0528B00ED829B /* Frameworks */,
 				95C2FEC920F0528B00ED829B /* Resources */,
 				89B1970EF2EAB5C8C7CC9801 /* [CP] Copy Pods Resources */,
+				952DE2BD223A2F6E0098B208 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -663,6 +789,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WYAMaterial/Pods-WYAMaterial-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		952DE2BD223A2F6E0098B208 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nBUGLY_APP_ID=\"209aebc96b\"\nBUGLY_APP_KEY=\"9bd7bee4-729b-41f2-a1b1-23abf9487dc9\"\nBUGLY_IDENTIFIER=\"com.weiyian.ws.WYAMaterial\"\nUPLOAD_DSYM_ONLY=1\nUPLOAD_DEBUG_SYMBOLS=1\nUPLOAD_SIMULATOR_SYMBOLS=1\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -674,21 +817,30 @@
 				95DD8CE42239E6FB00731A7E /* WYAHomeView.m in Sources */,
 				95DD8CDB2239E6BC00731A7E /* WYAHomeViewModel.m in Sources */,
 				95DD8CCC2239E66400731A7E /* WYALoginViewController.m in Sources */,
+				952DE2B9223A074B0098B208 /* WYAMineHeaderView.m in Sources */,
+				95F6323A223A609300BFC68C /* WYAMineCollectionMaterialViewController.m in Sources */,
+				95F63234223A599F00BFC68C /* WYAMineCreateDynamicViewController.m in Sources */,
 				95DD8CDE2239E6CE00731A7E /* WYAMineViewModel.m in Sources */,
 				95C2FF8520F0533600ED829B /* RootControllerModel.m in Sources */,
 				95C2FEDE20F0528C00ED829B /* main.m in Sources */,
-				95DD8CE12239E6F000731A7E /* WYAMineView.m in Sources */,
 				95DD8CD82239E6AF00731A7E /* WYALoginViewModel.m in Sources */,
 				95DE135021ECB55700B5867B /* UIColor+WYAColor.m in Sources */,
 				95C2FF8620F0533600ED829B /* AppDelegate.m in Sources */,
+				95F6323D223A613B00BFC68C /* WYAMineCollectionDynamicViewController.m in Sources */,
+				952DE2C6223A46730098B208 /* WYAArticleViewController.m in Sources */,
 				95DD8CD22239E69500731A7E /* WYALoginModel.m in Sources */,
 				21271DD220F59341008EBAD1 /* BaseNetWorking.m in Sources */,
 				95C2FF8420F0533600ED829B /* RootViewController.m in Sources */,
+				952DE2C9223A46800098B208 /* WYAImgTextViewController.m in Sources */,
+				95F63237223A5FE600BFC68C /* WYAMineCollectionViewController.m in Sources */,
+				952DE2BC223A2A300098B208 /* WYAMineTableViewCell.m in Sources */,
 				95DD8CC92239E65400731A7E /* WYAMaterialViewController.m in Sources */,
 				95DD8CC62239E2C300731A7E /* WYAMaterialViewModel.m in Sources */,
 				95DD8CE72239E70900731A7E /* WYALoginVIew.m in Sources */,
+				95F63231223A597600BFC68C /* WYAMineCreateMaterialViewController.m in Sources */,
 				95C2FF8020F0533600ED829B /* WYAHomeViewController.m in Sources */,
 				95DD8CC32239E2AB00731A7E /* WYAMaterialView.m in Sources */,
+				95F6322E223A592800BFC68C /* WYAMineCreateViewController.m in Sources */,
 				95C2FF8220F0533600ED829B /* WYAMineViewController.m in Sources */,
 				95DD8CC02239E29400731A7E /* WYAMaterialModel.m in Sources */,
 				95C2FF7F20F0533600ED829B /* BaseViewController.m in Sources */,
@@ -855,7 +1007,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = J5265ZP7QT;
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/WYAMaterial/Config/WYABaseConfig.pch";
 				INFOPLIST_FILE = WYAMaterial/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -875,7 +1029,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = J5265ZP7QT;
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/WYAMaterial/Config/WYABaseConfig.pch";
 				INFOPLIST_FILE = WYAMaterial/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

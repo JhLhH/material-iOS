@@ -10,6 +10,8 @@
 #import "WYAHomeViewController.h"
 #import "WYAMineViewController.h"
 #import "WYAMaterialViewController.h"
+#import "WYAImgTextViewController.h"
+#import "WYAArticleViewController.h"
 @interface RootViewController ()
 /**
  存放初始化tabBar的数据模型
@@ -56,8 +58,21 @@
 - (void)creatViewControllers {
     NSMutableArray * viewControllers = [NSMutableArray array];
     for (RootControllerModel * model in _tabBarModelArray) {
+
         NSString * className              = model.className;
-        UIViewController * viewController = [[NSClassFromString(className) alloc] init];
+        UIViewController * viewController;
+        if ([model.className isEqualToString:@"WYAMaterialViewController"]) {
+          WYAMaterialViewController * vc = [[WYAMaterialViewController alloc]init];
+            vc.selectIndex                       = 0;
+            vc.menuViewStyle                     = WYAMenuViewStyleLine;
+            vc.automaticallyCalculatesItemWidths = YES;
+            vc.titleColorSelected                = [UIColor wya_blueColor];
+            vc.titleColorNormal                  = [UIColor wya_blackTextColor];
+            vc.progressColor                     = [UIColor wya_blueColor];
+            viewController = vc;
+        }else{
+        viewController = [[NSClassFromString(className) alloc] init];
+        }
         UINavigationController * nav      = [[UINavigationController alloc] initWithRootViewController:viewController];
         nav.tabBarItem.title              = model.tabBarTitle;
         nav.tabBarItem.image              = [model normalImage];
