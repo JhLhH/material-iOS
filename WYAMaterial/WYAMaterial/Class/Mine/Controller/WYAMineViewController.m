@@ -6,13 +6,13 @@
 //  Copyright © 2018年 WeiYiAn. All rights reserved.
 //
 
-#import "WYAMineController.h"
+#import "WYAMineViewController.h"
 
-@interface WYAMineController ()
+@interface WYAMineViewController ()
 
 @end
 
-@implementation WYAMineController
+@implementation WYAMineViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -134,7 +134,7 @@
         _navBar = ({
             WYANavBar * object     = [[WYANavBar alloc] init];
             object.delegate        = self;
-            object.navTitle        = @"WYA移动端组件";
+            object.navTitle        = @"素材库";
             object.navTitleColor   = [UIColor wya_blackTitleColor];
             object.backgroundColor = [UIColor wya_whiteColor];
             object;

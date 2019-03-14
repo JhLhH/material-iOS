@@ -14,8 +14,8 @@
 		95C2FEE820F0528C00ED829B /* WYAMaterialTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95C2FEE720F0528C00ED829B /* WYAMaterialTests.m */; };
 		95C2FEF320F0528C00ED829B /* WYAMaterialUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95C2FEF220F0528C00ED829B /* WYAMaterialUITests.m */; };
 		95C2FF7F20F0533600ED829B /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95C2FF3E20F0533500ED829B /* BaseViewController.m */; };
-		95C2FF8020F0533600ED829B /* WYAHomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95C2FF4520F0533500ED829B /* WYAHomeController.m */; };
-		95C2FF8220F0533600ED829B /* WYAMineController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95C2FF5220F0533500ED829B /* WYAMineController.m */; };
+		95C2FF8020F0533600ED829B /* WYAHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95C2FF4520F0533500ED829B /* WYAHomeViewController.m */; };
+		95C2FF8220F0533600ED829B /* WYAMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95C2FF5220F0533500ED829B /* WYAMineViewController.m */; };
 		95C2FF8420F0533600ED829B /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95C2FF5F20F0533500ED829B /* RootViewController.m */; };
 		95C2FF8520F0533600ED829B /* RootControllerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 95C2FF6220F0533500ED829B /* RootControllerModel.m */; };
 		95C2FF8620F0533600ED829B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 95C2FF6620F0533500ED829B /* AppDelegate.m */; };
@@ -77,10 +77,10 @@
 		95C2FF0620F0533500ED829B /* WYABaseConfig.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYABaseConfig.pch; sourceTree = "<group>"; };
 		95C2FF3E20F0533500ED829B /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		95C2FF3F20F0533500ED829B /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
-		95C2FF4420F0533500ED829B /* WYAHomeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYAHomeController.h; sourceTree = "<group>"; };
-		95C2FF4520F0533500ED829B /* WYAHomeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYAHomeController.m; sourceTree = "<group>"; };
-		95C2FF5220F0533500ED829B /* WYAMineController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYAMineController.m; sourceTree = "<group>"; };
-		95C2FF5320F0533500ED829B /* WYAMineController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYAMineController.h; sourceTree = "<group>"; };
+		95C2FF4420F0533500ED829B /* WYAHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYAHomeViewController.h; sourceTree = "<group>"; };
+		95C2FF4520F0533500ED829B /* WYAHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYAHomeViewController.m; sourceTree = "<group>"; };
+		95C2FF5220F0533500ED829B /* WYAMineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYAMineViewController.m; sourceTree = "<group>"; };
+		95C2FF5320F0533500ED829B /* WYAMineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYAMineViewController.h; sourceTree = "<group>"; };
 		95C2FF5F20F0533500ED829B /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		95C2FF6020F0533500ED829B /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		95C2FF6220F0533500ED829B /* RootControllerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootControllerModel.m; sourceTree = "<group>"; };
@@ -290,8 +290,8 @@
 		95C2FF4320F0533500ED829B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				95C2FF4420F0533500ED829B /* WYAHomeController.h */,
-				95C2FF4520F0533500ED829B /* WYAHomeController.m */,
+				95C2FF4420F0533500ED829B /* WYAHomeViewController.h */,
+				95C2FF4520F0533500ED829B /* WYAHomeViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -310,8 +310,8 @@
 		95C2FF5120F0533500ED829B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				95C2FF5320F0533500ED829B /* WYAMineController.h */,
-				95C2FF5220F0533500ED829B /* WYAMineController.m */,
+				95C2FF5320F0533500ED829B /* WYAMineViewController.h */,
+				95C2FF5220F0533500ED829B /* WYAMineViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -687,9 +687,9 @@
 				95DD8CC92239E65400731A7E /* WYAMaterialViewController.m in Sources */,
 				95DD8CC62239E2C300731A7E /* WYAMaterialViewModel.m in Sources */,
 				95DD8CE72239E70900731A7E /* WYALoginVIew.m in Sources */,
-				95C2FF8020F0533600ED829B /* WYAHomeController.m in Sources */,
+				95C2FF8020F0533600ED829B /* WYAHomeViewController.m in Sources */,
 				95DD8CC32239E2AB00731A7E /* WYAMaterialView.m in Sources */,
-				95C2FF8220F0533600ED829B /* WYAMineController.m in Sources */,
+				95C2FF8220F0533600ED829B /* WYAMineViewController.m in Sources */,
 				95DD8CC02239E29400731A7E /* WYAMaterialModel.m in Sources */,
 				95C2FF7F20F0533600ED829B /* BaseViewController.m in Sources */,
 				95DD8CCF2239E68800731A7E /* WYAHomeModel.m in Sources */,

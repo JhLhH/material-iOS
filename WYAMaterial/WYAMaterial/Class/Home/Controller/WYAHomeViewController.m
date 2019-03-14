@@ -6,17 +6,19 @@
 //  Copyright © 2018年 WeiYiAn. All rights reserved.
 //
 
-#import "WYAHomeController.h"
+#import "WYAHomeViewController.h"
 
-@interface WYAHomeController ()
+@interface WYAHomeViewController ()
 
 @end
 
-@implementation WYAHomeController
+@implementation WYAHomeViewController
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navTitle = @"首页";
+
 }
 
 - (void)didReceiveMemoryWarning {

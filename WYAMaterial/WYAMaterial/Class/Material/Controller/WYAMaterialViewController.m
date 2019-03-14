@@ -16,6 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navTitle = @"素材库";
     // Do any additional setup after loading the view.
 }
 

@@ -7,9 +7,9 @@
 //
 
 #import "RootViewController.h"
-#import "WYAHomeController.h"
-#import "WYAMineController.h"
-
+#import "WYAHomeViewController.h"
+#import "WYAMineViewController.h"
+#import "WYAMaterialViewController.h"
 @interface RootViewController ()
 /**
  存放初始化tabBar的数据模型
@@ -33,16 +33,21 @@
 - (void)createTabBarModelArray {
     NSMutableArray * array           = [NSMutableArray array];
     RootControllerModel * item1Model = [RootControllerModel modelWithTitle:@"首页"
-                                                                 className:@"WYAHomeController"
+                                                                 className:@"WYAHomeViewController"
                                                            normalImageName:@"home_normal"
                                                          selectedImageName:@"home_selected"];
+    RootControllerModel * item2Model = [RootControllerModel modelWithTitle:@"素材库"
+                                                                 className:@"WYAMaterialViewController"
+                                                           normalImageName:@"More_normal"
+                                                         selectedImageName:@"More_selected"];
 
-    RootControllerModel * item2Model = [RootControllerModel modelWithTitle:@"我的"
-                                                                 className:@"WYAMineController"
+    RootControllerModel * item3Model = [RootControllerModel modelWithTitle:@"我的"
+                                                                 className:@"WYAMineViewController"
                                                            normalImageName:@"More_normal"
                                                          selectedImageName:@"More_selected"];
     [array addObject:item1Model];
     [array addObject:item2Model];
+    [array addObject:item3Model];
     _tabBarModelArray = [array copy];
     [self creatViewControllers];
 }

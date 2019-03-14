@@ -8,6 +8,6 @@
 
 #import "BaseViewController.h"
 
-@interface WYAMineController : BaseViewController
+@interface WYAMineViewController : BaseViewController
 
 @end

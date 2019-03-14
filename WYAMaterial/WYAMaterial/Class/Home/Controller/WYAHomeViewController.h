@@ -8,6 +8,6 @@
 
 #import "BaseViewController.h"
 
-@interface WYAHomeController : BaseViewController
+@interface WYAHomeViewController : BaseViewController
 
 @end
