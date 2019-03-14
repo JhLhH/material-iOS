@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		211F67F9223A31A700F7ACBB /* WYAAgentRingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 211F67F8223A31A700F7ACBB /* WYAAgentRingModel.m */; };
+		211F67FC223A337800F7ACBB /* WYAAgentRingViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 211F67FB223A337800F7ACBB /* WYAAgentRingViewModel.m */; };
+		211F67FF223A5EC000F7ACBB /* WYAAgentRingSectionFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211F67FE223A5EC000F7ACBB /* WYAAgentRingSectionFootView.m */; };
 		21271DD220F59341008EBAD1 /* BaseNetWorking.m in Sources */ = {isa = PBXBuildFile; fileRef = 21271DD120F59341008EBAD1 /* BaseNetWorking.m */; };
+		21B6BD7B2239FA0100962255 /* WYAAgentRingCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B6BD7A2239FA0100962255 /* WYAAgentRingCoverView.m */; };
+		21F1C4C0223A05F800527496 /* WYAAgentRingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F1C4BF223A05F800527496 /* WYAAgentRingCell.m */; };
 		958FB47620F0574A00F44489 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 958FB47520F0574A00F44489 /* Assets.xcassets */; };
 		95C2FEDB20F0528C00ED829B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95C2FED920F0528C00ED829B /* LaunchScreen.storyboard */; };
 		95C2FEDE20F0528C00ED829B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 95C2FEDD20F0528C00ED829B /* main.m */; };
@@ -55,8 +60,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		211F67F7223A31A700F7ACBB /* WYAAgentRingModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAAgentRingModel.h; sourceTree = "<group>"; };
+		211F67F8223A31A700F7ACBB /* WYAAgentRingModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAAgentRingModel.m; sourceTree = "<group>"; };
+		211F67FA223A337800F7ACBB /* WYAAgentRingViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAAgentRingViewModel.h; sourceTree = "<group>"; };
+		211F67FB223A337800F7ACBB /* WYAAgentRingViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAAgentRingViewModel.m; sourceTree = "<group>"; };
+		211F67FD223A5EC000F7ACBB /* WYAAgentRingSectionFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAAgentRingSectionFootView.h; sourceTree = "<group>"; };
+		211F67FE223A5EC000F7ACBB /* WYAAgentRingSectionFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAAgentRingSectionFootView.m; sourceTree = "<group>"; };
 		21271DD020F59341008EBAD1 /* BaseNetWorking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseNetWorking.h; sourceTree = "<group>"; };
 		21271DD120F59341008EBAD1 /* BaseNetWorking.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseNetWorking.m; sourceTree = "<group>"; };
+		21B6BD792239FA0100962255 /* WYAAgentRingCoverView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAAgentRingCoverView.h; sourceTree = "<group>"; };
+		21B6BD7A2239FA0100962255 /* WYAAgentRingCoverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAAgentRingCoverView.m; sourceTree = "<group>"; };
+		21F1C4BE223A05F800527496 /* WYAAgentRingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAAgentRingCell.h; sourceTree = "<group>"; };
+		21F1C4BF223A05F800527496 /* WYAAgentRingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAAgentRingCell.m; sourceTree = "<group>"; };
 		4C7029995E79562742AF7EB9 /* Pods-WYAMaterial.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYAMaterial.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WYAMaterial/Pods-WYAMaterial.debug.xcconfig"; sourceTree = "<group>"; };
 		6E595E41FAC2B4D66BC88E36 /* Pods-WYAMaterial.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYAMaterial.release.xcconfig"; path = "Pods/Target Support Files/Pods-WYAMaterial/Pods-WYAMaterial.release.xcconfig"; sourceTree = "<group>"; };
 		958FB47520F0574A00F44489 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -429,6 +444,12 @@
 			children = (
 				95DD8CE22239E6FB00731A7E /* WYAHomeView.h */,
 				95DD8CE32239E6FB00731A7E /* WYAHomeView.m */,
+				21B6BD792239FA0100962255 /* WYAAgentRingCoverView.h */,
+				21B6BD7A2239FA0100962255 /* WYAAgentRingCoverView.m */,
+				21F1C4BE223A05F800527496 /* WYAAgentRingCell.h */,
+				21F1C4BF223A05F800527496 /* WYAAgentRingCell.m */,
+				211F67FD223A5EC000F7ACBB /* WYAAgentRingSectionFootView.h */,
+				211F67FE223A5EC000F7ACBB /* WYAAgentRingSectionFootView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -438,6 +459,8 @@
 			children = (
 				95DD8CD92239E6BC00731A7E /* WYAHomeViewModel.h */,
 				95DD8CDA2239E6BC00731A7E /* WYAHomeViewModel.m */,
+				211F67FA223A337800F7ACBB /* WYAAgentRingViewModel.h */,
+				211F67FB223A337800F7ACBB /* WYAAgentRingViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -447,6 +470,8 @@
 			children = (
 				95DD8CCD2239E68800731A7E /* WYAHomeModel.h */,
 				95DD8CCE2239E68800731A7E /* WYAHomeModel.m */,
+				211F67F7223A31A700F7ACBB /* WYAAgentRingModel.h */,
+				211F67F8223A31A700F7ACBB /* WYAAgentRingModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -671,6 +696,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				95DD8CD52239E6A100731A7E /* WYAMineModel.m in Sources */,
+				211F67F9223A31A700F7ACBB /* WYAAgentRingModel.m in Sources */,
 				95DD8CE42239E6FB00731A7E /* WYAHomeView.m in Sources */,
 				95DD8CDB2239E6BC00731A7E /* WYAHomeViewModel.m in Sources */,
 				95DD8CCC2239E66400731A7E /* WYALoginViewController.m in Sources */,
@@ -680,16 +706,20 @@
 				95DD8CE12239E6F000731A7E /* WYAMineView.m in Sources */,
 				95DD8CD82239E6AF00731A7E /* WYALoginViewModel.m in Sources */,
 				95DE135021ECB55700B5867B /* UIColor+WYAColor.m in Sources */,
+				21F1C4C0223A05F800527496 /* WYAAgentRingCell.m in Sources */,
+				211F67FF223A5EC000F7ACBB /* WYAAgentRingSectionFootView.m in Sources */,
 				95C2FF8620F0533600ED829B /* AppDelegate.m in Sources */,
 				95DD8CD22239E69500731A7E /* WYALoginModel.m in Sources */,
 				21271DD220F59341008EBAD1 /* BaseNetWorking.m in Sources */,
 				95C2FF8420F0533600ED829B /* RootViewController.m in Sources */,
 				95DD8CC92239E65400731A7E /* WYAMaterialViewController.m in Sources */,
 				95DD8CC62239E2C300731A7E /* WYAMaterialViewModel.m in Sources */,
+				211F67FC223A337800F7ACBB /* WYAAgentRingViewModel.m in Sources */,
 				95DD8CE72239E70900731A7E /* WYALoginVIew.m in Sources */,
 				95C2FF8020F0533600ED829B /* WYAHomeViewController.m in Sources */,
 				95DD8CC32239E2AB00731A7E /* WYAMaterialView.m in Sources */,
 				95C2FF8220F0533600ED829B /* WYAMineViewController.m in Sources */,
+				21B6BD7B2239FA0100962255 /* WYAAgentRingCoverView.m in Sources */,
 				95DD8CC02239E29400731A7E /* WYAMaterialModel.m in Sources */,
 				95C2FF7F20F0533600ED829B /* BaseViewController.m in Sources */,
 				95DD8CCF2239E68800731A7E /* WYAHomeModel.m in Sources */,
