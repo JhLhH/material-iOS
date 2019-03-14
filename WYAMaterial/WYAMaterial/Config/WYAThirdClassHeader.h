@@ -17,4 +17,6 @@
 #import "UIColor+WYAColor.h"
 #import <WYAKit/Category.h>
 #import <WYAKit/WYAAlertController.h>
+#import <Bugly/Bugly.h>
+#import <WYAKit/WYAPageController.h>
 #endif /* WYAThirdClassHeader_h */
