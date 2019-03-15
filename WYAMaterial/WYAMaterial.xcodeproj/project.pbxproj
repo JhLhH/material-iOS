@@ -11,15 +11,13 @@
 		211F67FC223A337800F7ACBB /* WYAAgentRingViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 211F67FB223A337800F7ACBB /* WYAAgentRingViewModel.m */; };
 		211F67FF223A5EC000F7ACBB /* WYAAgentRingSectionFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211F67FE223A5EC000F7ACBB /* WYAAgentRingSectionFootView.m */; };
 		21271DD220F59341008EBAD1 /* BaseNetWorking.m in Sources */ = {isa = PBXBuildFile; fileRef = 21271DD120F59341008EBAD1 /* BaseNetWorking.m */; };
-
 		21B6BD7B2239FA0100962255 /* WYAAgentRingCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B6BD7A2239FA0100962255 /* WYAAgentRingCoverView.m */; };
 		21F1C4C0223A05F800527496 /* WYAAgentRingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F1C4BF223A05F800527496 /* WYAAgentRingCell.m */; };
-
 		952DE2B9223A074B0098B208 /* WYAMineHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 952DE2B8223A074B0098B208 /* WYAMineHeaderView.m */; };
 		952DE2BC223A2A300098B208 /* WYAMineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 952DE2BB223A2A300098B208 /* WYAMineTableViewCell.m */; };
 		952DE2C6223A46730098B208 /* WYAArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 952DE2C5223A46730098B208 /* WYAArticleViewController.m */; };
 		952DE2C9223A46800098B208 /* WYAImgTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 952DE2C8223A46800098B208 /* WYAImgTextViewController.m */; };
-
+		955D770F223B913C00B3B1EE /* WYAContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 955D770E223B913C00B3B1EE /* WYAContentView.m */; };
 		958FB47620F0574A00F44489 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 958FB47520F0574A00F44489 /* Assets.xcassets */; };
 		95C2FEDB20F0528C00ED829B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95C2FED920F0528C00ED829B /* LaunchScreen.storyboard */; };
 		95C2FEDE20F0528C00ED829B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 95C2FEDD20F0528C00ED829B /* main.m */; };
@@ -51,6 +49,9 @@
 		95F63237223A5FE600BFC68C /* WYAMineCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95F63236223A5FE600BFC68C /* WYAMineCollectionViewController.m */; };
 		95F6323A223A609300BFC68C /* WYAMineCollectionMaterialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95F63239223A609300BFC68C /* WYAMineCollectionMaterialViewController.m */; };
 		95F6323D223A613B00BFC68C /* WYAMineCollectionDynamicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95F6323C223A613B00BFC68C /* WYAMineCollectionDynamicViewController.m */; };
+		95F63240223B364D00BFC68C /* WYANoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95F6323F223B364D00BFC68C /* WYANoticeViewController.m */; };
+		95F63247223B37E300BFC68C /* WYANoticeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95F63246223B37E300BFC68C /* WYANoticeTableViewCell.m */; };
+		95F6324D223B79A100BFC68C /* WYALabelScreeningView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95F6324C223B79A100BFC68C /* WYALabelScreeningView.m */; };
 		F2D65C53BEA9A4821E1FFEDD /* libPods-WYAMaterial.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E5C09EEF13ED37F442242C6C /* libPods-WYAMaterial.a */; };
 /* End PBXBuildFile section */
 
@@ -94,6 +95,8 @@
 		952DE2C5223A46730098B208 /* WYAArticleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAArticleViewController.m; sourceTree = "<group>"; };
 		952DE2C7223A46800098B208 /* WYAImgTextViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAImgTextViewController.h; sourceTree = "<group>"; };
 		952DE2C8223A46800098B208 /* WYAImgTextViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAImgTextViewController.m; sourceTree = "<group>"; };
+		955D770D223B913C00B3B1EE /* WYAContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAContentView.h; sourceTree = "<group>"; };
+		955D770E223B913C00B3B1EE /* WYAContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAContentView.m; sourceTree = "<group>"; };
 		958FB47520F0574A00F44489 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		95C2FECB20F0528B00ED829B /* WYAMaterial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WYAMaterial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95C2FEDA20F0528C00ED829B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -162,6 +165,12 @@
 		95F63239223A609300BFC68C /* WYAMineCollectionMaterialViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAMineCollectionMaterialViewController.m; sourceTree = "<group>"; };
 		95F6323B223A613B00BFC68C /* WYAMineCollectionDynamicViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAMineCollectionDynamicViewController.h; sourceTree = "<group>"; };
 		95F6323C223A613B00BFC68C /* WYAMineCollectionDynamicViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAMineCollectionDynamicViewController.m; sourceTree = "<group>"; };
+		95F6323E223B364D00BFC68C /* WYANoticeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYANoticeViewController.h; sourceTree = "<group>"; };
+		95F6323F223B364D00BFC68C /* WYANoticeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYANoticeViewController.m; sourceTree = "<group>"; };
+		95F63245223B37E300BFC68C /* WYANoticeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYANoticeTableViewCell.h; sourceTree = "<group>"; };
+		95F63246223B37E300BFC68C /* WYANoticeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYANoticeTableViewCell.m; sourceTree = "<group>"; };
+		95F6324B223B79A100BFC68C /* WYALabelScreeningView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYALabelScreeningView.h; sourceTree = "<group>"; };
+		95F6324C223B79A100BFC68C /* WYALabelScreeningView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYALabelScreeningView.m; sourceTree = "<group>"; };
 		E5C09EEF13ED37F442242C6C /* libPods-WYAMaterial.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WYAMaterial.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -225,6 +234,8 @@
 		952DE2C0223A42550098B208 /* MineNotice */ = {
 			isa = PBXGroup;
 			children = (
+				95F6323E223B364D00BFC68C /* WYANoticeViewController.h */,
+				95F6323F223B364D00BFC68C /* WYANoticeViewController.m */,
 			);
 			path = MineNotice;
 			sourceTree = "<group>";
@@ -478,6 +489,7 @@
 		95DD8CAE2239E23800731A7E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				95F63251223B83E300BFC68C /* LabelScreening */,
 				95DD8CC12239E2AB00731A7E /* WYAMaterialView.h */,
 				95DD8CC22239E2AB00731A7E /* WYAMaterialView.m */,
 			);
@@ -587,6 +599,10 @@
 		95DD8CBD2239E26900731A7E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				95F63244223B37C300BFC68C /* MineSettingView */,
+				95F63243223B379D00BFC68C /* MineCollectionView */,
+				95F63242223B377B00BFC68C /* MineCreateView */,
+				95F63241223B365D00BFC68C /* NoticeView */,
 				952DE2B7223A074B0098B208 /* WYAMineHeaderView.h */,
 				952DE2B8223A074B0098B208 /* WYAMineHeaderView.m */,
 				952DE2BA223A2A300098B208 /* WYAMineTableViewCell.h */,
@@ -638,6 +654,47 @@
 				95F63239223A609300BFC68C /* WYAMineCollectionMaterialViewController.m */,
 			);
 			path = MineCollectionMaterial;
+			sourceTree = "<group>";
+		};
+		95F63241223B365D00BFC68C /* NoticeView */ = {
+			isa = PBXGroup;
+			children = (
+				95F63245223B37E300BFC68C /* WYANoticeTableViewCell.h */,
+				95F63246223B37E300BFC68C /* WYANoticeTableViewCell.m */,
+			);
+			path = NoticeView;
+			sourceTree = "<group>";
+		};
+		95F63242223B377B00BFC68C /* MineCreateView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MineCreateView;
+			sourceTree = "<group>";
+		};
+		95F63243223B379D00BFC68C /* MineCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MineCollectionView;
+			sourceTree = "<group>";
+		};
+		95F63244223B37C300BFC68C /* MineSettingView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MineSettingView;
+			sourceTree = "<group>";
+		};
+		95F63251223B83E300BFC68C /* LabelScreening */ = {
+			isa = PBXGroup;
+			children = (
+				95F6324B223B79A100BFC68C /* WYALabelScreeningView.h */,
+				95F6324C223B79A100BFC68C /* WYALabelScreeningView.m */,
+				955D770D223B913C00B3B1EE /* WYAContentView.h */,
+				955D770E223B913C00B3B1EE /* WYAContentView.m */,
+			);
+			path = LabelScreening;
 			sourceTree = "<group>";
 		};
 		D83764D07F0DA6788B0B7539 /* Frameworks */ = {
@@ -851,18 +908,21 @@
 				95F63234223A599F00BFC68C /* WYAMineCreateDynamicViewController.m in Sources */,
 				95DD8CDE2239E6CE00731A7E /* WYAMineViewModel.m in Sources */,
 				95C2FF8520F0533600ED829B /* RootControllerModel.m in Sources */,
+				955D770F223B913C00B3B1EE /* WYAContentView.m in Sources */,
 				95C2FEDE20F0528C00ED829B /* main.m in Sources */,
 				95DD8CD82239E6AF00731A7E /* WYALoginViewModel.m in Sources */,
 				95DE135021ECB55700B5867B /* UIColor+WYAColor.m in Sources */,
 				21F1C4C0223A05F800527496 /* WYAAgentRingCell.m in Sources */,
 				211F67FF223A5EC000F7ACBB /* WYAAgentRingSectionFootView.m in Sources */,
 				95C2FF8620F0533600ED829B /* AppDelegate.m in Sources */,
+				95F63247223B37E300BFC68C /* WYANoticeTableViewCell.m in Sources */,
 				95F6323D223A613B00BFC68C /* WYAMineCollectionDynamicViewController.m in Sources */,
 				952DE2C6223A46730098B208 /* WYAArticleViewController.m in Sources */,
 				95DD8CD22239E69500731A7E /* WYALoginModel.m in Sources */,
 				21271DD220F59341008EBAD1 /* BaseNetWorking.m in Sources */,
 				95C2FF8420F0533600ED829B /* RootViewController.m in Sources */,
 				952DE2C9223A46800098B208 /* WYAImgTextViewController.m in Sources */,
+				95F63240223B364D00BFC68C /* WYANoticeViewController.m in Sources */,
 				95F63237223A5FE600BFC68C /* WYAMineCollectionViewController.m in Sources */,
 				952DE2BC223A2A300098B208 /* WYAMineTableViewCell.m in Sources */,
 				95DD8CC92239E65400731A7E /* WYAMaterialViewController.m in Sources */,
@@ -875,6 +935,7 @@
 				95F6322E223A592800BFC68C /* WYAMineCreateViewController.m in Sources */,
 				95C2FF8220F0533600ED829B /* WYAMineViewController.m in Sources */,
 				21B6BD7B2239FA0100962255 /* WYAAgentRingCoverView.m in Sources */,
+				95F6324D223B79A100BFC68C /* WYALabelScreeningView.m in Sources */,
 				95DD8CC02239E29400731A7E /* WYAMaterialModel.m in Sources */,
 				95C2FF7F20F0533600ED829B /* BaseViewController.m in Sources */,
 				95DD8CCF2239E68800731A7E /* WYAHomeModel.m in Sources */,

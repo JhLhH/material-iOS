@@ -66,9 +66,9 @@
             vc.selectIndex                       = 0;
             vc.menuViewStyle                     = WYAMenuViewStyleLine;
             vc.automaticallyCalculatesItemWidths = YES;
-            vc.titleColorSelected                = [UIColor wya_blueColor];
-            vc.titleColorNormal                  = [UIColor wya_blackTextColor];
-            vc.progressColor                     = [UIColor wya_blueColor];
+            vc.titleColorSelected                = [UIColor orangeColor];
+            vc.titleColorNormal                  = [UIColor whiteColor];
+            vc.progressColor                     = [UIColor orangeColor];
             viewController = vc;
         }else{
         viewController = [[NSClassFromString(className) alloc] init];

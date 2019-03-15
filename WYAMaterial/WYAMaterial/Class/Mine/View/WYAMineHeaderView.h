@@ -9,8 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "WYAMineModel.h"
 NS_ASSUME_NONNULL_BEGIN
+@protocol WYAMineHeaderDelegate <NSObject>
 
+@required
+- (void)mineHeaderSettingButtonPressed:(UIButton *)sender;
+- (void)mineHeaderEditUserIconButtonPressed:(UIButton *)sender;
+
+@end
 @interface WYAMineHeaderView : UIView
+@property (nonatomic, weak) id<WYAMineHeaderDelegate> delegate;
 @property (nonatomic, strong) WYAMineUserInfoModel * model;
 @end
 

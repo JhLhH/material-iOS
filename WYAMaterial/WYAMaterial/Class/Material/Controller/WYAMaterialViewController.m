@@ -11,26 +11,54 @@
 #import "WYAImgTextViewController.h"
 #import "WYAArticleViewController.h"
 
-@interface WYAMaterialViewController ()<WYANavBarDelegate>
+#import "WYALabelScreeningView.h"
 
+@interface WYAMaterialViewController ()<WYANavBarDelegate>
+@property (nonatomic, strong) WYALabelScreeningView * screeningView;
 @end
 
 @implementation WYAMaterialViewController
+#pragma mark ======= LifeCircle
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.menuView.backgroundColor = [UIColor blackColor];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navBar.backgroundColor = [UIColor yellowColor];
     self.navBar = [[WYANavBar alloc] init];
     self.navBar.navTitle = @"图文";
+    self.navBar.navTitleColor = [UIColor whiteColor];
+    self.navBar.backgroundColor = [UIColor blackColor];
+    self.navBar.isShowLine = NO;
     self.navBar.delegate = self;
-    [self.navBar wya_addRightNavBarButtonWithNormalTitle:@[@"筛选"]];
+    [self.navBar wya_addRightNavBarButtonWithNormalTitle:@[@"筛选"]
+                                             normalColor:@[[UIColor whiteColor]]
+                                        highlightedColor:@[[UIColor grayColor]]];
     [self.view addSubview:self.navBar];
 }
 
 - (void)wya_rightBarButtonItemPressed:(UIButton *)sender{
     NSLog(@"筛选");
+    if (!self.screeningView.screenViewIsShow) {
+        [self.screeningView showScreenView];
+    }else{
+        [self.screeningView hidenScreenView];
+    }
 }
 
+#pragma mark ======= Lazy
+
+- (WYALabelScreeningView *)screeningView{
+    if(!_screeningView){
+        _screeningView = ({
+            WYALabelScreeningView * object = [[WYALabelScreeningView alloc]initWithFrame:CGRectZero];
+            object;
+        });
+    }
+    return _screeningView;
+}
 #pragma mark ======= delegate
 - (NSInteger)wya_numberOfTitlesInMenuView:(WYAMenuView *)menu {
     return 2;
@@ -65,7 +93,10 @@
         [self.navBar wya_addRightNavBarButtonWithNormalTitle:@[]];
     }else{
         self.navBar.navTitle = @"图文";
-        [self.navBar wya_addRightNavBarButtonWithNormalTitle:@[@"筛选"]];
+        [self.navBar wya_addRightNavBarButtonWithNormalTitle:@[@"筛选"]
+                                                 normalColor:@[[UIColor whiteColor]]
+                                            highlightedColor:@[[UIColor grayColor]]];
+
     }
 }
 
@@ -75,9 +106,6 @@
 }
 - (CGRect)wya_pageController:(WYAPageController *)pageController
    preferredFrameForMenuView:(WYAMenuView *)menuView {
-
-    menuView.backgroundColor = [UIColor wya_whiteColor];
-
     return CGRectMake(0, WYATopHeight, ScreenWidth,
                       44);
 }
@@ -88,4 +116,6 @@
     return CGRectMake(0, WYATopHeight + 44 , ScreenWidth,
                       ScreenHeight- (WYATopHeight + 44) - WYATabBarHeight );
 }
+
+
 @end
