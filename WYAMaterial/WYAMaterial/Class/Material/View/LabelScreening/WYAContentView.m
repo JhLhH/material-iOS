@@ -44,26 +44,26 @@
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).offset(LEFT);
         make.top.equalTo(self.mas_top).offset(TOP);
-        make.size.mas_offset(CGSizeMake(ScreenWidth, 30));
+        make.size.mas_equalTo(CGSizeMake(ScreenWidth, 30));
     }];
 
     [self.btnBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).offset(0);
         make.right.equalTo(self.mas_right).offset(0);
         make.top.equalTo(self.titleLabel.mas_bottom).offset(10);
-        make.height.mas_offset(self.btnBgViewHeight);
+        make.height.mas_equalTo(self.btnBgViewHeight);
     }];
 
     [self.resetButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.mas_bottom).offset(0);
         make.left.equalTo(self.mas_left).offset(0);
-        make.size.mas_offset(CGSizeMake(ScreenWidth*0.5, 44));
+        make.size.mas_equalTo(CGSizeMake(ScreenWidth*0.5, 44));
     }];
 
     [self.sureButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.mas_bottom).offset(0);
         make.right.equalTo(self.mas_right).offset(0);
-        make.size.mas_offset(CGSizeMake(ScreenWidth*0.5, 44));
+        make.size.mas_equalTo(CGSizeMake(ScreenWidth*0.5, 44));
     }];
 }
 

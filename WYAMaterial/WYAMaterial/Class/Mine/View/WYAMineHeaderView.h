@@ -9,15 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "WYAMineModel.h"
 NS_ASSUME_NONNULL_BEGIN
-@protocol WYAMineHeaderDelegate <NSObject>
 
-@required
-- (void)mineHeaderSettingButtonPressed:(UIButton *)sender;
-- (void)mineHeaderEditUserIconButtonPressed:(UIButton *)sender;
+typedef void (^SettingActionBlock)(void);
+typedef void (^EditUserIconActionBlock)(void);
 
-@end
 @interface WYAMineHeaderView : UIView
-@property (nonatomic, weak) id<WYAMineHeaderDelegate> delegate;
+
+@property (nonatomic, copy) SettingActionBlock settingActionBlock;
+@property (nonatomic, copy) EditUserIconActionBlock editUserIconActionBlock;
+
 @property (nonatomic, strong) WYAMineUserInfoModel * model;
 @end
 

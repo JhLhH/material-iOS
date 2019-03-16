@@ -62,13 +62,16 @@
         NSString * className              = model.className;
         UIViewController * viewController;
         if ([model.className isEqualToString:@"WYAMaterialViewController"]) {
-          WYAMaterialViewController * vc = [[WYAMaterialViewController alloc]init];
+          WYAMaterialViewController * vc         = [[WYAMaterialViewController alloc]init];
             vc.selectIndex                       = 0;
             vc.menuViewStyle                     = WYAMenuViewStyleLine;
-            vc.automaticallyCalculatesItemWidths = YES;
-            vc.titleColorSelected                = [UIColor orangeColor];
+            vc.titleColorSelected                = WYA_RGB_COLOR(226, 193, 139);
             vc.titleColorNormal                  = [UIColor whiteColor];
-            vc.progressColor                     = [UIColor orangeColor];
+            vc.progressColor                     = WYA_RGB_COLOR(226, 193, 139);
+            vc.progressViewBottomSpace           = 5;
+            vc.progressWidth                     = 25;
+            vc.progressHeight                    = 3;
+            vc.progressViewCornerRadius          = 1.5;
             viewController = vc;
         }else{
         viewController = [[NSClassFromString(className) alloc] init];

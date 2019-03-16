@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navTitle = @"历史通知";
-    [self.view addSubview:self.tableView];
+//    [self.view addSubview:self.tableView];
     // Do any additional setup after loading the view.
 }
 
