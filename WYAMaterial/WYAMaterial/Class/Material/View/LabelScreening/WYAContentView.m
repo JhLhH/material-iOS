@@ -67,6 +67,7 @@
     }];
 }
 
+#pragma mark ======= Setter
 - (void)setContentArray:(NSArray *)contentArray{
     if (contentArray) {
         _contentArray = contentArray;
@@ -110,6 +111,13 @@
     }
 }
 
+#pragma mark ======= Public Method
+- (void)resetContentViewItem{
+    for (UIButton * btn in self.selectedTitleArray) {
+        btn.selected = NO;
+    }
+    [self.selectedTitleArray removeAllObjects];
+}
 #pragma mark ======= Event
 
 - (void)buttonClicked:(UIButton *)sender{
@@ -123,28 +131,24 @@
 
 - (void)resetButtonClicked:(UIButton *)sender{
 
-    for (UIButton * btn in self.selectedTitleArray) {
-        btn.selected = NO;
-    }
-
+    [self resetContentViewItem];
     sender.backgroundColor = [UIColor orangeColor];
     [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-
     self.sureButton.backgroundColor = [UIColor whiteColor];
     [self.sureButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-
+//    if (self.resetButtonAction) {
+//        self.resetButtonAction();
+//    }
 }
 - (void)sureButtonClicked:(UIButton *)sender{
 
     sender.backgroundColor = [UIColor orangeColor];
     [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-
     self.resetButton.backgroundColor = [UIColor whiteColor];
     [self.resetButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-
-
-    for (UIButton * btn in self.selectedTitleArray) {
-        NSLog(@"被选中后的标签：%@",btn.titleLabel.text);
+    if (self.sureButtonAction) {
+        self.sureButtonAction([self.selectedTitleArray copy]);
+        [self resetContentViewItem];
     }
 
 }

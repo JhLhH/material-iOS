@@ -9,17 +9,15 @@
 #import <UIKit/UIKit.h>
 @class WYALabelScreeningView;
 NS_ASSUME_NONNULL_BEGIN
+typedef void (^SureBlock)(NSArray * selectedLabelArray);
 
-//@protocol WYALabelScreeningViewDelegate <NSObject>
-//
-//@required
-//- (void)
-//
-//@end
+typedef void (^ResetBlock)(void);
 
 @interface WYALabelScreeningView : UIView
 @property (nonatomic, assign) BOOL screenViewIsShow;
 @property (nonatomic, strong) NSArray * dataSources;
+@property (nonatomic, copy) SureBlock sureBlock;
+@property (nonatomic, copy) ResetBlock resetBlock;
 /**
  展示筛选视图
  */
