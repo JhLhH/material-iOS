@@ -51,6 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL show;
 
 @property (nonatomic, assign) BOOL contentShow;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -28,7 +28,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navBar.hidden = YES;
+    self.navTitle = @"首页";
     [self setupUI];
     [self getNetWorkDataSource];
 }
@@ -38,9 +38,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
-     return UIStatusBarStyleLightContent;
-}
+//- (UIStatusBarStyle)preferredStatusBarStyle {
+//     return UIStatusBarStyleLightContent;
+//}
 
 #pragma mark ======= Private Method
 - (void)setupUI {
@@ -68,9 +68,7 @@
     WYAAgentRingCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.model              = self.dataSource[indexPath.section];
     cell.stretchBlock = ^(WYAAgentRingModel * _Nonnull model) {
-        [tableView beginUpdates];
-        [tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationNone];
-        [tableView endUpdates];
+        [tableView reloadData];
     };
     return cell;
 }
@@ -81,7 +79,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [WYAAgentRingCell getCellHeightWithModel:self.dataSource[indexPath.section]];
+        return [WYAAgentRingCell getCellHeightWithModel:self.dataSource[indexPath.section]];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -121,14 +119,15 @@
     if (!_agentRingTableView) {
         _agentRingTableView = ({
             CGFloat object_x      = self.view.cmam_left;
-            CGFloat object_y      = -WYAStatusBarHeight;
+            CGFloat object_y      = WYATopHeight;
             CGFloat object_width  = self.view.cmam_width;
-            CGFloat object_height = self.view.cmam_height - WYATabBarHeight + WYAStatusBarHeight;
+            CGFloat object_height = self.view.cmam_height - WYATopHeight * 2;
             CGRect object_rect    = CGRectMake(object_x, object_y, object_width, object_height);
 
             UITableView * object   = [[UITableView alloc] initWithFrame:object_rect style:UITableViewStyleGrouped];
             object.delegate        = self;
             object.dataSource      = self;
+            object.estimatedRowHeight = 700;
             object.backgroundColor = [UIColor whiteColor];
             object.separatorStyle  = UITableViewCellSeparatorStyleNone;
             [object registerClass:[WYAAgentRingCell class] forCellReuseIdentifier:@"cell"];
@@ -199,4 +198,5 @@
     }
     return _sendDynamicButton;
 }
+
 @end

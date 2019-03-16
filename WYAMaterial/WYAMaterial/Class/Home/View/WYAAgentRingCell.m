@@ -14,13 +14,14 @@
 @property (nonatomic, strong) UILabel * userNameLabel;           // 用户昵称
 @property (nonatomic, strong) UILabel * userLevelLabel;          // 用户层级
 @property (nonatomic, strong) UILabel * userReleaseTimeLabel;    // 用户发布时间
-@property (nonatomic, strong) YYLabel * userReleaseContentLabel; // 用户发布内容
+@property (nonatomic, strong) UILabel * userReleaseContentLabel; // 用户发布内容
+@property (nonatomic, strong) UIButton * showButton; // 全文按钮
 @property (nonatomic, strong) UIView * userReleaseImagesView;    // 用户发布图片父视图
 @property (nonatomic, strong) UIButton * forwardingButton;       // 转发
 @property (nonatomic, strong) UIButton * collectionButton;       // 收藏
 @property (nonatomic, strong) UIButton * commentsButton;         // 评论
 @property (nonatomic, strong) UIButton * praiseButton;           // 点赞
-
+@property (nonatomic, assign) BOOL showContent;
 @end
 
 @implementation WYAAgentRingCell
@@ -35,6 +36,7 @@
         [self.contentView addSubview:self.userLevelLabel];
         [self.contentView addSubview:self.userReleaseTimeLabel];
         [self.contentView addSubview:self.userReleaseContentLabel];
+        [self.contentView addSubview:self.showButton];
         [self.contentView addSubview:self.userReleaseImagesView];
         [self.contentView addSubview:self.forwardingButton];
         [self.contentView addSubview:self.collectionButton];
@@ -80,63 +82,20 @@
         make.height.mas_equalTo(self->contentHeight);
     }];
 
-    [self.userReleaseImagesView mas_remakeConstraints:^(MASConstraintMaker * make) {
-        make.left.right.mas_equalTo(self.userReleaseContentLabel);
-        make.top.mas_equalTo(self.userReleaseContentLabel.mas_bottom).with.offset(10 * SizeAdapter);
-        if (self.model.urls.count > 0) {
-            CGFloat itemHeight = (ScreenWidth - 89 * SizeAdapter) / 3;
-            if (self.model.urls.count < 2) {
-                make.height.mas_equalTo(itemHeight * 2);
-            } else {
-                NSInteger row = self.model.urls.count / 3;
-                NSInteger column = self.model.urls.count % 3;
-                NSLog(@"row==%d,column=%d",row,column);
-                if (column == 0) {
-                    // 整除的
-                    if (row > 1) {
-                        make.height.mas_equalTo(itemHeight * row + 10 * SizeAdapter * (row - 1));
-                    } else {
-                        make.height.mas_equalTo(itemHeight);
-                    }
-                } else {
-                    if (row > 0) {
-                        make.height.mas_equalTo(itemHeight * (row + 1) + 10 * SizeAdapter * row);
-                    } else {
-                        make.height.mas_equalTo(itemHeight);
-                    }
-
-                }
-            }
-        }
+    [self.showButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.userReleaseContentLabel.mas_left);
+        make.top.mas_equalTo(self.userReleaseContentLabel.mas_bottom);
+        make.width.mas_equalTo(50 * SizeAdapter);
+        make.height.mas_equalTo(self.showButton.hidden ? 0 : 30 * SizeAdapter);
     }];
 
-    if (self.userReleaseImagesView.subviews.count > 0) {
-        if (self.userReleaseImagesView.subviews.count < 2) {
-            UIView * view = [self.userReleaseImagesView.subviews firstObject];
+    [self.userReleaseImagesView mas_remakeConstraints:^(MASConstraintMaker * make) {
+        make.left.right.mas_equalTo(self.userReleaseContentLabel);
+        make.top.mas_equalTo(self.showButton.mas_bottom).with.offset(0 * SizeAdapter);
+        make.height.mas_equalTo([self userReleaseImagesViewHeightWith:self.model]);
+    }];
 
-            CGFloat view_width = (ScreenWidth - 89 * SizeAdapter) / 3 * 2;
-            CGFloat view_height = view_width;
-            CGFloat view_x = 0;
-            CGFloat view_y = 0;
 
-            CGRect view_rect = CGRectMake(view_x, view_y,  view_width, view_height);
-            view.frame = view_rect;
-        } else {
-            for (NSInteger index = 0; index < self.userReleaseImagesView.subviews.count; index++) {
-                UIView * view = self.userReleaseImagesView.subviews[index];
-                CGFloat row = index / 3;
-                CGFloat column = index % 3;
-
-                CGFloat view_width = (self.contentView.cmam_width - 89 * SizeAdapter) / 3;
-                CGFloat view_height = view_width;
-                CGFloat view_x = (view_width + 10 * SizeAdapter) * column;
-                CGFloat view_y = (view_width + 10 * SizeAdapter) * row;
-
-                CGRect view_rect = CGRectMake(view_x, view_y,  view_width, view_height);
-                view.frame = view_rect;
-            }
-        }
-    }
 
 //    [self.userReleaseImagesView.subviews wya_mas_distributeSudokuViewsWithFixedLineSpacing:5 * SizeAdapter
 //                                                                     fixedInteritemSpacing:5 * SizeAdapter
@@ -183,49 +142,85 @@
 }
 
 #pragma mark ======= Private Method
-- (void)addSeeMoreButtonWithAgentRingModel:(WYAAgentRingModel *)agentRingModel {
+- (CGFloat)userReleaseImagesViewHeightWith:(WYAAgentRingModel *)agentRingModel{
+    CGFloat height = 0.0f;
+    if (agentRingModel.urls.count > 0) {
+        CGFloat itemHeight = (ScreenWidth - 89 * SizeAdapter) / 3;
+        if (agentRingModel.urls.count < 2) {
+            height = itemHeight * 2;
+        } else {
+            NSInteger row = agentRingModel.urls.count / 3;
+            NSInteger column = agentRingModel.urls.count % 3;
+            NSLog(@"row==%d,column=%d",row,column);
+            if (column == 0) {
+                // 整除的
+                if (row > 1) {
+                    height = itemHeight * row + 10 * SizeAdapter * (row - 1);
+                } else {
+                    height = itemHeight;
+                }
+            } else {
+                if (row > 0) {
+                    height = itemHeight * (row + 1) + 10 * SizeAdapter * row;
+                } else {
+                    height = itemHeight;
+                }
 
-    NSMutableAttributedString * text = [[NSMutableAttributedString alloc] initWithString:@"...全文"];
-
-    YYTextHighlight * textHighlight = [YYTextHighlight new];
-    [textHighlight setColor:[UIColor blueColor]];
-    WeakSelf(weakSelf);
-    textHighlight.tapAction = ^(UIView * containerView, NSAttributedString * text, NSRange range, CGRect rect) {
-        StrongSelf(strongSelf);
-        agentRingModel.contentShow = YES;
-        if (strongSelf.stretchBlock) {
-            strongSelf.stretchBlock(strongSelf.model);
+            }
         }
+    }
+    return height;
+}
 
-    };
+- (void)addUserReleaseImageViewSubView{
+    if (self.userReleaseImagesView.subviews.count > 0) {
+        if (self.userReleaseImagesView.subviews.count < 2) {
+            UIView * view = [self.userReleaseImagesView.subviews firstObject];
 
-    [text yy_setColor:[UIColor blueColor] range:[text.string rangeOfString:@"全文"]];
-    [text yy_setTextHighlight:textHighlight range:[text.string rangeOfString:@"全文"]];
-    text.yy_font = FONT(13);
+            CGFloat view_width = (ScreenWidth - 89 * SizeAdapter) / 3 * 2;
+            CGFloat view_height = view_width;
+            CGFloat view_x = 0;
+            CGFloat view_y = 0;
 
-    YYLabel * seeMore      = [YYLabel new];
-    seeMore.attributedText = text;
-    [seeMore sizeToFit];
+            CGRect view_rect = CGRectMake(view_x, view_y,  view_width, view_height);
+            view.frame = view_rect;
+        } else {
+            for (NSInteger index = 0; index < self.userReleaseImagesView.subviews.count; index++) {
+                UIView * view = self.userReleaseImagesView.subviews[index];
+                CGFloat row = index / 3;
+                CGFloat column = index % 3;
 
-    NSAttributedString * truncationToken = [NSAttributedString yy_attachmentStringWithContent:seeMore
-                                                                                  contentMode:UIViewContentModeCenter
-                                                                               attachmentSize:seeMore.cmam_size
-                                                                                  alignToFont:text.yy_font
-                                                                                    alignment:YYTextVerticalAlignmentCenter];
+                CGFloat view_width = (self.contentView.cmam_width - 89 * SizeAdapter) / 3;
+                CGFloat view_height = view_width;
+                CGFloat view_x = (view_width + 10 * SizeAdapter) * column;
+                CGFloat view_y = (view_width + 10 * SizeAdapter) * row;
 
-    self.userReleaseContentLabel.truncationToken = truncationToken;
+                CGRect view_rect = CGRectMake(view_x, view_y,  view_width, view_height);
+                view.frame = view_rect;
+            }
+        }
+    }
 }
 
 #pragma mark ======= Public Method
 + (CGFloat)getCellHeightWithModel:(WYAAgentRingModel *)model {
-    WYAAgentRingCell * cell = [[WYAAgentRingCell alloc] initWithStyle:0 reuseIdentifier:@"xxx"];
-    cell.model              = model;
-    [cell setNeedsLayout];
-    [cell layoutIfNeeded];
+    CGFloat height = 56.0f;
+    CGFloat contantHeight = [model.content wya_heightWithFontSize:15 width:ScreenWidth - 69 * SizeAdapter];
+    if (model.contentShow) {
+        height = height + contantHeight;
+
+    } else {
+        height = height + 51 * SizeAdapter;
+    }
+
+    if (contantHeight > 51 * SizeAdapter) {
+        height = height + 30 * SizeAdapter;
+    }
 //    NSLog(@"hei==%f",cell.userReleaseImagesView.cmam_bottom);
 //    NSLog(@"height==%f",cell.forwardingButton.cmam_bottom);
-
-    return cell.forwardingButton.cmam_bottom + 10 * SizeAdapter;
+    WYAAgentRingCell * cell = [[WYAAgentRingCell alloc] init];
+    CGFloat imageH = [cell userReleaseImagesViewHeightWith:model];
+    return height + imageH + 40 * SizeAdapter;
 }
 
 #pragma mark ======= Setter
@@ -236,26 +231,23 @@
         self.userNameLabel.text           = model.userName;
         self.userLevelLabel.text          = model.userLevel;
         self.userReleaseTimeLabel.text    = model.time;
-
+        self.userReleaseContentLabel.text = model.content;
         self.forwardingButton.selected    = model.forwarding;
         self.collectionButton.selected    = model.collection;
         [self.praiseButton setTitle:[NSString stringWithFormat:@"%d点赞", model.person] forState:UIControlStateNormal];
+        CGFloat height = [model.content wya_heightWithFontSize:15 width:ScreenWidth - 69 * SizeAdapter];
+        if (height > 51 * SizeAdapter) {
+            self.showButton.hidden = NO;
+        }else{
+            self.showButton.hidden = YES;
+        }
 
-        NSMutableAttributedString * text = [[NSMutableAttributedString alloc]initWithString:model.content];
-        self.userReleaseContentLabel.attributedText = text;
-        CGSize introSize      = CGSizeMake(ScreenWidth - 69 * SizeAdapter, CGFLOAT_MAX);
-        YYTextLayout * layout = [YYTextLayout layoutWithContainerSize:introSize text:text];
         if (model.contentShow) {
-            self.userReleaseContentLabel.textLayout      = layout;
-            contentHeight   = layout.textBoundingSize.height;
-
+            contentHeight   = height;
+            self.showButton.selected = YES;
         } else {
-            if (layout.textBoundingSize.height > 36 * SizeAdapter) {
-                [self addSeeMoreButtonWithAgentRingModel:model];
-                contentHeight = 36 * SizeAdapter;
-            } else {
-                contentHeight = layout.textBoundingSize.height;
-            }
+            contentHeight = 51 * SizeAdapter;
+            self.showButton.selected = NO;
         }
 
         if (self.model.urls.count > 0) {
@@ -271,6 +263,7 @@
                 }];
                 [self.userReleaseImagesView addSubview:object];
             }
+            [self addUserReleaseImageViewSubView];
         }
         [self setNeedsLayout];
         [self layoutIfNeeded];
@@ -329,11 +322,11 @@
     return _userReleaseTimeLabel;
 }
 
-- (YYLabel *)userReleaseContentLabel {
+- (UILabel *)userReleaseContentLabel {
     if (!_userReleaseContentLabel) {
         _userReleaseContentLabel = ({
-            YYLabel * object     = [[YYLabel alloc] init];
-            object.preferredMaxLayoutWidth = ScreenWidth - 69 * SizeAdapter;
+            UILabel * object     = [[UILabel alloc] init];
+            object.font = FONT(15);
             object.numberOfLines           = 0;
             object;
         });
@@ -429,6 +422,31 @@
         });
     }
     return _praiseButton;
+}
+
+
+- (UIButton *)showButton{
+    if(!_showButton){
+        _showButton = ({
+            UIButton *  object = [[UIButton alloc]init];
+            [object setTitle:@"全文" forState:UIControlStateNormal];
+            [object setTitle:@"收起" forState:UIControlStateSelected];
+            [object setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+            [object setTitleColor:[UIColor blueColor] forState:UIControlStateSelected];
+            object.hidden = YES;
+            object.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+            object.titleLabel.font = FONT(15);
+            [object addCallBackAction:^(UIButton *button) {
+                self.model.contentShow = !self.model.contentShow;
+                button.selected = self.model.contentShow;
+                if (self.stretchBlock) {
+                    self.stretchBlock(self.model);
+                }
+            }];
+            object;
+       });
+    }
+    return _showButton;
 }
 
 @end

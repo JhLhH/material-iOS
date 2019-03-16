@@ -20,9 +20,7 @@
 		952DE2BC223A2A300098B208 /* WYAMineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 952DE2BB223A2A300098B208 /* WYAMineTableViewCell.m */; };
 		952DE2C6223A46730098B208 /* WYAArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 952DE2C5223A46730098B208 /* WYAArticleViewController.m */; };
 		952DE2C9223A46800098B208 /* WYAImgTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 952DE2C8223A46800098B208 /* WYAImgTextViewController.m */; };
-
 		955D770F223B913C00B3B1EE /* WYAContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 955D770E223B913C00B3B1EE /* WYAContentView.m */; };
-
 		958FB47620F0574A00F44489 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 958FB47520F0574A00F44489 /* Assets.xcassets */; };
 		95C2FEDB20F0528C00ED829B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95C2FED920F0528C00ED829B /* LaunchScreen.storyboard */; };
 		95C2FEDE20F0528C00ED829B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 95C2FEDD20F0528C00ED829B /* main.m */; };
@@ -925,11 +923,8 @@
 				95F63234223A599F00BFC68C /* WYAMineCreateDynamicViewController.m in Sources */,
 				95DD8CDE2239E6CE00731A7E /* WYAMineViewModel.m in Sources */,
 				95C2FF8520F0533600ED829B /* RootControllerModel.m in Sources */,
-
 				211F6802223B8E8300F7ACBB /* WYASendDynamicViewController.m in Sources */,
-
 				955D770F223B913C00B3B1EE /* WYAContentView.m in Sources */,
-
 				95C2FEDE20F0528C00ED829B /* main.m in Sources */,
 				95DD8CD82239E6AF00731A7E /* WYALoginViewModel.m in Sources */,
 				95DE135021ECB55700B5867B /* UIColor+WYAColor.m in Sources */,
