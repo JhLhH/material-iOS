@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WYAMineModel : NSObject
 @property (nonatomic, strong) WYAMineUserInfoModel * userInfoModel;
+
 @end
 
 @interface WYAMineUserInfoModel : NSObject
@@ -28,5 +29,24 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)initWithResults:(id)results;
 
 @end
+
+@interface WYAMineNoticeModel : NSObject
+
+/**
+ 通知内容最大值为50个字
+ */
+@property (nonatomic, copy) NSString * contentString;
+@property (nonatomic, copy) NSString * timeString;
+
+/**
+ 获取个人中心模块历史通知数据
+
+ @param results 请求返回的数据
+ @return 返回一个供tableView使用的dataSources数据
+ */
++ (NSArray *)getModelsWithResults:(id)results;
+@end
+
+
 
 NS_ASSUME_NONNULL_END

@@ -135,8 +135,9 @@
             WYANavBar * object     = [[WYANavBar alloc] init];
             object.delegate        = self;
             object.navTitle        = @"素材库";
-            object.navTitleColor   = [UIColor wya_blackTitleColor];
-            object.backgroundColor = [UIColor wya_whiteColor];
+            object.isShowLine = NO;
+            object.navTitleColor   = [UIColor whiteColor];
+            object.backgroundColor = [UIColor blackColor];
             object;
         });
     }

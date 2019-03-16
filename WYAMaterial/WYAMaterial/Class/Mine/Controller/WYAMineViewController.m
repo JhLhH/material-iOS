@@ -14,6 +14,9 @@
 
 #import "WYAMineCollectionViewController.h"
 
+#import "WYANoticeViewController.h"
+
+
 #import "WYAMineModel.h"
 
 #define MINE_CELLID @"WYAMineTableViewCell"
@@ -22,6 +25,7 @@
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) WYAMineHeaderView * headerView;
 @property (nonatomic, strong) NSArray * dataSources;
+@property (nonatomic, strong) UIImageView * bgImageView;
 @end
 
 @implementation WYAMineViewController
@@ -30,7 +34,7 @@
     [super viewDidLoad];
     self.navTitle = @"个人中心";
     [self wya_addRightNavBarButtonWithNormalTitle:@[@"设置"]];
-    [self.view addSubview:self.tableView];
+//    [self.view addSubview:self.tableView];
     // Do any additional setup after loading the view.
 }
 
@@ -135,7 +139,7 @@
             break;
         case 2:
         {
-
+            vc = [[WYANoticeViewController alloc]init];
         }
             break;
         default:
