@@ -127,7 +127,7 @@
             UITableView * object   = [[UITableView alloc] initWithFrame:object_rect style:UITableViewStyleGrouped];
             object.delegate        = self;
             object.dataSource      = self;
-            object.estimatedRowHeight = 700;
+            object.estimatedRowHeight = 0;
             object.backgroundColor = [UIColor whiteColor];
             object.separatorStyle  = UITableViewCellSeparatorStyleNone;
             [object registerClass:[WYAAgentRingCell class] forCellReuseIdentifier:@"cell"];
