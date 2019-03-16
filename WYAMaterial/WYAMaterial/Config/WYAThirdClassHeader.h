@@ -19,4 +19,8 @@
 #import <WYAKit/WYAAlertController.h>
 #import <Bugly/Bugly.h>
 #import <WYAKit/WYAPageController.h>
+#import <WYAKit/WYATextView.h>
+#import <WYAKit/WYAEditCameraCell.h>
+#import <WYAKit/WYACameraViewController.h>
+#import <WYAKit/WYAPhotoBrowser.h>
 #endif /* WYAThirdClassHeader_h */

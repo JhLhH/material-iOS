@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) WYAAgentRingModel * model;
 @property (nonatomic, copy) void(^stretchBlock)(WYAAgentRingModel * model);
-
+@property (nonatomic, copy) void(^singleCommentsBlock)(WYAAgentRingModel * model);
 + (CGFloat)getFootHeightWithModel:(WYAAgentRingModel *)model;
 @end
 

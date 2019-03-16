@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString * comments;
 
+@property (nonatomic, assign) BOOL show;
+
 @end
 
 @interface WYAAgentRingModel : NSObject
@@ -48,6 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL show;
 
+@property (nonatomic, assign) BOOL contentShow;
 @end
 
 NS_ASSUME_NONNULL_END
