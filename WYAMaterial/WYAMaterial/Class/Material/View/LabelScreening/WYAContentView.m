@@ -44,29 +44,30 @@
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).offset(LEFT);
         make.top.equalTo(self.mas_top).offset(TOP);
-        make.size.mas_offset(CGSizeMake(ScreenWidth, 30));
+        make.size.mas_equalTo(CGSizeMake(ScreenWidth, 30));
     }];
 
     [self.btnBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).offset(0);
         make.right.equalTo(self.mas_right).offset(0);
         make.top.equalTo(self.titleLabel.mas_bottom).offset(10);
-        make.height.mas_offset(self.btnBgViewHeight);
+        make.height.mas_equalTo(self.btnBgViewHeight);
     }];
 
     [self.resetButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.mas_bottom).offset(0);
         make.left.equalTo(self.mas_left).offset(0);
-        make.size.mas_offset(CGSizeMake(ScreenWidth*0.5, 44));
+        make.size.mas_equalTo(CGSizeMake(ScreenWidth*0.5, 44));
     }];
 
     [self.sureButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.mas_bottom).offset(0);
         make.right.equalTo(self.mas_right).offset(0);
-        make.size.mas_offset(CGSizeMake(ScreenWidth*0.5, 44));
+        make.size.mas_equalTo(CGSizeMake(ScreenWidth*0.5, 44));
     }];
 }
 
+#pragma mark ======= Setter
 - (void)setContentArray:(NSArray *)contentArray{
     if (contentArray) {
         _contentArray = contentArray;
@@ -110,6 +111,13 @@
     }
 }
 
+#pragma mark ======= Public Method
+- (void)resetContentViewItem{
+    for (UIButton * btn in self.selectedTitleArray) {
+        btn.selected = NO;
+    }
+    [self.selectedTitleArray removeAllObjects];
+}
 #pragma mark ======= Event
 
 - (void)buttonClicked:(UIButton *)sender{
@@ -123,28 +131,24 @@
 
 - (void)resetButtonClicked:(UIButton *)sender{
 
-    for (UIButton * btn in self.selectedTitleArray) {
-        btn.selected = NO;
-    }
-
+    [self resetContentViewItem];
     sender.backgroundColor = [UIColor orangeColor];
     [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-
     self.sureButton.backgroundColor = [UIColor whiteColor];
     [self.sureButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-
+//    if (self.resetButtonAction) {
+//        self.resetButtonAction();
+//    }
 }
 - (void)sureButtonClicked:(UIButton *)sender{
 
     sender.backgroundColor = [UIColor orangeColor];
     [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-
     self.resetButton.backgroundColor = [UIColor whiteColor];
     [self.resetButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-
-
-    for (UIButton * btn in self.selectedTitleArray) {
-        NSLog(@"被选中后的标签：%@",btn.titleLabel.text);
+    if (self.sureButtonAction) {
+        self.sureButtonAction([self.selectedTitleArray copy]);
+        [self resetContentViewItem];
     }
 
 }

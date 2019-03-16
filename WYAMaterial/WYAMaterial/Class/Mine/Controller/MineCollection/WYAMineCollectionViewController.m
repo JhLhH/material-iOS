@@ -15,18 +15,25 @@
 @end
 
 @implementation WYAMineCollectionViewController
+#pragma mark ======= LifeCircle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navBar.backgroundColor = [UIColor yellowColor];
+    [self createNavBar];
+    self.menuView.backgroundColor = [UIColor blackColor];
+}
+
+- (void)createNavBar{
     self.navBar = [[WYANavBar alloc] init];
-    self.navBar.navTitle = @"动态";
+    self.navBar.backgroundColor = [UIColor blackColor];
+    self.navBar.navTitle = @"我的收藏";
+    self.navBar.navTitleColor = [UIColor whiteColor];
+    self.navBar.isShowLine = NO;
     self.navBar.delegate = self;
-    [self.navBar wya_goBackButtonWithImage:@"返回"];
+    [self.navBar wya_goBackButtonWithImage:@"fanhui"];
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
     [self.view addSubview:self.navBar];
 }
-
 - (void)wya_goBackPressed:(UIButton *)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -41,9 +48,9 @@
 - (NSString *)wya_pageController:(WYAPageController *)pageController titleAtIndex:(NSInteger)index {
     switch (index % 2) {
         case 0:
-            return @"动态";
+            return @"我的动态";
         case 1:
-            return @"素材";
+            return @"我的素材";
     }
     return @"NONE";
 }
@@ -59,16 +66,16 @@
     return [[UIViewController alloc] init];
 }
 
-- (void)wya_pageController:(WYAPageController *)pageController
-   willEnterViewController:(__kindof UIViewController *)viewController
-                  withInfo:(NSDictionary *)info{
-    if ([NSStringFromClass([viewController class]) isEqualToString:@"WYAMineCreateDynamicViewController"]) {
-        self.navBar.navTitle = @"动态";
-        [self.navBar wya_addRightNavBarButtonWithNormalTitle:@[]];
-    }else{
-        self.navBar.navTitle = @"素材";
-    }
-}
+//- (void)wya_pageController:(WYAPageController *)pageController
+//   willEnterViewController:(__kindof UIViewController *)viewController
+//                  withInfo:(NSDictionary *)info{
+//    if ([NSStringFromClass([viewController class]) isEqualToString:@"WYAMineCreateDynamicViewController"]) {
+//        self.navBar.navTitle = @"动态";
+//        [self.navBar wya_addRightNavBarButtonWithNormalTitle:@[]];
+//    }else{
+//        self.navBar.navTitle = @"素材";
+//    }
+//}
 
 
 - (CGFloat)wya_menuView:(WYAMenuView *)menu widthForItemAtIndex:(NSInteger)index {
@@ -77,9 +84,6 @@
 }
 - (CGRect)wya_pageController:(WYAPageController *)pageController
    preferredFrameForMenuView:(WYAMenuView *)menuView {
-
-    menuView.backgroundColor = [UIColor wya_whiteColor];
-
     return CGRectMake(0, WYATopHeight, ScreenWidth,
                       44);
 }

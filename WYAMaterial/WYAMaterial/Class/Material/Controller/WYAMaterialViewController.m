@@ -54,8 +54,22 @@
     if(!_screeningView){
         _screeningView = ({
             WYALabelScreeningView * object = [[WYALabelScreeningView alloc]initWithFrame:CGRectZero];
+            object.sureBlock = ^(NSArray * _Nonnull selectedLabelArray) {
+                // 点击确定筛选按钮
+                for (NSString * titleString in selectedLabelArray) {
+                    NSLog(@"筛选项%@\n",titleString);
+                }
+                [self wya_reloadData];
+            };
+
+            object.resetBlock = ^{
+                // 重置
+                [self wya_reloadData];
+            };
+
             object;
         });
+
     }
     return _screeningView;
 }

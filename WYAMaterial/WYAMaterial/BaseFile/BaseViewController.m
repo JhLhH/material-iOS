@@ -21,8 +21,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    NSLog(@"hidden==%d", self.navigationController.navigationBarHidden);
-    NSLog(@"h==%d", self.navigationController.navigationBar.hidden);
 }
 
 - (void)viewDidLoad {
@@ -36,7 +34,7 @@
 - (void)addCustomNavBar {
     NSArray * arrViewControllers = self.navigationController.viewControllers;
     if ([arrViewControllers indexOfObject:self] > 0) {
-        [self.navBar wya_goBackButtonWithImage:@"返回"];
+        [self.navBar wya_goBackButtonWithImage:@"fanhui"];
     }
     [self.view addSubview:self.navBar];
 }

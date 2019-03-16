@@ -17,23 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navBar.hidden = YES;
-    self.view.backgroundColor = randomColor;
-//    [self wya_addRightNavBarButtonWithNormalTitle:@"筛选"];
-    // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor whiteColor];
+
 }
-
-- (void)wya_customrRightBarButtonItemPressed:(UIButton *)sender{
-    NSLog(@"筛选");
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end

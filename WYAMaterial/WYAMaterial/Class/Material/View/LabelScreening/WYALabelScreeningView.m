@@ -33,10 +33,8 @@
 }
 - (void)hidenScreenView{
     self.screenViewIsShow = NO;
-//    [self.contentView removeFromSuperview];
-//    self.contentView = nil;
     self.hidden = !self.screenViewIsShow;
-//    [self removeFromSuperview];
+    [self.contentView resetContentViewItem];
 }
 
 #pragma mark ======= Lazy
@@ -67,6 +65,22 @@
              self.contentViewHeight = 114 + (self.dataSources.count/3)*40;
             WYAContentView * object = [[WYAContentView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, self.contentViewHeight)];
             object.contentArray = self.dataSources;
+            object.resetButtonAction = ^{
+                if (self.resetBlock) {
+                    self.resetBlock();
+                    [self hidenScreenView];
+                }
+            };
+            object.sureButtonAction = ^(NSArray * _Nonnull selectedBtnArray) {
+                if (self.sureBlock) {
+                    NSMutableArray * selectedLabelArray = [NSMutableArray array];
+                    for (UIButton * btn in selectedBtnArray) {
+                        [selectedLabelArray wya_safeAddObject: btn.titleLabel.text];
+                    }
+                    self.sureBlock(selectedLabelArray);
+                    [self hidenScreenView];
+                }
+            };
             object;
         });
     }
@@ -96,9 +110,7 @@
 - (void)hiddenScreenView:(UIGestureRecognizer * )recognizer{
     self.screenViewIsShow = NO;
     self.hidden = !self.screenViewIsShow;
-//    [self.contentView removeFromSuperview];
-//    self.contentView = nil;
-//    [self removeFromSuperview];
+    [self.contentView resetContentViewItem];
 }
 
 @end
