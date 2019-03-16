@@ -28,13 +28,15 @@
 #pragma mark ======= Public Method
 - (void)showScreenView{
     self.screenViewIsShow = YES;
+    self.hidden = !self.screenViewIsShow;
     [Window addSubview:self];
 }
 - (void)hidenScreenView{
     self.screenViewIsShow = NO;
-    [self.contentView removeFromSuperview];
-    self.contentView = nil;
-    [self removeFromSuperview];
+//    [self.contentView removeFromSuperview];
+//    self.contentView = nil;
+    self.hidden = !self.screenViewIsShow;
+//    [self removeFromSuperview];
 }
 
 #pragma mark ======= Lazy
@@ -73,7 +75,7 @@
 - (NSArray *)dataSources{
     if (!_dataSources) {
         _dataSources = ({
-            NSArray * object = @[@"测试",@"演讲速成手啊啊",@"高效率思维",@"提高效率",@"测试",@"商务英语",@"提高效率",@"测试",@"商务英语"];
+            NSArray * object = @[@"测试",@"演讲速成手啊啊",@"高效率思维",@"提高效率",@"测试",@"商务英语",@"提高效率",@"测试",@"商务英语",@"高效率思维",@"高效率思维",@"高效率思维",@"高效率思维"];
 
             object;
         });
@@ -93,9 +95,10 @@
 
 - (void)hiddenScreenView:(UIGestureRecognizer * )recognizer{
     self.screenViewIsShow = NO;
-    [self.contentView removeFromSuperview];
-    self.contentView = nil;
-    [self removeFromSuperview];
+    self.hidden = !self.screenViewIsShow;
+//    [self.contentView removeFromSuperview];
+//    self.contentView = nil;
+//    [self removeFromSuperview];
 }
 
 @end
