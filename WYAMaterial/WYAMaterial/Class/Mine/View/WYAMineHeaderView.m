@@ -165,7 +165,7 @@
             object.userInteractionEnabled = YES;
             object.text = @"个人中心";
             object.textColor = [UIColor whiteColor];
-            object.font = FONTS(18);
+            object.font = FONT(18);
             object.textAlignment = NSTextAlignmentCenter;
             object;
        });

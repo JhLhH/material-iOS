@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WYAImageTextTableViewCell : UITableViewCell
 @property (nonatomic, strong) WYAImageTextModel * model;
++ (CGFloat)getCellHeightWithModel:(WYAImageTextModel *)model;
 @end
 
 NS_ASSUME_NONNULL_END
