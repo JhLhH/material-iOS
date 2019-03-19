@@ -97,13 +97,17 @@
         make.centerY.mas_equalTo(self.userNameLabel.mas_centerY);
         make.size.mas_equalTo(CGSizeMake(100, 20));
     }];
+    
     CGFloat bodyTextHeight;
-    if (self.showAllBodyButton.isSelected) {
+    if ([self.showAllBodyButton.titleLabel.text isEqualToString:@"收起"]) {
         bodyTextHeight = [_model.bodyString wya_heightWithFontSize:14 width:ScreenWidth - 67 - 10];
     }else{
-        bodyTextHeight = 100;
+        if ([_model.bodyString wya_heightWithFontSize:14 width:ScreenWidth - 67 - 10] > 100) {
+            bodyTextHeight = 100;
+        }else{
+            bodyTextHeight = [_model.bodyString wya_heightWithFontSize:14 width:ScreenWidth - 67 - 10];
+        }
     }
-
     [self.userContentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.userHeaderButton.mas_right).offset(LEFT_MARGIN);
         make.top.equalTo(self.userHeaderButton.mas_bottom).offset(5);
@@ -255,7 +259,6 @@
         _showAllBodyButton = ({
             UIButton * object = [[UIButton alloc]init];
             [object setTitle:@"全文" forState:0];
-            [object setTitle:@"收起" forState:UIControlStateSelected];
             [object setTitleColor:[UIColor wya_blueColor] forState:0];
             [object addTarget:self action:@selector(showAllBodyButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
             object.titleLabel.font = FONT(14);
@@ -329,15 +332,27 @@
 
 - (void)showAllBodyButtonClicked:(UIButton *)sender{
 
-    sender.selected = !sender.isSelected;
-
+    if ([sender.titleLabel.text isEqualToString:@"收起"]) {
+        [sender setTitle:@"全文" forState:UIControlStateNormal];
+    }else{
+        [sender setTitle:@"收起" forState:UIControlStateNormal];
+    }
+    
     [self setNeedsLayout];
-
+    if (self.showAllBodyActionBlock) {
+        self.showAllBodyActionBlock(self.cellIndexPath);
+    }
 }
 
 #pragma mark ======= Public Method
 
 + (CGFloat)getCellHeightWithModel:(WYAImageTextModel *)model{
+    CGFloat contentHeight ;
+    if ([model.bodyString wya_heightWithFontSize:14 width:ScreenWidth - 67 - 10] > 100) {
+        contentHeight = 100;
+    }else{
+        contentHeight = [model.bodyString wya_heightWithFontSize:14 width:ScreenWidth - 67 - 10];
+    }
     if (model.bodyImgArray.count > 1) {
         int index ;
         if (model.bodyImgArray.count<=3) {
@@ -349,9 +364,27 @@
         }
         CGFloat height = index * (ITEM_MARGIN + ITEM_WH);
 
-        return [model.bodyString wya_heightWithFontSize:14 width:ScreenWidth - 67 - 10] + 75 + height + 45 + 25;
+        return contentHeight + 75 + height + 45 + 25;
     }
-    return [model.bodyString wya_heightWithFontSize:14 width:ScreenWidth - 67 - 10] + 75 + 200 + 45 + 25;
+    return contentHeight + 75 + 200 + 45 + 25;
 }
 
++ (CGFloat)refreshCellHeightWithModel:(WYAImageTextModel *)model{
+    CGFloat contentHeight ;
+    contentHeight = [model.bodyString wya_heightWithFontSize:14 width:ScreenWidth - 67 - 10];
+    if (model.bodyImgArray.count > 1) {
+        int index ;
+        if (model.bodyImgArray.count<=3) {
+            index = 1;
+        }else if (model.bodyImgArray.count>6){
+            index = 3;
+        }else{
+            index = 2;
+        }
+        CGFloat height = index * (ITEM_MARGIN + ITEM_WH);
+
+        return contentHeight + 75 + height + 45 + 25;
+    }
+    return contentHeight + 75 + 200 + 45 + 25;
+}
 @end

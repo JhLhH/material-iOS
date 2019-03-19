@@ -40,3 +40,22 @@
 }
 
 @end
+
+@implementation WYAArticleModel
+
++ (NSArray *)getArticleWithResults:(id)results{
+    NSMutableArray * array = [NSMutableArray array];
+    for (int i = 0; i < 10; i++) {
+        WYAArticleModel * model = [[WYAArticleModel alloc]init];
+        model.titleString = @"一代一品一个系统多个独立产品线";
+        model.contentString = @"店主不用铺货、无需发货、申请成为店主后会拥有属于自己的独立店铺";
+        model.contentImgString = @"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1552901682&di=b23661d86c50223d02fb22c8c77d1e42&src=http://b-ssl.duitang.com/uploads/item/201602/24/20160224122640_XSZYB.thumb.700_0.jpeg";
+        model.timeString = @"2019-01-20";
+        model.forwardingNumString = @"263";
+        model.readNumString = @"635";
+        [array addObject:model];
+    }
+    return [array copy];
+}
+
+@end

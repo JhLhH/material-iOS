@@ -15,6 +15,7 @@
 @property (nonatomic, strong) UIButton * createMaterialBtn;
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) NSMutableArray * dataSources;
+@property (nonatomic, assign) BOOL isRefreshCell;
 @end
 
 @implementation WYAImgTextViewController
@@ -22,14 +23,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navBar.hidden = YES;
+    self.isRefreshCell = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tableView];
-    [self.view addSubview:self.createMaterialBtn];
-    [self.createMaterialBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.view.mas_right).offset(-15);
-        make.bottom.equalTo(self.view.mas_bottom).offset(-25);
-        make.size.mas_equalTo(CGSizeMake(60, 60));
-    }];
+//    [self.view addSubview:self.createMaterialBtn];
+//    [self.createMaterialBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.equalTo(self.view.mas_right).offset(-15);
+//        make.bottom.equalTo(self.view.mas_bottom).offset(-25);
+//        make.size.mas_equalTo(CGSizeMake(60, 60));
+//    }];
 }
 
 
@@ -86,6 +88,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.isRefreshCell) {
+        return [WYAImageTextTableViewCell refreshCellHeightWithModel:[self.dataSources wya_safeObjectAtIndex:indexPath.row]];
+    }
     return [WYAImageTextTableViewCell getCellHeightWithModel:[self.dataSources wya_safeObjectAtIndex:indexPath.row]];
 }
 
@@ -93,6 +98,7 @@
     WYAImageTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:IMGTEXT_CELLID forIndexPath:indexPath];
     cell.model = [self.dataSources wya_safeObjectAtIndex:indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.cellIndexPath = indexPath;
     cell.collectionActionBlock = ^(WYAImageTextTableViewCell * _Nonnull target) {
         // 收藏
         NSLog(@"收藏");
@@ -100,6 +106,12 @@
     cell.forwardingActionBlock = ^(WYAImageTextTableViewCell * _Nonnull target) {
         // 转发
         NSLog(@"转发");
+    };
+    cell.showAllBodyActionBlock = ^(NSIndexPath * _Nonnull cellIndexPath) {
+        NSArray <NSIndexPath *> *indexPathArray = @[cellIndexPath];
+        //3.传入数组，对当前cell进行刷新
+        [self.tableView reloadRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
+        self.isRefreshCell = YES;
     };
     return cell;
 }

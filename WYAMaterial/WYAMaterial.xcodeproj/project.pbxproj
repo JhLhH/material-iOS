@@ -35,6 +35,7 @@
 		955D7716223CE2EF00B3B1EE /* WYASettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 955D7715223CE2EF00B3B1EE /* WYASettingViewController.m */; };
 		955D771D223CEA4100B3B1EE /* WYAImageTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 955D771C223CEA4100B3B1EE /* WYAImageTextTableViewCell.m */; };
 		955D7723223CFDE300B3B1EE /* WYAImgTextBodyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 955D7722223CFDE300B3B1EE /* WYAImgTextBodyView.m */; };
+		955D77582240C99C00B3B1EE /* WYAArticleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 955D77572240C99C00B3B1EE /* WYAArticleTableViewCell.m */; };
 		958FB47620F0574A00F44489 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 958FB47520F0574A00F44489 /* Assets.xcassets */; };
 		95C2FEDB20F0528C00ED829B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95C2FED920F0528C00ED829B /* LaunchScreen.storyboard */; };
 		95C2FEDE20F0528C00ED829B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 95C2FEDD20F0528C00ED829B /* main.m */; };
@@ -147,6 +148,8 @@
 		955D771C223CEA4100B3B1EE /* WYAImageTextTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAImageTextTableViewCell.m; sourceTree = "<group>"; };
 		955D7721223CFDE300B3B1EE /* WYAImgTextBodyView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAImgTextBodyView.h; sourceTree = "<group>"; };
 		955D7722223CFDE300B3B1EE /* WYAImgTextBodyView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAImgTextBodyView.m; sourceTree = "<group>"; };
+		955D77562240C99C00B3B1EE /* WYAArticleTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAArticleTableViewCell.h; sourceTree = "<group>"; };
+		955D77572240C99C00B3B1EE /* WYAArticleTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAArticleTableViewCell.m; sourceTree = "<group>"; };
 		958FB47520F0574A00F44489 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		95C2FECB20F0528B00ED829B /* WYAMaterial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WYAMaterial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95C2FEDA20F0528C00ED829B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -438,6 +441,15 @@
 			path = ImgTextView;
 			sourceTree = "<group>";
 		};
+		955D77552240C97600B3B1EE /* ArticleView */ = {
+			isa = PBXGroup;
+			children = (
+				955D77562240C99C00B3B1EE /* WYAArticleTableViewCell.h */,
+				955D77572240C99C00B3B1EE /* WYAArticleTableViewCell.m */,
+			);
+			path = ArticleView;
+			sourceTree = "<group>";
+		};
 		9592DAAC2239E0D800DAB8B7 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -664,6 +676,7 @@
 		95DD8CAE2239E23800731A7E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				955D77552240C97600B3B1EE /* ArticleView */,
 				955D771A223CEA0200B3B1EE /* ImgTextView */,
 				95F63251223B83E300BFC68C /* LabelScreening */,
 				95DD8CC12239E2AB00731A7E /* WYAMaterialView.h */,
@@ -1078,6 +1091,7 @@
 				2193EE87223FD70900FD61B9 /* WYAMineCreateDynamicModel.m in Sources */,
 				2193EE7D223FD49C00FD61B9 /* WYAMineCreateReviewFailCell.m in Sources */,
 				211F6806223B95B200F7ACBB /* WYACameraCell.m in Sources */,
+				955D77582240C99C00B3B1EE /* WYAArticleTableViewCell.m in Sources */,
 				95DD8CCC2239E66400731A7E /* WYALoginViewController.m in Sources */,
 				952DE2B9223A074B0098B208 /* WYAMineHeaderView.m in Sources */,
 				95F6323A223A609300BFC68C /* WYAMineCollectionMaterialViewController.m in Sources */,

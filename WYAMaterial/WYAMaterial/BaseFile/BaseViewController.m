@@ -29,7 +29,10 @@
     [self addCustomNavBar];
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
 }
-
+- (void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    [self.view bringSubviewToFront:self.navBar];
+}
 #pragma mark ======= private
 - (void)addCustomNavBar {
     NSArray * arrViewControllers = self.navigationController.viewControllers;
