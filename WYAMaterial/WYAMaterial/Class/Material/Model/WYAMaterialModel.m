@@ -31,9 +31,10 @@
             model.bodyImgArray = [tempArray copy];
             [tempArray removeAllObjects];
         }else{
-            model.bodyImgArray = @[@"1",@"1",@"1",@"1",@"1"];
+            model.bodyImgArray = @[@"1",@"1",@"1",@"1",@"1",@"2",@"2",@"2",@"2"];
         }
         model.forwardingNumber = @"666";
+        [array addObject:model];
     }
     return [array copy];
 }
