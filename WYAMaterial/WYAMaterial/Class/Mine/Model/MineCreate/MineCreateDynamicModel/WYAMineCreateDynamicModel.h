@@ -1,22 +1,21 @@
 //
-//  WYAAgentRingModel.h
+//  MineCreateDynamicModel.h
 //  WYAMaterial
 //
-//  Created by 李世航 on 2019/3/14.
+//  Created by 李世航 on 2019/3/18.
 //  Copyright © 2019 WeiYiAn. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
-@interface WYAAgentRingImageModel : NSObject
+@interface WYAMineCreateDynamicImageModel : NSObject
 
 @property (nonatomic, copy) NSString * imageUrl;
 
 @end
 
-@interface WYAAgentRingCommentsModel : NSObject
+@interface WYAMineCreateDynamicCommentsModel : NSObject
 
 @property (nonatomic, copy) NSString * personName;
 
@@ -26,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface WYAAgentRingModel : NSObject
+@interface WYAMineCreateDynamicModel : NSObject
 
 @property (nonatomic, copy) NSString * userHeader;
 
@@ -38,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString * content;
 
-@property (nonatomic, strong) NSArray <WYAAgentRingImageModel *> * urls;
+@property (nonatomic, strong) NSArray <WYAMineCreateDynamicImageModel *> * urls;
 
 @property (nonatomic, assign) BOOL forwarding;
 
@@ -46,14 +45,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) int person;
 
-@property (nonatomic, strong) NSArray <WYAAgentRingCommentsModel *> * comments;
+@property (nonatomic, strong) NSArray <WYAMineCreateDynamicCommentsModel *> * comments;
+
+/**
+ 审核状态：0：失败，1：成功， 2：正在审核
+ */
+@property (nonatomic, assign) int reviewStatus;
 
 @property (nonatomic, assign) BOOL show;
 
 @property (nonatomic, assign) BOOL contentShow;
 
-@property (nonatomic, assign) CGFloat cellHeight;
-
 @end
+
 
 NS_ASSUME_NONNULL_END

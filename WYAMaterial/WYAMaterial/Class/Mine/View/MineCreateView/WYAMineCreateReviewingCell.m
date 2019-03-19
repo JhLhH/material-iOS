@@ -1,15 +1,15 @@
 //
-//  WYAAgentRingCell.m
+//  WYAMineCreateReviewingCell.m
 //  WYAMaterial
 //
-//  Created by 李世航 on 2019/3/14.
+//  Created by 李世航 on 2019/3/19.
 //  Copyright © 2019 WeiYiAn. All rights reserved.
 //
 
-#import "WYAAgentRingCell.h"
-#import "WYAAgentRingModel.h"
+#import "WYAMineCreateReviewingCell.h"
+#import "WYAMineCreateDynamicModel.h"
 
-@interface WYAAgentRingCell ()
+@interface WYAMineCreateReviewingCell ()
 @property (nonatomic, strong) UIButton * userHeaderButton;       // 用户头像按钮
 @property (nonatomic, strong) UILabel * userNameLabel;           // 用户昵称
 @property (nonatomic, strong) UILabel * userLevelLabel;          // 用户层级
@@ -17,14 +17,9 @@
 @property (nonatomic, strong) UILabel * userReleaseContentLabel; // 用户发布内容
 @property (nonatomic, strong) UIButton * showButton; // 全文按钮
 @property (nonatomic, strong) UIView * userReleaseImagesView;    // 用户发布图片父视图
-@property (nonatomic, strong) UIButton * forwardingButton;       // 转发
-@property (nonatomic, strong) UIButton * collectionButton;       // 收藏
-@property (nonatomic, strong) UIButton * commentsButton;         // 评论
-@property (nonatomic, strong) UIButton * praiseButton;           // 点赞
-
+@property (nonatomic, strong) UIImageView * reviewStatusImageView;
 @end
-
-@implementation WYAAgentRingCell
+@implementation WYAMineCreateReviewingCell
 {
     CGFloat contentHeight;
 }
@@ -39,10 +34,7 @@
         [self.contentView addSubview:self.userReleaseContentLabel];
         [self.contentView addSubview:self.showButton];
         [self.contentView addSubview:self.userReleaseImagesView];
-        [self.contentView addSubview:self.forwardingButton];
-        [self.contentView addSubview:self.collectionButton];
-        [self.contentView addSubview:self.commentsButton];
-        [self.contentView addSubview:self.praiseButton];
+        [self.contentView addSubview:self.reviewStatusImageView];
     }
     return self;
 }
@@ -98,28 +90,10 @@
         make.height.mas_equalTo([self userReleaseImagesViewHeightWith:self.model]);
     }];
 
-    [self.forwardingButton mas_remakeConstraints:^(MASConstraintMaker * make) {
-        make.left.mas_equalTo(self.userReleaseImagesView.mas_left);
-        make.top.mas_equalTo(self.userReleaseImagesView.mas_bottom).with.offset(10 * SizeAdapter);
-        make.size.mas_equalTo(CGSizeMake(60 * SizeAdapter, 20 * SizeAdapter));
-    }];
-
-    [self.collectionButton mas_remakeConstraints:^(MASConstraintMaker * make) {
-        make.left.mas_equalTo(self.forwardingButton.mas_right).with.offset(10 * SizeAdapter);
-        make.centerY.mas_equalTo(self.forwardingButton.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(60 * SizeAdapter, 20 * SizeAdapter));
-    }];
-
-    [self.commentsButton mas_remakeConstraints:^(MASConstraintMaker * make) {
-        make.left.mas_equalTo(self.collectionButton.mas_right).with.offset(20 * SizeAdapter);
-        make.centerY.mas_equalTo(self.forwardingButton.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(60 * SizeAdapter, 20 * SizeAdapter));
-    }];
-
-    [self.praiseButton mas_remakeConstraints:^(MASConstraintMaker * make) {
-        make.left.mas_equalTo(self.commentsButton.mas_right).with.offset(20 * SizeAdapter);
-        make.centerY.mas_equalTo(self.forwardingButton.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(80 * SizeAdapter, 20 * SizeAdapter));
+    [self.reviewStatusImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self.contentView.mas_right).with.offset(-16 * SizeAdapter);
+        make.top.mas_equalTo(self.contentView);
+        make.size.mas_equalTo(CGSizeMake(100 * SizeAdapter, 100 * SizeAdapter));
     }];
 }
 
@@ -135,7 +109,7 @@
 }
 
 #pragma mark ======= Private Method
-- (CGFloat)userReleaseImagesViewHeightWith:(WYAAgentRingModel *)agentRingModel{
+- (CGFloat)userReleaseImagesViewHeightWith:(WYAMineCreateDynamicModel *)agentRingModel{
     CGFloat height = 0.0f;
     if (agentRingModel.urls.count > 0) {
         CGFloat itemHeight = (ScreenWidth - 89 * SizeAdapter) / 3;
@@ -194,7 +168,7 @@
 }
 
 #pragma mark ======= Public Method
-+ (CGFloat)getCellHeightWithModel:(WYAAgentRingModel *)model {
++ (CGFloat)getCellHeightWithModel:(WYAMineCreateDynamicModel *)model {
     CGFloat height = 56.0f;
     CGFloat contantHeight = [model.content wya_heightWithFontSize:15 width:ScreenWidth - 69 * SizeAdapter];
     if (model.contentShow) {
@@ -207,13 +181,13 @@
         height = height + 30 * SizeAdapter;
     }
 
-    WYAAgentRingCell * cell = [[WYAAgentRingCell alloc] init];
+    WYAMineCreateReviewingCell * cell = [[WYAMineCreateReviewingCell alloc] init];
     CGFloat imageH = [cell userReleaseImagesViewHeightWith:model];
-    return height + imageH + 40 * SizeAdapter;
+    return height + imageH + 10 * SizeAdapter;
 }
 
 #pragma mark ======= Setter
-- (void)setModel:(WYAAgentRingModel *)model {
+- (void)setModel:(WYAMineCreateDynamicModel *)model {
     _model = model;
     if (model) {
         //        self.userHeaderButton
@@ -221,9 +195,6 @@
         self.userLevelLabel.text          = model.userLevel;
         self.userReleaseTimeLabel.text    = model.time;
         self.userReleaseContentLabel.text = model.content;
-        self.forwardingButton.selected    = model.forwarding;
-        [self.collectionButton setTitle:[NSString stringWithFormat:@"%d", model.collection] forState:UIControlStateNormal];
-        [self.praiseButton setTitle:[NSString stringWithFormat:@"%d", model.person] forState:UIControlStateNormal];
 
         // 判断全文按钮是否显示
         CGFloat height = [model.content wya_heightWithFontSize:15 width:ScreenWidth - 69 * SizeAdapter];
@@ -342,99 +313,6 @@
     return _userReleaseImagesView;
 }
 
-- (UIButton *)forwardingButton {
-    if (!_forwardingButton) {
-        _forwardingButton = ({
-            CGFloat space = 3.f;
-            UIButton * object = [[UIButton alloc] init];
-            [object setTitle:@"转发" forState:UIControlStateNormal];
-            [object setTitle:@"已转" forState:UIControlStateSelected];
-            [object setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [object setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
-            object.titleLabel.font            = FONT(13);
-            object.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-            [object setImage:[UIImage imageNamed:@"点赞已选"] forState:UIControlStateNormal];
-            object.imageEdgeInsets = UIEdgeInsetsMake(0, -space/2.0, 0, space/2.0);
-            object.titleEdgeInsets = UIEdgeInsetsMake(0, space/2.0, 0, -space/2.0);
-            [object addCallBackAction:^(UIButton * button) {
-                if (self.forwardingBlock) {
-                    self.forwardingBlock(self.model);
-                }
-            }];
-            object;
-        });
-    }
-    return _forwardingButton;
-}
-
-- (UIButton *)collectionButton {
-    if (!_collectionButton) {
-        _collectionButton = ({
-            CGFloat space = 3.f;
-            UIButton * object = [[UIButton alloc] init];
-            object.titleLabel.font = FONT(13);
-            [object setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [object setImage:[UIImage imageNamed:@"点赞已选"] forState:UIControlStateNormal];
-            object.imageEdgeInsets = UIEdgeInsetsMake(0, -space/2.0, 0, space/2.0);
-            object.titleEdgeInsets = UIEdgeInsetsMake(0, space/2.0, 0, -space/2.0);
-            [object addCallBackAction:^(UIButton * button) {
-                if (self.collectionBlock) {
-                    self.collectionBlock(self.model);
-                }
-            }];
-            object;
-        });
-    }
-    return _collectionButton;
-}
-
-- (UIButton *)commentsButton {
-    if (!_commentsButton) {
-        _commentsButton = ({
-            CGFloat space = 3.f;
-            UIButton * object = [[UIButton alloc] init];
-            [object setTitle:@"评论" forState:UIControlStateNormal];
-            [object setTitle:@"已评" forState:UIControlStateSelected];
-            [object setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [object setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
-            object.titleLabel.font = FONT(13);
-            [object setImage:[UIImage imageNamed:@"点赞已选"] forState:UIControlStateNormal];
-            object.imageEdgeInsets = UIEdgeInsetsMake(0, -space/2.0, 0, space/2.0);
-            object.titleEdgeInsets = UIEdgeInsetsMake(0, space/2.0, 0, -space/2.0);
-            [object addCallBackAction:^(UIButton * button) {
-                if (self.commentsBlock) {
-                    self.commentsBlock(self.model);
-                }
-            }];
-            object;
-        });
-    }
-    return _commentsButton;
-}
-
-- (UIButton *)praiseButton {
-    if (!_praiseButton) {
-        _praiseButton = ({
-            CGFloat space = 3.f;
-            UIButton * object = [[UIButton alloc] init];
-            [object setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [object setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
-            object.titleLabel.font = FONT(13);
-            [object setImage:[UIImage imageNamed:@"点赞已选"] forState:UIControlStateNormal];
-            object.imageEdgeInsets = UIEdgeInsetsMake(0, -space/2.0, 0, space/2.0);
-            object.titleEdgeInsets = UIEdgeInsetsMake(0, space/2.0, 0, -space/2.0);
-            [object addCallBackAction:^(UIButton * button) {
-                if (self.praiseBlock) {
-                    self.praiseBlock(self.model);
-                }
-            }];
-            object;
-        });
-    }
-    return _praiseButton;
-}
-
-
 - (UIButton *)showButton{
     if(!_showButton){
         _showButton = ({
@@ -454,9 +332,22 @@
                 }
             }];
             object;
-       });
+        });
     }
     return _showButton;
+}
+
+- (UIImageView *)reviewStatusImageView{
+    if(!_reviewStatusImageView){
+        _reviewStatusImageView = ({
+            UIImageView * object = [[UIImageView alloc]init];
+            object.backgroundColor = randomColor;
+            object.layer.cornerRadius = 50 * SizeAdapter;
+            object.layer.masksToBounds = YES;
+            object;
+        });
+    }
+    return _reviewStatusImageView;
 }
 
 @end

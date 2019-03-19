@@ -26,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) void(^stretchBlock)(WYAAgentRingModel * model);
 
+@property (nonatomic, copy) void(^imageBlock)(WYAAgentRingModel * model, NSInteger index);
+
 + (CGFloat)getCellHeightWithModel:(WYAAgentRingModel *)model;
 
 @end

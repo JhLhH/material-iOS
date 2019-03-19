@@ -23,4 +23,5 @@
 #import <WYAKit/WYAEditCameraCell.h>
 #import <WYAKit/WYACameraViewController.h>
 #import <WYAKit/WYAPhotoBrowser.h>
+#import <WYAKit/WYANoticeBar.h>
 #endif /* WYAThirdClassHeader_h */
