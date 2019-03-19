@@ -13,6 +13,7 @@
 #define EditCameraCell @"WYAEditCameraCell"
 
 @interface WYASendDynamicViewController () <WYANavBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
+@property (nonatomic, strong) UIView * textSuperView;
 @property (nonatomic, strong) WYATextView * textView;
 @property (nonatomic, strong) UICollectionView * collectionView;
 @property (nonatomic, strong) NSMutableArray * dataSource;
@@ -46,9 +47,26 @@
 }
 
 - (void)configUI {
-    self.view.backgroundColor = [UIColor wya_whiteColor];
-    [self.view addSubview:self.textView];
+    self.view.backgroundColor = [UIColor wya_grayBGColor];
+    [self.view addSubview:self.textSuperView];
+    [self.textSuperView addSubview:self.textView];
     [self.view addSubview:self.collectionView];
+}
+
+- (void)changeCollectionViewFrame{
+    CGFloat height = (ScreenWidth - 40 * SizeAdapter) / 3;
+    CGFloat row = (self.dataSource.count + (self.allImage ? 0 : 1)) / 3;
+    CGFloat column = (self.dataSource.count + (self.allImage ? 0 : 1)) % 3;
+    if (row > 0) {
+        if (column > 0) {
+            self.collectionView.cmam_height = (height + 20 * SizeAdapter) * (row + 1);
+        } else {
+            self.collectionView.cmam_height = (height + 20 * SizeAdapter) * row;
+        }
+    } else {
+        self.collectionView.cmam_height = height + 20 * SizeAdapter;
+    }
+
 }
 
 #pragma mark ======= WYANavBarDelegate
@@ -75,23 +93,23 @@
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.allImage) {
-        WYAEditCameraCell * cell =
-            [collectionView dequeueReusableCellWithReuseIdentifier:EditCameraCell
-                                                      forIndexPath:indexPath];
+    if (indexPath.item == self.dataSource.count) {
+        WYACameraCell * cell =
+        [collectionView dequeueReusableCellWithReuseIdentifier:CameraCell
+                                                  forIndexPath:indexPath];
         return cell;
     } else {
-        if (indexPath.item == self.dataSource.count) {
-            WYACameraCell * cell =
-                [collectionView dequeueReusableCellWithReuseIdentifier:CameraCell
-                                                          forIndexPath:indexPath];
-            return cell;
-        } else {
-            WYAEditCameraCell * cell =
-                [collectionView dequeueReusableCellWithReuseIdentifier:EditCameraCell
-                                                          forIndexPath:indexPath];
-            return cell;
-        }
+        WYAEditCameraCell * cell =
+        [collectionView dequeueReusableCellWithReuseIdentifier:EditCameraCell
+                                                  forIndexPath:indexPath];
+        cell.image               = self.dataSource[indexPath.item];
+        cell.editBlock           = ^{
+            [self.dataSource removeObjectAtIndex:indexPath.item];
+            self.allImage = NO;
+            [collectionView reloadData];
+            [self changeCollectionViewFrame];
+        };
+        return cell;
     }
 }
 
@@ -99,12 +117,13 @@
 - (void)collectionView:(UICollectionView *)collectionView
        willDisplayCell:(UICollectionViewCell *)cell
     forItemAtIndexPath:(NSIndexPath *)indexPath {
+
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat width = (ScreenWidth - 50) / 4;
+    CGFloat width = (ScreenWidth - 40 * SizeAdapter) / 3;
     return CGSizeMake(width, width);
 }
 
@@ -112,7 +131,7 @@
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
                         layout:(UICollectionViewLayout *)collectionViewLayout
         insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(10 * SizeAdapter, 10, 10 * SizeAdapter, 10);
+    return UIEdgeInsetsMake(10 * SizeAdapter, 10 * SizeAdapter, 10 * SizeAdapter, 10 * SizeAdapter);
 }
 
 //设置每个item水平间距
@@ -126,13 +145,13 @@
 - (CGFloat)collectionView:(UICollectionView *)collectionView
                                  layout:(UICollectionViewLayout *)collectionViewLayout
     minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 5;
+    return 10 * SizeAdapter;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView
     didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    [self.view endEditing:YES];
+    
     if (indexPath.item == self.dataSource.count) {
 
         WYAAlertController * alert = [WYAAlertController wya_alertSheetWithTitle:@"" Message:@""];
@@ -145,7 +164,12 @@
                                             cameraOrientation:WYACameraOrientationFront];
             camera.preset    = WYAVideoPresetHigh;
             camera.takePhoto = ^(UIImage * photo, NSString * imagePath) {
-
+                [self.dataSource insertObject:photo atIndex:0];
+                if (self.dataSource.count == 9) {
+                    self.allImage = YES;
+                }
+                [self.collectionView reloadData];
+                [self changeCollectionViewFrame];
             };
             camera.takeVideo = ^(NSString * videoPath) {
 
@@ -159,10 +183,15 @@
                                                                    handler:^{
 
             WYAPhotoBrowser * photo =
-                [[WYAPhotoBrowser alloc] initWithMaxCount:3
-                                         photoBrowserType:WYAPhotoBrowserTypeAll];
+                [[WYAPhotoBrowser alloc] initWithMaxCount:9 - self.dataSource.count
+                                         photoBrowserType:WYAPhotoBrowserTypePhoto];
             photo.callBackBlock = ^(NSMutableArray * _Nonnull media) {
-
+                [self.dataSource addObjectsFromArray:media];
+                if (self.dataSource.count == 9) {
+                    self.allImage = YES;
+                }
+                [self.collectionView reloadData];
+                [self changeCollectionViewFrame];
             };
             [weakSelf presentViewController:photo animated:YES completion:nil];
 
@@ -180,12 +209,12 @@
         _collectionView = ({
             UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
             layout.scrollDirection              = UICollectionViewScrollDirectionVertical;
-            layout.headerReferenceSize          = CGSizeMake(ScreenWidth, 0 * SizeAdapter);
+            layout.headerReferenceSize          = CGSizeMake(ScreenWidth, 0);
 
             CGFloat object_x      = 0;
-            CGFloat object_y      = self.textView.cmam_bottom;
+            CGFloat object_y      = self.textSuperView.cmam_bottom;
             CGFloat object_width  = self.view.cmam_width;
-            CGFloat object_height = self.view.cmam_height - self.textView.cmam_bottom;
+            CGFloat object_height = (ScreenWidth - 40 * SizeAdapter) / 3 + 20 * SizeAdapter;
             CGRect object_rect    = CGRectMake(object_x, object_y, object_width, object_height);
 
             UICollectionView * object = [[UICollectionView alloc] initWithFrame:object_rect collectionViewLayout:layout];
@@ -212,10 +241,10 @@
     if (!_textView) {
         _textView = ({
 
-            CGFloat object_x = 10;
-            CGFloat object_y = WYATopHeight + 20;
-            CGFloat object_width = self.view.cmam_width - 20;
-            CGFloat object_height = 100;
+            CGFloat object_x = 10 * SizeAdapter;
+            CGFloat object_y = 10 * SizeAdapter;
+            CGFloat object_width = self.view.cmam_width - 20 * SizeAdapter;
+            CGFloat object_height = 100 * SizeAdapter;
             CGRect object_rect = CGRectMake(object_x, object_y,  object_width, object_height);
 
             WYATextView * object = [[WYATextView alloc] initWithFrame:object_rect];
@@ -223,11 +252,27 @@
                          PlaceHoldColor:[UIColor grayColor]
                           PlaceHoldFont:15.f];
             object.showTitle         = NO;
-            object.showWordsCount    = NO;
+            object.textViewWordsCount = 500;
             object.textViewMaxHeight = 100;
             object;
         });
     }
     return _textView;
+}
+
+- (UIView *)textSuperView{
+    if(!_textSuperView){
+        _textSuperView = ({
+            CGFloat object_x = 0;
+            CGFloat object_y = WYATopHeight;
+            CGFloat object_width = ScreenWidth;
+            CGFloat object_height = 110 * SizeAdapter;
+            CGRect object_rect = CGRectMake(object_x, object_y,  object_width, object_height);
+            UIView * object = [[UIView alloc]initWithFrame:object_rect];
+            object.backgroundColor = [UIColor wya_whiteColor];
+            object;
+       });
+    }
+    return _textSuperView;
 }
 @end

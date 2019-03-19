@@ -22,6 +22,7 @@
 @property (nonatomic, strong) UITableView * agentRingTableView;
 @property (nonatomic, strong) UIButton * sendDynamicButton; // 发动态按钮
 @property (nonatomic, strong) WYANoticeBar * noticeBar;
+
 @end
 
 @implementation WYAHomeViewController
@@ -44,15 +45,41 @@
 
 #pragma mark ======= Private Method
 - (void)setupUI {
-    [self.view addSubview:self.noticeBar];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.navBar.backgroundColor  = [[UIColor blackColor] colorWithAlphaComponent:0.5f];
     self.agentRingTableView.tableHeaderView = self.agentRingCoverView;
+    self.navTitleColor = [UIColor whiteColor];
     [self.view addSubview:self.agentRingTableView];
+    [self.view addSubview:self.noticeBar];
     [self.view addSubview:self.sendDynamicButton];
 }
 
 - (void)getNetWorkDataSource {
     self.dataSource = [self.viewModel testSource];
     [self.agentRingTableView reloadData];
+}
+
+#pragma mark ======= KVO
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"contentOffset"]) {
+
+        NSValue * newvalue = change[NSKeyValueChangeNewKey];
+        CGFloat point_y = newvalue.UIOffsetValue.vertical;
+        NSLog(@"New:%f",point_y);
+
+
+        if (WYANavBarHeight > point_y >= WYANavBarHeight/2) {
+            // 浅色
+            CGFloat alp = (WYANavBarHeight - point_y) / WYANavBarHeight;
+            NSLog(@"alp==%f",alp);
+            self.navBar.backgroundColor = [[UIColor blackColor]colorWithAlphaComponent: + 0.5];
+        } else if (0 > point_y >= -WYANavBarHeight/2) {
+            // 深色
+            self.navBar.backgroundColor  = [[UIColor blackColor] colorWithAlphaComponent:0.5f];
+        }
+    } else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
 }
 
 #pragma mark ======= UITableViewDataSource
@@ -129,10 +156,10 @@
 - (UITableView *)agentRingTableView {
     if (!_agentRingTableView) {
         _agentRingTableView = ({
-            CGFloat object_x      = self.view.cmam_left;
-            CGFloat object_y      = WYATopHeight + 30 * SizeAdapter;
-            CGFloat object_width  = self.view.cmam_width;
-            CGFloat object_height = ScreenHeight - WYATopHeight - WYATabBarHeight - 30 * SizeAdapter;
+            CGFloat object_x      = 0;
+            CGFloat object_y      = 0;
+            CGFloat object_width  = ScreenWidth;
+            CGFloat object_height = ScreenHeight - WYATabBarHeight;
             CGRect object_rect    = CGRectMake(object_x, object_y, object_width, object_height);
 
             UITableView * object   = [[UITableView alloc] initWithFrame:object_rect style:UITableViewStyleGrouped];
@@ -145,6 +172,7 @@
             object.separatorStyle  = UITableViewCellSeparatorStyleNone;
             [object registerClass:[WYAAgentRingCell class] forCellReuseIdentifier:@"cell"];
             [object registerClass:[WYAAgentRingSectionFootView class] forHeaderFooterViewReuseIdentifier:@"foot"];
+            [object addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
             object;
         });
     }
@@ -228,14 +256,14 @@
                                      initWithFrame:object_rect];
             object.showNoticeButton      = YES;
             object.noticeButtonImage     = [UIImage imageNamed:@"1"];
-            object.showRightButton       = YES;
-            object.rightButtonImage      = [UIImage imageNamed:@"2"];
+            object.showRightButton       = NO;
             object.showText              = @"待修改通知栏文字";
             object.showTextColor         = [UIColor wya_whiteColor];
-            object.noticeBackgroundColor = [UIColor blackColor];
+            object.noticeBackgroundColor = random(12, 12, 10, 0.5);
             object;
        });
     }
     return _noticeBar;
 }
+
 @end

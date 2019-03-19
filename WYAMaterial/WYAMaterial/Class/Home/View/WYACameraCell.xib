@@ -18,7 +18,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="112" height="88"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kmf-dm-2Gt">
+                    <imageView contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kmf-dm-2Gt">
                         <rect key="frame" x="0.0" y="0.0" width="112" height="88"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                     </imageView>
