@@ -93,6 +93,14 @@
     WYAImageTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:IMGTEXT_CELLID forIndexPath:indexPath];
     cell.model = [self.dataSources wya_safeObjectAtIndex:indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.collectionActionBlock = ^(WYAImageTextTableViewCell * _Nonnull target) {
+        // 收藏
+        NSLog(@"收藏");
+    };
+    cell.forwardingActionBlock = ^(WYAImageTextTableViewCell * _Nonnull target) {
+        // 转发
+        NSLog(@"转发");
+    };
     return cell;
 }
 

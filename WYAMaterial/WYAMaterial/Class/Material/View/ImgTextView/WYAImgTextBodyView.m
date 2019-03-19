@@ -8,8 +8,9 @@
 
 #import "WYAImgTextBodyView.h"
 
-#define IMGWIDTH 100
-#define IMGHEIGHT 100
+#define MARGIN 10
+#define IMGWIDTH (ScreenWidth - 77 - 3*MARGIN)/3
+#define IMGHEIGHT (ScreenWidth - 77 - 3*MARGIN)/3
 #define COL_COUNT 3
 #define BASETAG 100
 
@@ -36,40 +37,28 @@
         }
         if (_imageArray.count > 1) {
             // 循环创建按钮图片
-//            CGFloat width = (self.cmam_width - 2*10)/3
             for (int i = 0; i < imageArray.count; i++) {
                 NSInteger row = i / COL_COUNT;// 行
                 NSInteger col = i % COL_COUNT;
-                NSInteger margin = 10;
-                CGFloat btnX = margin + (IMGWIDTH + margin) * col;
-                CGFloat btnY = margin + (IMGHEIGHT + margin) * row;
+                CGFloat btnX = (IMGWIDTH + MARGIN) * col;
+                CGFloat btnY = MARGIN + (IMGHEIGHT + MARGIN) * row;
                 UIImage * image = [UIImage imageNamed:[imageArray wya_safeObjectAtIndex:0]];
                 UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
                 [button setImage:image forState:0];
                 button.tag = BASETAG + i;
                 button.frame = CGRectMake(btnX, btnY, IMGWIDTH, IMGHEIGHT);
-                button.layer.cornerRadius = 8;
+                button.layer.cornerRadius = 5;
                 button.layer.masksToBounds = YES;
                 [self addSubview:button];
             }
         }else{
             UIImageView * bodyImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 200, 200)];
             bodyImageView.image = [UIImage imageNamed:imageArray[0]];
+            bodyImageView.layer.cornerRadius = 5;
+            bodyImageView.layer.masksToBounds = YES;
             [self addSubview:bodyImageView];
         }
 
     }
 }
-#pragma mark ======= Lazy
-//- (UIImageView *)bodyImageView{
-//    if(!_bodyImageView){
-//        _bodyImageView = ({
-//            UIImageView * object = [[UIImageView alloc]init];
-//            object.layer.cornerRadius = 8;
-//            object.layer.masksToBounds = YES;
-//            object;
-//       });
-//    }
-//    return _bodyImageView;
-//}
 @end
