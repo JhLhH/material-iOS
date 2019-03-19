@@ -1,15 +1,15 @@
 //
-//  WYAAgentRingCell.m
+//  WYAMineCreateReviewSuccessCell.m
 //  WYAMaterial
 //
-//  Created by 李世航 on 2019/3/14.
+//  Created by 李世航 on 2019/3/18.
 //  Copyright © 2019 WeiYiAn. All rights reserved.
 //
 
-#import "WYAAgentRingCell.h"
-#import "WYAAgentRingModel.h"
+#import "WYAMineCreateReviewSuccessCell.h"
+#import "WYAMineCreateDynamicModel.h"
 
-@interface WYAAgentRingCell ()
+@interface WYAMineCreateReviewSuccessCell ()
 @property (nonatomic, strong) UIButton * userHeaderButton;       // 用户头像按钮
 @property (nonatomic, strong) UILabel * userNameLabel;           // 用户昵称
 @property (nonatomic, strong) UILabel * userLevelLabel;          // 用户层级
@@ -21,10 +21,10 @@
 @property (nonatomic, strong) UIButton * collectionButton;       // 收藏
 @property (nonatomic, strong) UIButton * commentsButton;         // 评论
 @property (nonatomic, strong) UIButton * praiseButton;           // 点赞
-
+@property (nonatomic, strong) UIImageView * reviewStatusImageView;
 @end
 
-@implementation WYAAgentRingCell
+@implementation WYAMineCreateReviewSuccessCell
 {
     CGFloat contentHeight;
 }
@@ -43,6 +43,7 @@
         [self.contentView addSubview:self.collectionButton];
         [self.contentView addSubview:self.commentsButton];
         [self.contentView addSubview:self.praiseButton];
+        [self.contentView addSubview:self.reviewStatusImageView];
     }
     return self;
 }
@@ -121,6 +122,12 @@
         make.centerY.mas_equalTo(self.forwardingButton.mas_centerY);
         make.size.mas_equalTo(CGSizeMake(80 * SizeAdapter, 20 * SizeAdapter));
     }];
+
+    [self.reviewStatusImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self.contentView.mas_right).with.offset(-16 * SizeAdapter);
+        make.top.mas_equalTo(self.contentView);
+        make.size.mas_equalTo(CGSizeMake(100 * SizeAdapter, 100 * SizeAdapter));
+    }];
 }
 
 - (void)awakeFromNib {
@@ -135,7 +142,7 @@
 }
 
 #pragma mark ======= Private Method
-- (CGFloat)userReleaseImagesViewHeightWith:(WYAAgentRingModel *)agentRingModel{
+- (CGFloat)userReleaseImagesViewHeightWith:(WYAMineCreateDynamicModel *)agentRingModel{
     CGFloat height = 0.0f;
     if (agentRingModel.urls.count > 0) {
         CGFloat itemHeight = (ScreenWidth - 89 * SizeAdapter) / 3;
@@ -194,7 +201,7 @@
 }
 
 #pragma mark ======= Public Method
-+ (CGFloat)getCellHeightWithModel:(WYAAgentRingModel *)model {
++ (CGFloat)getCellHeightWithModel:(WYAMineCreateDynamicModel *)model {
     CGFloat height = 56.0f;
     CGFloat contantHeight = [model.content wya_heightWithFontSize:15 width:ScreenWidth - 69 * SizeAdapter];
     if (model.contentShow) {
@@ -207,13 +214,13 @@
         height = height + 30 * SizeAdapter;
     }
 
-    WYAAgentRingCell * cell = [[WYAAgentRingCell alloc] init];
+    WYAMineCreateReviewSuccessCell * cell = [[WYAMineCreateReviewSuccessCell alloc] init];
     CGFloat imageH = [cell userReleaseImagesViewHeightWith:model];
     return height + imageH + 40 * SizeAdapter;
 }
 
 #pragma mark ======= Setter
-- (void)setModel:(WYAAgentRingModel *)model {
+- (void)setModel:(WYAMineCreateDynamicModel *)model {
     _model = model;
     if (model) {
         //        self.userHeaderButton
@@ -454,9 +461,23 @@
                 }
             }];
             object;
-       });
+        });
     }
     return _showButton;
 }
 
+
+
+- (UIImageView *)reviewStatusImageView{
+    if(!_reviewStatusImageView){
+        _reviewStatusImageView = ({
+            UIImageView * object = [[UIImageView alloc]init];
+            object.backgroundColor = randomColor;
+            object.layer.cornerRadius = 50 * SizeAdapter;
+            object.layer.masksToBounds = YES;
+            object;
+       });
+    }
+    return _reviewStatusImageView;
+}
 @end

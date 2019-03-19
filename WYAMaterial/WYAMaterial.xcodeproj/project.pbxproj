@@ -14,6 +14,16 @@
 		211F6806223B95B200F7ACBB /* WYACameraCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 211F6803223B95B100F7ACBB /* WYACameraCell.m */; };
 		211F6807223B95B200F7ACBB /* WYACameraCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 211F6805223B95B100F7ACBB /* WYACameraCell.xib */; };
 		21271DD220F59341008EBAD1 /* BaseNetWorking.m in Sources */ = {isa = PBXBuildFile; fileRef = 21271DD120F59341008EBAD1 /* BaseNetWorking.m */; };
+		2193EE79223FD40F00FD61B9 /* WYAMineCreateReviewSuccessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2193EE78223FD40F00FD61B9 /* WYAMineCreateReviewSuccessCell.m */; };
+		2193EE7D223FD49C00FD61B9 /* WYAMineCreateReviewFailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2193EE7C223FD49C00FD61B9 /* WYAMineCreateReviewFailCell.m */; };
+		2193EE82223FD6A800FD61B9 /* WYAMineCreateDynamicViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2193EE81223FD6A800FD61B9 /* WYAMineCreateDynamicViewModel.m */; };
+		2193EE87223FD70900FD61B9 /* WYAMineCreateDynamicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2193EE86223FD70900FD61B9 /* WYAMineCreateDynamicModel.m */; };
+		2193EE8A22407E1600FD61B9 /* WYAMineCreateReviewSuccessFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2193EE8922407E1600FD61B9 /* WYAMineCreateReviewSuccessFootView.m */; };
+		2193EE8D2240881D00FD61B9 /* WYAMineCreateReviewingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2193EE8C2240881D00FD61B9 /* WYAMineCreateReviewingCell.m */; };
+		2193EE9422408F7800FD61B9 /* WYAMineCollectionDynamicViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2193EE9322408F7800FD61B9 /* WYAMineCollectionDynamicViewModel.m */; };
+		2193EE9922408FD200FD61B9 /* WYAMineCollectionDynamicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2193EE9822408FD200FD61B9 /* WYAMineCollectionDynamicModel.m */; };
+		2193EE9D2240919900FD61B9 /* WYAMineCollectionDynamicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2193EE9C2240919900FD61B9 /* WYAMineCollectionDynamicCell.m */; };
+		2193EEA02240925500FD61B9 /* WYAMineCollectionDynamicFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2193EE9F2240925500FD61B9 /* WYAMineCollectionDynamicFootView.m */; };
 		21B6BD7B2239FA0100962255 /* WYAAgentRingCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B6BD7A2239FA0100962255 /* WYAAgentRingCoverView.m */; };
 		21F1C4C0223A05F800527496 /* WYAAgentRingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F1C4BF223A05F800527496 /* WYAAgentRingCell.m */; };
 		952DE2B9223A074B0098B208 /* WYAMineHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 952DE2B8223A074B0098B208 /* WYAMineHeaderView.m */; };
@@ -93,6 +103,26 @@
 		211F6805223B95B100F7ACBB /* WYACameraCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WYACameraCell.xib; sourceTree = "<group>"; };
 		21271DD020F59341008EBAD1 /* BaseNetWorking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseNetWorking.h; sourceTree = "<group>"; };
 		21271DD120F59341008EBAD1 /* BaseNetWorking.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseNetWorking.m; sourceTree = "<group>"; };
+		2193EE77223FD40F00FD61B9 /* WYAMineCreateReviewSuccessCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WYAMineCreateReviewSuccessCell.h; path = WYAMaterial/Class/Mine/View/MineCreateView/MineCreateDynamicView/WYAMineCreateReviewSuccessCell.h; sourceTree = SOURCE_ROOT; };
+		2193EE78223FD40F00FD61B9 /* WYAMineCreateReviewSuccessCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WYAMineCreateReviewSuccessCell.m; path = WYAMaterial/Class/Mine/View/MineCreateView/MineCreateDynamicView/WYAMineCreateReviewSuccessCell.m; sourceTree = SOURCE_ROOT; };
+		2193EE7B223FD49C00FD61B9 /* WYAMineCreateReviewFailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAMineCreateReviewFailCell.h; sourceTree = "<group>"; };
+		2193EE7C223FD49C00FD61B9 /* WYAMineCreateReviewFailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAMineCreateReviewFailCell.m; sourceTree = "<group>"; };
+		2193EE80223FD6A800FD61B9 /* WYAMineCreateDynamicViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAMineCreateDynamicViewModel.h; sourceTree = "<group>"; };
+		2193EE81223FD6A800FD61B9 /* WYAMineCreateDynamicViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAMineCreateDynamicViewModel.m; sourceTree = "<group>"; };
+		2193EE85223FD70900FD61B9 /* WYAMineCreateDynamicModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAMineCreateDynamicModel.h; sourceTree = "<group>"; };
+		2193EE86223FD70900FD61B9 /* WYAMineCreateDynamicModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAMineCreateDynamicModel.m; sourceTree = "<group>"; };
+		2193EE8822407E1600FD61B9 /* WYAMineCreateReviewSuccessFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAMineCreateReviewSuccessFootView.h; sourceTree = "<group>"; };
+		2193EE8922407E1600FD61B9 /* WYAMineCreateReviewSuccessFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAMineCreateReviewSuccessFootView.m; sourceTree = "<group>"; };
+		2193EE8B2240881D00FD61B9 /* WYAMineCreateReviewingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAMineCreateReviewingCell.h; sourceTree = "<group>"; };
+		2193EE8C2240881D00FD61B9 /* WYAMineCreateReviewingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAMineCreateReviewingCell.m; sourceTree = "<group>"; };
+		2193EE9222408F7800FD61B9 /* WYAMineCollectionDynamicViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAMineCollectionDynamicViewModel.h; sourceTree = "<group>"; };
+		2193EE9322408F7800FD61B9 /* WYAMineCollectionDynamicViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAMineCollectionDynamicViewModel.m; sourceTree = "<group>"; };
+		2193EE9722408FD200FD61B9 /* WYAMineCollectionDynamicModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAMineCollectionDynamicModel.h; sourceTree = "<group>"; };
+		2193EE9822408FD200FD61B9 /* WYAMineCollectionDynamicModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAMineCollectionDynamicModel.m; sourceTree = "<group>"; };
+		2193EE9B2240919900FD61B9 /* WYAMineCollectionDynamicCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WYAMineCollectionDynamicCell.h; path = WYAMaterial/Class/Mine/Model/MineCollectionModel/MineCollectionDynamicModel/WYAMineCollectionDynamicCell.h; sourceTree = SOURCE_ROOT; };
+		2193EE9C2240919900FD61B9 /* WYAMineCollectionDynamicCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WYAMineCollectionDynamicCell.m; path = WYAMaterial/Class/Mine/Model/MineCollectionModel/MineCollectionDynamicModel/WYAMineCollectionDynamicCell.m; sourceTree = SOURCE_ROOT; };
+		2193EE9E2240925500FD61B9 /* WYAMineCollectionDynamicFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WYAMineCollectionDynamicFootView.h; path = WYAMaterial/Class/Mine/Model/MineCollectionModel/MineCollectionDynamicModel/WYAMineCollectionDynamicFootView.h; sourceTree = SOURCE_ROOT; };
+		2193EE9F2240925500FD61B9 /* WYAMineCollectionDynamicFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WYAMineCollectionDynamicFootView.m; path = WYAMaterial/Class/Mine/Model/MineCollectionModel/MineCollectionDynamicModel/WYAMineCollectionDynamicFootView.m; sourceTree = SOURCE_ROOT; };
 		21B6BD792239FA0100962255 /* WYAAgentRingCoverView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAAgentRingCoverView.h; sourceTree = "<group>"; };
 		21B6BD7A2239FA0100962255 /* WYAAgentRingCoverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAAgentRingCoverView.m; sourceTree = "<group>"; };
 		21F1C4BE223A05F800527496 /* WYAAgentRingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAAgentRingCell.h; sourceTree = "<group>"; };
@@ -220,6 +250,116 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2193EE7A223FD42C00FD61B9 /* MineCreateView */ = {
+			isa = PBXGroup;
+			children = (
+				2193EE8E22408E6B00FD61B9 /* MineCreateDynamicView */,
+			);
+			path = MineCreateView;
+			sourceTree = "<group>";
+		};
+		2193EE7E223FD5BB00FD61B9 /* MineCreateDynamicViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2193EE80223FD6A800FD61B9 /* WYAMineCreateDynamicViewModel.h */,
+				2193EE81223FD6A800FD61B9 /* WYAMineCreateDynamicViewModel.m */,
+			);
+			path = MineCreateDynamicViewModel;
+			sourceTree = "<group>";
+		};
+		2193EE7F223FD63600FD61B9 /* MineCreateMaterialViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MineCreateMaterialViewModel;
+			sourceTree = "<group>";
+		};
+		2193EE83223FD6C500FD61B9 /* MineCreateModel */ = {
+			isa = PBXGroup;
+			children = (
+				2193EE84223FD6E100FD61B9 /* MineCreateDynamicModel */,
+			);
+			path = MineCreateModel;
+			sourceTree = "<group>";
+		};
+		2193EE84223FD6E100FD61B9 /* MineCreateDynamicModel */ = {
+			isa = PBXGroup;
+			children = (
+				2193EE85223FD70900FD61B9 /* WYAMineCreateDynamicModel.h */,
+				2193EE86223FD70900FD61B9 /* WYAMineCreateDynamicModel.m */,
+			);
+			path = MineCreateDynamicModel;
+			sourceTree = "<group>";
+		};
+		2193EE8E22408E6B00FD61B9 /* MineCreateDynamicView */ = {
+			isa = PBXGroup;
+			children = (
+				2193EE77223FD40F00FD61B9 /* WYAMineCreateReviewSuccessCell.h */,
+				2193EE78223FD40F00FD61B9 /* WYAMineCreateReviewSuccessCell.m */,
+				2193EE7B223FD49C00FD61B9 /* WYAMineCreateReviewFailCell.h */,
+				2193EE7C223FD49C00FD61B9 /* WYAMineCreateReviewFailCell.m */,
+				2193EE8B2240881D00FD61B9 /* WYAMineCreateReviewingCell.h */,
+				2193EE8C2240881D00FD61B9 /* WYAMineCreateReviewingCell.m */,
+				2193EE8822407E1600FD61B9 /* WYAMineCreateReviewSuccessFootView.h */,
+				2193EE8922407E1600FD61B9 /* WYAMineCreateReviewSuccessFootView.m */,
+			);
+			path = MineCreateDynamicView;
+			sourceTree = "<group>";
+		};
+		2193EE8F22408EFA00FD61B9 /* MineCreateViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2193EE7F223FD63600FD61B9 /* MineCreateMaterialViewModel */,
+				2193EE7E223FD5BB00FD61B9 /* MineCreateDynamicViewModel */,
+			);
+			path = MineCreateViewModel;
+			sourceTree = "<group>";
+		};
+		2193EE9022408F1800FD61B9 /* MineCollectionViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2193EE9122408F2800FD61B9 /* MineCollectionDynamicViewModel */,
+			);
+			path = MineCollectionViewModel;
+			sourceTree = "<group>";
+		};
+		2193EE9122408F2800FD61B9 /* MineCollectionDynamicViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2193EE9222408F7800FD61B9 /* WYAMineCollectionDynamicViewModel.h */,
+				2193EE9322408F7800FD61B9 /* WYAMineCollectionDynamicViewModel.m */,
+			);
+			path = MineCollectionDynamicViewModel;
+			sourceTree = "<group>";
+		};
+		2193EE9522408FA100FD61B9 /* MineCollectionModel */ = {
+			isa = PBXGroup;
+			children = (
+				2193EE9622408FB100FD61B9 /* MineCollectionDynamicModel */,
+			);
+			path = MineCollectionModel;
+			sourceTree = "<group>";
+		};
+		2193EE9622408FB100FD61B9 /* MineCollectionDynamicModel */ = {
+			isa = PBXGroup;
+			children = (
+				2193EE9722408FD200FD61B9 /* WYAMineCollectionDynamicModel.h */,
+				2193EE9822408FD200FD61B9 /* WYAMineCollectionDynamicModel.m */,
+			);
+			path = MineCollectionDynamicModel;
+			sourceTree = "<group>";
+		};
+		2193EE9A2240916D00FD61B9 /* MineCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				2193EE9B2240919900FD61B9 /* WYAMineCollectionDynamicCell.h */,
+				2193EE9C2240919900FD61B9 /* WYAMineCollectionDynamicCell.m */,
+				2193EE9E2240925500FD61B9 /* WYAMineCollectionDynamicFootView.h */,
+				2193EE9F2240925500FD61B9 /* WYAMineCollectionDynamicFootView.m */,
+			);
+			path = MineCollectionView;
+			sourceTree = "<group>";
+		};
 		2D58A82D018BD5D3B50876E6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -620,6 +760,8 @@
 		95DD8CBB2239E26900731A7E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2193EE9522408FA100FD61B9 /* MineCollectionModel */,
+				2193EE83223FD6C500FD61B9 /* MineCreateModel */,
 				95DD8CD32239E6A100731A7E /* WYAMineModel.h */,
 				95DD8CD42239E6A100731A7E /* WYAMineModel.m */,
 			);
@@ -629,6 +771,8 @@
 		95DD8CBC2239E26900731A7E /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				2193EE9022408F1800FD61B9 /* MineCollectionViewModel */,
+				2193EE8F22408EFA00FD61B9 /* MineCreateViewModel */,
 				95DD8CDC2239E6CE00731A7E /* WYAMineViewModel.h */,
 				95DD8CDD2239E6CE00731A7E /* WYAMineViewModel.m */,
 			);
@@ -638,9 +782,9 @@
 		95DD8CBD2239E26900731A7E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2193EE9A2240916D00FD61B9 /* MineCollectionView */,
+				2193EE7A223FD42C00FD61B9 /* MineCreateView */,
 				95F63244223B37C300BFC68C /* MineSettingView */,
-				95F63243223B379D00BFC68C /* MineCollectionView */,
-				95F63242223B377B00BFC68C /* MineCreateView */,
 				95F63241223B365D00BFC68C /* NoticeView */,
 				952DE2B7223A074B0098B208 /* WYAMineHeaderView.h */,
 				952DE2B8223A074B0098B208 /* WYAMineHeaderView.m */,
@@ -704,20 +848,6 @@
 				95F63246223B37E300BFC68C /* WYANoticeTableViewCell.m */,
 			);
 			path = NoticeView;
-			sourceTree = "<group>";
-		};
-		95F63242223B377B00BFC68C /* MineCreateView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = MineCreateView;
-			sourceTree = "<group>";
-		};
-		95F63243223B379D00BFC68C /* MineCollectionView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = MineCollectionView;
 			sourceTree = "<group>";
 		};
 		95F63244223B37C300BFC68C /* MineSettingView */ = {
@@ -940,29 +1070,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2193EE9922408FD200FD61B9 /* WYAMineCollectionDynamicModel.m in Sources */,
 				95DD8CD52239E6A100731A7E /* WYAMineModel.m in Sources */,
 				211F67F9223A31A700F7ACBB /* WYAAgentRingModel.m in Sources */,
 				95DD8CE42239E6FB00731A7E /* WYAHomeView.m in Sources */,
 				95DD8CDB2239E6BC00731A7E /* WYAHomeViewModel.m in Sources */,
+				2193EE87223FD70900FD61B9 /* WYAMineCreateDynamicModel.m in Sources */,
+				2193EE7D223FD49C00FD61B9 /* WYAMineCreateReviewFailCell.m in Sources */,
 				211F6806223B95B200F7ACBB /* WYACameraCell.m in Sources */,
 				95DD8CCC2239E66400731A7E /* WYALoginViewController.m in Sources */,
 				952DE2B9223A074B0098B208 /* WYAMineHeaderView.m in Sources */,
 				95F6323A223A609300BFC68C /* WYAMineCollectionMaterialViewController.m in Sources */,
 				955D7723223CFDE300B3B1EE /* WYAImgTextBodyView.m in Sources */,
+				2193EE9D2240919900FD61B9 /* WYAMineCollectionDynamicCell.m in Sources */,
 				95F63234223A599F00BFC68C /* WYAMineCreateDynamicViewController.m in Sources */,
 				95DD8CDE2239E6CE00731A7E /* WYAMineViewModel.m in Sources */,
 				95C2FF8520F0533600ED829B /* RootControllerModel.m in Sources */,
 				211F6802223B8E8300F7ACBB /* WYASendDynamicViewController.m in Sources */,
 				955D770F223B913C00B3B1EE /* WYAContentView.m in Sources */,
 				95C2FEDE20F0528C00ED829B /* main.m in Sources */,
+				2193EE79223FD40F00FD61B9 /* WYAMineCreateReviewSuccessCell.m in Sources */,
+				2193EE8D2240881D00FD61B9 /* WYAMineCreateReviewingCell.m in Sources */,
 				95DD8CD82239E6AF00731A7E /* WYALoginViewModel.m in Sources */,
 				95DE135021ECB55700B5867B /* UIColor+WYAColor.m in Sources */,
 				21F1C4C0223A05F800527496 /* WYAAgentRingCell.m in Sources */,
 				955D7716223CE2EF00B3B1EE /* WYASettingViewController.m in Sources */,
+				2193EE9422408F7800FD61B9 /* WYAMineCollectionDynamicViewModel.m in Sources */,
 				955D771D223CEA4100B3B1EE /* WYAImageTextTableViewCell.m in Sources */,
 				211F67FF223A5EC000F7ACBB /* WYAAgentRingSectionFootView.m in Sources */,
 				95C2FF8620F0533600ED829B /* AppDelegate.m in Sources */,
 				955D7712223CD9E900B3B1EE /* WYAMineBodyView.m in Sources */,
+				2193EE8A22407E1600FD61B9 /* WYAMineCreateReviewSuccessFootView.m in Sources */,
 				95F63247223B37E300BFC68C /* WYANoticeTableViewCell.m in Sources */,
 				95F6323D223A613B00BFC68C /* WYAMineCollectionDynamicViewController.m in Sources */,
 				952DE2C6223A46730098B208 /* WYAArticleViewController.m in Sources */,
@@ -971,8 +1109,10 @@
 				95C2FF8420F0533600ED829B /* RootViewController.m in Sources */,
 				952DE2C9223A46800098B208 /* WYAImgTextViewController.m in Sources */,
 				95F63240223B364D00BFC68C /* WYANoticeViewController.m in Sources */,
+				2193EE82223FD6A800FD61B9 /* WYAMineCreateDynamicViewModel.m in Sources */,
 				95F63237223A5FE600BFC68C /* WYAMineCollectionViewController.m in Sources */,
 				952DE2BC223A2A300098B208 /* WYAMineTableViewCell.m in Sources */,
+				2193EEA02240925500FD61B9 /* WYAMineCollectionDynamicFootView.m in Sources */,
 				95DD8CC92239E65400731A7E /* WYAMaterialViewController.m in Sources */,
 				95DD8CC62239E2C300731A7E /* WYAMaterialViewModel.m in Sources */,
 				211F67FC223A337800F7ACBB /* WYAAgentRingViewModel.m in Sources */,

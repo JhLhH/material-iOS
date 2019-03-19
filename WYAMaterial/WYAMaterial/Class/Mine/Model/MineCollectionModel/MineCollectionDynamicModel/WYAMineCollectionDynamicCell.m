@@ -1,15 +1,15 @@
 //
-//  WYAAgentRingCell.m
+//  WYAMineCollectionDynamicCell.m
 //  WYAMaterial
 //
-//  Created by 李世航 on 2019/3/14.
+//  Created by 李世航 on 2019/3/19.
 //  Copyright © 2019 WeiYiAn. All rights reserved.
 //
 
-#import "WYAAgentRingCell.h"
-#import "WYAAgentRingModel.h"
+#import "WYAMineCollectionDynamicCell.h"
+#import "WYAMineCollectionDynamicModel.h"
 
-@interface WYAAgentRingCell ()
+@interface WYAMineCollectionDynamicCell ()
 @property (nonatomic, strong) UIButton * userHeaderButton;       // 用户头像按钮
 @property (nonatomic, strong) UILabel * userNameLabel;           // 用户昵称
 @property (nonatomic, strong) UILabel * userLevelLabel;          // 用户层级
@@ -24,7 +24,7 @@
 
 @end
 
-@implementation WYAAgentRingCell
+@implementation WYAMineCollectionDynamicCell
 {
     CGFloat contentHeight;
 }
@@ -135,7 +135,7 @@
 }
 
 #pragma mark ======= Private Method
-- (CGFloat)userReleaseImagesViewHeightWith:(WYAAgentRingModel *)agentRingModel{
+- (CGFloat)userReleaseImagesViewHeightWith:(WYAMineCollectionDynamicModel *)agentRingModel{
     CGFloat height = 0.0f;
     if (agentRingModel.urls.count > 0) {
         CGFloat itemHeight = (ScreenWidth - 89 * SizeAdapter) / 3;
@@ -194,7 +194,7 @@
 }
 
 #pragma mark ======= Public Method
-+ (CGFloat)getCellHeightWithModel:(WYAAgentRingModel *)model {
++ (CGFloat)getCellHeightWithModel:(WYAMineCollectionDynamicModel *)model {
     CGFloat height = 56.0f;
     CGFloat contantHeight = [model.content wya_heightWithFontSize:15 width:ScreenWidth - 69 * SizeAdapter];
     if (model.contentShow) {
@@ -207,13 +207,13 @@
         height = height + 30 * SizeAdapter;
     }
 
-    WYAAgentRingCell * cell = [[WYAAgentRingCell alloc] init];
+    WYAMineCollectionDynamicCell * cell = [[WYAMineCollectionDynamicCell alloc] init];
     CGFloat imageH = [cell userReleaseImagesViewHeightWith:model];
     return height + imageH + 40 * SizeAdapter;
 }
 
 #pragma mark ======= Setter
-- (void)setModel:(WYAAgentRingModel *)model {
+- (void)setModel:(WYAMineCollectionDynamicModel *)model {
     _model = model;
     if (model) {
         //        self.userHeaderButton
@@ -454,7 +454,7 @@
                 }
             }];
             object;
-       });
+        });
     }
     return _showButton;
 }

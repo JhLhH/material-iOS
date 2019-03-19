@@ -1,21 +1,21 @@
 //
-//  WYAAgentRingSectionFootView.m
+//  WYAMineCollectionDynamicFootView.m
 //  WYAMaterial
 //
-//  Created by 李世航 on 2019/3/14.
+//  Created by 李世航 on 2019/3/19.
 //  Copyright © 2019 WeiYiAn. All rights reserved.
 //
 
-#import "WYAAgentRingSectionFootView.h"
-#import "WYAAgentRingModel.h"
+#import "WYAMineCollectionDynamicFootView.h"
+#import "WYAMineCollectionDynamicModel.h"
 
-@interface WYAAgentRingSectionFootView ()
+@interface WYAMineCollectionDynamicFootView ()
 @property (nonatomic, strong) UIView * commentsView; // 关于评论的视图
 @property (nonatomic, strong) UIButton * showCommentsButton;
 @property (nonatomic, strong) NSMutableArray * heights;
 @end
 
-@implementation WYAAgentRingSectionFootView
+@implementation WYAMineCollectionDynamicFootView
 
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithReuseIdentifier:reuseIdentifier];
@@ -48,7 +48,7 @@
 }
 
 #pragma mark ======= Setter
-- (void)setModel:(WYAAgentRingModel *)model {
+- (void)setModel:(WYAMineCollectionDynamicModel *)model {
     _model = model;
     if (model) {
         if (model.comments.count > 0) {
@@ -66,7 +66,7 @@
 
             {
                 for (NSInteger index = 0; index < model.comments.count; index++) {
-                    WYAAgentRingCommentsModel * commentsModel = model.comments[index];
+                    WYAMineCollectionDynamicCommentsModel * commentsModel = model.comments[index];
 
                     YYLabel * label = [self configYYLabelWithModel:commentsModel];
 
@@ -129,7 +129,7 @@
     }
 }
 
-- (YYLabel *)configYYLabelWithModel:(WYAAgentRingCommentsModel *)model {
+- (YYLabel *)configYYLabelWithModel:(WYAMineCollectionDynamicCommentsModel *)model {
 
     NSMutableAttributedString * text = [self commentsAttributedStringWithModel:model];
 
@@ -152,7 +152,7 @@
     return label;
 }
 
-- (NSMutableAttributedString *)commentsAttributedStringWithModel:(WYAAgentRingCommentsModel *)model {
+- (NSMutableAttributedString *)commentsAttributedStringWithModel:(WYAMineCollectionDynamicCommentsModel *)model {
     NSString * closeString = @"收起评论";
     NSString * string;
     if (model.show) {
@@ -193,7 +193,7 @@
     return text;
 }
 
-- (void)addSeeMoreButtonWithYYLabel:(YYLabel *)label commentsModel:(WYAAgentRingCommentsModel *)commentsModel {
+- (void)addSeeMoreButtonWithYYLabel:(YYLabel *)label commentsModel:(WYAMineCollectionDynamicCommentsModel *)commentsModel {
 
     NSMutableAttributedString * text = [[NSMutableAttributedString alloc] initWithString:@"...更多"];
 
@@ -227,8 +227,8 @@
 }
 
 #pragma mark ======= Public Method
-+ (CGFloat)getFootHeightWithModel:(WYAAgentRingModel *)model {
-    WYAAgentRingSectionFootView * cell = [[WYAAgentRingSectionFootView alloc] initWithReuseIdentifier:@"xa"];
++ (CGFloat)getFootHeightWithModel:(WYAMineCollectionDynamicModel *)model {
+    WYAMineCollectionDynamicFootView * cell = [[WYAMineCollectionDynamicFootView alloc] initWithReuseIdentifier:@"xa"];
     cell.model                         = model;
     [cell setNeedsLayout];
     [cell layoutIfNeeded];
@@ -280,5 +280,13 @@
     }
     return _heights;
 }
+
+/*
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect {
+    // Drawing code
+}
+*/
 
 @end
