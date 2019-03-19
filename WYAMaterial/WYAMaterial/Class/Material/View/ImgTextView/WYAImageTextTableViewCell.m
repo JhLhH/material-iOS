@@ -10,8 +10,9 @@
 #import <SDWebImage/UIButton+WebCache.h>
 #import "WYAImgTextBodyView.h"
 
-#define ITEM_WH 100
 #define ITEM_MARGIN 10
+#define ITEM_WH (ScreenWidth - 77 - 3*ITEM_MARGIN)/3
+
 
 #define LEFT_MARGIN 10
 
@@ -38,6 +39,9 @@
 @property (nonatomic, strong) UIButton * collectionButton;
 /// 分割线
 @property (nonatomic, strong) UIView * lineView;
+
+@property (nonatomic, assign) BOOL isAnimation;
+
 @end
 @implementation WYAImageTextTableViewCell
 
@@ -50,6 +54,7 @@
         [self.contentView addSubview:self.userLevelLabel];
         [self.contentView addSubview:self.userTimeLabel];
         [self.contentView addSubview:self.userContentLabel];
+        [self.contentView addSubview:self.showAllBodyButton];
         [self.contentView addSubview:self.userBodyImageView];
         [self.contentView addSubview:self.forwardingButton];
         [self.contentView addSubview:self.collectionButton];
@@ -92,12 +97,24 @@
         make.centerY.mas_equalTo(self.userNameLabel.mas_centerY);
         make.size.mas_equalTo(CGSizeMake(100, 20));
     }];
+    CGFloat bodyTextHeight;
+    if (self.showAllBodyButton.isSelected) {
+        bodyTextHeight = [_model.bodyString wya_heightWithFontSize:14 width:ScreenWidth - 67 - 10];
+    }else{
+        bodyTextHeight = 100;
+    }
 
-    CGFloat bodyTextHeight = [_model.bodyString wya_heightWithFontSize:14 width:ScreenWidth - 67 - 10];
     [self.userContentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.userHeaderButton.mas_right).offset(LEFT_MARGIN);
         make.top.equalTo(self.userHeaderButton.mas_bottom).offset(5);
         make.size.mas_equalTo(CGSizeMake(ScreenWidth - 67 - 10, bodyTextHeight));
+    }];
+
+    [self.showAllBodyButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.userHeaderButton.mas_right).offset(LEFT_MARGIN);
+        make.top.equalTo(self.userContentLabel.mas_bottom).offset(0);
+        make.size.mas_equalTo(CGSizeMake(40, 20));
+
     }];
 
     if (_model.bodyImgArray.count > 1) {
@@ -112,13 +129,13 @@
         CGFloat height = index * (ITEM_MARGIN + ITEM_WH);
         [self.userBodyImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.userHeaderButton.mas_right).offset(LEFT_MARGIN);
-            make.top.equalTo(self.userContentLabel.mas_bottom).offset(10);
+            make.top.equalTo(self.showAllBodyButton.mas_bottom).offset(10);
             make.size.mas_equalTo(CGSizeMake(ScreenWidth - 67 - 10, height));
         }];
     }else{
         [self.userBodyImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.userHeaderButton.mas_right).offset(LEFT_MARGIN);
-            make.top.equalTo(self.userContentLabel.mas_bottom).offset(10);
+            make.top.equalTo(self.showAllBodyButton.mas_bottom).offset(10);
             make.size.mas_equalTo(CGSizeMake(200, 200));
         }];
     }
@@ -140,7 +157,6 @@
         make.left.right.mas_equalTo(self.contentView);
         make.height.mas_equalTo(0.5);
     }];
-
 }
 
 #pragma mark ======= Setter
@@ -177,6 +193,7 @@
             UILabel * object = [[UILabel alloc]init];
             object.textColor = [UIColor blackColor];
             object.font = FONT(15);
+            object.textAlignment = NSTextAlignmentCenter;
             object;
        });
     }
@@ -240,7 +257,9 @@
             [object setTitle:@"全文" forState:0];
             [object setTitle:@"收起" forState:UIControlStateSelected];
             [object setTitleColor:[UIColor wya_blueColor] forState:0];
+            [object addTarget:self action:@selector(showAllBodyButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
             object.titleLabel.font = FONT(14);
+            object.titleLabel.textAlignment = NSTextAlignmentLeft;
             object;
        });
     }
@@ -263,6 +282,8 @@
             UIButton * object = [[UIButton alloc]init];
             [object setTitle:@"收藏" forState:0];
             [object setTitleColor:[UIColor blackColor] forState:0];
+            [object setTitleColor:[UIColor orangeColor] forState:UIControlStateHighlighted];
+            [object addTarget:self action:@selector(collectionButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
             object.titleLabel.font = FONT(13);
             object;
        });
@@ -277,6 +298,7 @@
             [object setTitle:@"转发" forState:0];
             [object setTitleColor:[UIColor blackColor] forState:0];
             object.titleLabel.font = FONT(13);
+            [object addTarget:self action:@selector(forwardingButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
             object;
         });
     }
@@ -292,6 +314,27 @@
     }
     return _lineView;
 }
+
+#pragma mark ======= Event
+- (void)forwardingButtonClicked:(UIButton *)sender{
+    if (self.forwardingActionBlock) {
+        self.forwardingActionBlock(self);
+    }
+}
+- (void)collectionButtonClicked:(UIButton *)sender{
+    if (self.collectionActionBlock) {
+        self.collectionActionBlock(self);
+    }
+}
+
+- (void)showAllBodyButtonClicked:(UIButton *)sender{
+
+    sender.selected = !sender.isSelected;
+
+    [self setNeedsLayout];
+
+}
+
 #pragma mark ======= Public Method
 
 + (CGFloat)getCellHeightWithModel:(WYAImageTextModel *)model{
@@ -306,9 +349,9 @@
         }
         CGFloat height = index * (ITEM_MARGIN + ITEM_WH);
 
-        return [model.bodyString wya_heightWithFontSize:14 width:ScreenWidth - 67 - 10] + 75 + height + 45;
+        return [model.bodyString wya_heightWithFontSize:14 width:ScreenWidth - 67 - 10] + 75 + height + 45 + 25;
     }
-    return [model.bodyString wya_heightWithFontSize:14 width:ScreenWidth - 67 - 10] + 75 + 200 + 45;
+    return [model.bodyString wya_heightWithFontSize:14 width:ScreenWidth - 67 - 10] + 75 + 200 + 45 + 25;
 }
 
 @end
