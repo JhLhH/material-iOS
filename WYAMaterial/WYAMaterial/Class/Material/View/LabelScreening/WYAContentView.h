@@ -11,9 +11,10 @@
 NS_ASSUME_NONNULL_BEGIN
 typedef void (^SureButtonPressed)(NSArray * selectedBtnArray);
 typedef void (^ResetButtonPressed)(void);
+
 @interface WYAContentView : UIView
-@property (nonatomic, copy) SureButtonPressed  sureButtonAction;
-@property (nonatomic, copy) ResetButtonPressed  resetButtonAction;
+@property (nonatomic, copy) SureButtonPressed sureButtonAction;
+@property (nonatomic, copy) ResetButtonPressed resetButtonAction;
 @property (nonatomic, strong) NSArray * contentArray;
 
 - (void)resetContentViewItem;

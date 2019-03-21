@@ -29,7 +29,7 @@
     [self addCustomNavBar];
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
 }
-- (void)viewDidLayoutSubviews{
+- (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     [self.view bringSubviewToFront:self.navBar];
 }
@@ -136,7 +136,7 @@
             WYANavBar * object     = [[WYANavBar alloc] init];
             object.delegate        = self;
             object.navTitle        = @"素材库";
-            object.isShowLine = NO;
+            object.isShowLine      = NO;
             object.navTitleColor   = [UIColor whiteColor];
             object.backgroundColor = [UIColor blackColor];
             object;

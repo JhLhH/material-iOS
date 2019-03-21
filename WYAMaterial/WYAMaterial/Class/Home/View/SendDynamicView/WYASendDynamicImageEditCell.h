@@ -11,8 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WYASendDynamicImageEditCell : UICollectionViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *imgView;
-@property (nonatomic, copy) void(^editBlock)(void);
+@property (weak, nonatomic) IBOutlet UIImageView * imgView;
+@property (nonatomic, copy) void (^editBlock)(void);
 @end
 
 NS_ASSUME_NONNULL_END

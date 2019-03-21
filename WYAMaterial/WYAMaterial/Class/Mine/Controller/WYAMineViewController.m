@@ -8,8 +8,8 @@
 
 #import "WYAMineViewController.h"
 
-#import "WYAMineHeaderView.h"
 #import "WYAMineBodyView.h"
+#import "WYAMineHeaderView.h"
 
 #import "WYAMineCreateViewController.h"
 
@@ -43,29 +43,28 @@
 
 #pragma mark ======= Event
 
-
 #pragma mark ======= Lazy
 
-- (WYAMineHeaderView *)headerView{
-    if(!_headerView){
+- (WYAMineHeaderView *)headerView {
+    if (!_headerView) {
         _headerView = ({
-            WYAMineHeaderView * object = [[WYAMineHeaderView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 330)];
-            object.model = [WYAMineUserInfoModel initWithResults:@" "];
-            object.settingActionBlock = ^{
-                WYASettingViewController * tempVc = [[WYASettingViewController alloc]init];
-                tempVc.hidesBottomBarWhenPushed = YES;
+            WYAMineHeaderView * object = [[WYAMineHeaderView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 330)];
+            object.model               = [WYAMineUserInfoModel initWithResults:@" "];
+            object.settingActionBlock  = ^{
+                WYASettingViewController * tempVc = [[WYASettingViewController alloc] init];
+                tempVc.hidesBottomBarWhenPushed   = YES;
                 [self.navigationController pushViewController:tempVc animated:YES];
 
             };
             object;
-       });
+        });
     }
     return _headerView;
 }
-- (WYAMineBodyView *)bodyView{
-    if(!_bodyView){
+- (WYAMineBodyView *)bodyView {
+    if (!_bodyView) {
         _bodyView = ({
-            WYAMineBodyView * object = [[WYAMineBodyView alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(self.headerView.frame) + 20, ScreenWidth - 20, 200)];
+            WYAMineBodyView * object     = [[WYAMineBodyView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.headerView.frame) + 20, ScreenWidth - 20, 200)];
             object.collectionActionBlock = ^{
                 WYAMineCollectionViewController * tempVc = [[WYAMineCollectionViewController alloc] init];
                 tempVc.selectIndex                       = 0;
@@ -82,23 +81,23 @@
             };
 
             object.createBlock = ^{
-                WYAMineCreateViewController * tempVc     = [[WYAMineCreateViewController alloc]init];
-                tempVc.selectIndex                       = 0;
-                tempVc.menuViewStyle                     = WYAMenuViewStyleLine;
-                tempVc.titleColorSelected                = WYA_RGB_COLOR(226, 193, 139);
-                tempVc.titleColorNormal                  = [UIColor whiteColor];
-                tempVc.progressColor                     = WYA_RGB_COLOR(226, 193, 139);
-                tempVc.progressViewBottomSpace           = 5;
-                tempVc.progressWidth                     = 25;
-                tempVc.progressHeight                    = 3;
-                tempVc.progressViewCornerRadius          = 1.5;
-                tempVc.hidesBottomBarWhenPushed          = YES;
+                WYAMineCreateViewController * tempVc = [[WYAMineCreateViewController alloc] init];
+                tempVc.selectIndex                   = 0;
+                tempVc.menuViewStyle                 = WYAMenuViewStyleLine;
+                tempVc.titleColorSelected            = WYA_RGB_COLOR(226, 193, 139);
+                tempVc.titleColorNormal              = [UIColor whiteColor];
+                tempVc.progressColor                 = WYA_RGB_COLOR(226, 193, 139);
+                tempVc.progressViewBottomSpace       = 5;
+                tempVc.progressWidth                 = 25;
+                tempVc.progressHeight                = 3;
+                tempVc.progressViewCornerRadius      = 1.5;
+                tempVc.hidesBottomBarWhenPushed      = YES;
                 [self.navigationController pushViewController:tempVc animated:YES];
             };
 
             object.noticeBlock = ^{
-                WYANoticeViewController * tempVc = [[WYANoticeViewController alloc]init];
-                tempVc.hidesBottomBarWhenPushed = YES;
+                WYANoticeViewController * tempVc = [[WYANoticeViewController alloc] init];
+                tempVc.hidesBottomBarWhenPushed  = YES;
                 [self.navigationController pushViewController:tempVc animated:YES];
 
             };

@@ -7,11 +7,14 @@
 //
 
 #import "WYANoticeViewController.h"
-#import "WYANoticeTableViewCell.h"
+
 #import "WYAMineModel.h"
+
+#import "WYANoticeTableViewCell.h"
+
 #define NOTICE_CELLID @"WYANoticeTableViewCell"
 
-@interface WYANoticeViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface WYANoticeViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) NSMutableArray * dataSources;
 @end
@@ -24,28 +27,27 @@
     [self.view addSubview:self.tableView];
 }
 
-
 #pragma mark ======= Lazy
-- (UITableView *)tableView{
-    if(!_tableView){
+- (UITableView *)tableView {
+    if (!_tableView) {
         _tableView = ({
-            UITableView * object = [[UITableView alloc]initWithFrame:CGRectMake(0, WYATopHeight, ScreenWidth, ScreenHeight - WYATopHeight) style:UITableViewStylePlain];
-            object.delegate       = self;
-            object.dataSource     = self;
+            UITableView * object   = [[UITableView alloc] initWithFrame:CGRectMake(0, WYATopHeight, ScreenWidth, ScreenHeight - WYATopHeight) style:UITableViewStylePlain];
+            object.delegate        = self;
+            object.dataSource      = self;
             object.tableFooterView = [UIView new];
             [object registerClass:[WYANoticeTableViewCell class] forCellReuseIdentifier:NOTICE_CELLID];
             object;
-       });
+        });
     }
     return _tableView;
 }
 
-- (NSMutableArray *)dataSources{
-    if(!_dataSources){
+- (NSMutableArray *)dataSources {
+    if (!_dataSources) {
         _dataSources = ({
             NSMutableArray * object = [NSMutableArray arrayWithArray:[WYAMineNoticeModel getModelsWithResults:@""]];
             object;
-       });
+        });
     }
     return _dataSources;
 }
@@ -65,9 +67,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    WYANoticeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NOTICE_CELLID];
-    cell.model = [self.dataSources wya_safeObjectAtIndex:indexPath.row];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    WYANoticeTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:NOTICE_CELLID];
+    cell.model                    = [self.dataSources wya_safeObjectAtIndex:indexPath.row];
+    cell.selectionStyle           = UITableViewCellSelectionStyleNone;
     return cell;
 }
 

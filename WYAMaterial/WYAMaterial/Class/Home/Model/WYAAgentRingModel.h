@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString * content;
 
-@property (nonatomic, strong) NSArray <WYAAgentRingImageModel *> * urls;
+@property (nonatomic, strong) NSArray<WYAAgentRingImageModel *> * urls;
 
 @property (nonatomic, assign) BOOL forwarding;
 
@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) int person;
 
-@property (nonatomic, strong) NSArray <WYAAgentRingCommentsModel *> * comments;
+@property (nonatomic, strong) NSArray<WYAAgentRingCommentsModel *> * comments;
 
 @property (nonatomic, assign) BOOL show;
 

@@ -7,6 +7,7 @@
 //
 
 #import "WYAMineCollectionDynamicModel.h"
+
 @implementation WYAMineCollectionDynamicImageModel
 
 @end
@@ -18,4 +19,3 @@
 @implementation WYAMineCollectionDynamicModel
 
 @end
-

@@ -7,11 +7,12 @@
 //
 
 #import "RootViewController.h"
-#import "WYAHomeViewController.h"
-#import "WYAMineViewController.h"
-#import "WYAMaterialViewController.h"
-#import "WYAImgTextViewController.h"
 #import "WYAArticleViewController.h"
+#import "WYAHomeViewController.h"
+#import "WYAImgTextViewController.h"
+#import "WYAMaterialViewController.h"
+#import "WYAMineViewController.h"
+
 @interface RootViewController ()
 /**
  存放初始化tabBar的数据模型
@@ -59,33 +60,33 @@
     NSMutableArray * viewControllers = [NSMutableArray array];
     for (RootControllerModel * model in _tabBarModelArray) {
 
-        NSString * className              = model.className;
+        NSString * className = model.className;
         UIViewController * viewController;
         if ([model.className isEqualToString:@"WYAMaterialViewController"]) {
-          WYAMaterialViewController * vc         = [[WYAMaterialViewController alloc]init];
-            vc.selectIndex                       = 0;
-            vc.menuViewStyle                     = WYAMenuViewStyleLine;
-            vc.titleColorSelected                = WYA_RGB_COLOR(226, 193, 139);
-            vc.titleColorNormal                  = [UIColor whiteColor];
-            vc.progressColor                     = WYA_RGB_COLOR(226, 193, 139);
-            vc.progressViewBottomSpace           = 5;
-            vc.progressWidth                     = 25;
-            vc.progressHeight                    = 3;
-            vc.progressViewCornerRadius          = 1.5;
-            viewController = vc;
-        }else{
-        viewController = [[NSClassFromString(className) alloc] init];
+            WYAMaterialViewController * vc = [[WYAMaterialViewController alloc] init];
+            vc.selectIndex                 = 0;
+            vc.menuViewStyle               = WYAMenuViewStyleLine;
+            vc.titleColorSelected          = WYA_RGB_COLOR(226, 193, 139);
+            vc.titleColorNormal            = [UIColor whiteColor];
+            vc.progressColor               = WYA_RGB_COLOR(226, 193, 139);
+            vc.progressViewBottomSpace     = 5;
+            vc.progressWidth               = 25;
+            vc.progressHeight              = 3;
+            vc.progressViewCornerRadius    = 1.5;
+            viewController                 = vc;
+        } else {
+            viewController = [[NSClassFromString(className) alloc] init];
         }
-        UINavigationController * nav      = [[UINavigationController alloc] initWithRootViewController:viewController];
-        nav.tabBarItem.title              = model.tabBarTitle;
-        nav.tabBarItem.image              = [model normalImage];
-        nav.tabBarItem.selectedImage      = [model selectedImage];
-        CGFloat fontSize                  = self.tabBarTitleFont == 0 ? 14 : self.tabBarTitleFont;
-        [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : self.normalTitleColor == nil ? WYA_RGB_COLOR(102, 102, 102) : self.normalTitleColor,
+        UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:viewController];
+        nav.tabBarItem.title         = model.tabBarTitle;
+        nav.tabBarItem.image         = [model normalImage];
+        nav.tabBarItem.selectedImage = [model selectedImage];
+        CGFloat fontSize             = self.tabBarTitleFont == 0 ? 14 : self.tabBarTitleFont;
+        [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : self.normalTitleColor == nil ? [UIColor wya_textBlackColor] : self.normalTitleColor,
                                                              NSFontAttributeName : FONT(fontSize) }
                                                  forState:UIControlStateNormal];
 
-        [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:self.selectedTitleColor == nil ? WYA_RGB_COLOR(77, 154, 247) : self.selectedTitleColor, NSForegroundColorAttributeName, nil] forState:(UIControlStateSelected)];
+        [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:self.selectedTitleColor == nil ? [UIColor wya_textBlackColor] : self.selectedTitleColor, NSForegroundColorAttributeName, nil] forState:(UIControlStateSelected)];
         [viewControllers addObject:nav];
     }
     self.viewControllers = viewControllers;

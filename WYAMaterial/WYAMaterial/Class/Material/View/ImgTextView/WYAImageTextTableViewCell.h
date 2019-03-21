@@ -6,15 +6,15 @@
 //  Copyright © 2019 WeiYiAn. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "WYAMaterialModel.h"
+#import <UIKit/UIKit.h>
 NS_ASSUME_NONNULL_BEGIN
 @class WYAImageTextTableViewCell;
 typedef void (^ShowAllBodyAction)(NSIndexPath * cellIndexPath);
 /// 收藏点击事件
 typedef void (^CollectionAction)(WYAImageTextTableViewCell * target);
 /// 转发点击事件
-typedef void(^ForwardingAction) (WYAImageTextTableViewCell * target);
+typedef void (^ForwardingAction)(WYAImageTextTableViewCell * target);
 
 @interface WYAImageTextTableViewCell : UITableViewCell
 

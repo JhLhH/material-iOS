@@ -7,10 +7,11 @@
 //
 
 #import "WYAMineCollectionViewController.h"
-#import "WYAMineCollectionMaterialViewController.h"
-#import "WYAMineCollectionDynamicViewController.h"
 
-@interface WYAMineCollectionViewController ()<WYANavBarDelegate,UIGestureRecognizerDelegate>
+#import "WYAMineCollectionDynamicViewController.h"
+#import "WYAMineCollectionMaterialViewController.h"
+
+@interface WYAMineCollectionViewController () <WYANavBarDelegate, UIGestureRecognizerDelegate>
 
 @end
 
@@ -23,8 +24,8 @@
     self.menuView.backgroundColor = [UIColor blackColor];
 }
 
-- (void)createNavBar{
-    self.navBar = [[WYANavBar alloc] init];
+- (void)createNavBar {
+    self.navBar                 = [[WYANavBar alloc] init];
     self.navBar.backgroundColor = [UIColor blackColor];
     self.navBar.navTitle = @"我的收藏";
     self.navBar.navTitleColor = [UIColor whiteColor];
@@ -77,7 +78,6 @@
 //    }
 //}
 
-
 - (CGFloat)wya_menuView:(WYAMenuView *)menu widthForItemAtIndex:(NSInteger)index {
     CGFloat width = [super wya_menuView:menu widthForItemAtIndex:index];
     return width + 20;
@@ -91,8 +91,8 @@
 - (CGRect)wya_pageController:(WYAPageController *)pageController
    preferredFrameContentView:(WYAPageScrollView *)contentView {
 
-    return CGRectMake(0, WYATopHeight + 44 , ScreenWidth,
-                      ScreenHeight- (WYATopHeight + 44));
+    return CGRectMake(0, WYATopHeight + 44, ScreenWidth,
+                      ScreenHeight - (WYATopHeight + 44));
 }
 
 @end

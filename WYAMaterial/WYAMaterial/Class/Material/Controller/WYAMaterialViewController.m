@@ -8,56 +8,56 @@
 
 #import "WYAMaterialViewController.h"
 
-#import "WYAImgTextViewController.h"
 #import "WYAArticleViewController.h"
+#import "WYAImgTextViewController.h"
 
 #import "WYALabelScreeningView.h"
 
-@interface WYAMaterialViewController ()<WYANavBarDelegate>
+@interface WYAMaterialViewController () <WYANavBarDelegate>
 @property (nonatomic, strong) WYALabelScreeningView * screeningView;
 @end
 
 @implementation WYAMaterialViewController
 #pragma mark ======= LifeCircle
 
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.menuView.backgroundColor = [UIColor blackColor];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navBar = [[WYANavBar alloc] init];
-    self.navBar.navTitle = @"图文";
-    self.navBar.navTitleColor = [UIColor whiteColor];
+    self.navBar                 = [[WYANavBar alloc] init];
+    self.navBar.navTitle        = @"图文";
+    self.navBar.navTitleColor   = [UIColor whiteColor];
     self.navBar.backgroundColor = [UIColor blackColor];
-    self.navBar.isShowLine = NO;
-    self.navBar.delegate = self;
-    [self.navBar wya_addRightNavBarButtonWithNormalTitle:@[@"筛选"]
-                                             normalColor:@[[UIColor whiteColor]]
-                                        highlightedColor:@[[UIColor grayColor]]];
+    self.navBar.isShowLine      = NO;
+    self.navBar.delegate        = self;
+    [self.navBar wya_addRightNavBarButtonWithNormalTitle:@[ @"筛选" ]
+                                             normalColor:@[ [UIColor whiteColor] ]
+                                        highlightedColor:@[ [UIColor grayColor] ]];
     [self.view addSubview:self.navBar];
 }
 
-- (void)wya_rightBarButtonItemPressed:(UIButton *)sender{
+- (void)wya_rightBarButtonItemPressed:(UIButton *)sender {
     NSLog(@"筛选");
     if (!self.screeningView.screenViewIsShow) {
         [self.screeningView showScreenView];
-    }else{
+    } else {
         [self.screeningView hidenScreenView];
     }
 }
 
 #pragma mark ======= Lazy
 
-- (WYALabelScreeningView *)screeningView{
-    if(!_screeningView){
+- (WYALabelScreeningView *)screeningView {
+    if (!_screeningView) {
         _screeningView = ({
-            WYALabelScreeningView * object = [[WYALabelScreeningView alloc]initWithFrame:CGRectZero];
-            object.sureBlock = ^(NSArray * _Nonnull selectedLabelArray) {
+            WYALabelScreeningView * object = [[WYALabelScreeningView alloc] initWithFrame:CGRectZero];
+            object.sureBlock               = ^(NSArray * _Nonnull selectedLabelArray) {
                 // 点击确定筛选按钮
                 for (NSString * titleString in selectedLabelArray) {
-                    NSLog(@"筛选项%@\n",titleString);
+                    NSLog(@"筛选项%@\n", titleString);
                 }
                 [self wya_reloadData];
             };
@@ -69,7 +69,6 @@
 
             object;
         });
-
     }
     return _screeningView;
 }
@@ -101,16 +100,15 @@
     return [[UIViewController alloc] init];
 }
 
-- (void)wya_pageController:(WYAPageController *)pageController didEnterViewController:(nonnull __kindof UIViewController *)viewController withInfo:(nonnull NSDictionary *)info{
+- (void)wya_pageController:(WYAPageController *)pageController didEnterViewController:(nonnull __kindof UIViewController *)viewController withInfo:(nonnull NSDictionary *)info {
     if ([NSStringFromClass([viewController class]) isEqualToString:@"WYAArticleViewController"]) {
         self.navBar.navTitle = @"文章";
         [self.navBar wya_addRightNavBarButtonWithNormalTitle:@[]];
-    }else{
+    } else {
         self.navBar.navTitle = @"图文";
-        [self.navBar wya_addRightNavBarButtonWithNormalTitle:@[@"筛选"]
-                                                 normalColor:@[[UIColor whiteColor]]
-                                            highlightedColor:@[[UIColor grayColor]]];
-
+        [self.navBar wya_addRightNavBarButtonWithNormalTitle:@[ @"筛选" ]
+                                                 normalColor:@[ [UIColor whiteColor] ]
+                                            highlightedColor:@[ [UIColor grayColor] ]];
     }
 }
 
@@ -127,9 +125,8 @@
 - (CGRect)wya_pageController:(WYAPageController *)pageController
    preferredFrameContentView:(WYAPageScrollView *)contentView {
 
-    return CGRectMake(0, WYATopHeight + 44 , ScreenWidth,
-                      ScreenHeight- (WYATopHeight + 44) - WYATabBarHeight );
+    return CGRectMake(0, WYATopHeight + 44, ScreenWidth,
+                      ScreenHeight - (WYATopHeight + 44) - WYATabBarHeight);
 }
-
 
 @end

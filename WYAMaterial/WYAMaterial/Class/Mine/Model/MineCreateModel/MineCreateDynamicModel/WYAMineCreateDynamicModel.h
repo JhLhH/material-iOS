@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
 @interface WYAMineCreateDynamicImageModel : NSObject
 
 @property (nonatomic, copy) NSString * imageUrl;
@@ -37,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString * content;
 
-@property (nonatomic, strong) NSArray <WYAMineCreateDynamicImageModel *> * urls;
+@property (nonatomic, strong) NSArray<WYAMineCreateDynamicImageModel *> * urls;
 
 @property (nonatomic, assign) BOOL forwarding;
 
@@ -45,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) int person;
 
-@property (nonatomic, strong) NSArray <WYAMineCreateDynamicCommentsModel *> * comments;
+@property (nonatomic, strong) NSArray<WYAMineCreateDynamicCommentsModel *> * comments;
 
 /**
  审核状态：0：失败，1：成功， 2：正在审核
@@ -57,6 +58,5 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL contentShow;
 
 @end
-
 
 NS_ASSUME_NONNULL_END

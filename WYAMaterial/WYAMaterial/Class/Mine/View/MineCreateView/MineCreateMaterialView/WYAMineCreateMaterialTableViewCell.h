@@ -6,8 +6,8 @@
 //  Copyright © 2019 WeiYiAn. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "WYAMineCreateMaterialModel.h"
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 @class WYAMineCreateMaterialTableViewCell;
@@ -15,7 +15,7 @@ typedef void (^ShowAllBodyAction)(NSIndexPath * cellIndexPath);
 /// 收藏点击事件
 typedef void (^CollectionAction)(WYAMineCreateMaterialTableViewCell * target);
 /// 转发点击事件
-typedef void(^ForwardingAction) (WYAMineCreateMaterialTableViewCell * target);
+typedef void (^ForwardingAction)(WYAMineCreateMaterialTableViewCell * target);
 
 @interface WYAMineCreateMaterialTableViewCell : UITableViewCell
 

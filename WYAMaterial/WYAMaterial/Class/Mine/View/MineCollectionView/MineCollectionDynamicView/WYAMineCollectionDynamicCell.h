@@ -13,17 +13,17 @@ NS_ASSUME_NONNULL_BEGIN
 @interface WYAMineCollectionDynamicCell : UITableViewCell
 @property (nonatomic, strong) WYAMineCollectionDynamicModel * model;
 
-@property (nonatomic, copy) void(^forwardingBlock)(WYAMineCollectionDynamicModel * model);
+@property (nonatomic, copy) void (^forwardingBlock)(WYAMineCollectionDynamicModel * model);
 
-@property (nonatomic, copy) void(^collectionBlock)(WYAMineCollectionDynamicModel * model);
+@property (nonatomic, copy) void (^collectionBlock)(WYAMineCollectionDynamicModel * model);
 
-@property (nonatomic, copy) void(^commentsBlock)(WYAMineCollectionDynamicModel * model);
+@property (nonatomic, copy) void (^commentsBlock)(WYAMineCollectionDynamicModel * model);
 
-@property (nonatomic, copy) void(^praiseBlock)(WYAMineCollectionDynamicModel * model);
+@property (nonatomic, copy) void (^praiseBlock)(WYAMineCollectionDynamicModel * model);
 
-@property (nonatomic, copy) void(^stretchBlock)(WYAMineCollectionDynamicModel * model);
+@property (nonatomic, copy) void (^stretchBlock)(WYAMineCollectionDynamicModel * model);
 
-@property (nonatomic, copy) void(^imageBlock)(WYAMineCollectionDynamicModel * model, NSInteger index);
+@property (nonatomic, copy) void (^imageBlock)(WYAMineCollectionDynamicModel * model, NSInteger index);
 
 + (CGFloat)getCellHeightWithModel:(WYAMineCollectionDynamicModel *)model;
 @end

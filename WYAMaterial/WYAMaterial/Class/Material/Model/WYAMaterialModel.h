@@ -46,7 +46,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-
 /// 文章
 @interface WYAArticleModel : NSObject
 /// 标题

@@ -16,12 +16,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  设置自身高度变化的block
  */
-@property (nonatomic, copy) void(^frameChangeBlock)(WYAAgentRingCommentsView * view, CGFloat height);
+@property (nonatomic, copy) void (^frameChangeBlock)(WYAAgentRingCommentsView * view, CGFloat height);
 
 /**
  发送回调
  */
-@property (nonatomic, copy) void(^sendCommentsBlock)(NSString * text);
+@property (nonatomic, copy) void (^sendCommentsBlock)(NSString * text);
 @end
 
 NS_ASSUME_NONNULL_END

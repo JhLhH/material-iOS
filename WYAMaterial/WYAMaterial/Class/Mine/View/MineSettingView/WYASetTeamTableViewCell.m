@@ -8,7 +8,7 @@
 
 #import "WYASetTeamTableViewCell.h"
 
-@interface WYASetTeamTableViewCell()
+@interface WYASetTeamTableViewCell ()
 @property (nonatomic, strong) UIImageView * leftIconImgView;
 @property (nonatomic, strong) UILabel * leftTitleLabel;
 @property (nonatomic, strong) UILabel * leftContentLabel;
@@ -17,7 +17,7 @@
 
 @implementation WYASetTeamTableViewCell
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self.contentView addSubview:self.leftIconImgView];
         [self.contentView addSubview:self.leftTitleLabel];
@@ -26,24 +26,24 @@
     }
     return self;
 }
-- (void)layoutSubviews{
+- (void)layoutSubviews {
     [super layoutSubviews];
-    [self.leftIconImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.leftIconImgView mas_makeConstraints:^(MASConstraintMaker * make) {
         make.left.equalTo(self.contentView.mas_left).offset(15);
         make.centerY.mas_equalTo(self.contentView.mas_centerY);
         make.size.mas_equalTo(CGSizeMake(40, 40));
     }];
-    [self.leftTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.leftTitleLabel mas_makeConstraints:^(MASConstraintMaker * make) {
         make.top.mas_equalTo(self.leftIconImgView);
         make.left.equalTo(self.leftIconImgView.mas_right).offset(8);
         make.size.mas_equalTo(CGSizeMake(ScreenWidth - 160, 15));
     }];
-    [self.leftContentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.leftContentLabel mas_makeConstraints:^(MASConstraintMaker * make) {
         make.bottom.mas_equalTo(self.leftIconImgView);
         make.left.equalTo(self.leftIconImgView.mas_right).offset(8);
         make.size.mas_equalTo(CGSizeMake(ScreenWidth - 160, 15));
     }];
-    [self.rightbutton mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.rightbutton mas_makeConstraints:^(MASConstraintMaker * make) {
         make.centerY.mas_equalTo(self.contentView.mas_centerY);
         make.right.equalTo(self.contentView.mas_right).offset(-20);
         make.size.mas_equalTo(CGSizeMake(70, 15));
@@ -51,11 +51,11 @@
 }
 
 #pragma mark ======= Setter
-- (void)setModel:(WYAMinSettingTeamModel *)model{
+- (void)setModel:(WYAMinSettingTeamModel *)model {
     if (model) {
-        _model= model;
+        _model                     = model;
         self.leftIconImgView.image = [UIImage imageNamed:_model.teamIcon];
-        self.leftTitleLabel.text = _model.teamName;
+        self.leftTitleLabel.text   = _model.teamName;
         self.leftContentLabel.text = _model.teamIntroduction;
         [self.rightbutton setTitle:_model.teamState forState:UIControlStateNormal];
         [self.rightbutton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -63,55 +63,54 @@
 }
 
 #pragma mark ======= Lazy
-- (UIImageView *)leftIconImgView{
-    if(!_leftIconImgView){
+- (UIImageView *)leftIconImgView {
+    if (!_leftIconImgView) {
         _leftIconImgView = ({
-            UIImageView * object = [[UIImageView alloc]init];
-            object.layer.cornerRadius = 20;
+            UIImageView * object       = [[UIImageView alloc] init];
+            object.layer.cornerRadius  = 20;
             object.layer.masksToBounds = YES;
             object;
-       });
+        });
     }
     return _leftIconImgView;
 }
 
-- (UILabel *)leftTitleLabel{
-    if(!_leftTitleLabel){
+- (UILabel *)leftTitleLabel {
+    if (!_leftTitleLabel) {
         _leftTitleLabel = ({
-            UILabel * object = [[UILabel alloc]init];
+            UILabel * object = [[UILabel alloc] init];
             object.textColor = [UIColor blackColor];
-            object.font = FONT(16);
+            object.font      = FONT(16);
             object;
-       });
+        });
     }
     return _leftTitleLabel;
 }
 
-- (UILabel *)leftContentLabel{
-    if(!_leftContentLabel){
+- (UILabel *)leftContentLabel {
+    if (!_leftContentLabel) {
         _leftContentLabel = ({
             UILabel * object = [[UILabel alloc]init];
             object.textColor = [UIColor wya_textGrayColor];
             object.font = FONT(12);
             object;
-       });
+        });
     }
     return _leftContentLabel;
 }
 
-- (UIButton *)rightbutton{
-    if(!_rightbutton){
+- (UIButton *)rightbutton {
+    if (!_rightbutton) {
         _rightbutton = ({
-            UIButton * object = [[UIButton alloc]init];
+            UIButton * object      = [[UIButton alloc] init];
             object.titleLabel.font = FONT(14);
             [object addTarget:self action:@selector(rightButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
             object;
-       });
+        });
     }
     return _rightbutton;
 }
 #pragma mark ======= Event
-- (void)rightButtonPressed:(UIButton *)sender{
-
+- (void)rightButtonPressed:(UIButton *)sender {
 }
 @end

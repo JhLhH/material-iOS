@@ -7,12 +7,14 @@
 //
 
 #import "WYAMineCollectionMaterialViewController.h"
-#import "WYAMineCollectionMaterialTableViewCell.h"
+
 #import "WYAMineCollectionMaterialModel.h"
+
+#import "WYAMineCollectionMaterialTableViewCell.h"
 
 #define COLECTION_MATERIAL_CELLID @"WYAMineCollectionMaterialTableViewCell"
 
-@interface WYAMineCollectionMaterialViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface WYAMineCollectionMaterialViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) NSMutableArray * dataSources;
 @end
@@ -21,16 +23,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navBar.hidden = YES;
+    self.navBar.hidden        = YES;
     self.view.backgroundColor = randomColor;
     [self.view addSubview:self.tableView];
 }
 #pragma mark ======= Lazy
 
-- (UITableView *)tableView{
-    if(!_tableView){
+- (UITableView *)tableView {
+    if (!_tableView) {
         _tableView = ({
-            UITableView * object = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - WYATopHeight - 44) style:UITableViewStylePlain];
+            UITableView * object  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - WYATopHeight - 44) style:UITableViewStylePlain];
             object.delegate       = self;
             object.dataSource     = self;
             object.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -41,8 +43,8 @@
     return _tableView;
 }
 
-- (NSMutableArray *)dataSources{
-    if(!_dataSources){
+- (NSMutableArray *)dataSources {
+    if (!_dataSources) {
         _dataSources = ({
             NSMutableArray * object = [NSMutableArray arrayWithArray:[WYAMineCollectionMaterialModel getmineCollectionMaterialModelWithResults:@" "]];
             object;
@@ -66,10 +68,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     WYAMineCollectionMaterialTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:COLECTION_MATERIAL_CELLID forIndexPath:indexPath];
-    cell.model = [self.dataSources wya_safeObjectAtIndex:indexPath.row];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.cellIndexPath = indexPath;
-    cell.collectionActionBlock = ^(WYAMineCollectionMaterialTableViewCell * _Nonnull target) {
+    cell.model                                    = [self.dataSources wya_safeObjectAtIndex:indexPath.row];
+    cell.selectionStyle                           = UITableViewCellSelectionStyleNone;
+    cell.cellIndexPath                            = indexPath;
+    cell.collectionActionBlock                    = ^(WYAMineCollectionMaterialTableViewCell * _Nonnull target) {
         // 收藏
         NSLog(@"收藏");
     };
@@ -78,7 +80,7 @@
         NSLog(@"转发");
     };
     cell.showAllBodyActionBlock = ^(NSIndexPath * _Nonnull cellIndexPath) {
-        NSArray <NSIndexPath *> *indexPathArray = @[cellIndexPath];
+        NSArray<NSIndexPath *> * indexPathArray = @[ cellIndexPath ];
         //3.传入数组，对当前cell进行刷新
         [self.tableView reloadRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
 
