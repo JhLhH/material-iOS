@@ -9,7 +9,7 @@
 #import "WYARefreshView.h"
 
 @interface WYARefreshView ()
-@property (nonatomic, strong) UIImageView * animationImageView;
+
 @property (nonatomic, strong) UIImageView * textImageView;
 @end
 
@@ -20,7 +20,7 @@
     self = [super init];
     if (self) {
         [self addSubview:self.animationImageView];
-        [self.animationImageView wya_setRotationAnimation:360 time:0.7 repeatCount:0];
+        
         [self addSubview:self.textImageView];
     }
     return self;

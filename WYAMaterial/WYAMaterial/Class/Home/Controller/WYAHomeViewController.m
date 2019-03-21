@@ -100,6 +100,7 @@
 - (void)addAgentRingRefresh {
     NSLog(@"调用一次");
     self.refreshView.hidden = NO;
+    [self.refreshView.animationImageView wya_setRotationAnimation:360 time:0.7 repeatCount:0];
     [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.9 initialSpringVelocity:10 options:UIViewAnimationOptionCurveEaseOut animations:^{
         CGFloat object_x             = 32 * SizeAdapter;
         CGFloat object_y             = self.noticeBar.cmam_bottom + 20 * SizeAdapter;
@@ -122,7 +123,7 @@
         self.refreshView.alpha = 0;
         self.isRefresh = NO;
     } completion:^(BOOL finished) {
-
+        [self.refreshView.animationImageView wya_removeRotationAnimation];
     }];
 }
 
