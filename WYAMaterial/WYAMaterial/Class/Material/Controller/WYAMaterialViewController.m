@@ -22,7 +22,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.menuView.backgroundColor = [UIColor blackColor];
+    self.menuView.backgroundColor = [UIColor wya_blackColor];
 }
 
 - (void)viewDidLoad {
@@ -30,7 +30,7 @@
     self.navBar                 = [[WYANavBar alloc] init];
     self.navBar.navTitle        = @"图文";
     self.navBar.navTitleColor   = [UIColor whiteColor];
-    self.navBar.backgroundColor = [UIColor blackColor];
+    self.navBar.backgroundColor = [UIColor wya_blackColor];
     self.navBar.isShowLine      = NO;
     self.navBar.delegate        = self;
     [self.navBar wya_addRightNavBarButtonWithNormalImage:@[@"icon_release",@"icon_filter"] highlightedImg:@[]];

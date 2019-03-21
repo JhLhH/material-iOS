@@ -46,7 +46,7 @@
             [object setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             object.layer.cornerRadius  = 24;
             object.layer.masksToBounds = YES;
-            [object wya_setBackgroundColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [object wya_setBackgroundColor:[UIColor wya_blackColor] forState:UIControlStateNormal];
             object;
         });
     }

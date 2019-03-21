@@ -171,7 +171,7 @@
             object.titleLabel.font = FONT(16);
             object.layer.borderColor = [UIColor wya_lineColor].CGColor;
             object.layer.borderWidth = 0.5;
-            [object setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [object setTitleColor:[UIColor wya_blackColor] forState:UIControlStateNormal];
             [object addTarget:self action:@selector(resetButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
             object;
         });

@@ -20,12 +20,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self createNavBar];
-    self.menuView.backgroundColor = [UIColor blackColor];
+    self.menuView.backgroundColor = [UIColor wya_blackColor];
 }
 
 - (void)createNavBar {
     self.navBar                 = [[WYANavBar alloc] init];
-    self.navBar.backgroundColor = [UIColor blackColor];
+    self.navBar.backgroundColor = [UIColor wya_blackColor];
 
     self.navBar.navTitle = @"我的创建";
     self.navBar.isShowLine = NO;
