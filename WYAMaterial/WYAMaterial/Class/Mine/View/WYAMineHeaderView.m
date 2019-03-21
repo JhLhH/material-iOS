@@ -133,7 +133,7 @@
     if (!_bgImageView) {
         _bgImageView = ({
             UIImageView * object          = [[UIImageView alloc] init];
-            object.image                  = [UIImage imageNamed:@"1"];
+            object.image                  = [UIImage imageNamed:@"pic_gerenzhongxinbackground"];
             object.userInteractionEnabled = YES;
             object;
         });
@@ -191,8 +191,8 @@
     if (!_userIconImageButton) {
         _userIconImageButton = ({
             UIButton * object          = [[UIButton alloc] init];
-            object.backgroundColor     = [UIColor wya_blueColor];
-            object.layer.cornerRadius  = 95 * 0.5;
+            [object setImage:[UIImage imageNamed:@"pic_moren"] forState:0];
+            object.layer.cornerRadius  = 95 * 0.5*SizeAdapter;
             object.layer.masksToBounds = YES;
             [object addTarget:self action:@selector(userIconButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
             object;

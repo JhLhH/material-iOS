@@ -233,7 +233,7 @@
     if (!_userLevelLabel) {
         _userLevelLabel = ({
             UILabel * object = [[UILabel alloc] init];
-            object.textColor = [UIColor wya_goldenColor];
+            object.textColor = [UIColor wya_goldenLevelTextColor];
             object.font      = FONT(11);
             object;
         });
@@ -316,7 +316,7 @@
         _forwardingButton = ({
             UIButton * object = [[UIButton alloc] init];
             [object setTitle:@"转发" forState:0];
-            [object setTitle:@"已转发" forState:UIControlStateSelected];
+//            [object setTitle:@"已转发" forState:UIControlStateSelected];
             [object setTitleColor:[UIColor wya_textBlackColor] forState:0];
             [object setImage:[UIImage imageNamed:@"icon_zhuanfa"] forState:UIControlStateNormal];
             object.titleLabel.font = FONT(12);

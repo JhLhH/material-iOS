@@ -49,7 +49,7 @@
             object.titleLabel.font = FONT(13);
             [object setTitleColor:[UIColor wya_blackColor] forState:0];
             [object setImage:[UIImage imageNamed:@"mine_icon_collect"] forState:0];
-            [object wya_setButtonImageLocationTopWithSpace:23*SizeAdapter];
+            [object wya_setButtonImageLocationTopWithSpace:15*SizeAdapter];
             [object addTarget:self action:@selector(leftBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
             object;
         });
@@ -66,7 +66,7 @@
             object.titleLabel.font = FONT(13);
             [object setTitleColor:[UIColor wya_blackColor] forState:0];
             [object setImage:[UIImage imageNamed:@"mine_icon_create"] forState:0];
-            [object wya_setButtonImageLocationTopWithSpace:23*SizeAdapter];
+            [object wya_setButtonImageLocationTopWithSpace:15*SizeAdapter];
             [object addTarget:self action:@selector(centerButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
 
             object;
@@ -83,7 +83,7 @@
             object.titleLabel.font = FONT(13);
             [object setTitleColor:[UIColor wya_blackColor] forState:0];
             [object setImage:[UIImage imageNamed:@"mine_iocn_inform"] forState:0];
-            [object wya_setButtonImageLocationTopWithSpace:23*SizeAdapter];
+            [object wya_setButtonImageLocationTopWithSpace:15*SizeAdapter];
             [object addTarget:self action:@selector(rightButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
 
             object;
