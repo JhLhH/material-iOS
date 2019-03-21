@@ -17,7 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navTitle             = @"文章详情";
-    self.view.backgroundColor = randomColor;
+    self.navBar.backgroundColor = [[UIColor wya_blackColor] colorWithAlphaComponent:1];
+    self.view.backgroundColor = [UIColor wya_bgColor];
     [self.navBar addSubview:self.rightButton];
     [self.rightButton mas_makeConstraints:^(MASConstraintMaker * make) {
         make.right.equalTo(self.navBar.mas_right).offset(-14*SizeAdapter);
