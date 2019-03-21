@@ -45,8 +45,12 @@
 
 + (BOOL)deleteSendDynamicDraft {
     WYASendDynamicDraftModel * model = [WYASendDynamicViewModel lookupSendDynamicDraft];
-    WYARealmBaseManager * dbManager  = [WYARealmBaseManager wya_defaultRealm];
-    return [dbManager wya_deleteRealmWithObject:model];
+    if (model) {
+        WYARealmBaseManager * dbManager  = [WYARealmBaseManager wya_defaultRealm];
+        return [dbManager wya_deleteRealmWithObject:model];
+    }
+
+    return NO;
 }
 
 @end

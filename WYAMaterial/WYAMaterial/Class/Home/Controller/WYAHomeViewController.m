@@ -77,7 +77,7 @@
     self.navTitleColor = [UIColor wya_whiteColor];
     [self.navBar wya_addRightNavBarButtonWithNormalTitle:@[ @"发布" ] normalColor:@[ [UIColor wya_whiteColor] ] highlightedColor:@[ [UIColor wya_whiteColor] ]];
     self.rightBarButtonItemTitleFont = 15 * SizeAdapter;
-    self.navBackGroundColor             = [[UIColor wya_goldenLevelTextColor] colorWithAlphaComponent:0.5f];
+    self.navBackGroundColor             = [[UIColor wya_blackColor] colorWithAlphaComponent:0.5f];
     self.agentRingTableView.tableHeaderView = self.agentRingCoverView;
     self.navTitleColor                      = [UIColor whiteColor];
     [self.view addSubview:self.agentRingTableView];
@@ -181,7 +181,7 @@
                     } else {
                         self.lastAlpha = 0.5 + ccc;
                     }
-                    self.navBar.backgroundColor = [[UIColor wya_goldenLevelTextColor] colorWithAlphaComponent:self.lastAlpha > 1 ? 1 : self.lastAlpha];
+                    self.navBar.backgroundColor = [[UIColor wya_blackColor] colorWithAlphaComponent:self.lastAlpha > 1 ? 1 : self.lastAlpha];
                 } else {
                     // 下拉
                     CGFloat ppp = (self.lastOffset_y - point_y) / 100;
