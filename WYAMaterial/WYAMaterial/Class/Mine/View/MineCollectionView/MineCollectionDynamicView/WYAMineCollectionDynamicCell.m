@@ -322,7 +322,7 @@
         _userLevelLabel = ({
             UILabel * object = [[UILabel alloc] init];
             object.font      = FONT(11);
-            object.textColor = [UIColor wya_hex:@"#C4903F"];
+            object.textColor = [UIColor wya_goldenLevelTextColor];
             object;
         });
     }
