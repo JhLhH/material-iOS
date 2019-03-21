@@ -341,7 +341,7 @@
             UIButton * object = [[UIButton alloc] init];
             [object setTitle:@"转发" forState:UIControlStateNormal];
             [object setTitle:@"已转" forState:UIControlStateSelected];
-            [object setTitleColor:[UIColor wya_blackTextColor] forState:UIControlStateNormal];
+            [object setTitleColor:[UIColor wya_textBlackColor] forState:UIControlStateNormal];
             //            [object setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
             object.titleLabel.font            = FONT(12);
             object.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
@@ -364,7 +364,7 @@
         _userReleaseContentLabel = ({
             UILabel * object     = [[UILabel alloc] init];
             object.font = FONT(14);
-            object.textColor = [UIColor wya_blackTextColor];
+            object.textColor = [UIColor wya_textBlackColor];
             object.numberOfLines           = 0;
             object;
         });
@@ -402,7 +402,7 @@
             UIButton * object = [[UIButton alloc] init];
             [object setTitle:@"评论" forState:UIControlStateNormal];
             [object setTitle:@"已评" forState:UIControlStateSelected];
-            [object setTitleColor:[UIColor wya_blackTextColor] forState:UIControlStateNormal];
+            [object setTitleColor:[UIColor wya_textBlackColor] forState:UIControlStateNormal];
             object.titleLabel.font = FONT(12);
             [object setImage:[UIImage imageNamed:@"点赞已选"] forState:UIControlStateNormal];
             object.imageEdgeInsets = UIEdgeInsetsMake(0, -space/2.0, 0, space/2.0);
@@ -424,7 +424,7 @@
             CGFloat space = 6 * SizeAdapter;
             UIButton * object = [[UIButton alloc] init];
             object.titleLabel.font = FONT(12);
-            [object setTitleColor:[UIColor wya_blackTextColor] forState:UIControlStateNormal];
+            [object setTitleColor:[UIColor wya_textBlackColor] forState:UIControlStateNormal];
             [object setImage:[UIImage imageNamed:@"点赞已选"] forState:UIControlStateNormal];
             object.imageEdgeInsets = UIEdgeInsetsMake(0, -space/2.0, 0, space/2.0);
             object.titleEdgeInsets = UIEdgeInsetsMake(0, space/2.0, 0, -space/2.0);
@@ -444,7 +444,7 @@
         _praiseButton = ({
             CGFloat space = 6 * SizeAdapter;
             UIButton * object = [[UIButton alloc] init];
-            [object setTitleColor:[UIColor wya_blackTextColor] forState:UIControlStateNormal];
+            [object setTitleColor:[UIColor wya_textBlackColor] forState:UIControlStateNormal];
             object.titleLabel.font = FONT(12);
             [object setImage:[UIImage imageNamed:@"点赞已选"] forState:UIControlStateNormal];
             object.imageEdgeInsets = UIEdgeInsetsMake(0, -space/2.0, 0, space/2.0);

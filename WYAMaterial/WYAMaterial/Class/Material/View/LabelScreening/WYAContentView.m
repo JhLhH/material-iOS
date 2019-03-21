@@ -78,7 +78,7 @@
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             button.tag = BASETAG + i;
             [button setTitle:title forState:UIControlStateNormal];
-            [button setTitleColor:[UIColor wya_blackTextColor] forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor wya_textBlackColor] forState:UIControlStateNormal];
             [button setTitleColor:[UIColor wya_whiteColor] forState:UIControlStateSelected];
             [button wya_setBackgroundColor:[UIColor blackColor] forState:UIControlStateSelected];
             [button wya_setBackgroundColor:[UIColor groupTableViewBackgroundColor] forState:UIControlStateNormal];

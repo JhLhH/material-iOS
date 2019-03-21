@@ -31,7 +31,7 @@
         [self.bgButton addSubview:self.forwardingNumLabel];
         [self.bgButton addSubview:self.readeNumLabel];
 
-        self.contentView.backgroundColor = [UIColor wya_grayBGColor];
+        self.contentView.backgroundColor = [UIColor wya_bgColor];
         [self.contentView addSubview:self.bgButton];
     }
     return self;
@@ -143,7 +143,7 @@
     if(!_articleContentLabel){
         _articleContentLabel = ({
             UILabel * object = [[UILabel alloc]init];
-            object.textColor = [UIColor wya_grayTitleColor];
+            object.textColor = [UIColor wya_textGrayColor];
             object.font = FONTS(14);
             object;
         });
@@ -167,7 +167,7 @@
     if(!_timeLabel){
         _timeLabel = ({
             UILabel * object = [[UILabel alloc]init];
-            object.textColor = [UIColor wya_grayTitleColor];
+            object.textColor = [UIColor wya_textGrayColor];
             object.font = FONTS(12);
             object;
        });
@@ -180,7 +180,7 @@
     if(!_forwardingNumLabel){
         _forwardingNumLabel = ({
             UILabel * object = [[UILabel alloc]init];
-            object.textColor = [UIColor wya_grayTitleColor];
+            object.textColor = [UIColor wya_textGrayColor];
             object.font = FONTS(13);
             object;
         });
@@ -194,7 +194,7 @@
     if(!_readeNumLabel){
         _readeNumLabel = ({
             UILabel * object = [[UILabel alloc]init];
-            object.textColor = [UIColor wya_grayTitleColor];
+            object.textColor = [UIColor wya_textGrayColor];
             object.font = FONTS(13);
             object;
        });

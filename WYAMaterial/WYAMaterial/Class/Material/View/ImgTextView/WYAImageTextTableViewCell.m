@@ -245,7 +245,7 @@
     if(!_userTimeLabel){
         _userTimeLabel = ({
             UILabel * object = [[UILabel alloc]init];
-            object.textColor = [UIColor wya_grayTitleColor];
+            object.textColor = [UIColor wya_textGrayColor];
             object.font = FONT(10);
             object;
        });

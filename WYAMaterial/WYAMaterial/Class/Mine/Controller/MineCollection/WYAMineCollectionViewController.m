@@ -30,7 +30,7 @@
     self.navBar.navTitleColor = [UIColor whiteColor];
     self.navBar.isShowLine = NO;
     self.navBar.delegate = self;
-    [self.navBar wya_goBackButtonWithImage:@"fanhui"];
+    [self.navBar wya_goBackButtonWithImage:@"icon_back"];
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
     [self.view addSubview:self.navBar];
 }

@@ -177,7 +177,7 @@
         if ([_model.mineCreateAuditType isEqualToString:@"正在审核"]) {
             self.auditImgView.backgroundColor = [UIColor greenColor];
         }if ([_model.mineCreateAuditType isEqualToString:@"审核失败"]) {
-            self.auditImgView.backgroundColor = [UIColor wya_grayBGColor];
+            self.auditImgView.backgroundColor = [UIColor wya_bgColor];
             self.userTimeLabel.hidden = YES;
             self.forwardingButton.hidden = YES;
             self.collectionButton.hidden = YES;
@@ -263,7 +263,7 @@
     if(!_userTimeLabel){
         _userTimeLabel = ({
             UILabel * object = [[UILabel alloc]init];
-            object.textColor = [UIColor wya_grayTitleColor];
+            object.textColor = [UIColor wya_textGrayColor];
             object.font = FONT(10);
             object;
         });

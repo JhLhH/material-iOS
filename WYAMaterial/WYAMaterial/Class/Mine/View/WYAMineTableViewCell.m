@@ -74,7 +74,7 @@
     if(!_mineIconImageView){
         _mineIconImageView = ({
             UIImageView * object = [[UIImageView alloc]init];
-            object.backgroundColor = [UIColor wya_grayTitleColor];
+            object.backgroundColor = [UIColor wya_textGrayColor];
             object.layer.cornerRadius = 8;
             object.layer.masksToBounds = YES;
             object;
@@ -87,7 +87,7 @@
     if(!_mineLabel){
         _mineLabel = ({
             UILabel * object = [[UILabel alloc]init];
-            object.textColor = [UIColor wya_blackTextColor];
+            object.textColor = [UIColor wya_textBlackColor];
             object.font = FONT(16);
             object;
        });
