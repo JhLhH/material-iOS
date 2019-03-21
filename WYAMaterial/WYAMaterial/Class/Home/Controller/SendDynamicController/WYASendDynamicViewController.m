@@ -120,10 +120,15 @@
                                     } else {
                                         isSuccess = [WYASendDynamicViewModel saveSendDynamicDraftWithText:self.textView.text images:self.dataSource];
                                     }
-                                    [UIView wya_showBottomToastWithMessage:@"保存失败"];
-                                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                        [self.navigationController popViewControllerAnimated:YES];
-                                    });
+                                    if (isSuccess == NO) {
+                                        [UIView wya_showBottomToastWithMessage:@"保存失败"];
+                                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                            [self.navigationController popViewControllerAnimated:YES];
+                                        });
+                                    }else{
+                                         [self.navigationController popViewControllerAnimated:YES];
+                                    }
+
                                 }];
 
     [alert wya_addAction:defaultAction];

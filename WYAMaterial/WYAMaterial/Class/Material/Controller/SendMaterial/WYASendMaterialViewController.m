@@ -24,6 +24,7 @@
 - (void)wya_customLeftBarButtonItemPressed:(UIButton *)sender{
     if (self.materialType == MaterialTypeCreate) {
         // 在点击取消按钮时需要确认是否保存草稿
+        [self createPop];
     }else{
         // 是否放弃编辑
     }
@@ -31,6 +32,45 @@
 - (void)wya_customrRightBarButtonItemPressed:(UIButton *)sender{
 
 }
+
+- (void)createPop{
+    WYAAlertController * alert =
+    [WYAAlertController wya_alertWithTitle:@"是否保存草稿？"
+                                   Message:nil
+                          AlertLayoutStyle:WYAAlertLayoutStyleHorizontal];
+    alert.backgroundButton.enabled = NO;
+    alert.presentStyle             = WYAPopupPresentStyleBounce;
+    alert.dismissStyle             = WYAPopupDismissStyleShrink;
+    // 创建 action
+    WYAAlertAction * defaultAction =
+    [WYAAlertAction wya_actionWithTitle:@"不保留"
+                                  style:WYAAlertActionStyleCancel
+                                handler:^{
+
+                                    [self.navigationController popViewControllerAnimated:YES];
+                                }];
+
+    WYAAlertAction * cancelAction =
+    [WYAAlertAction wya_actionWithTitle:@"保留"
+                                  style:WYAAlertActionStyleDefault
+                                handler:^{
+//                                    BOOL isSuccess;
+//                                    if (self.model) {
+//                                        isSuccess = [WYASendDynamicViewModel updateSendDynamicDraftWithText:self.textView.text images:self.dataSource];
+//                                    } else {
+//                                        isSuccess = [WYASendDynamicViewModel saveSendDynamicDraftWithText:self.textView.text images:self.dataSource];
+//                                    }
+                                    [UIView wya_showBottomToastWithMessage:@"保存失败"];
+                                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                        [self.navigationController popViewControllerAnimated:YES];
+                                    });
+                                }];
+
+    [alert wya_addAction:defaultAction];
+    [alert wya_addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 /*
 #pragma mark - Navigation
 
