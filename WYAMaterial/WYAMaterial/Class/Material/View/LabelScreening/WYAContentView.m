@@ -9,8 +9,8 @@
 #import "WYAContentView.h"
 
 #define BASETAG 1000
-#define LEFT 10
-#define TOP 10
+#define LEFT 17*SizeAdapter
+#define TOP 21*SizeAdapter
 @interface WYAContentView()
 
 @property (nonatomic, strong) UILabel * titleLabel;
@@ -44,13 +44,13 @@
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).offset(LEFT);
         make.top.equalTo(self.mas_top).offset(TOP);
-        make.size.mas_equalTo(CGSizeMake(ScreenWidth, 30));
+        make.size.mas_equalTo(CGSizeMake(70*SizeAdapter, 16*SizeAdapter));
     }];
 
     [self.btnBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).offset(0);
         make.right.equalTo(self.mas_right).offset(0);
-        make.top.equalTo(self.titleLabel.mas_bottom).offset(10);
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(20*SizeAdapter);
         make.height.mas_equalTo(self.btnBgViewHeight);
     }];
 
@@ -72,7 +72,7 @@
     if (contentArray) {
         _contentArray = contentArray;
         CGFloat w = 0;//保存前一个button的宽以及前一个button距离屏幕边缘的距离
-        CGFloat h = 10;//用来控制button距离父视图的高
+        CGFloat h = 0;//用来控制button距离父视图的高
         for (int i = 0; i < _contentArray.count; i++) {
             NSString * title = [_contentArray wya_safeObjectAtIndex:i];
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -85,15 +85,15 @@
 
             button.backgroundColor = [UIColor groupTableViewBackgroundColor];
             button.titleLabel.textAlignment = NSTextAlignmentCenter;
-            button.titleLabel.font = FONT(14);
+            button.titleLabel.font = FONT(15);
             button.layer.cornerRadius = 15;
             button.layer.masksToBounds = YES;
             [button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
             //根据计算文字的大小
-            NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:14]};
-            CGFloat length = [_contentArray[i] boundingRectWithSize:CGSizeMake(ScreenWidth, 0) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil].size.width + 14;
+            NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:15*SizeAdapter]};
+            CGFloat length = [_contentArray[i] boundingRectWithSize:CGSizeMake(ScreenWidth, 0) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil].size.width + 15;
             //设置button的frame
-            button.frame = CGRectMake(10 + w, h, length + 15 , 30);
+            button.frame = CGRectMake(10*SizeAdapter + w, h, length + 15 , 27);
             //当button的位置超出屏幕边缘时换行 ScreenWidth 只是button所在父视图的宽度
             if(10 + w + length + 15 > ScreenWidth){
                 w = 0; //换行时将w置为0
@@ -132,23 +132,12 @@
 - (void)resetButtonClicked:(UIButton *)sender{
 
     [self resetContentViewItem];
-    sender.backgroundColor = [UIColor orangeColor];
-    [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.sureButton.backgroundColor = [UIColor whiteColor];
-    [self.sureButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    if (self.resetButtonAction) {
-//        self.resetButtonAction();
-//    }
+
 }
 - (void)sureButtonClicked:(UIButton *)sender{
 
-    sender.backgroundColor = [UIColor orangeColor];
-    [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.resetButton.backgroundColor = [UIColor whiteColor];
-    [self.resetButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     if (self.sureButtonAction) {
         self.sureButtonAction([self.selectedTitleArray copy]);
-        [self resetContentViewItem];
     }
 
 }
@@ -166,7 +155,7 @@
     if(!_titleLabel){
         _titleLabel = ({
             UILabel * object = [[UILabel alloc]init];
-            object.font = FONTS(20);
+            object.font = FONTS(16);
             object.text = @"标签分类";
             object.textColor = [UIColor blackColor];
             object;

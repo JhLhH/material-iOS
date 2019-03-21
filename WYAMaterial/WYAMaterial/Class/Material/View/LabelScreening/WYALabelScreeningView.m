@@ -34,7 +34,6 @@
 - (void)hidenScreenView{
     self.screenViewIsShow = NO;
     self.hidden = !self.screenViewIsShow;
-    [self.contentView resetContentViewItem];
 }
 
 #pragma mark ======= Lazy
@@ -110,7 +109,6 @@
 - (void)hiddenScreenView:(UIGestureRecognizer * )recognizer{
     self.screenViewIsShow = NO;
     self.hidden = !self.screenViewIsShow;
-    [self.contentView resetContentViewItem];
 }
 
 @end

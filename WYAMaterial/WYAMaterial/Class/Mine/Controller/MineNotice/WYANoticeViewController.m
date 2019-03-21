@@ -21,19 +21,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navTitle = @"历史通知";
-//    [self.view addSubview:self.tableView];
-    // Do any additional setup after loading the view.
+    [self.view addSubview:self.tableView];
 }
 
 
-
+#pragma mark ======= Lazy
 - (UITableView *)tableView{
     if(!_tableView){
         _tableView = ({
-            UITableView * object = [[UITableView alloc]initWithFrame:CGRectMake(0, WYATopHeight, ScreenWidth, ScreenHeight - WYATopHeight) style:UITableViewStyleGrouped];
+            UITableView * object = [[UITableView alloc]initWithFrame:CGRectMake(0, WYATopHeight, ScreenWidth, ScreenHeight - WYATopHeight) style:UITableViewStylePlain];
             object.delegate       = self;
             object.dataSource     = self;
-            object.separatorStyle = UITableViewCellSeparatorStyleNone;
+            object.tableFooterView = [UIView new];
             [object registerClass:[WYANoticeTableViewCell class] forCellReuseIdentifier:NOTICE_CELLID];
             object;
        });
@@ -45,7 +44,6 @@
     if(!_dataSources){
         _dataSources = ({
             NSMutableArray * object = [NSMutableArray arrayWithArray:[WYAMineNoticeModel getModelsWithResults:@""]];
-
             object;
        });
     }

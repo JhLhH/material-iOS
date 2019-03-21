@@ -15,7 +15,6 @@
 @property (nonatomic, strong) UIButton * createMaterialBtn;
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) NSMutableArray * dataSources;
-@property (nonatomic, assign) BOOL isRefreshCell;
 @end
 
 @implementation WYAImgTextViewController
@@ -23,7 +22,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navBar.hidden = YES;
-    self.isRefreshCell = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tableView];
 //    [self.view addSubview:self.createMaterialBtn];
@@ -88,9 +86,6 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.isRefreshCell) {
-        return [WYAImageTextTableViewCell refreshCellHeightWithModel:[self.dataSources wya_safeObjectAtIndex:indexPath.row]];
-    }
     return [WYAImageTextTableViewCell getCellHeightWithModel:[self.dataSources wya_safeObjectAtIndex:indexPath.row]];
 }
 
@@ -111,7 +106,6 @@
         NSArray <NSIndexPath *> *indexPathArray = @[cellIndexPath];
         //3.传入数组，对当前cell进行刷新
         [self.tableView reloadRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
-        self.isRefreshCell = YES;
     };
     return cell;
 }

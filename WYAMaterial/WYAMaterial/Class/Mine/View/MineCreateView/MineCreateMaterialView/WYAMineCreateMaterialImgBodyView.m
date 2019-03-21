@@ -1,12 +1,12 @@
 //
-//  WYAImgTextBodyView.m
+//  WYAMineCreateMaterialImgBodyView.m
 //  WYAMaterial
 //
-//  Created by 李俊恒 on 2019/3/16.
+//  Created by 李俊恒 on 2019/3/20.
 //  Copyright © 2019 WeiYiAn. All rights reserved.
 //
 
-#import "WYAImgTextBodyView.h"
+#import "WYAMineCreateMaterialImgBodyView.h"
 
 #define MARGIN 10*SizeAdapter
 #define IMGWIDTH (ScreenWidth - 88*SizeAdapter - 3*MARGIN)/3
@@ -14,11 +14,11 @@
 #define COL_COUNT 3
 #define BASETAG 100
 
-@interface WYAImgTextBodyView ()
+@interface WYAMineCreateMaterialImgBodyView()
 
 @end
 
-@implementation WYAImgTextBodyView
+@implementation WYAMineCreateMaterialImgBodyView
 #pragma mark ======= LifeCircle
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
@@ -61,4 +61,5 @@
 
     }
 }
+
 @end

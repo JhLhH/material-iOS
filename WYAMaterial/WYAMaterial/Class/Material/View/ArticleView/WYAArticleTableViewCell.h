@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WYAMaterialModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WYAArticleTableViewCell : UITableViewCell
-
+@property (nonatomic, strong) WYAArticleModel * model;
+@property(nonatomic, copy) void (^DidSelectActionBlock)(WYAArticleTableViewCell * taraget);
++ (CGFloat)getCellHeightWithModel:(WYAArticleModel *)model;
 @end
 
 NS_ASSUME_NONNULL_END

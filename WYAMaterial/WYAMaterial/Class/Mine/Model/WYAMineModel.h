@@ -48,5 +48,22 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
+@interface WYAMinSettingModel : NSObject
+@property (nonatomic, copy) NSString * userIconUrl;
+@property (nonatomic, copy) NSString * userName;
+@property (nonatomic, copy) NSString * userPhoneNum;
+@property (nonatomic, copy) NSString * weCheatNum;
+
++ (instancetype)initWithReqults:(id)results;
+@end
+
+
+@interface WYAMinSettingTeamModel : NSObject
+@property (nonatomic, copy) NSString * teamIcon;
+@property (nonatomic, copy) NSString * teamName;
+@property (nonatomic, copy) NSString * teamIntroduction;
+@property (nonatomic, copy) NSString * teamState;
++ (NSArray *)getModelWithReqults:(id)results;
+@end
 
 NS_ASSUME_NONNULL_END

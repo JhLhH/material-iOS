@@ -1,14 +1,14 @@
 //
-//  WYAImageTextTableViewCell.m
+//  WYAMineCreateMaterialTableViewCell.m
 //  WYAMaterial
 //
-//  Created by 李俊恒 on 2019/3/16.
+//  Created by 李俊恒 on 2019/3/20.
 //  Copyright © 2019 WeiYiAn. All rights reserved.
 //
 
-#import "WYAImageTextTableViewCell.h"
+#import "WYAMineCreateMaterialTableViewCell.h"
 #import <SDWebImage/UIButton+WebCache.h>
-#import "WYAImgTextBodyView.h"
+#import "WYAMineCreateMaterialImgBodyView.h"
 
 #define ITEM_MARGIN 10*SizeAdapter
 #define ITEM_WH (ScreenWidth - 88*SizeAdapter - 3*ITEM_MARGIN)/3
@@ -17,7 +17,7 @@
 
 #define CONTENT_WIDTH (ScreenWidth - 88*SizeAdapter)
 
-@interface WYAImageTextTableViewCell()
+@interface WYAMineCreateMaterialTableViewCell ()
 @property (nonatomic, assign) CGFloat contentHeight;
 /// 用户头像按钮
 @property (nonatomic, strong) UIButton * userHeaderButton;
@@ -34,7 +34,7 @@
 /// 全文按钮
 @property (nonatomic, strong) UIButton * showAllBodyButton;
 /// 图片视图
-@property (nonatomic, strong) WYAImgTextBodyView * userBodyImageView;
+@property (nonatomic, strong) WYAMineCreateMaterialImgBodyView * userBodyImageView;
 /// 转发
 @property (nonatomic, strong) UIButton * forwardingButton;
 /// 收藏
@@ -44,10 +44,11 @@
 
 @property (nonatomic, assign) BOOL isAnimation;
 
+/// 审核状态视图
+@property (nonatomic, strong) UIImageView * auditImgView;
 @end
-@implementation WYAImageTextTableViewCell
 
-#pragma mark ======= LifeCircle
+@implementation WYAMineCreateMaterialTableViewCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self.contentView addSubview:self.userHeaderButton];
@@ -60,6 +61,7 @@
         [self.contentView addSubview:self.userBodyImageView];
         [self.contentView addSubview:self.forwardingButton];
         [self.contentView addSubview:self.collectionButton];
+        [self.contentView addSubview:self.auditImgView];
         [self.contentView addSubview:self.lineView];
     }
     return self;
@@ -73,7 +75,7 @@
         make.size.mas_equalTo(CGSizeMake(44*SizeAdapter, 44*SizeAdapter));
     }];
 
-    CGFloat userNameWidth = [_model.userName wya_widthWithFontSize:15 height:15*SizeAdapter];
+    CGFloat userNameWidth = [_model.mineCreateUserName wya_widthWithFontSize:15 height:15*SizeAdapter];
     [self.userNameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.userHeaderButton.mas_right).offset(11*SizeAdapter);
         make.top.equalTo(self.contentView.mas_top).offset(20*SizeAdapter);
@@ -86,7 +88,7 @@
         make.size.mas_equalTo(CGSizeMake(15*SizeAdapter, 15*SizeAdapter));
     }];
 
-    CGFloat userLevelWidth = [_model.userInfoString wya_widthWithFontSize:11 height:10*SizeAdapter];
+    CGFloat userLevelWidth = [_model.mineCreateUserInfoString wya_widthWithFontSize:11 height:10*SizeAdapter];
     [self.userLevelLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.userLevelIconView.mas_right).offset(8*SizeAdapter);
         make.top.equalTo(self.userNameLabel.mas_bottom).offset(10*SizeAdapter);
@@ -100,6 +102,12 @@
         make.height.mas_equalTo(self.contentHeight);
     }];
 
+    [self.auditImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.contentView.mas_right).offset(-14*SizeAdapter);
+        make.bottom.equalTo(self.userContentLabel.mas_top).offset(24*SizeAdapter);
+        make.size.mas_equalTo(CGSizeMake(60*SizeAdapter, 60*SizeAdapter));
+    }];
+
     [self.showAllBodyButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.userContentLabel.mas_left);
         make.top.equalTo(self.userContentLabel.mas_bottom).offset(0);
@@ -107,11 +115,11 @@
 
     }];
 
-    if (_model.bodyImgArray.count > 1) {
+    if (_model.mineCreateBodyImgArray.count > 1) {
         int index;
-        if (_model.bodyImgArray.count<=3) {
+        if (_model.mineCreateBodyImgArray.count<=3) {
             index = 1;
-        }else if (_model.bodyImgArray.count>6){
+        }else if (_model.mineCreateBodyImgArray.count>6){
             index = 3;
         }else{
             index = 2;
@@ -156,19 +164,29 @@
 }
 
 #pragma mark ======= Setter
-- (void)setModel:(WYAImageTextModel *)model{
+- (void)setModel:(WYAMineCreateMaterialModel *)model{
     if (model) {
         _model = model;
-        [self.userHeaderButton sd_setImageWithURL:[NSURL URLWithString:_model.userIconName] forState:0];
-        self.userNameLabel.text = _model.userName;
-        [self.userLevelIconView sd_setImageWithURL:[NSURL URLWithString:_model.userInfoImgString] placeholderImage:nil];
-        self.userLevelLabel.text = _model.userInfoString;
-        self.userTimeLabel.text = _model.timeString;
-        self.userContentLabel.text = _model.bodyString;
-        self.userBodyImageView.imageArray = _model.bodyImgArray;
-
+        [self.userHeaderButton sd_setImageWithURL:[NSURL URLWithString:_model.mineCreateUserIconName] forState:0];
+        self.userNameLabel.text = _model.mineCreateUserName;
+        [self.userLevelIconView sd_setImageWithURL:[NSURL URLWithString:_model.mineCreateUserInfoImgString] placeholderImage:nil];
+        self.userLevelLabel.text = _model.mineCreateUserInfoString;
+        self.userTimeLabel.text = _model.mineCreateTimeString;
+        self.userContentLabel.text = _model.mineCreateBodyString;
+        self.userBodyImageView.imageArray = _model.mineCreateBodyImgArray;
+        if ([_model.mineCreateAuditType isEqualToString:@"正在审核"]) {
+            self.auditImgView.backgroundColor = [UIColor greenColor];
+        }if ([_model.mineCreateAuditType isEqualToString:@"审核失败"]) {
+            self.auditImgView.backgroundColor = [UIColor wya_grayBGColor];
+            self.userTimeLabel.hidden = YES;
+            self.forwardingButton.hidden = YES;
+            self.collectionButton.hidden = YES;
+            self.lineView.hidden = YES;
+        }else{
+            self.auditImgView.backgroundColor = [UIColor orangeColor];
+        }
         // 判断全文按钮是否显示
-        CGFloat height = [_model.bodyString wya_heightWithFontSize:14 width:CONTENT_WIDTH];
+        CGFloat height = [_model.mineCreateBodyString wya_heightWithFontSize:14 width:CONTENT_WIDTH];
         if (height > DEFAULT_CONTENT_HEIGHT) {
             self.showAllBodyButton.hidden = NO;
         }else{
@@ -183,7 +201,7 @@
             if (height < DEFAULT_CONTENT_HEIGHT) {
                 self.contentHeight = height;
             }else{
-            self.contentHeight = DEFAULT_CONTENT_HEIGHT;
+                self.contentHeight = DEFAULT_CONTENT_HEIGHT;
             }
             self.showAllBodyButton.selected = NO;
         }
@@ -200,7 +218,7 @@
             object.layer.cornerRadius = 22*SizeAdapter;
             object.layer.masksToBounds = YES;
             object;
-       });
+        });
     }
     return _userHeaderButton;
 }
@@ -213,7 +231,7 @@
             object.font = FONT(15);
             object.textAlignment = NSTextAlignmentCenter;
             object;
-       });
+        });
     }
     return _userNameLabel;
 }
@@ -224,7 +242,7 @@
             UIImageView * object = [[UIImageView alloc]init];
             object.backgroundColor = [UIColor orangeColor];
             object;
-       });
+        });
     }
     return _userLevelIconView;
 }
@@ -236,7 +254,7 @@
             object.textColor = [UIColor orangeColor];
             object.font = FONT(11);
             object;
-       });
+        });
     }
     return _userLevelLabel;
 }
@@ -248,7 +266,7 @@
             object.textColor = [UIColor wya_grayTitleColor];
             object.font = FONT(10);
             object;
-       });
+        });
     }
     return _userTimeLabel;
 }
@@ -261,7 +279,7 @@
             object.font = FONT(14);
             object.numberOfLines = 0;
             object;
-       });
+        });
     }
     return _userContentLabel;
 }
@@ -278,14 +296,14 @@
             object.titleLabel.font = FONT(14);
             object.titleLabel.textAlignment = NSTextAlignmentLeft;
             object;
-       });
+        });
     }
     return _showAllBodyButton;
 }
-- (WYAImgTextBodyView *)userBodyImageView{
+- (WYAMineCreateMaterialImgBodyView *)userBodyImageView{
     if(!_userBodyImageView){
         _userBodyImageView = ({
-            WYAImgTextBodyView * object = [[WYAImgTextBodyView alloc]init];
+            WYAMineCreateMaterialImgBodyView * object = [[WYAMineCreateMaterialImgBodyView alloc]init];
             object;
         });
     }
@@ -303,7 +321,7 @@
             [object addTarget:self action:@selector(collectionButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
             object.titleLabel.font = FONT(12);
             object;
-       });
+        });
     }
     return _collectionButton;
 }
@@ -332,6 +350,17 @@
     return _lineView;
 }
 
+- (UIImageView *)auditImgView{
+    if(!_auditImgView){
+        _auditImgView = ({
+            UIImageView * object = [[UIImageView alloc]init];
+            object.layer.cornerRadius = 30*SizeAdapter;
+            object.layer.masksToBounds = YES;
+            object;
+        });
+    }
+    return _auditImgView;
+}
 #pragma mark ======= Event
 - (void)forwardingButtonClicked:(UIButton *)sender{
     if (self.forwardingActionBlock) {
@@ -355,10 +384,10 @@
 
 #pragma mark ======= Public Method
 
-+ (CGFloat)getCellHeightWithModel:(WYAImageTextModel *)model{
++ (CGFloat)getCellHeightWithModel:(WYAMineCreateMaterialModel *)model{
 
 
-    CGFloat contentHeight = [model.bodyString wya_heightWithFontSize:14 width:CONTENT_WIDTH];
+    CGFloat contentHeight = [model.mineCreateBodyString wya_heightWithFontSize:14 width:CONTENT_WIDTH];
 
     if (!model.isShowContent) {
         if (contentHeight > DEFAULT_CONTENT_HEIGHT) {
@@ -367,11 +396,11 @@
     }
 
     CGFloat bodyImgHeight ;
-    if (model.bodyImgArray.count > 1) {
+    if (model.mineCreateBodyImgArray.count > 1) {
         int index ;
-        if (model.bodyImgArray.count <= 3) {
+        if (model.mineCreateBodyImgArray.count <= 3) {
             index = 1;
-        }else if (model.bodyImgArray.count > 6){
+        }else if (model.mineCreateBodyImgArray.count > 6){
             index = 3;
         }else{
             index = 2;
@@ -381,7 +410,15 @@
         bodyImgHeight = 200*SizeAdapter;
     }
 
+    CGFloat bottomHeight;
 
-    return 70*SizeAdapter + contentHeight + 15*SizeAdapter + bodyImgHeight + 52*SizeAdapter;
+   if ([model.mineCreateAuditType isEqualToString:@"审核失败"]) {
+       bottomHeight = 37*SizeAdapter;
+    }else{
+        bottomHeight = 52*SizeAdapter;
+    }
+
+    return 70*SizeAdapter + contentHeight + 15*SizeAdapter + bodyImgHeight + bottomHeight;
 }
+
 @end
