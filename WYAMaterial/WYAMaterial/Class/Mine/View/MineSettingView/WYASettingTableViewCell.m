@@ -80,7 +80,7 @@
     if (!_rightInfoLabel) {
         _rightInfoLabel = ({
             UILabel * object     = [[UILabel alloc] init];
-            object.font          = FONT(14);
+            object.font          = FONT(15);
             object.textColor     = [UIColor wya_blackColor];
             object.textAlignment = NSTextAlignmentRight;
             object;

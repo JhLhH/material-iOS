@@ -46,11 +46,14 @@
     self.navBar.navTitleColor   = [UIColor wya_whiteColor];
     self.navTitleFont = 18 * SizeAdapter;
     self.navBar.backgroundColor = [UIColor wya_textBlackColor];
-    self.leftBarButtonItemTitleFont = 15 * SizeAdapter;
-    self.rightBarButtonItemTitleFont = 15 * SizeAdapter;
-    [self.navBar wya_goBackButtonWithTitle:@"取消"
-                               normalColor:[UIColor wya_whiteColor]
-                          highlightedColor:nil];
+
+//    [self.navBar wya_goBackButtonWithTitle:@"取消"
+//                               normalColor:[UIColor wya_whiteColor]
+//                          highlightedColor:nil];
+    [self.navBar wya_addLeftNavBarButtonWithNormalTitle:@[@"取消"]
+                                            normalColor:@[ [UIColor wya_whiteColor] ]
+                                       highlightedColor:@[ [UIColor wya_whiteColor] ]];
+
     [self.navBar wya_addRightNavBarButtonWithNormalTitle:@[ @"发布" ]
                                              normalColor:@[ [UIColor wya_whiteColor] ]
                                         highlightedColor:@[ [UIColor wya_whiteColor] ]];
@@ -90,39 +93,38 @@
 }
 
 #pragma mark ======= WYANavBarDelegate
-- (void)wya_goBackPressed:(UIButton *)sender {
+- (void)wya_customLeftBarButtonItemPressed:(UIButton *)sender{
     WYAAlertController * alert =
-        [WYAAlertController wya_alertWithTitle:@"是否保存草稿？"
-                                       Message:nil
-                              AlertLayoutStyle:WYAAlertLayoutStyleHorizontal];
+    [WYAAlertController wya_alertWithTitle:@"是否保存草稿？"
+                                   Message:nil
+                          AlertLayoutStyle:WYAAlertLayoutStyleHorizontal];
     alert.backgroundButton.enabled = NO;
     alert.presentStyle             = WYAPopupPresentStyleBounce;
     alert.dismissStyle             = WYAPopupDismissStyleShrink;
     // 创建 action
     WYAAlertAction * defaultAction =
-        [WYAAlertAction wya_actionWithTitle:@"不保留"
-                                      style:WYAAlertActionStyleCancel
-                                    handler:^{
-                                        [WYASendDynamicViewModel deleteSendDynamicDraft];
-                                        [self.navigationController popViewControllerAnimated:YES];
-                                    }];
+    [WYAAlertAction wya_actionWithTitle:@"不保留"
+                                  style:WYAAlertActionStyleCancel
+                                handler:^{
+                                    [WYASendDynamicViewModel deleteSendDynamicDraft];
+                                    [self.navigationController popViewControllerAnimated:YES];
+                                }];
 
     WYAAlertAction * cancelAction =
-        [WYAAlertAction wya_actionWithTitle:@"保留"
-                                      style:WYAAlertActionStyleDefault
-                                    handler:^{
-                                        BOOL isSuccess;
-                                        if (self.model) {
-                                            isSuccess = [WYASendDynamicViewModel updateSendDynamicDraftWithText:self.textView.text images:self.dataSource];
-                                        } else {
-                                            isSuccess = [WYASendDynamicViewModel saveSendDynamicDraftWithText:self.textView.text images:self.dataSource];
-                                        }
-                                        if (isSuccess) {
-                                            [self.navigationController popViewControllerAnimated:YES];
-                                        } else {
-                                            [UIView wya_showBottomToastWithMessage:@"保存失败"];
-                                        }
-                                    }];
+    [WYAAlertAction wya_actionWithTitle:@"保留"
+                                  style:WYAAlertActionStyleDefault
+                                handler:^{
+                                    BOOL isSuccess;
+                                    if (self.model) {
+                                        isSuccess = [WYASendDynamicViewModel updateSendDynamicDraftWithText:self.textView.text images:self.dataSource];
+                                    } else {
+                                        isSuccess = [WYASendDynamicViewModel saveSendDynamicDraftWithText:self.textView.text images:self.dataSource];
+                                    }
+                                    [UIView wya_showBottomToastWithMessage:@"保存失败"];
+                                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                        [self.navigationController popViewControllerAnimated:YES];
+                                    });
+                                }];
 
     [alert wya_addAction:defaultAction];
     [alert wya_addAction:cancelAction];

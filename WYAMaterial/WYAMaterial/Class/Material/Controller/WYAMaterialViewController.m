@@ -13,6 +13,9 @@
 
 #import "WYALabelScreeningView.h"
 
+
+#import "WYASendMaterialViewController.h"
+
 @interface WYAMaterialViewController () <WYANavBarDelegate>
 @property (nonatomic, strong) WYALabelScreeningView * screeningView;
 @end
@@ -44,6 +47,9 @@
         case 0:
             {
                 NSLog(@"发布素材");
+                WYASendMaterialViewController * vc = [[WYASendMaterialViewController alloc]init];
+                vc.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:vc animated:YES];
             }
             break;
         case 1:
