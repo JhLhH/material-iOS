@@ -97,8 +97,8 @@
         make.top.mas_equalTo(self.userReleaseContentLabel.mas_bottom);
         make.width.mas_equalTo(50 * SizeAdapter);
         make.height.mas_equalTo(self.showButton.hidden
-                                    ? 0
-                                    : 30 * SizeAdapter);
+                                ? 0
+                                : 30 * SizeAdapter);
     }];
 
     [self.userReleaseImagesView mas_remakeConstraints:^(MASConstraintMaker * make) {
@@ -231,6 +231,8 @@
         self.userReleaseTimeLabel.text    = model.time;
         self.userReleaseContentLabel.text = model.content;
         self.forwardingButton.selected    = model.forwarding;
+        self.collectionButton.selected    = model.collection;
+        self.praiseButton.selected        = model.person;
         [self.collectionButton setTitle:[NSString stringWithFormat:@"%d", model.collection] forState:UIControlStateNormal];
         [self.praiseButton setTitle:[NSString stringWithFormat:@"%d", model.person] forState:UIControlStateNormal];
 
@@ -297,7 +299,7 @@
         _userNameLabel = ({
             UILabel * object = [[UILabel alloc] init];
             object.font      = FONT(15);
-            object.textColor = [UIColor wya_hex:@"#584F60"];
+            object.textColor = [UIColor wya_textLightBlackColor];
             object;
         });
     }
@@ -308,7 +310,7 @@
     if (!_userLevelImageView) {
         _userLevelImageView = ({
             UIImageView * object   = [[UIImageView alloc] init];
-            object.backgroundColor = randomColor;
+            object.image         = [UIImage imageNamed:@"icon_huizhang"];
             object;
         });
     }
@@ -333,12 +335,13 @@
             CGFloat space     = 6.f;
             UIButton * object = [[UIButton alloc] init];
             [object setTitle:@"转发" forState:UIControlStateNormal];
-            [object setTitle:@"已转" forState:UIControlStateSelected];
+            [object setTitle:@"转发" forState:UIControlStateSelected];
             [object setTitleColor:[UIColor wya_textBlackColor] forState:UIControlStateNormal];
-            //            [object setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+            [object setTitleColor:[UIColor wya_textBlackColor] forState:UIControlStateSelected];
             object.titleLabel.font            = FONT(12);
             object.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-            [object setImage:[UIImage imageNamed:@"点赞已选"] forState:UIControlStateNormal];
+            [object setImage:[UIImage imageNamed:@"icon_zhuanfa"] forState:UIControlStateNormal];
+            [object setImage:[UIImage imageNamed:@"icon_zhuanfablack"] forState:UIControlStateSelected];
             object.imageEdgeInsets = UIEdgeInsetsMake(0, -space / 2.0, 0, space / 2.0);
             object.titleEdgeInsets = UIEdgeInsetsMake(0, space / 2.0, 0, -space / 2.0);
             [object addCallBackAction:^(UIButton * button) {
@@ -381,7 +384,7 @@
             UILabel * object     = [[UILabel alloc] init];
             object.font          = FONT(10);
             object.textAlignment = NSTextAlignmentLeft;
-            object.textColor     = [UIColor wya_hex:@"#999999"];
+            object.textColor     = [UIColor wya_textGrayColor];
             object;
         });
     }
@@ -394,10 +397,12 @@
             CGFloat space     = 6 * SizeAdapter;
             UIButton * object = [[UIButton alloc] init];
             [object setTitle:@"评论" forState:UIControlStateNormal];
-            [object setTitle:@"已评" forState:UIControlStateSelected];
+            [object setTitle:@"评论" forState:UIControlStateSelected];
             [object setTitleColor:[UIColor wya_textBlackColor] forState:UIControlStateNormal];
+            [object setTitleColor:[UIColor wya_textBlackColor] forState:UIControlStateSelected];
             object.titleLabel.font = FONT(12);
-            [object setImage:[UIImage imageNamed:@"点赞已选"] forState:UIControlStateNormal];
+            [object setImage:[UIImage imageNamed:@"icon_pinglun"] forState:UIControlStateNormal];
+            [object setImage:[UIImage imageNamed:@"icon_pinglun_press"] forState:UIControlStateSelected];
             object.imageEdgeInsets = UIEdgeInsetsMake(0, -space / 2.0, 0, space / 2.0);
             object.titleEdgeInsets = UIEdgeInsetsMake(0, space / 2.0, 0, -space / 2.0);
             [object addCallBackAction:^(UIButton * button) {
@@ -418,7 +423,8 @@
             UIButton * object      = [[UIButton alloc] init];
             object.titleLabel.font = FONT(12);
             [object setTitleColor:[UIColor wya_textBlackColor] forState:UIControlStateNormal];
-            [object setImage:[UIImage imageNamed:@"点赞已选"] forState:UIControlStateNormal];
+            [object setImage:[UIImage imageNamed:@"icon_collect"] forState:UIControlStateNormal];
+            [object setImage:[UIImage imageNamed:@"icon_collect_press"] forState:UIControlStateSelected];
             object.imageEdgeInsets = UIEdgeInsetsMake(0, -space / 2.0, 0, space / 2.0);
             object.titleEdgeInsets = UIEdgeInsetsMake(0, space / 2.0, 0, -space / 2.0);
             [object addCallBackAction:^(UIButton * button) {
@@ -439,7 +445,8 @@
             UIButton * object = [[UIButton alloc] init];
             [object setTitleColor:[UIColor wya_textBlackColor] forState:UIControlStateNormal];
             object.titleLabel.font = FONT(12);
-            [object setImage:[UIImage imageNamed:@"点赞已选"] forState:UIControlStateNormal];
+            [object setImage:[UIImage imageNamed:@"icon_dianzan"] forState:UIControlStateNormal];
+            [object setImage:[UIImage imageNamed:@"icon_dianzan_press"] forState:UIControlStateSelected];
             object.imageEdgeInsets = UIEdgeInsetsMake(0, -space / 2.0, 0, space / 2.0);
             object.titleEdgeInsets = UIEdgeInsetsMake(0, space / 2.0, 0, -space / 2.0);
             [object addCallBackAction:^(UIButton * button) {

@@ -14,6 +14,7 @@
 		211F6806223B95B200F7ACBB /* WYACameraCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 211F6803223B95B100F7ACBB /* WYACameraCell.m */; };
 		211F6807223B95B200F7ACBB /* WYACameraCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 211F6805223B95B100F7ACBB /* WYACameraCell.xib */; };
 		21271DD220F59341008EBAD1 /* BaseNetWorking.m in Sources */ = {isa = PBXBuildFile; fileRef = 21271DD120F59341008EBAD1 /* BaseNetWorking.m */; };
+		21690E5722436E8F00333F88 /* WYARefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21690E5622436E8F00333F88 /* WYARefreshView.m */; };
 		2193EE79223FD40F00FD61B9 /* WYAMineCreateReviewSuccessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2193EE78223FD40F00FD61B9 /* WYAMineCreateReviewSuccessCell.m */; };
 		2193EE7D223FD49C00FD61B9 /* WYAMineCreateReviewFailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2193EE7C223FD49C00FD61B9 /* WYAMineCreateReviewFailCell.m */; };
 		2193EE82223FD6A800FD61B9 /* WYAMineCreateDynamicViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2193EE81223FD6A800FD61B9 /* WYAMineCreateDynamicViewModel.m */; };
@@ -117,6 +118,8 @@
 		211F6805223B95B100F7ACBB /* WYACameraCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WYACameraCell.xib; sourceTree = "<group>"; };
 		21271DD020F59341008EBAD1 /* BaseNetWorking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseNetWorking.h; sourceTree = "<group>"; };
 		21271DD120F59341008EBAD1 /* BaseNetWorking.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseNetWorking.m; sourceTree = "<group>"; };
+		21690E5522436E8F00333F88 /* WYARefreshView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYARefreshView.h; sourceTree = "<group>"; };
+		21690E5622436E8F00333F88 /* WYARefreshView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYARefreshView.m; sourceTree = "<group>"; };
 		2193EE77223FD40F00FD61B9 /* WYAMineCreateReviewSuccessCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WYAMineCreateReviewSuccessCell.h; path = WYAMaterial/Class/Mine/View/MineCreateView/MineCreateDynamicView/WYAMineCreateReviewSuccessCell.h; sourceTree = SOURCE_ROOT; };
 		2193EE78223FD40F00FD61B9 /* WYAMineCreateReviewSuccessCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WYAMineCreateReviewSuccessCell.m; path = WYAMaterial/Class/Mine/View/MineCreateView/MineCreateDynamicView/WYAMineCreateReviewSuccessCell.m; sourceTree = SOURCE_ROOT; };
 		2193EE7B223FD49C00FD61B9 /* WYAMineCreateReviewFailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAMineCreateReviewFailCell.h; sourceTree = "<group>"; };
@@ -133,11 +136,10 @@
 		2193EE9322408F7800FD61B9 /* WYAMineCollectionDynamicViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAMineCollectionDynamicViewModel.m; sourceTree = "<group>"; };
 		2193EE9722408FD200FD61B9 /* WYAMineCollectionDynamicModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAMineCollectionDynamicModel.h; sourceTree = "<group>"; };
 		2193EE9822408FD200FD61B9 /* WYAMineCollectionDynamicModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAMineCollectionDynamicModel.m; sourceTree = "<group>"; };
-
-		2193EE9B2240919900FD61B9 /* WYAMineCollectionDynamicCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WYAMineCollectionDynamicCell.h; path = WYAMaterial/Class/Mine/Model/MineCollectionModel/MineCollectionDynamicModel/WYAMineCollectionDynamicCell.h; sourceTree = SOURCE_ROOT; };
-		2193EE9C2240919900FD61B9 /* WYAMineCollectionDynamicCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WYAMineCollectionDynamicCell.m; path = WYAMaterial/Class/Mine/Model/MineCollectionModel/MineCollectionDynamicModel/WYAMineCollectionDynamicCell.m; sourceTree = SOURCE_ROOT; };
-		2193EE9E2240925500FD61B9 /* WYAMineCollectionDynamicFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WYAMineCollectionDynamicFootView.h; path = WYAMaterial/Class/Mine/Model/MineCollectionModel/MineCollectionDynamicModel/WYAMineCollectionDynamicFootView.h; sourceTree = SOURCE_ROOT; };
-		2193EE9F2240925500FD61B9 /* WYAMineCollectionDynamicFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WYAMineCollectionDynamicFootView.m; path = WYAMaterial/Class/Mine/Model/MineCollectionModel/MineCollectionDynamicModel/WYAMineCollectionDynamicFootView.m; sourceTree = SOURCE_ROOT; };
+		2193EE9B2240919900FD61B9 /* WYAMineCollectionDynamicCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WYAMineCollectionDynamicCell.h; path = WYAMaterial/Class/Mine/View/MineCollectionView/MineCollectionDynamicView/WYAMineCollectionDynamicCell.h; sourceTree = SOURCE_ROOT; };
+		2193EE9C2240919900FD61B9 /* WYAMineCollectionDynamicCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WYAMineCollectionDynamicCell.m; path = WYAMaterial/Class/Mine/View/MineCollectionView/MineCollectionDynamicView/WYAMineCollectionDynamicCell.m; sourceTree = SOURCE_ROOT; };
+		2193EE9E2240925500FD61B9 /* WYAMineCollectionDynamicFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WYAMineCollectionDynamicFootView.h; path = WYAMaterial/Class/Mine/View/MineCollectionView/MineCollectionDynamicView/WYAMineCollectionDynamicFootView.h; sourceTree = SOURCE_ROOT; };
+		2193EE9F2240925500FD61B9 /* WYAMineCollectionDynamicFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WYAMineCollectionDynamicFootView.m; path = WYAMaterial/Class/Mine/View/MineCollectionView/MineCollectionDynamicView/WYAMineCollectionDynamicFootView.m; sourceTree = SOURCE_ROOT; };
 		2193EEAD2242181E00FD61B9 /* WYASendDynamicDraftModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYASendDynamicDraftModel.h; sourceTree = "<group>"; };
 		2193EEAE2242181E00FD61B9 /* WYASendDynamicDraftModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYASendDynamicDraftModel.m; sourceTree = "<group>"; };
 		2193EEB0224218AC00FD61B9 /* WYASendDynamicViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYASendDynamicViewModel.h; sourceTree = "<group>"; };
@@ -147,12 +149,6 @@
 		2193EEBA22423BA300FD61B9 /* WYASendDynamicImageEditCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WYASendDynamicImageEditCell.xib; sourceTree = "<group>"; };
 		2193EEBD22426DE900FD61B9 /* WYAAgentRingCommentsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAAgentRingCommentsView.h; sourceTree = "<group>"; };
 		2193EEBE22426DE900FD61B9 /* WYAAgentRingCommentsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAAgentRingCommentsView.m; sourceTree = "<group>"; };
-
-		2193EE9B2240919900FD61B9 /* WYAMineCollectionDynamicCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WYAMineCollectionDynamicCell.h; path = WYAMaterial/Class/Mine/View/MineCollectionView/MineCollectionDynamicView/WYAMineCollectionDynamicCell.h; sourceTree = SOURCE_ROOT; };
-		2193EE9C2240919900FD61B9 /* WYAMineCollectionDynamicCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WYAMineCollectionDynamicCell.m; path = WYAMaterial/Class/Mine/View/MineCollectionView/MineCollectionDynamicView/WYAMineCollectionDynamicCell.m; sourceTree = SOURCE_ROOT; };
-		2193EE9E2240925500FD61B9 /* WYAMineCollectionDynamicFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WYAMineCollectionDynamicFootView.h; path = WYAMaterial/Class/Mine/View/MineCollectionView/MineCollectionDynamicView/WYAMineCollectionDynamicFootView.h; sourceTree = SOURCE_ROOT; };
-		2193EE9F2240925500FD61B9 /* WYAMineCollectionDynamicFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WYAMineCollectionDynamicFootView.m; path = WYAMaterial/Class/Mine/View/MineCollectionView/MineCollectionDynamicView/WYAMineCollectionDynamicFootView.m; sourceTree = SOURCE_ROOT; };
-
 		21B6BD792239FA0100962255 /* WYAAgentRingCoverView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAAgentRingCoverView.h; sourceTree = "<group>"; };
 		21B6BD7A2239FA0100962255 /* WYAAgentRingCoverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAAgentRingCoverView.m; sourceTree = "<group>"; };
 		21F1C4BE223A05F800527496 /* WYAAgentRingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAAgentRingCell.h; sourceTree = "<group>"; };
@@ -880,6 +876,8 @@
 				211F67FE223A5EC000F7ACBB /* WYAAgentRingSectionFootView.m */,
 				2193EEBD22426DE900FD61B9 /* WYAAgentRingCommentsView.h */,
 				2193EEBE22426DE900FD61B9 /* WYAAgentRingCommentsView.m */,
+				21690E5522436E8F00333F88 /* WYARefreshView.h */,
+				21690E5622436E8F00333F88 /* WYARefreshView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1226,11 +1224,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-
 				2193EEAF2242181E00FD61B9 /* WYASendDynamicDraftModel.m in Sources */,
-
 				953855792242795800AF7450 /* WYAMineCreateMaterialImgBodyView.m in Sources */,
-
 				2193EE9922408FD200FD61B9 /* WYAMineCollectionDynamicModel.m in Sources */,
 				95DD8CD52239E6A100731A7E /* WYAMineModel.m in Sources */,
 				95DAE467224120D00044E97D /* WYASettingTableViewCell.m in Sources */,
@@ -1268,6 +1263,7 @@
 				2193EEBB22423BA300FD61B9 /* WYASendDynamicImageEditCell.m in Sources */,
 				211F67FF223A5EC000F7ACBB /* WYAAgentRingSectionFootView.m in Sources */,
 				95C2FF8620F0533600ED829B /* AppDelegate.m in Sources */,
+				21690E5722436E8F00333F88 /* WYARefreshView.m in Sources */,
 				955D7712223CD9E900B3B1EE /* WYAMineBodyView.m in Sources */,
 				2193EE8A22407E1600FD61B9 /* WYAMineCreateReviewSuccessFootView.m in Sources */,
 				95F63247223B37E300BFC68C /* WYANoticeTableViewCell.m in Sources */,
