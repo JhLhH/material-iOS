@@ -43,6 +43,24 @@
     [self.mineCreateTableView reloadData];
 }
 
+- (void)showImageBrowserWithModel:(WYAMineCreateDynamicModel *)model index:(NSInteger)index {
+    NSMutableArray * array = [NSMutableArray array];
+    for (NSInteger i = 0; i < model.urls.count; i++) {
+        [array addObject:[UIImage imageNamed:@"1"]];
+    }
+    WYAImageBrowser * imageBrowser      = [[WYAImageBrowser alloc] init];
+    imageBrowser.frame                  = Window.bounds;
+    imageBrowser.images                 = [array copy];
+    imageBrowser.selectIndex            = index;
+    imageBrowser.pageControlNormalColor = [[UIColor wya_whiteColor] colorWithAlphaComponent:0.5];
+    imageBrowser.pageControlSelectColor = [UIColor wya_hex:@"#E7C083"];
+    __block WYAImageBrowser * imageB    = imageBrowser;
+    imageBrowser.imageSelectBlock       = ^(NSInteger index) {
+        [imageB removeFromSuperview];
+    };
+    [Window addSubview:imageBrowser];
+}
+
 #pragma mark ======= UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.dataSource.count;
@@ -53,6 +71,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    WeakSelf(weakSelf);
     WYAMineCreateDynamicModel * dynamicModel = self.dataSource[indexPath.section];
     if (dynamicModel.reviewStatus == 1) {
         WYAMineCreateReviewSuccessCell * cell = [tableView dequeueReusableCellWithIdentifier:@"success" forIndexPath:indexPath];
@@ -73,6 +92,9 @@
         };
         cell.praiseBlock = ^(WYAMineCreateDynamicModel * _Nonnull model) {
 
+        };
+        cell.imageBlock = ^(WYAMineCreateDynamicModel * _Nonnull model, NSInteger index) {
+            [weakSelf showImageBrowserWithModel:model index:index];
         };
         return cell;
     } else if (dynamicModel.reviewStatus == 0) {

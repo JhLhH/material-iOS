@@ -41,6 +41,23 @@
     [self.mineCollectionDynamicTableView reloadData];
 }
 
+- (void)showImageBrowserWithModel:(WYAMineCollectionDynamicModel *)model index:(NSInteger)index {
+    NSMutableArray * array = [NSMutableArray array];
+    for (NSInteger i = 0; i < model.urls.count; i++) {
+        [array addObject:[UIImage imageNamed:@"1"]];
+    }
+    WYAImageBrowser * imageBrowser      = [[WYAImageBrowser alloc] init];
+    imageBrowser.frame                  = Window.bounds;
+    imageBrowser.images                 = [array copy];
+    imageBrowser.selectIndex            = index;
+    imageBrowser.pageControlNormalColor = [[UIColor wya_whiteColor] colorWithAlphaComponent:0.5];
+    imageBrowser.pageControlSelectColor = [UIColor wya_hex:@"#E7C083"];
+    __block WYAImageBrowser * imageB    = imageBrowser;
+    imageBrowser.imageSelectBlock       = ^(NSInteger index) {
+        [imageB removeFromSuperview];
+    };
+    [Window addSubview:imageBrowser];
+}
 #pragma mark ======= UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.dataSource.count;
@@ -51,6 +68,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    WeakSelf(weakSelf);
     WYAMineCollectionDynamicCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.model                          = self.dataSource[indexPath.section];
     cell.stretchBlock                   = ^(WYAMineCollectionDynamicModel * _Nonnull model) {
@@ -69,6 +87,9 @@
     };
     cell.praiseBlock = ^(WYAMineCollectionDynamicModel * _Nonnull model) {
 
+    };
+    cell.imageBlock = ^(WYAMineCollectionDynamicModel * _Nonnull model, NSInteger index) {
+        [weakSelf showImageBrowserWithModel:model index:index];
     };
     return cell;
 }

@@ -57,7 +57,7 @@
     if (!_agentRingCoverImageView) {
         _agentRingCoverImageView = ({
             UIImageView * object = [[UIImageView alloc] init];
-            object.image         = [UIImage wya_createImageWithColor:randomColor];
+            object.image         = [UIImage imageNamed:@"pic_shouyebackground"];
             object;
 
         });
@@ -69,7 +69,7 @@
     if (!_userHeaderImageView) {
         _userHeaderImageView = ({
             UIImageView * object       = [[UIImageView alloc] init];
-            object.backgroundColor     = [UIColor redColor];
+            object.image = [UIImage imageNamed:@"pic_moren"];
             object.layer.cornerRadius  = 8 * SizeAdapter;
             object.layer.masksToBounds = YES;
             object;
