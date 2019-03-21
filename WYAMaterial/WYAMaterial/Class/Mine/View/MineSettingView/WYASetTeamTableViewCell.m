@@ -29,24 +29,24 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     [self.leftIconImgView mas_makeConstraints:^(MASConstraintMaker * make) {
-        make.left.equalTo(self.contentView.mas_left).offset(15);
+        make.left.equalTo(self.contentView.mas_left).offset(15*SizeAdapter);
         make.centerY.mas_equalTo(self.contentView.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(40, 40));
+        make.size.mas_equalTo(CGSizeMake(40*SizeAdapter, 40*SizeAdapter));
     }];
     [self.leftTitleLabel mas_makeConstraints:^(MASConstraintMaker * make) {
         make.top.mas_equalTo(self.leftIconImgView);
-        make.left.equalTo(self.leftIconImgView.mas_right).offset(8);
-        make.size.mas_equalTo(CGSizeMake(ScreenWidth - 160, 15));
+        make.left.equalTo(self.leftIconImgView.mas_right).offset(8*SizeAdapter);
+        make.size.mas_equalTo(CGSizeMake(ScreenWidth - 160*SizeAdapter, 15*SizeAdapter));
     }];
     [self.leftContentLabel mas_makeConstraints:^(MASConstraintMaker * make) {
         make.bottom.mas_equalTo(self.leftIconImgView);
-        make.left.equalTo(self.leftIconImgView.mas_right).offset(8);
-        make.size.mas_equalTo(CGSizeMake(ScreenWidth - 160, 15));
+        make.left.equalTo(self.leftIconImgView.mas_right).offset(8*SizeAdapter);
+        make.size.mas_equalTo(CGSizeMake(ScreenWidth - 160*SizeAdapter, 15*SizeAdapter));
     }];
     [self.rightbutton mas_makeConstraints:^(MASConstraintMaker * make) {
         make.centerY.mas_equalTo(self.contentView.mas_centerY);
-        make.right.equalTo(self.contentView.mas_right).offset(-20);
-        make.size.mas_equalTo(CGSizeMake(70, 15));
+        make.right.equalTo(self.contentView.mas_right).offset(-20*SizeAdapter);
+        make.size.mas_equalTo(CGSizeMake(70*SizeAdapter, 15*SizeAdapter));
     }];
 }
 
@@ -58,7 +58,7 @@
         self.leftTitleLabel.text   = _model.teamName;
         self.leftContentLabel.text = _model.teamIntroduction;
         [self.rightbutton setTitle:_model.teamState forState:UIControlStateNormal];
-        [self.rightbutton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self.rightbutton setTitleColor:[UIColor wya_blackColor] forState:UIControlStateNormal];
     }
 }
 
@@ -67,7 +67,7 @@
     if (!_leftIconImgView) {
         _leftIconImgView = ({
             UIImageView * object       = [[UIImageView alloc] init];
-            object.layer.cornerRadius  = 20;
+            object.layer.cornerRadius  = 20*SizeAdapter;
             object.layer.masksToBounds = YES;
             object;
         });
@@ -79,7 +79,7 @@
     if (!_leftTitleLabel) {
         _leftTitleLabel = ({
             UILabel * object = [[UILabel alloc] init];
-            object.textColor = [UIColor blackColor];
+            object.textColor = [UIColor wya_blackColor];
             object.font      = FONT(16);
             object;
         });

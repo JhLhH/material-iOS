@@ -207,7 +207,7 @@
     if (!_userNameLabel) {
         _userNameLabel = ({
             UILabel * object     = [[UILabel alloc] init];
-            object.textColor     = [UIColor blackColor];
+            object.textColor     = [UIColor wya_blackColor];
             object.font          = FONT(15);
             object.textAlignment = NSTextAlignmentCenter;
             object;
@@ -297,6 +297,7 @@
         _collectionButton = ({
             UIButton * object = [[UIButton alloc] init];
             [object setTitle:@"收藏" forState:0];
+            object.selected = YES;
             [object setTitleColor:[UIColor wya_textBlackColor] forState:0];
             [object setImage:[UIImage imageNamed:@"icon_collect"] forState:UIControlStateNormal];
             [object setImage:[UIImage imageNamed:@"icon_collect_press"] forState:UIControlStateSelected];

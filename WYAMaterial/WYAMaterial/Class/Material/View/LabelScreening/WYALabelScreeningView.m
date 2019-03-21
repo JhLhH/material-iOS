@@ -21,7 +21,7 @@
 #pragma mark ======= LifeCircle
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:CGRectMake(0, WYATopHeight, ScreenWidth, ScreenHeight - WYATopHeight)]) {
-        self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7f];
+        self.backgroundColor = [[UIColor wya_blackColor] colorWithAlphaComponent:0.7f];
         [self addSubview:self.contentView];
         [self addGestureRecognizer:self.recongizer];
     }

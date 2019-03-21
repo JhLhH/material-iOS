@@ -27,21 +27,21 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     [self.leftTitleLabel mas_makeConstraints:^(MASConstraintMaker * make) {
-        make.left.equalTo(self.contentView.mas_left).offset(16);
+        make.left.equalTo(self.contentView.mas_left).offset(16*SizeAdapter);
         make.centerY.mas_equalTo(self.contentView.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(50, 20));
+        make.size.mas_equalTo(CGSizeMake(50*SizeAdapter, 20*SizeAdapter));
     }];
 
     [self.rightInfoLabel mas_makeConstraints:^(MASConstraintMaker * make) {
-        make.right.equalTo(self.contentView.mas_right).offset(-21);
+        make.right.equalTo(self.contentView.mas_right).offset(-21*SizeAdapter);
         make.centerY.mas_equalTo(self.contentView.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(ScreenWidth - 90, 20));
+        make.size.mas_equalTo(CGSizeMake(ScreenWidth - 90*SizeAdapter, 20*SizeAdapter));
     }];
 
     [self.rightIconImageView mas_makeConstraints:^(MASConstraintMaker * make) {
-        make.right.equalTo(self.contentView.mas_right).offset(-21);
+        make.right.equalTo(self.contentView.mas_right).offset(-21*SizeAdapter);
         make.centerY.mas_equalTo(self.contentView.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(35, 35));
+        make.size.mas_equalTo(CGSizeMake(35*SizeAdapter, 35*SizeAdapter));
     }];
 }
 #pragma mark ======= Setter
@@ -68,7 +68,7 @@
     if (!_rightIconImageView) {
         _rightIconImageView = ({
             UIImageView * object       = [[UIImageView alloc] init];
-            object.layer.cornerRadius  = 17.5;
+            object.layer.cornerRadius  = 17.5*SizeAdapter;
             object.layer.masksToBounds = YES;
             object;
         });
@@ -81,7 +81,7 @@
         _rightInfoLabel = ({
             UILabel * object     = [[UILabel alloc] init];
             object.font          = FONT(14);
-            object.textColor     = [UIColor blackColor];
+            object.textColor     = [UIColor wya_blackColor];
             object.textAlignment = NSTextAlignmentRight;
             object;
         });
@@ -94,7 +94,7 @@
         _leftTitleLabel = ({
             UILabel * object     = [[UILabel alloc] init];
             object.font          = FONT(16);
-            object.textColor     = [UIColor blackColor];
+            object.textColor     = [UIColor wya_blackColor];
             object.textAlignment = NSTextAlignmentLeft;
             object;
         });
