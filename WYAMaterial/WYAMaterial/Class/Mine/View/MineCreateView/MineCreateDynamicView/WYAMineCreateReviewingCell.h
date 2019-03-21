@@ -14,9 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) WYAMineCreateDynamicModel * model;
 
-@property (nonatomic, copy) void(^stretchBlock)(WYAMineCreateDynamicModel * model);
+@property (nonatomic, copy) void (^stretchBlock)(WYAMineCreateDynamicModel * model);
 
-@property (nonatomic, copy) void(^imageBlock)(WYAMineCreateDynamicModel * model, NSInteger index);
+@property (nonatomic, copy) void (^imageBlock)(WYAMineCreateDynamicModel * model, NSInteger index);
 + (CGFloat)getCellHeightWithModel:(WYAMineCreateDynamicModel *)model;
 @end
 

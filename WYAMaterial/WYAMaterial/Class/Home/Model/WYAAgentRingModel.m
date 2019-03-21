@@ -23,19 +23,19 @@
 
 @implementation WYAAgentRingModel
 
-- (CGFloat)cellHeight{
-    CGFloat h = 56 * SizeAdapter;
+- (CGFloat)cellHeight {
+    CGFloat h        = 56 * SizeAdapter;
     CGFloat contentH = [self.content wya_heightWithFontSize:15
                                                       width:ScreenWidth - 69 * SizeAdapter];
     CGFloat contentHeight = self.contentShow ? contentH : 51 * SizeAdapter;
-    CGFloat showH = contentH > 51 * SizeAdapter ? 30 * SizeAdapter : 0;
-    CGFloat imageH = 0.0;
+    CGFloat showH         = contentH > 51 * SizeAdapter ? 30 * SizeAdapter : 0;
+    CGFloat imageH        = 0.0;
     if (self.urls.count > 0) {
         CGFloat itemHeight = (ScreenWidth - 89 * SizeAdapter) / 3;
         if (self.urls.count < 2) {
             imageH = itemHeight * 2;
         } else {
-            NSInteger row = self.urls.count / 3;
+            NSInteger row    = self.urls.count / 3;
             NSInteger column = self.urls.count % 3;
 
             if (column == 0) {
@@ -51,7 +51,6 @@
                 } else {
                     imageH = itemHeight;
                 }
-
             }
         }
     }
@@ -86,9 +85,8 @@
 
     h = h + contentHeight + showH + imageH;
     return h;
-//    return 300;
+    //    return 300;
 }
-
 
 - (void)configYYLabelWithModel:(WYAAgentRingCommentsModel *)model {
 
@@ -108,7 +106,6 @@
     } else {
         [self.heights addObject:[NSNumber numberWithFloat:30 * SizeAdapter]];
     }
-
 }
 
 - (NSMutableAttributedString *)commentsAttributedStringWithModel:(WYAAgentRingCommentsModel *)model {
@@ -144,10 +141,10 @@
     return text;
 }
 
-- (NSMutableArray *)heights{
-    if(!_heights){
+- (NSMutableArray *)heights {
+    if (!_heights) {
         _heights = ({
-            NSMutableArray * object = [[NSMutableArray alloc]init];
+            NSMutableArray * object = [[NSMutableArray alloc] init];
             object;
         });
     }

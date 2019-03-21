@@ -8,14 +8,15 @@
 
 #import "WYAMineCreateDynamicViewController.h"
 
-#import "WYAMineCreateReviewSuccessCell.h"
 #import "WYAMineCreateReviewFailCell.h"
-#import "WYAMineCreateReviewingCell.h"
+#import "WYAMineCreateReviewSuccessCell.h"
 #import "WYAMineCreateReviewSuccessFootView.h"
+#import "WYAMineCreateReviewingCell.h"
 
-#import "WYAMineCreateDynamicViewModel.h"
 #import "WYAMineCreateDynamicModel.h"
-@interface WYAMineCreateDynamicViewController ()<UITableViewDataSource, UITableViewDelegate>
+#import "WYAMineCreateDynamicViewModel.h"
+
+@interface WYAMineCreateDynamicViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) WYAMineCreateDynamicViewModel * viewModel;
 @property (nonatomic, strong) NSArray * dataSource;
 @property (nonatomic, strong) UITableView * mineCreateTableView;
@@ -25,7 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navBar.hidden = YES;
+    self.navBar.hidden        = YES;
     self.view.backgroundColor = randomColor;
     [self setupUI];
     [self getNetWorkDataSource];
@@ -55,10 +56,10 @@
     WYAMineCreateDynamicModel * dynamicModel = self.dataSource[indexPath.section];
     if (dynamicModel.reviewStatus == 1) {
         WYAMineCreateReviewSuccessCell * cell = [tableView dequeueReusableCellWithIdentifier:@"success" forIndexPath:indexPath];
-        cell.model              = dynamicModel;
-        cell.stretchBlock = ^(WYAMineCreateDynamicModel * _Nonnull model) {
+        cell.model                            = dynamicModel;
+        cell.stretchBlock                     = ^(WYAMineCreateDynamicModel * _Nonnull model) {
             [tableView beginUpdates];
-            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            [tableView reloadRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationNone];
             [tableView endUpdates];
         };
         cell.forwardingBlock = ^(WYAMineCreateDynamicModel * _Nonnull model) {
@@ -74,30 +75,29 @@
 
         };
         return cell;
-    } else if (dynamicModel.reviewStatus == 0){
+    } else if (dynamicModel.reviewStatus == 0) {
         WYAMineCreateReviewFailCell * cell = [tableView dequeueReusableCellWithIdentifier:@"fail" forIndexPath:indexPath];
-        cell.model = dynamicModel;
-        cell.stretchBlock = ^(WYAMineCreateDynamicModel * _Nonnull model) {
+        cell.model                         = dynamicModel;
+        cell.stretchBlock                  = ^(WYAMineCreateDynamicModel * _Nonnull model) {
             [tableView beginUpdates];
-            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            [tableView reloadRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationNone];
             [tableView endUpdates];
         };
         return cell;
     } else {
         WYAMineCreateReviewingCell * cell = [tableView dequeueReusableCellWithIdentifier:@"ing" forIndexPath:indexPath];
-        cell.model = dynamicModel;
-        cell.stretchBlock = ^(WYAMineCreateDynamicModel * _Nonnull model) {
+        cell.model                        = dynamicModel;
+        cell.stretchBlock                 = ^(WYAMineCreateDynamicModel * _Nonnull model) {
             [tableView beginUpdates];
-            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            [tableView reloadRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationNone];
             [tableView endUpdates];
         };
         return cell;
     }
-
 }
 
 #pragma mark ======= UITableViewDelegate
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 0.01;
 }
 
@@ -110,7 +110,6 @@
     } else {
         return [WYAMineCreateReviewingCell getCellHeightWithModel:model];
     }
-
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -122,16 +121,16 @@
     }
 }
 
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    return [[UIView alloc]init];
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return [[UIView alloc] init];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     WYAMineCreateDynamicModel * model = self.dataSource[section];
     if (model.reviewStatus == 1) {
         WYAMineCreateReviewSuccessFootView * foot = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"foot"];
-        foot.model = model;
-        foot.stretchBlock                  = ^(WYAMineCreateDynamicModel * _Nonnull model) {
+        foot.model                                = model;
+        foot.stretchBlock                         = ^(WYAMineCreateDynamicModel * _Nonnull model) {
             NSLog(@"model.show==%d", model.show);
             [tableView beginUpdates];
             [tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
@@ -144,7 +143,7 @@
         };
         return foot;
     } else {
-        return [[UIView alloc]init];
+        return [[UIView alloc] init];
     }
 }
 
@@ -161,14 +160,14 @@
             CGFloat object_height = ScreenHeight - WYATopHeight - 44;
             CGRect object_rect    = CGRectMake(object_x, object_y, object_width, object_height);
 
-            UITableView * object   = [[UITableView alloc] initWithFrame:object_rect style:UITableViewStyleGrouped];
-            object.delegate        = self;
-            object.dataSource      = self;
-            object.estimatedRowHeight = 0;
+            UITableView * object                = [[UITableView alloc] initWithFrame:object_rect style:UITableViewStyleGrouped];
+            object.delegate                     = self;
+            object.dataSource                   = self;
+            object.estimatedRowHeight           = 0;
             object.estimatedSectionFooterHeight = 0;
             object.estimatedSectionHeaderHeight = 0;
-            object.backgroundColor = [UIColor whiteColor];
-            object.separatorStyle  = UITableViewCellSeparatorStyleNone;
+            object.backgroundColor              = [UIColor whiteColor];
+            object.separatorStyle               = UITableViewCellSeparatorStyleNone;
             [object registerClass:[WYAMineCreateReviewSuccessCell class] forCellReuseIdentifier:@"success"];
             [object registerClass:[WYAMineCreateReviewFailCell class] forCellReuseIdentifier:@"fail"];
             [object registerClass:[WYAMineCreateReviewingCell class] forCellReuseIdentifier:@"ing"];

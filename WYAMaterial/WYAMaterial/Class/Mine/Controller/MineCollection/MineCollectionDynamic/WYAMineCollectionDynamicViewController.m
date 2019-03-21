@@ -11,9 +11,10 @@
 #import "WYAMineCollectionDynamicCell.h"
 #import "WYAMineCollectionDynamicFootView.h"
 
-#import "WYAMineCollectionDynamicViewModel.h"
 #import "WYAMineCollectionDynamicModel.h"
-@interface WYAMineCollectionDynamicViewController ()<UITableViewDataSource, UITableViewDelegate>
+#import "WYAMineCollectionDynamicViewModel.h"
+
+@interface WYAMineCollectionDynamicViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) WYAMineCollectionDynamicViewModel * viewModel;
 @property (nonatomic, strong) NSArray * dataSource;
 @property (nonatomic, strong) UITableView * mineCollectionDynamicTableView;
@@ -24,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navBar.hidden = YES;
+    self.navBar.hidden        = YES;
     self.view.backgroundColor = randomColor;
     [self setupUI];
     [self getNetWorkDataSource];
@@ -51,10 +52,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     WYAMineCollectionDynamicCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    cell.model              = self.dataSource[indexPath.section];
-    cell.stretchBlock = ^(WYAMineCollectionDynamicModel * _Nonnull model) {
+    cell.model                          = self.dataSource[indexPath.section];
+    cell.stretchBlock                   = ^(WYAMineCollectionDynamicModel * _Nonnull model) {
         [tableView beginUpdates];
-        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        [tableView reloadRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationNone];
         [tableView endUpdates];
     };
     cell.forwardingBlock = ^(WYAMineCollectionDynamicModel * _Nonnull model) {
@@ -70,11 +71,10 @@
 
     };
     return cell;
-
 }
 
 #pragma mark ======= UITableViewDelegate
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 0.01;
 }
 
@@ -86,14 +86,14 @@
     return [WYAMineCollectionDynamicFootView getFootHeightWithModel:self.dataSource[section]];
 }
 
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    return [[UIView alloc]init];
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return [[UIView alloc] init];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     WYAMineCollectionDynamicFootView * foot = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"foot"];
-    foot.model = self.dataSource[section];
-    foot.stretchBlock                  = ^(WYAMineCollectionDynamicModel * _Nonnull model) {
+    foot.model                              = self.dataSource[section];
+    foot.stretchBlock                       = ^(WYAMineCollectionDynamicModel * _Nonnull model) {
         NSLog(@"model.show==%d", model.show);
         [tableView beginUpdates];
         [tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
@@ -120,14 +120,14 @@
             CGFloat object_height = ScreenHeight - WYATopHeight - 44;
             CGRect object_rect    = CGRectMake(object_x, object_y, object_width, object_height);
 
-            UITableView * object   = [[UITableView alloc] initWithFrame:object_rect style:UITableViewStyleGrouped];
-            object.delegate        = self;
-            object.dataSource      = self;
-            object.estimatedRowHeight = 0;
+            UITableView * object                = [[UITableView alloc] initWithFrame:object_rect style:UITableViewStyleGrouped];
+            object.delegate                     = self;
+            object.dataSource                   = self;
+            object.estimatedRowHeight           = 0;
             object.estimatedSectionFooterHeight = 0;
             object.estimatedSectionHeaderHeight = 0;
-            object.backgroundColor = [UIColor whiteColor];
-            object.separatorStyle  = UITableViewCellSeparatorStyleNone;
+            object.backgroundColor              = [UIColor whiteColor];
+            object.separatorStyle               = UITableViewCellSeparatorStyleNone;
             [object registerClass:[WYAMineCollectionDynamicCell class] forCellReuseIdentifier:@"cell"];
             [object registerClass:[WYAMineCollectionDynamicFootView class] forHeaderFooterViewReuseIdentifier:@"foot"];
             object;

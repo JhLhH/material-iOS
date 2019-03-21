@@ -15,15 +15,15 @@
 #import <YYModel/YYModel.h>
 
 #import "UIColor+WYAColor.h"
+#import <Bugly/Bugly.h>
 #import <WYAKit/Category.h>
 #import <WYAKit/WYAAlertController.h>
-#import <Bugly/Bugly.h>
-#import <WYAKit/WYAPageController.h>
-#import <WYAKit/WYATextView.h>
-#import <WYAKit/WYAEditCameraCell.h>
 #import <WYAKit/WYACameraViewController.h>
-#import <WYAKit/WYAPhotoBrowser.h>
-#import <WYAKit/WYANoticeBar.h>
-#import <WYAKit/WYARealmBaseManager.h>
+#import <WYAKit/WYAEditCameraCell.h>
 #import <WYAKit/WYAImageBrowser.h>
+#import <WYAKit/WYANoticeBar.h>
+#import <WYAKit/WYAPageController.h>
+#import <WYAKit/WYAPhotoBrowser.h>
+#import <WYAKit/WYARealmBaseManager.h>
+#import <WYAKit/WYATextView.h>
 #endif /* WYAThirdClassHeader_h */

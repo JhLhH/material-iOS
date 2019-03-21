@@ -8,19 +8,21 @@
 
 #import "WYAHomeViewController.h"
 #import "WYASendDynamicViewController.h"
+
 #import "WYAAgentRingModel.h"
 #import "WYAAgentRingViewModel.h"
 
 #import "WYAAgentRingCell.h"
+#import "WYAAgentRingCommentsView.h"
 #import "WYAAgentRingCoverView.h"
 #import "WYAAgentRingSectionFootView.h"
-#import "WYAAgentRingCommentsView.h"
-#import <YYImage/YYImage.h>
 #import <IQKeyboardManager/IQKeyboardManager.h>
+#import <YYImage/YYImage.h>
+
 @interface WYAHomeViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) WYAAgentRingViewModel * viewModel;
 @property (nonatomic, strong) NSArray * dataSource;
-@property (nonatomic, assign) BOOL isRefresh; // 判断是否已经触发了刷新
+@property (nonatomic, assign) BOOL isRefresh;       // 判断是否已经触发了刷新
 @property (nonatomic, assign) CGFloat lastOffset_y; // 记录tableview最后偏移量
 @property (nonatomic, assign) CGFloat lastAlpha;    // 记录tableview最后的透明度
 
@@ -52,7 +54,7 @@
     [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
 }
 
-- (void)dealloc{
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self.agentRingTableView forKeyPath:@"contentOffset"];
 }
 
@@ -62,16 +64,16 @@
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
-     return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleLightContent;
 }
 
 #pragma mark ======= Private Method
 - (void)setupUI {
     self.automaticallyAdjustsScrollViewInsets = NO;
-    [self.navBar wya_addRightNavBarButtonWithNormalTitle:@[@"发布"] normalColor:@[[UIColor whiteColor]] highlightedColor:@[[UIColor whiteColor]]];
-    self.navBar.backgroundColor  = [[UIColor blackColor] colorWithAlphaComponent:0.5f];
+    [self.navBar wya_addRightNavBarButtonWithNormalTitle:@[ @"发布" ] normalColor:@[ [UIColor whiteColor] ] highlightedColor:@[ [UIColor whiteColor] ]];
+    self.navBar.backgroundColor             = [[UIColor blackColor] colorWithAlphaComponent:0.5f];
     self.agentRingTableView.tableHeaderView = self.agentRingCoverView;
-    self.navTitleColor = [UIColor whiteColor];
+    self.navTitleColor                      = [UIColor whiteColor];
     [self.view addSubview:self.agentRingTableView];
     [self.view addSubview:self.noticeBar];
     [self.view addSubview:self.sendDynamicButton];
@@ -84,46 +86,44 @@
     [self.agentRingTableView reloadData];
 }
 
-- (void)wya_customrRightBarButtonItemPressed:(UIButton *)sender{
-
+- (void)wya_customrRightBarButtonItemPressed:(UIButton *)sender {
 }
 
-- (void)addAgentRingRefresh{
+- (void)addAgentRingRefresh {
     NSLog(@"调用一次");
     self.gifAnimatedImageView.hidden = NO;
 }
 
-- (void)showImageBrowserWithModel:(WYAAgentRingModel *)model index:(NSInteger)index{
+- (void)showImageBrowserWithModel:(WYAAgentRingModel *)model index:(NSInteger)index {
     NSMutableArray * array = [NSMutableArray array];
     for (NSInteger i = 0; i < model.urls.count; i++) {
         [array addObject:[UIImage imageNamed:@"1"]];
     }
-    WYAImageBrowser * imageBrowser = [[WYAImageBrowser alloc]init];
-    imageBrowser.frame = Window.bounds;
-    imageBrowser.images = [array copy];
-    imageBrowser.selectIndex = index;
+    WYAImageBrowser * imageBrowser      = [[WYAImageBrowser alloc] init];
+    imageBrowser.frame                  = Window.bounds;
+    imageBrowser.images                 = [array copy];
+    imageBrowser.selectIndex            = index;
     imageBrowser.pageControlNormalColor = [UIColor wya_hex:@"#FFFFFF"];
     imageBrowser.pageControlSelectColor = [UIColor wya_hex:@"#E7C083"];
-    __block WYAImageBrowser * imageB = imageBrowser;
-    imageBrowser.imageSelectBlock = ^(NSInteger index) {
+    __block WYAImageBrowser * imageB    = imageBrowser;
+    imageBrowser.imageSelectBlock       = ^(NSInteger index) {
         [imageB removeFromSuperview];
     };
     [Window addSubview:imageBrowser];
 }
 
-- (void)agentRingCommentEdit{
+- (void)agentRingCommentEdit {
     self.commentsView.hidden = NO;
     [self.commentsView.textView becomeFirstResponder];
 }
 
 #pragma mark ======= KVO
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey, id> *)change context:(void *)context {
     if ([keyPath isEqualToString:@"contentOffset"]) {
 
         NSValue * newvalue = change[NSKeyValueChangeNewKey];
-        CGFloat point_y = newvalue.UIOffsetValue.vertical;
-        NSLog(@"New:%f",point_y);
-
+        CGFloat point_y    = newvalue.UIOffsetValue.vertical;
+        NSLog(@"New:%f", point_y);
 
         if (point_y < -100) {
             if (self.isRefresh == NO) {
@@ -140,29 +140,28 @@
             if (self.lastOffset_y) {
                 if (point_y > self.lastOffset_y) {
                     // 回弹
-                    CGFloat ccc = (point_y - self.lastOffset_y)/100;
-                    NSLog(@"ccc==%f",ccc);
-                    NSLog(@"lastAlp==%f",self.lastAlpha);
+                    CGFloat ccc = (point_y - self.lastOffset_y) / 100;
+                    NSLog(@"ccc==%f", ccc);
+                    NSLog(@"lastAlp==%f", self.lastAlpha);
                     if (self.lastAlpha) {
                         self.lastAlpha = self.lastAlpha + ccc;
                     } else {
                         self.lastAlpha = 0.5 + ccc;
                     }
-                    self.navBar.backgroundColor  = [[UIColor blackColor] colorWithAlphaComponent:self.lastAlpha > 1 ? 1 : self.lastAlpha];
-                }else{
+                    self.navBar.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:self.lastAlpha > 1 ? 1 : self.lastAlpha];
+                } else {
                     // 下拉
-                    CGFloat ppp = (self.lastOffset_y - point_y)/100;
-                    NSLog(@"ppp==%f",ppp);
+                    CGFloat ppp = (self.lastOffset_y - point_y) / 100;
+                    NSLog(@"ppp==%f", ppp);
                     if (self.lastAlpha) {
                         self.lastAlpha = self.lastAlpha - ppp;
                     }
 
-                    self.navBar.backgroundColor  = [[UIColor blackColor] colorWithAlphaComponent:self.lastAlpha < 0.5 ? 0.5 : self.lastAlpha];
+                    self.navBar.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:self.lastAlpha < 0.5 ? 0.5 : self.lastAlpha];
                 }
             }
             self.lastOffset_y = point_y;
         }
-
 
     } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
@@ -182,9 +181,9 @@
     WeakSelf(weakSelf);
     WYAAgentRingCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.model              = self.dataSource[indexPath.section];
-    cell.stretchBlock = ^(WYAAgentRingModel * _Nonnull model) {
+    cell.stretchBlock       = ^(WYAAgentRingModel * _Nonnull model) {
         [tableView beginUpdates];
-        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        [tableView reloadRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationNone];
         [tableView endUpdates];
     };
     cell.forwardingBlock = ^(WYAAgentRingModel * _Nonnull model) {
@@ -206,7 +205,7 @@
 }
 
 #pragma mark ======= UITableViewDelegate
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 0.01;
 }
 
@@ -218,8 +217,8 @@
     return [WYAAgentRingSectionFootView getFootHeightWithModel:self.dataSource[section]];
 }
 
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    return [[UIView alloc]init];
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return [[UIView alloc] init];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
@@ -252,20 +251,20 @@
             CGFloat object_height = ScreenHeight - WYATabBarHeight;
             CGRect object_rect    = CGRectMake(object_x, object_y, object_width, object_height);
 
-            UITableView * object   = [[UITableView alloc] initWithFrame:object_rect style:UITableViewStyleGrouped];
-            object.delegate        = self;
-            object.dataSource      = self;
-            object.estimatedRowHeight = 0;
+            UITableView * object                = [[UITableView alloc] initWithFrame:object_rect style:UITableViewStyleGrouped];
+            object.delegate                     = self;
+            object.dataSource                   = self;
+            object.estimatedRowHeight           = 0;
             object.estimatedSectionFooterHeight = 0;
             object.estimatedSectionHeaderHeight = 0;
-            object.backgroundColor = [UIColor whiteColor];
-            object.separatorStyle  = UITableViewCellSeparatorStyleNone;
+            object.backgroundColor              = [UIColor whiteColor];
+            object.separatorStyle               = UITableViewCellSeparatorStyleNone;
             [object registerClass:[WYAAgentRingCell class] forCellReuseIdentifier:@"cell"];
             [object registerClass:[WYAAgentRingSectionFootView class] forHeaderFooterViewReuseIdentifier:@"foot"];
             [object addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
-//            UIRefreshControl * refreshControl = [[UIRefreshControl alloc]init];
-//            [refreshControl addTarget:self action:@selector(refreshClick) forControlEvents:UIControlEventValueChanged];
-//            object.refreshControl = refreshControl;
+            //            UIRefreshControl * refreshControl = [[UIRefreshControl alloc]init];
+            //            [refreshControl addTarget:self action:@selector(refreshClick) forControlEvents:UIControlEventValueChanged];
+            //            object.refreshControl = refreshControl;
             object;
         });
     }
@@ -310,43 +309,42 @@
     return _dataSource;
 }
 
-- (UIButton *)sendDynamicButton{
-    if(!_sendDynamicButton){
+- (UIButton *)sendDynamicButton {
+    if (!_sendDynamicButton) {
         _sendDynamicButton = ({
-            CGFloat object_x = self.view.cmam_width - 76 * SizeAdapter;
-            CGFloat object_y = self.view.cmam_height - WYATabBarHeight - 76 * SizeAdapter;
-            CGFloat object_width = 60 * SizeAdapter;
+            CGFloat object_x      = self.view.cmam_width - 76 * SizeAdapter;
+            CGFloat object_y      = self.view.cmam_height - WYATabBarHeight - 76 * SizeAdapter;
+            CGFloat object_width  = 60 * SizeAdapter;
             CGFloat object_height = 60 * SizeAdapter;
-            CGRect object_rect = CGRectMake(object_x, object_y,  object_width, object_height);
+            CGRect object_rect    = CGRectMake(object_x, object_y, object_width, object_height);
 
-            UIButton *  object = [[UIButton alloc]initWithFrame:object_rect];
+            UIButton * object = [[UIButton alloc] initWithFrame:object_rect];
             [object setBackgroundImage:[UIImage wya_createImageWithColor:[UIColor redColor]] forState:UIControlStateNormal];
-            object.layer.cornerRadius = object_width / 2;
+            object.layer.cornerRadius  = object_width / 2;
             object.layer.masksToBounds = YES;
-            [object addCallBackAction:^(UIButton *button) {
-                WYASendDynamicViewController * sendDynamic = [[WYASendDynamicViewController alloc]init];
-                sendDynamic.hidesBottomBarWhenPushed = YES;
+            [object addCallBackAction:^(UIButton * button) {
+                WYASendDynamicViewController * sendDynamic = [[WYASendDynamicViewController alloc] init];
+                sendDynamic.hidesBottomBarWhenPushed       = YES;
                 [self.navigationController pushViewController:sendDynamic animated:YES];
             }];
             object;
-       });
+        });
     }
     return _sendDynamicButton;
 }
 
-
-- (WYANoticeBar *)noticeBar{
-    if(!_noticeBar){
+- (WYANoticeBar *)noticeBar {
+    if (!_noticeBar) {
         _noticeBar = ({
 
-            CGFloat object_x = 0;
-            CGFloat object_y = WYATopHeight;
-            CGFloat object_width = ScreenWidth;
+            CGFloat object_x      = 0;
+            CGFloat object_y      = WYATopHeight;
+            CGFloat object_width  = ScreenWidth;
             CGFloat object_height = 30 * SizeAdapter;
-            CGRect object_rect = CGRectMake(object_x, object_y,  object_width, object_height);
+            CGRect object_rect    = CGRectMake(object_x, object_y, object_width, object_height);
 
             WYANoticeBar * object = [[WYANoticeBar alloc]
-                                     initWithFrame:object_rect];
+                initWithFrame:object_rect];
             object.showNoticeButton      = YES;
             object.noticeButtonImage     = [UIImage imageNamed:@"1"];
             object.showRightButton       = NO;
@@ -354,53 +352,52 @@
             object.showTextColor         = [UIColor wya_whiteColor];
             object.noticeBackgroundColor = random(12, 12, 10, 0.5);
             object;
-       });
+        });
     }
     return _noticeBar;
 }
 
-
-- (YYAnimatedImageView *)gifAnimatedImageView{
-    if(!_gifAnimatedImageView){
+- (YYAnimatedImageView *)gifAnimatedImageView {
+    if (!_gifAnimatedImageView) {
         _gifAnimatedImageView = ({
-            CGFloat object_x = 50;
-            CGFloat object_y = self.noticeBar.cmam_bottom + 20 * SizeAdapter;
-            CGFloat object_width = 60 * SizeAdapter;
-            CGFloat object_height = 60 * SizeAdapter;
-            CGRect object_rect = CGRectMake(object_x, object_y,  object_width, object_height);
-            UIImage * image = [YYImage imageNamed:@"wya-applogo1"];
-            YYAnimatedImageView * object = [[YYAnimatedImageView alloc]initWithImage:image];
-            object.frame = object_rect;
-            object.hidden = YES;
+            CGFloat object_x             = 50;
+            CGFloat object_y             = self.noticeBar.cmam_bottom + 20 * SizeAdapter;
+            CGFloat object_width         = 60 * SizeAdapter;
+            CGFloat object_height        = 60 * SizeAdapter;
+            CGRect object_rect           = CGRectMake(object_x, object_y, object_width, object_height);
+            UIImage * image              = [YYImage imageNamed:@"wya-applogo1"];
+            YYAnimatedImageView * object = [[YYAnimatedImageView alloc] initWithImage:image];
+            object.frame                 = object_rect;
+            object.hidden                = YES;
             object;
-       });
+        });
     }
     return _gifAnimatedImageView;
 }
 
-- (WYAAgentRingCommentsView *)commentsView{
-    if(!_commentsView){
+- (WYAAgentRingCommentsView *)commentsView {
+    if (!_commentsView) {
         _commentsView = ({
-            CGFloat object_x = 0;
-            CGFloat object_y = ScreenHeight - WYATabBarHeight - 49 * SizeAdapter;
-            CGFloat object_width = ScreenWidth;
-            CGFloat object_height = 49 * SizeAdapter;
-            CGRect object_rect = CGRectMake(object_x, object_y,  object_width, object_height);
-            WYAAgentRingCommentsView * object = [[WYAAgentRingCommentsView alloc]init];
-            object.frame = object_rect;
-            object.backgroundColor = [UIColor wya_whiteColor];
-            object.hidden = YES;
-            object.frameChangeBlock = ^(WYAAgentRingCommentsView * _Nonnull view, CGFloat height) {
-                CGFloat view_x = view.cmam_left;
-                CGFloat view_y = ScreenHeight - WYATabBarHeight - height;
-                CGFloat view_width = view.cmam_width;
+            CGFloat object_x                  = 0;
+            CGFloat object_y                  = ScreenHeight - WYATabBarHeight - 49 * SizeAdapter;
+            CGFloat object_width              = ScreenWidth;
+            CGFloat object_height             = 49 * SizeAdapter;
+            CGRect object_rect                = CGRectMake(object_x, object_y, object_width, object_height);
+            WYAAgentRingCommentsView * object = [[WYAAgentRingCommentsView alloc] init];
+            object.frame                      = object_rect;
+            object.backgroundColor            = [UIColor wya_whiteColor];
+            object.hidden                     = YES;
+            object.frameChangeBlock           = ^(WYAAgentRingCommentsView * _Nonnull view, CGFloat height) {
+                CGFloat view_x      = view.cmam_left;
+                CGFloat view_y      = ScreenHeight - WYATabBarHeight - height;
+                CGFloat view_width  = view.cmam_width;
                 CGFloat view_height = height;
-                CGRect view_rect = CGRectMake(view_x, view_y,  view_width, view_height);
-                view.frame = view_rect;
+                CGRect view_rect    = CGRectMake(view_x, view_y, view_width, view_height);
+                view.frame          = view_rect;
             };
-            
+
             object;
-       });
+        });
     }
     return _commentsView;
 }

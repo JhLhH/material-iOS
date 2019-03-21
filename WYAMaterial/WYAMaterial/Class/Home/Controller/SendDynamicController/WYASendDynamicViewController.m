@@ -7,11 +7,12 @@
 //
 
 #import "WYASendDynamicViewController.h"
+
 #import "WYACameraCell.h"
 #import "WYASendDynamicImageEditCell.h"
 
-#import "WYASendDynamicViewModel.h"
 #import "WYASendDynamicDraftModel.h"
+#import "WYASendDynamicViewModel.h"
 
 #define CameraCell @"WYACameraCell"
 #define EditCameraCell @"WYASendDynamicImageEditCell"
@@ -63,15 +64,15 @@
     self.model = [WYASendDynamicViewModel lookupSendDynamicDraft];
     if (self.model) {
         self.textView.text = self.model.text;
-        self.dataSource = [NSKeyedUnarchiver unarchiveObjectWithData:self.model.imageDatas];
+        self.dataSource    = [NSKeyedUnarchiver unarchiveObjectWithData:self.model.imageDatas];
         [self.collectionView reloadData];
         [self changeCollectionViewFrame];
     }
 }
 
-- (void)changeCollectionViewFrame{
+- (void)changeCollectionViewFrame {
     CGFloat height = (ScreenWidth - 40 * SizeAdapter) / 3;
-    CGFloat row = (self.dataSource.count + (self.allImage ? 0 : 1)) / 3;
+    CGFloat row    = (self.dataSource.count + (self.allImage ? 0 : 1)) / 3;
     CGFloat column = (self.dataSource.count + (self.allImage ? 0 : 1)) % 3;
     if (row > 0) {
         if (column > 0) {
@@ -82,48 +83,46 @@
     } else {
         self.collectionView.cmam_height = height + 20 * SizeAdapter;
     }
-
 }
 
 #pragma mark ======= WYANavBarDelegate
 - (void)wya_goBackPressed:(UIButton *)sender {
     WYAAlertController * alert =
-    [WYAAlertController wya_alertWithTitle:@"是否保存草稿？"
-                                   Message:nil
-                          AlertLayoutStyle:WYAAlertLayoutStyleHorizontal];
+        [WYAAlertController wya_alertWithTitle:@"是否保存草稿？"
+                                       Message:nil
+                              AlertLayoutStyle:WYAAlertLayoutStyleHorizontal];
     alert.backgroundButton.enabled = NO;
     alert.presentStyle             = WYAPopupPresentStyleBounce;
     alert.dismissStyle             = WYAPopupDismissStyleShrink;
     // 创建 action
     WYAAlertAction * defaultAction =
-    [WYAAlertAction wya_actionWithTitle:@"不保留"
-                                  style:WYAAlertActionStyleCancel
-                                handler:^{
-                                    [WYASendDynamicViewModel deleteSendDynamicDraft];
-                                    [self.navigationController popViewControllerAnimated:YES];
-    }];
+        [WYAAlertAction wya_actionWithTitle:@"不保留"
+                                      style:WYAAlertActionStyleCancel
+                                    handler:^{
+                                        [WYASendDynamicViewModel deleteSendDynamicDraft];
+                                        [self.navigationController popViewControllerAnimated:YES];
+                                    }];
 
     WYAAlertAction * cancelAction =
-    [WYAAlertAction wya_actionWithTitle:@"保留"
-                                  style:WYAAlertActionStyleDefault
-                                handler:^{
-                                    BOOL isSuccess;
-                                    if (self.model) {
-                                        isSuccess = [WYASendDynamicViewModel updateSendDynamicDraftWithText:self.textView.text images:self.dataSource];
-                                    } else {
-                                        isSuccess = [WYASendDynamicViewModel saveSendDynamicDraftWithText:self.textView.text images:self.dataSource];
-                                    }
-                                    if (isSuccess) {
-                                        [self.navigationController popViewControllerAnimated:YES];
-                                    } else {
-                                        [UIView wya_showBottomToastWithMessage:@"保存失败"];
-                                    }
-    }];
+        [WYAAlertAction wya_actionWithTitle:@"保留"
+                                      style:WYAAlertActionStyleDefault
+                                    handler:^{
+                                        BOOL isSuccess;
+                                        if (self.model) {
+                                            isSuccess = [WYASendDynamicViewModel updateSendDynamicDraftWithText:self.textView.text images:self.dataSource];
+                                        } else {
+                                            isSuccess = [WYASendDynamicViewModel saveSendDynamicDraftWithText:self.textView.text images:self.dataSource];
+                                        }
+                                        if (isSuccess) {
+                                            [self.navigationController popViewControllerAnimated:YES];
+                                        } else {
+                                            [UIView wya_showBottomToastWithMessage:@"保存失败"];
+                                        }
+                                    }];
 
     [alert wya_addAction:defaultAction];
     [alert wya_addAction:cancelAction];
     [self presentViewController:alert animated:YES completion:nil];
-
 }
 
 /// 自定义右侧按钮点击事件
@@ -142,15 +141,15 @@
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.item == self.dataSource.count) {
         WYACameraCell * cell =
-        [collectionView dequeueReusableCellWithReuseIdentifier:CameraCell
-                                                  forIndexPath:indexPath];
+            [collectionView dequeueReusableCellWithReuseIdentifier:CameraCell
+                                                      forIndexPath:indexPath];
         return cell;
     } else {
         WYASendDynamicImageEditCell * cell =
-        [collectionView dequeueReusableCellWithReuseIdentifier:EditCameraCell
-                                                  forIndexPath:indexPath];
-        cell.imgView.image               = self.dataSource[indexPath.item];
-        cell.editBlock           = ^{
+            [collectionView dequeueReusableCellWithReuseIdentifier:EditCameraCell
+                                                      forIndexPath:indexPath];
+        cell.imgView.image = self.dataSource[indexPath.item];
+        cell.editBlock     = ^{
             [self.dataSource removeObjectAtIndex:indexPath.item];
             self.allImage = NO;
             [collectionView reloadData];
@@ -164,7 +163,6 @@
 - (void)collectionView:(UICollectionView *)collectionView
        willDisplayCell:(UICollectionViewCell *)cell
     forItemAtIndexPath:(NSIndexPath *)indexPath {
-
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
@@ -198,7 +196,7 @@
 - (void)collectionView:(UICollectionView *)collectionView
     didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    
+
     if (indexPath.item == self.dataSource.count) {
 
         WYAAlertController * alert = [WYAAlertController wya_alertSheetWithTitle:@"" Message:@""];
@@ -206,43 +204,43 @@
         WYAAlertAction * photoAction = [WYAAlertAction wya_actionWithTitle:@"相机"
                                                                      style:WYAAlertActionStyleDefault
                                                                    handler:^{
-            WYACameraViewController * camera =
-                [[WYACameraViewController alloc] initWithType:WYACameraTypeImage
-                                            cameraOrientation:WYACameraOrientationFront];
-            camera.preset    = WYAVideoPresetHigh;
-            camera.takePhoto = ^(UIImage * photo, NSString * imagePath) {
-                [self.dataSource insertObject:photo atIndex:0];
-                if (self.dataSource.count == 9) {
-                    self.allImage = YES;
-                }
-                [self.collectionView reloadData];
-                [self changeCollectionViewFrame];
-            };
-            camera.takeVideo = ^(NSString * videoPath) {
+                                                                       WYACameraViewController * camera =
+                                                                           [[WYACameraViewController alloc] initWithType:WYACameraTypeImage
+                                                                                                       cameraOrientation:WYACameraOrientationFront];
+                                                                       camera.preset    = WYAVideoPresetHigh;
+                                                                       camera.takePhoto = ^(UIImage * photo, NSString * imagePath) {
+                                                                           [self.dataSource insertObject:photo atIndex:0];
+                                                                           if (self.dataSource.count == 9) {
+                                                                               self.allImage = YES;
+                                                                           }
+                                                                           [self.collectionView reloadData];
+                                                                           [self changeCollectionViewFrame];
+                                                                       };
+                                                                       camera.takeVideo = ^(NSString * videoPath) {
 
-            };
-            [weakSelf presentViewController:camera animated:YES completion:nil];
+                                                                       };
+                                                                       [weakSelf presentViewController:camera animated:YES completion:nil];
 
-        }];
+                                                                   }];
 
         WYAAlertAction * ablumAction = [WYAAlertAction wya_actionWithTitle:@"相册"
                                                                      style:WYAAlertActionStyleDefault
                                                                    handler:^{
 
-            WYAPhotoBrowser * photo =
-                [[WYAPhotoBrowser alloc] initWithMaxCount:9 - self.dataSource.count
-                                         photoBrowserType:WYAPhotoBrowserTypePhoto];
-            photo.callBackBlock = ^(NSMutableArray * _Nonnull media) {
-                [self.dataSource addObjectsFromArray:media];
-                if (self.dataSource.count == 9) {
-                    self.allImage = YES;
-                }
-                [self.collectionView reloadData];
-                [self changeCollectionViewFrame];
-            };
-            [weakSelf presentViewController:photo animated:YES completion:nil];
+                                                                       WYAPhotoBrowser * photo =
+                                                                           [[WYAPhotoBrowser alloc] initWithMaxCount:9 - self.dataSource.count
+                                                                                                    photoBrowserType:WYAPhotoBrowserTypePhoto];
+                                                                       photo.callBackBlock = ^(NSMutableArray * _Nonnull media) {
+                                                                           [self.dataSource addObjectsFromArray:media];
+                                                                           if (self.dataSource.count == 9) {
+                                                                               self.allImage = YES;
+                                                                           }
+                                                                           [self.collectionView reloadData];
+                                                                           [self changeCollectionViewFrame];
+                                                                       };
+                                                                       [weakSelf presentViewController:photo animated:YES completion:nil];
 
-        }];
+                                                                   }];
 
         [alert wya_addAction:photoAction];
         [alert wya_addAction:ablumAction];
@@ -288,37 +286,37 @@
     if (!_textView) {
         _textView = ({
 
-            CGFloat object_x = 10 * SizeAdapter;
-            CGFloat object_y = 10 * SizeAdapter;
-            CGFloat object_width = self.view.cmam_width - 20 * SizeAdapter;
+            CGFloat object_x      = 10 * SizeAdapter;
+            CGFloat object_y      = 10 * SizeAdapter;
+            CGFloat object_width  = self.view.cmam_width - 20 * SizeAdapter;
             CGFloat object_height = 100 * SizeAdapter;
-            CGRect object_rect = CGRectMake(object_x, object_y,  object_width, object_height);
+            CGRect object_rect    = CGRectMake(object_x, object_y, object_width, object_height);
 
             WYATextView * object = [[WYATextView alloc] initWithFrame:object_rect];
             [object wya_PlaceHoldString:@"请输入文字"
                          PlaceHoldColor:[UIColor grayColor]
                           PlaceHoldFont:15.f];
-            object.showTitle         = NO;
+            object.showTitle          = NO;
             object.textViewWordsCount = 500;
-            object.textViewMaxHeight = 100;
+            object.textViewMaxHeight  = 100;
             object;
         });
     }
     return _textView;
 }
 
-- (UIView *)textSuperView{
-    if(!_textSuperView){
+- (UIView *)textSuperView {
+    if (!_textSuperView) {
         _textSuperView = ({
-            CGFloat object_x = 0;
-            CGFloat object_y = WYATopHeight;
-            CGFloat object_width = ScreenWidth;
-            CGFloat object_height = 110 * SizeAdapter;
-            CGRect object_rect = CGRectMake(object_x, object_y,  object_width, object_height);
-            UIView * object = [[UIView alloc]initWithFrame:object_rect];
+            CGFloat object_x       = 0;
+            CGFloat object_y       = WYATopHeight;
+            CGFloat object_width   = ScreenWidth;
+            CGFloat object_height  = 110 * SizeAdapter;
+            CGRect object_rect     = CGRectMake(object_x, object_y, object_width, object_height);
+            UIView * object        = [[UIView alloc] initWithFrame:object_rect];
             object.backgroundColor = [UIColor wya_whiteColor];
             object;
-       });
+        });
     }
     return _textSuperView;
 }

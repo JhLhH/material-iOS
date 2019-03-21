@@ -58,10 +58,9 @@
                     view.hidden = YES;
                     [view removeFromSuperview];
                 }
-                self.showCommentsButton.hidden = YES;
+                self.showCommentsButton.hidden   = YES;
                 self.showCommentsButton.selected = model.show;
                 [self.heights removeAllObjects];
-
             }
 
             {
@@ -89,7 +88,7 @@
 }
 
 #pragma mark ======= Private Method
-- (CGFloat)getCommentsHeight{
+- (CGFloat)getCommentsHeight {
     CGFloat height = 0.0f;
     if (self.model.comments.count > 0) {
         // 判断当前评论的条数大于0条
@@ -114,7 +113,7 @@
     return height;
 }
 
-- (void)layoutConmmentSubViews{
+- (void)layoutConmmentSubViews {
     UIView * lastView;
     for (NSInteger index = 0; index < self.commentsView.subviews.count; index++) {
         UIView * view       = self.commentsView.subviews[index];
@@ -172,7 +171,7 @@
     [text yy_setFont:FONTS(12) range:commentsRange];
     [text yy_setColor:[UIColor wya_hex:@"#666666"] range:commentsRange];
     text.yy_lineSpacing = 2 * SizeAdapter;
-    text.yy_kern = [NSNumber numberWithInt:1 * SizeAdapter];
+    text.yy_kern        = [NSNumber numberWithInt:1 * SizeAdapter];
     if (model.show) {
         // 当前评论处于展开状态，添加收起评论，以及相关事件
         WeakSelf(weakSelf);
@@ -211,7 +210,7 @@
     NSRange range = [text.string rangeOfString:@"更多"];
     [text yy_setColor:[UIColor blueColor] range:range];
     [text yy_setTextHighlight:textHighlight range:range];
-    text.yy_font = FONT(12);
+    text.yy_font           = FONT(12);
     text.yy_baselineOffset = [NSNumber numberWithInt:-2];
     YYLabel * seeMore      = [YYLabel new];
     seeMore.attributedText = text;
@@ -229,7 +228,7 @@
 #pragma mark ======= Public Method
 + (CGFloat)getFootHeightWithModel:(WYAMineCollectionDynamicModel *)model {
     WYAMineCollectionDynamicFootView * cell = [[WYAMineCollectionDynamicFootView alloc] initWithReuseIdentifier:@"xa"];
-    cell.model                         = model;
+    cell.model                              = model;
     [cell setNeedsLayout];
     [cell layoutIfNeeded];
     return cell.showCommentsButton.cmam_bottom;
@@ -239,9 +238,9 @@
 - (UIView *)commentsView {
     if (!_commentsView) {
         _commentsView = ({
-            UIView * object        = [[UIView alloc] init];
-            object.backgroundColor = [UIColor wya_hex:@"#F2F2F5"];
-            object.layer.cornerRadius = 5 * SizeAdapter;
+            UIView * object            = [[UIView alloc] init];
+            object.backgroundColor     = [UIColor wya_hex:@"#F2F2F5"];
+            object.layer.cornerRadius  = 5 * SizeAdapter;
             object.layer.masksToBounds = YES;
             object;
         });

@@ -7,42 +7,45 @@
 //
 
 #import "WYASendDynamicViewModel.h"
-#import <Realm/Realm.h>
+
 #import "WYASendDynamicDraftModel.h"
+
+#import <Realm/Realm.h>
+
 @implementation WYASendDynamicViewModel
 
-+ (BOOL)saveSendDynamicDraftWithText:(NSString *)text images:(NSArray *)images{
-    NSData * data = [NSKeyedArchiver archivedDataWithRootObject:images];
++ (BOOL)saveSendDynamicDraftWithText:(NSString *)text images:(NSArray *)images {
+    NSData * data                    = [NSKeyedArchiver archivedDataWithRootObject:images];
     WYASendDynamicDraftModel * model = [[WYASendDynamicDraftModel alloc] init];
-    model.text = text;
-    model.imageDatas = data;
+    model.text                       = text;
+    model.imageDatas                 = data;
 
     WYARealmBaseManager * dbManager = [WYARealmBaseManager wya_defaultRealm];
     return [dbManager wya_insertRealmWithObject:model];
 }
 
-+ (BOOL)updateSendDynamicDraftWithText:(NSString *)text images:(NSArray *)images{
-    NSData * data = [NSKeyedArchiver archivedDataWithRootObject:images];
++ (BOOL)updateSendDynamicDraftWithText:(NSString *)text images:(NSArray *)images {
+    NSData * data                    = [NSKeyedArchiver archivedDataWithRootObject:images];
     WYASendDynamicDraftModel * model = [WYASendDynamicViewModel lookupSendDynamicDraft];
-    RLMRealm * realm = [RLMRealm defaultRealm];
+    RLMRealm * realm                 = [RLMRealm defaultRealm];
 
     return [realm transactionWithBlock:^{
-        model.text = text;
+        model.text       = text;
         model.imageDatas = data;
     } error:nil];
 }
 
-+ (WYASendDynamicDraftModel *)lookupSendDynamicDraft{
++ (WYASendDynamicDraftModel *)lookupSendDynamicDraft {
     WYARealmBaseManager * dbManager = [WYARealmBaseManager wya_defaultRealm];
-    RLMResults * res = [dbManager wya_lookupRealmWithAllClassName:@"WYASendDynamicDraftModel"];
-    NSLog(@"res==%@",res);
+    RLMResults * res                = [dbManager wya_lookupRealmWithAllClassName:@"WYASendDynamicDraftModel"];
+    NSLog(@"res==%@", res);
     WYASendDynamicDraftModel * model = [res firstObject];
     return model;
 }
 
-+ (BOOL)deleteSendDynamicDraft{
++ (BOOL)deleteSendDynamicDraft {
     WYASendDynamicDraftModel * model = [WYASendDynamicViewModel lookupSendDynamicDraft];
-    WYARealmBaseManager * dbManager = [WYARealmBaseManager wya_defaultRealm];
+    WYARealmBaseManager * dbManager  = [WYARealmBaseManager wya_defaultRealm];
     return [dbManager wya_deleteRealmWithObject:model];
 }
 

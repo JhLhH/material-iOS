@@ -6,8 +6,9 @@
 //  Copyright © 2018年 WeiYiAn. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "WXApi.h"
+#import <UIKit/UIKit.h>
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate, WXApiDelegate>
 
 @property (strong, nonatomic) UIWindow * window;

@@ -7,14 +7,17 @@
 //
 
 #import "WYAMineCollectionMaterialTableViewCell.h"
-#import <SDWebImage/UIButton+WebCache.h>
+
 #import "WYAMineCollectionMaterialImgBodyview.h"
-#define ITEM_MARGIN 10*SizeAdapter
-#define ITEM_WH (ScreenWidth - 88*SizeAdapter - 3*ITEM_MARGIN)/3
 
-#define DEFAULT_CONTENT_HEIGHT 80*SizeAdapter
+#import <SDWebImage/UIButton+WebCache.h>
 
-#define CONTENT_WIDTH (ScreenWidth - 88*SizeAdapter)
+#define ITEM_MARGIN 10 * SizeAdapter
+#define ITEM_WH (ScreenWidth - 88 * SizeAdapter - 3 * ITEM_MARGIN) / 3
+
+#define DEFAULT_CONTENT_HEIGHT 80 * SizeAdapter
+
+#define CONTENT_WIDTH (ScreenWidth - 88 * SizeAdapter)
 
 @interface WYAMineCollectionMaterialTableViewCell ()
 @property (nonatomic, assign) CGFloat contentHeight;
@@ -45,7 +48,7 @@
 
 @implementation WYAMineCollectionMaterialTableViewCell
 #pragma mark ======= LifeCircle
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self.contentView addSubview:self.userHeaderButton];
         [self.contentView addSubview:self.userNameLabel];
@@ -57,102 +60,102 @@
         [self.contentView addSubview:self.userBodyImageView];
         [self.contentView addSubview:self.forwardingButton];
         [self.contentView addSubview:self.collectionButton];
-//        [self.contentView addSubview:self.auditImgView];
+        //        [self.contentView addSubview:self.auditImgView];
         [self.contentView addSubview:self.lineView];
     }
     return self;
 }
 
-- (void)layoutSubviews{
+- (void)layoutSubviews {
     [super layoutSubviews];
-    [self.userHeaderButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView.mas_left).offset(17*SizeAdapter);
-        make.top.equalTo(self.contentView.mas_top).offset(18*SizeAdapter);
-        make.size.mas_equalTo(CGSizeMake(44*SizeAdapter, 44*SizeAdapter));
+    [self.userHeaderButton mas_remakeConstraints:^(MASConstraintMaker * make) {
+        make.left.equalTo(self.contentView.mas_left).offset(17 * SizeAdapter);
+        make.top.equalTo(self.contentView.mas_top).offset(18 * SizeAdapter);
+        make.size.mas_equalTo(CGSizeMake(44 * SizeAdapter, 44 * SizeAdapter));
     }];
 
-    CGFloat userNameWidth = [_model.mineCollectionUserName wya_widthWithFontSize:15 height:15*SizeAdapter];
-    [self.userNameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.userHeaderButton.mas_right).offset(11*SizeAdapter);
-        make.top.equalTo(self.contentView.mas_top).offset(20*SizeAdapter);
-        make.size.mas_equalTo(CGSizeMake(userNameWidth, 15*SizeAdapter));
+    CGFloat userNameWidth = [_model.mineCollectionUserName wya_widthWithFontSize:15 height:15 * SizeAdapter];
+    [self.userNameLabel mas_remakeConstraints:^(MASConstraintMaker * make) {
+        make.left.equalTo(self.userHeaderButton.mas_right).offset(11 * SizeAdapter);
+        make.top.equalTo(self.contentView.mas_top).offset(20 * SizeAdapter);
+        make.size.mas_equalTo(CGSizeMake(userNameWidth, 15 * SizeAdapter));
     }];
 
-    [self.userLevelIconView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.userHeaderButton.mas_right).offset(10*SizeAdapter);
-        make.top.equalTo(self.userNameLabel.mas_bottom).offset(8*SizeAdapter);
-        make.size.mas_equalTo(CGSizeMake(15*SizeAdapter, 15*SizeAdapter));
+    [self.userLevelIconView mas_remakeConstraints:^(MASConstraintMaker * make) {
+        make.left.equalTo(self.userHeaderButton.mas_right).offset(10 * SizeAdapter);
+        make.top.equalTo(self.userNameLabel.mas_bottom).offset(8 * SizeAdapter);
+        make.size.mas_equalTo(CGSizeMake(15 * SizeAdapter, 15 * SizeAdapter));
     }];
 
-    CGFloat userLevelWidth = [_model.mineCollectionUserInfoString wya_widthWithFontSize:11 height:10*SizeAdapter];
-    [self.userLevelLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.userLevelIconView.mas_right).offset(8*SizeAdapter);
-        make.top.equalTo(self.userNameLabel.mas_bottom).offset(10*SizeAdapter);
-        make.size.mas_equalTo(CGSizeMake(userLevelWidth, 10*SizeAdapter));
+    CGFloat userLevelWidth = [_model.mineCollectionUserInfoString wya_widthWithFontSize:11 height:10 * SizeAdapter];
+    [self.userLevelLabel mas_remakeConstraints:^(MASConstraintMaker * make) {
+        make.left.equalTo(self.userLevelIconView.mas_right).offset(8 * SizeAdapter);
+        make.top.equalTo(self.userNameLabel.mas_bottom).offset(10 * SizeAdapter);
+        make.size.mas_equalTo(CGSizeMake(userLevelWidth, 10 * SizeAdapter));
     }];
 
-    [self.userContentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView.mas_left).offset(73*SizeAdapter);
-        make.top.equalTo(self.userLevelLabel.mas_bottom).offset(15*SizeAdapter);
-        make.right.equalTo(self.contentView.mas_right).offset(-15*SizeAdapter);
+    [self.userContentLabel mas_remakeConstraints:^(MASConstraintMaker * make) {
+        make.left.equalTo(self.contentView.mas_left).offset(73 * SizeAdapter);
+        make.top.equalTo(self.userLevelLabel.mas_bottom).offset(15 * SizeAdapter);
+        make.right.equalTo(self.contentView.mas_right).offset(-15 * SizeAdapter);
         make.height.mas_equalTo(self.contentHeight);
     }];
 
-//    [self.auditImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.right.equalTo(self.contentView.mas_right).offset(-14*SizeAdapter);
-//        make.bottom.equalTo(self.userContentLabel.mas_top).offset(24*SizeAdapter);
-//        make.size.mas_equalTo(CGSizeMake(60*SizeAdapter, 60*SizeAdapter));
-//    }];
+    //    [self.auditImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+    //        make.right.equalTo(self.contentView.mas_right).offset(-14*SizeAdapter);
+    //        make.bottom.equalTo(self.userContentLabel.mas_top).offset(24*SizeAdapter);
+    //        make.size.mas_equalTo(CGSizeMake(60*SizeAdapter, 60*SizeAdapter));
+    //    }];
 
-    [self.showAllBodyButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.showAllBodyButton mas_remakeConstraints:^(MASConstraintMaker * make) {
         make.left.mas_equalTo(self.userContentLabel.mas_left);
         make.top.equalTo(self.userContentLabel.mas_bottom).offset(0);
-        make.size.mas_equalTo(CGSizeMake(40*SizeAdapter, self.showAllBodyButton.hidden ? 0 : 40*SizeAdapter));
+        make.size.mas_equalTo(CGSizeMake(40 * SizeAdapter, self.showAllBodyButton.hidden ? 0 : 40 * SizeAdapter));
 
     }];
 
     if (_model.mineCollectionBodyImgArray.count > 1) {
         int index;
-        if (_model.mineCollectionBodyImgArray.count<=3) {
+        if (_model.mineCollectionBodyImgArray.count <= 3) {
             index = 1;
-        }else if (_model.mineCollectionBodyImgArray.count>6){
+        } else if (_model.mineCollectionBodyImgArray.count > 6) {
             index = 3;
-        }else{
+        } else {
             index = 2;
         }
         CGFloat height = index * (ITEM_MARGIN + ITEM_WH);
-        [self.userBodyImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        [self.userBodyImageView mas_remakeConstraints:^(MASConstraintMaker * make) {
             make.left.mas_equalTo(self.userContentLabel.mas_left);
-            make.top.equalTo(self.showAllBodyButton.mas_bottom).offset(15*SizeAdapter);
+            make.top.equalTo(self.showAllBodyButton.mas_bottom).offset(15 * SizeAdapter);
             make.size.mas_equalTo(CGSizeMake(CONTENT_WIDTH, height));
         }];
-    }else{
-        [self.userBodyImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+    } else {
+        [self.userBodyImageView mas_remakeConstraints:^(MASConstraintMaker * make) {
             make.left.mas_equalTo(self.userContentLabel.mas_left);
-            make.top.equalTo(self.showAllBodyButton.mas_bottom).offset(15*SizeAdapter);
-            make.size.mas_equalTo(CGSizeMake(200*SizeAdapter, 200*SizeAdapter));
+            make.top.equalTo(self.showAllBodyButton.mas_bottom).offset(15 * SizeAdapter);
+            make.size.mas_equalTo(CGSizeMake(200 * SizeAdapter, 200 * SizeAdapter));
         }];
     }
 
-    [self.userTimeLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.userTimeLabel mas_remakeConstraints:^(MASConstraintMaker * make) {
         make.left.mas_equalTo(self.userContentLabel.mas_left);
-        make.top.equalTo(self.userBodyImageView.mas_bottom).offset(20*SizeAdapter);
-        make.size.mas_equalTo(CGSizeMake(60*SizeAdapter, 8*SizeAdapter));
+        make.top.equalTo(self.userBodyImageView.mas_bottom).offset(20 * SizeAdapter);
+        make.size.mas_equalTo(CGSizeMake(60 * SizeAdapter, 8 * SizeAdapter));
     }];
 
-    [self.forwardingButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.contentView.mas_right).offset(-25*SizeAdapter);
-        make.top.equalTo(self.userBodyImageView.mas_bottom).offset(17*SizeAdapter);
-        make.size.mas_equalTo(CGSizeMake(50*SizeAdapter, 15*SizeAdapter));
+    [self.forwardingButton mas_remakeConstraints:^(MASConstraintMaker * make) {
+        make.right.equalTo(self.contentView.mas_right).offset(-25 * SizeAdapter);
+        make.top.equalTo(self.userBodyImageView.mas_bottom).offset(17 * SizeAdapter);
+        make.size.mas_equalTo(CGSizeMake(50 * SizeAdapter, 15 * SizeAdapter));
     }];
 
-    [self.collectionButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.forwardingButton.mas_left).offset(-26*SizeAdapter);
-        make.top.equalTo(self.userBodyImageView.mas_bottom).offset(17*SizeAdapter);
-        make.size.mas_equalTo(CGSizeMake(50*SizeAdapter, 15*SizeAdapter));
+    [self.collectionButton mas_remakeConstraints:^(MASConstraintMaker * make) {
+        make.right.equalTo(self.forwardingButton.mas_left).offset(-26 * SizeAdapter);
+        make.top.equalTo(self.userBodyImageView.mas_bottom).offset(17 * SizeAdapter);
+        make.size.mas_equalTo(CGSizeMake(50 * SizeAdapter, 15 * SizeAdapter));
     }];
 
-    [self.lineView mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.lineView mas_remakeConstraints:^(MASConstraintMaker * make) {
         make.bottom.equalTo(self.contentView.mas_bottom).offset(-1);
         make.left.right.mas_equalTo(self.contentView);
         make.height.mas_equalTo(0.5);
@@ -160,40 +163,40 @@
 }
 
 #pragma mark ======= Setter
-- (void)setModel:(WYAMineCollectionMaterialModel *)model{
+- (void)setModel:(WYAMineCollectionMaterialModel *)model {
     if (model) {
         _model = model;
         [self.userHeaderButton sd_setImageWithURL:[NSURL URLWithString:_model.mineCollectionUserIconName] forState:0];
         self.userNameLabel.text = _model.mineCollectionUserName;
         [self.userLevelIconView sd_setImageWithURL:[NSURL URLWithString:_model.mineCollectionUserInfoImgString] placeholderImage:nil];
-        self.userLevelLabel.text = _model.mineCollectionUserInfoString;
-        self.userTimeLabel.text = _model.mineCollectionTimeString;
-        self.userContentLabel.text = _model.mineCollectionBodyString;
+        self.userLevelLabel.text          = _model.mineCollectionUserInfoString;
+        self.userTimeLabel.text           = _model.mineCollectionTimeString;
+        self.userContentLabel.text        = _model.mineCollectionBodyString;
         self.userBodyImageView.imageArray = _model.mineCollectionBodyImgArray;
-//        if ([_model.mineCreateAuditType isEqualToString:@"正在审核"]) {
-//            self.auditImgView.backgroundColor = [UIColor greenColor];
-//        }if ([_model.mineCreateAuditType isEqualToString:@"审核失败"]) {
-//            self.auditImgView.backgroundColor = [UIColor wya_grayBGColor];
-//
-//        }else{
-//            self.auditImgView.backgroundColor = [UIColor orangeColor];
-//        }
+        //        if ([_model.mineCreateAuditType isEqualToString:@"正在审核"]) {
+        //            self.auditImgView.backgroundColor = [UIColor greenColor];
+        //        }if ([_model.mineCreateAuditType isEqualToString:@"审核失败"]) {
+        //            self.auditImgView.backgroundColor = [UIColor wya_grayBGColor];
+        //
+        //        }else{
+        //            self.auditImgView.backgroundColor = [UIColor orangeColor];
+        //        }
         // 判断全文按钮是否显示
         CGFloat height = [_model.mineCollectionBodyString wya_heightWithFontSize:14 width:CONTENT_WIDTH];
         if (height > DEFAULT_CONTENT_HEIGHT) {
             self.showAllBodyButton.hidden = NO;
-        }else{
+        } else {
             self.showAllBodyButton.hidden = YES;
         }
 
         // 判断全文按钮是否隐藏
         if (_model.isShowContent) {
-            self.contentHeight   = height;
+            self.contentHeight              = height;
             self.showAllBodyButton.selected = YES;
         } else {
             if (height < DEFAULT_CONTENT_HEIGHT) {
                 self.contentHeight = height;
-            }else{
+            } else {
                 self.contentHeight = DEFAULT_CONTENT_HEIGHT;
             }
             self.showAllBodyButton.selected = NO;
@@ -203,12 +206,12 @@
     }
 }
 #pragma mark ======= Lazy
-- (UIButton *)userHeaderButton{
-    if(!_userHeaderButton){
+- (UIButton *)userHeaderButton {
+    if (!_userHeaderButton) {
         _userHeaderButton = ({
-            UIButton * object = [[UIButton alloc]init];
-            object.backgroundColor = randomColor;
-            object.layer.cornerRadius = 22*SizeAdapter;
+            UIButton * object          = [[UIButton alloc] init];
+            object.backgroundColor     = randomColor;
+            object.layer.cornerRadius  = 22 * SizeAdapter;
             object.layer.masksToBounds = YES;
             object;
         });
@@ -216,12 +219,12 @@
     return _userHeaderButton;
 }
 
-- (UILabel *)userNameLabel{
-    if(!_userNameLabel){
+- (UILabel *)userNameLabel {
+    if (!_userNameLabel) {
         _userNameLabel = ({
-            UILabel * object = [[UILabel alloc]init];
-            object.textColor = [UIColor blackColor];
-            object.font = FONT(15);
+            UILabel * object     = [[UILabel alloc] init];
+            object.textColor     = [UIColor blackColor];
+            object.font          = FONT(15);
             object.textAlignment = NSTextAlignmentCenter;
             object;
         });
@@ -229,10 +232,10 @@
     return _userNameLabel;
 }
 
-- (UIImageView *)userLevelIconView{
-    if(!_userLevelIconView){
+- (UIImageView *)userLevelIconView {
+    if (!_userLevelIconView) {
         _userLevelIconView = ({
-            UIImageView * object = [[UIImageView alloc]init];
+            UIImageView * object   = [[UIImageView alloc] init];
             object.backgroundColor = [UIColor orangeColor];
             object;
         });
@@ -240,36 +243,36 @@
     return _userLevelIconView;
 }
 
-- (UILabel *)userLevelLabel{
-    if(!_userLevelLabel){
+- (UILabel *)userLevelLabel {
+    if (!_userLevelLabel) {
         _userLevelLabel = ({
-            UILabel * object = [[UILabel alloc]init];
+            UILabel * object = [[UILabel alloc] init];
             object.textColor = [UIColor orangeColor];
-            object.font = FONT(11);
+            object.font      = FONT(11);
             object;
         });
     }
     return _userLevelLabel;
 }
 
-- (UILabel *)userTimeLabel{
-    if(!_userTimeLabel){
+- (UILabel *)userTimeLabel {
+    if (!_userTimeLabel) {
         _userTimeLabel = ({
-            UILabel * object = [[UILabel alloc]init];
+            UILabel * object = [[UILabel alloc] init];
             object.textColor = [UIColor wya_grayTitleColor];
-            object.font = FONT(10);
+            object.font      = FONT(10);
             object;
         });
     }
     return _userTimeLabel;
 }
 
-- (UILabel *)userContentLabel{
-    if(!_userContentLabel){
+- (UILabel *)userContentLabel {
+    if (!_userContentLabel) {
         _userContentLabel = ({
-            UILabel * object = [[UILabel alloc]init];
-            object.textColor = [UIColor blackColor];
-            object.font = FONT(14);
+            UILabel * object     = [[UILabel alloc] init];
+            object.textColor     = [UIColor blackColor];
+            object.font          = FONT(14);
             object.numberOfLines = 0;
             object;
         });
@@ -277,37 +280,36 @@
     return _userContentLabel;
 }
 
-- (UIButton *)showAllBodyButton{
-    if(!_showAllBodyButton){
+- (UIButton *)showAllBodyButton {
+    if (!_showAllBodyButton) {
         _showAllBodyButton = ({
-            UIButton * object = [[UIButton alloc]init];
+            UIButton * object = [[UIButton alloc] init];
             [object setTitle:@"全文" forState:0];
             [object setTitle:@"收起" forState:UIControlStateSelected];
             [object setTitleColor:[UIColor wya_blueColor] forState:0];
             [object setTitleColor:[UIColor wya_blueColor] forState:UIControlStateSelected];
             [object addTarget:self action:@selector(showAllBodyButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-            object.titleLabel.font = FONT(14);
+            object.titleLabel.font          = FONT(14);
             object.titleLabel.textAlignment = NSTextAlignmentLeft;
             object;
         });
     }
     return _showAllBodyButton;
 }
-- (WYAMineCollectionMaterialImgBodyview *)userBodyImageView{
-    if(!_userBodyImageView){
+- (WYAMineCollectionMaterialImgBodyview *)userBodyImageView {
+    if (!_userBodyImageView) {
         _userBodyImageView = ({
-            WYAMineCollectionMaterialImgBodyview * object = [[WYAMineCollectionMaterialImgBodyview alloc]init];
+            WYAMineCollectionMaterialImgBodyview * object = [[WYAMineCollectionMaterialImgBodyview alloc] init];
             object;
         });
     }
     return _userBodyImageView;
 }
 
-
-- (UIButton *)collectionButton{
-    if(!_collectionButton){
+- (UIButton *)collectionButton {
+    if (!_collectionButton) {
         _collectionButton = ({
-            UIButton * object = [[UIButton alloc]init];
+            UIButton * object = [[UIButton alloc] init];
             [object setTitle:@"收藏" forState:0];
             [object setTitleColor:[UIColor blackColor] forState:0];
             [object setTitleColor:[UIColor orangeColor] forState:UIControlStateHighlighted];
@@ -319,10 +321,10 @@
     return _collectionButton;
 }
 
-- (UIButton *)forwardingButton{
-    if(!_forwardingButton){
+- (UIButton *)forwardingButton {
+    if (!_forwardingButton) {
         _forwardingButton = ({
-            UIButton * object = [[UIButton alloc]init];
+            UIButton * object = [[UIButton alloc] init];
             [object setTitle:@"转发" forState:0];
             [object setTitleColor:[UIColor blackColor] forState:0];
             object.titleLabel.font = FONT(12);
@@ -332,11 +334,11 @@
     }
     return _forwardingButton;
 }
-- (UIView *)lineView{
-    if(!_lineView){
+- (UIView *)lineView {
+    if (!_lineView) {
         _lineView = ({
-            UIView * object = [[UIView alloc]init];
-            object.backgroundColor = [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:1.0];
+            UIView * object        = [[UIView alloc] init];
+            object.backgroundColor = [UIColor colorWithRed:242 / 255.0 green:242 / 255.0 blue:242 / 255.0 alpha:1.0];
             object;
         });
     }
@@ -355,21 +357,21 @@
 //    return _auditImgView;
 //}
 #pragma mark ======= Event
-- (void)forwardingButtonClicked:(UIButton *)sender{
+- (void)forwardingButtonClicked:(UIButton *)sender {
     if (self.forwardingActionBlock) {
         self.forwardingActionBlock(self);
     }
 }
-- (void)collectionButtonClicked:(UIButton *)sender{
+- (void)collectionButtonClicked:(UIButton *)sender {
     if (self.collectionActionBlock) {
         self.collectionActionBlock(self);
     }
 }
 
-- (void)showAllBodyButtonClicked:(UIButton *)sender{
+- (void)showAllBodyButtonClicked:(UIButton *)sender {
 
     self.model.isShowContent = !self.model.isShowContent;
-    sender.selected = self.model.isShowContent;
+    sender.selected          = self.model.isShowContent;
     if (self.showAllBodyActionBlock) {
         self.showAllBodyActionBlock(self.cellIndexPath);
     }
@@ -377,8 +379,7 @@
 
 #pragma mark ======= Public Method
 
-+ (CGFloat)getCellHeightWithModel:(WYAMineCollectionMaterialModel *)model{
-
++ (CGFloat)getCellHeightWithModel:(WYAMineCollectionMaterialModel *)model {
 
     CGFloat contentHeight = [model.mineCollectionBodyString wya_heightWithFontSize:14 width:CONTENT_WIDTH];
 
@@ -388,25 +389,22 @@
         }
     }
 
-    CGFloat bodyImgHeight ;
+    CGFloat bodyImgHeight;
     if (model.mineCollectionBodyImgArray.count > 1) {
-        int index ;
+        int index;
         if (model.mineCollectionBodyImgArray.count <= 3) {
             index = 1;
-        }else if (model.mineCollectionBodyImgArray.count > 6){
+        } else if (model.mineCollectionBodyImgArray.count > 6) {
             index = 3;
-        }else{
+        } else {
             index = 2;
         }
         bodyImgHeight = index * (ITEM_MARGIN + ITEM_WH);
-    }else{
-        bodyImgHeight = 200*SizeAdapter;
+    } else {
+        bodyImgHeight = 200 * SizeAdapter;
     }
 
-
-    return 70*SizeAdapter + contentHeight + 15*SizeAdapter + bodyImgHeight + 52*SizeAdapter;
+    return 70 * SizeAdapter + contentHeight + 15 * SizeAdapter + bodyImgHeight + 52 * SizeAdapter;
 }
-
-
 
 @end

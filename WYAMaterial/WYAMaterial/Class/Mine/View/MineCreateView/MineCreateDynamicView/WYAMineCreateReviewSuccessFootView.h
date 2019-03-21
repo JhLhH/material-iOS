@@ -12,8 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WYAMineCreateReviewSuccessFootView : UITableViewHeaderFooterView
 @property (nonatomic, strong) WYAMineCreateDynamicModel * model;
-@property (nonatomic, copy) void(^stretchBlock)(WYAMineCreateDynamicModel * model);
-@property (nonatomic, copy) void(^singleCommentsBlock)(WYAMineCreateDynamicModel * model);
+@property (nonatomic, copy) void (^stretchBlock)(WYAMineCreateDynamicModel * model);
+@property (nonatomic, copy) void (^singleCommentsBlock)(WYAMineCreateDynamicModel * model);
 + (CGFloat)getFootHeightWithModel:(WYAMineCreateDynamicModel *)model;
 @end
 

@@ -7,15 +7,16 @@
 //
 
 #import "WYAArticleViewController.h"
+
 #import "WYAArticleTableViewCell.h"
+
 #import "WYAMaterialModel.h"
 
 #import "WYAArticleDetailViewController.h"
 
-
 #define ARTICLE_CELLID @"WYAArticleTableViewCell"
 
-@interface WYAArticleViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface WYAArticleViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) NSMutableArray * dataSource;
 @end
@@ -29,24 +30,24 @@
 }
 
 #pragma mark ======= Lazy
-- (UITableView *)tableView{
-    if(!_tableView){
+- (UITableView *)tableView {
+    if (!_tableView) {
         _tableView = ({
-            UITableView * object = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - WYATopHeight - 44 - WYATabBarHeight) style:UITableViewStylePlain];
+            UITableView * object  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - WYATopHeight - 44 - WYATabBarHeight) style:UITableViewStylePlain];
             object.delegate       = self;
             object.dataSource     = self;
             object.separatorStyle = UITableViewCellSeparatorStyleNone;
             [object registerClass:[WYAArticleTableViewCell class] forCellReuseIdentifier:ARTICLE_CELLID];
             object;
-       });
+        });
     }
     return _tableView;
 }
 
-- (NSMutableArray *)dataSource{
-    if(!_dataSource){
+- (NSMutableArray *)dataSource {
+    if (!_dataSource) {
         _dataSource = ({
-            NSArray * array = [WYAArticleModel getArticleWithResults:@""];
+            NSArray * array         = [WYAArticleModel getArticleWithResults:@""];
             NSMutableArray * object = [NSMutableArray arrayWithArray:array];
             object;
         });
@@ -65,27 +66,27 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     WYAArticleModel * model = [self.dataSource wya_safeObjectAtIndex:indexPath.row];
-    return [WYAArticleTableViewCell getCellHeightWithModel:model];;
+    return [WYAArticleTableViewCell getCellHeightWithModel:model];
+    ;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    WYAArticleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ARTICLE_CELLID];
-    WYAArticleModel * model = [self.dataSource wya_safeObjectAtIndex:indexPath.row];
-    cell.model = model;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.DidSelectActionBlock = ^(WYAArticleTableViewCell * _Nonnull taraget) {
+    WYAArticleTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:ARTICLE_CELLID];
+    WYAArticleModel * model        = [self.dataSource wya_safeObjectAtIndex:indexPath.row];
+    cell.model                     = model;
+    cell.selectionStyle            = UITableViewCellSelectionStyleNone;
+    cell.DidSelectActionBlock      = ^(WYAArticleTableViewCell * _Nonnull taraget) {
         [self didSelectActionBlockWithModel:taraget.model];
     };
     return cell;
 }
 
-- (void)didSelectActionBlockWithModel:(WYAArticleModel *)model{
-    WYAArticleDetailViewController * vc = [[WYAArticleDetailViewController alloc]init];
-    vc.articleTitle = model.titleString;
-    vc.urlString = model.detailsUrlString;
-    vc.hidesBottomBarWhenPushed = YES;
+- (void)didSelectActionBlockWithModel:(WYAArticleModel *)model {
+    WYAArticleDetailViewController * vc = [[WYAArticleDetailViewController alloc] init];
+    vc.articleTitle                     = model.titleString;
+    vc.urlString                        = model.detailsUrlString;
+    vc.hidesBottomBarWhenPushed         = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
-
 
 @end

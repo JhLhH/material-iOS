@@ -12,21 +12,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WYAMineCollectionMaterialModel : NSObject
 /// 用户头像
-@property (nonatomic, copy) NSString *  mineCollectionUserIconName;
+@property (nonatomic, copy) NSString * mineCollectionUserIconName;
 /// 用户名
-@property (nonatomic, copy) NSString *  mineCollectionUserName;
+@property (nonatomic, copy) NSString * mineCollectionUserName;
 /// 用户层级信息
-@property (nonatomic, copy) NSString *  mineCollectionUserInfoString;
+@property (nonatomic, copy) NSString * mineCollectionUserInfoString;
 /// 用户层级图标
-@property (nonatomic, copy) NSString *  mineCollectionUserInfoImgString;
+@property (nonatomic, copy) NSString * mineCollectionUserInfoImgString;
 /// 发布时间
-@property (nonatomic, copy) NSString *  mineCollectionTimeString;
+@property (nonatomic, copy) NSString * mineCollectionTimeString;
 /// 发布内容
-@property (nonatomic, copy) NSString *  mineCollectionBodyString;
+@property (nonatomic, copy) NSString * mineCollectionBodyString;
 /// 发布图片
-@property (nonatomic, copy) NSArray *  mineCollectionBodyImgArray;
+@property (nonatomic, copy) NSArray * mineCollectionBodyImgArray;
 /// 转发数量
-@property (nonatomic, copy) NSString *  mineCollectionForwardingNumber;
+@property (nonatomic, copy) NSString * mineCollectionForwardingNumber;
 /// 是否需要展开
 @property (nonatomic, assign) BOOL isShowContent;
 

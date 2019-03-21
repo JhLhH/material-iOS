@@ -7,10 +7,11 @@
 //
 
 #import "WYAMineCreateViewController.h"
-#import "WYAMineCreateMaterialViewController.h"
-#import "WYAMineCreateDynamicViewController.h"
 
-@interface WYAMineCreateViewController ()<WYANavBarDelegate,UIGestureRecognizerDelegate>
+#import "WYAMineCreateDynamicViewController.h"
+#import "WYAMineCreateMaterialViewController.h"
+
+@interface WYAMineCreateViewController () <WYANavBarDelegate, UIGestureRecognizerDelegate>
 
 @end
 
@@ -20,16 +21,15 @@
     [super viewDidLoad];
     [self createNavBar];
     self.menuView.backgroundColor = [UIColor blackColor];
-
 }
 
-- (void)createNavBar{
-    self.navBar = [[WYANavBar alloc] init];
+- (void)createNavBar {
+    self.navBar                 = [[WYANavBar alloc] init];
     self.navBar.backgroundColor = [UIColor blackColor];
-    self.navBar.navTitle = @"我的创建";
-    self.navBar.isShowLine = NO;
-    self.navBar.navTitleColor = [UIColor whiteColor];
-    self.navBar.delegate = self;
+    self.navBar.navTitle        = @"我的创建";
+    self.navBar.isShowLine      = NO;
+    self.navBar.navTitleColor   = [UIColor whiteColor];
+    self.navBar.delegate        = self;
     [self.navBar wya_goBackButtonWithImage:@"fanhui"];
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
     [self.view addSubview:self.navBar];
@@ -77,7 +77,6 @@
 //    }
 //}
 
-
 - (CGFloat)wya_menuView:(WYAMenuView *)menu widthForItemAtIndex:(NSInteger)index {
     CGFloat width = [super wya_menuView:menu widthForItemAtIndex:index];
     return width + 20;
@@ -92,7 +91,7 @@
 - (CGRect)wya_pageController:(WYAPageController *)pageController
    preferredFrameContentView:(WYAPageScrollView *)contentView {
 
-    return CGRectMake(0, WYATopHeight + 44 , ScreenWidth,
-                      ScreenHeight- (WYATopHeight + 44));
+    return CGRectMake(0, WYATopHeight + 44, ScreenWidth,
+                      ScreenHeight - (WYATopHeight + 44));
 }
 @end

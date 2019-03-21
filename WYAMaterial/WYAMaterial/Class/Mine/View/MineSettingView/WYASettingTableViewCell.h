@@ -11,8 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WYASettingTableViewCell : UITableViewCell
-@property (nonatomic, assign) NSInteger  row;
-@property (nonatomic, strong) NSArray <NSString *>* dataArray;
+@property (nonatomic, assign) NSInteger row;
+@property (nonatomic, strong) NSArray<NSString *> * dataArray;
 @end
 
 NS_ASSUME_NONNULL_END

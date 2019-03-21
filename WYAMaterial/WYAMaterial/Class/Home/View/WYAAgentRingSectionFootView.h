@@ -13,8 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface WYAAgentRingSectionFootView : UITableViewHeaderFooterView
 
 @property (nonatomic, strong) WYAAgentRingModel * model;
-@property (nonatomic, copy) void(^stretchBlock)(WYAAgentRingModel * model);
-@property (nonatomic, copy) void(^singleCommentsBlock)(WYAAgentRingModel * model);
+@property (nonatomic, copy) void (^stretchBlock)(WYAAgentRingModel * model);
+@property (nonatomic, copy) void (^singleCommentsBlock)(WYAAgentRingModel * model);
 + (CGFloat)getFootHeightWithModel:(WYAAgentRingModel *)model;
 @end
 

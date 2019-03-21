@@ -6,8 +6,8 @@
 //  Copyright © 2019 WeiYiAn. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "WYAMineModel.h"
+#import <UIKit/UIKit.h>
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WYANoticeTableViewCell : UITableViewCell

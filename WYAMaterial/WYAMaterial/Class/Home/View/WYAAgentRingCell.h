@@ -16,17 +16,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) WYAAgentRingModel * model;
 
-@property (nonatomic, copy) void(^forwardingBlock)(WYAAgentRingModel * model);
+@property (nonatomic, copy) void (^forwardingBlock)(WYAAgentRingModel * model);
 
-@property (nonatomic, copy) void(^collectionBlock)(WYAAgentRingModel * model);
+@property (nonatomic, copy) void (^collectionBlock)(WYAAgentRingModel * model);
 
-@property (nonatomic, copy) void(^commentsBlock)(WYAAgentRingModel * model);
+@property (nonatomic, copy) void (^commentsBlock)(WYAAgentRingModel * model);
 
-@property (nonatomic, copy) void(^praiseBlock)(WYAAgentRingModel * model);
+@property (nonatomic, copy) void (^praiseBlock)(WYAAgentRingModel * model);
 
-@property (nonatomic, copy) void(^stretchBlock)(WYAAgentRingModel * model);
+@property (nonatomic, copy) void (^stretchBlock)(WYAAgentRingModel * model);
 
-@property (nonatomic, copy) void(^imageBlock)(WYAAgentRingModel * model, NSInteger index);
+@property (nonatomic, copy) void (^imageBlock)(WYAAgentRingModel * model, NSInteger index);
 
 + (CGFloat)getCellHeightWithModel:(WYAAgentRingModel *)model;
 

@@ -47,7 +47,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSArray *)getModelsWithResults:(id)results;
 @end
 
-
 @interface WYAMinSettingModel : NSObject
 @property (nonatomic, copy) NSString * userIconUrl;
 @property (nonatomic, copy) NSString * userName;
@@ -56,7 +55,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)initWithReqults:(id)results;
 @end
-
 
 @interface WYAMinSettingTeamModel : NSObject
 @property (nonatomic, copy) NSString * teamIcon;

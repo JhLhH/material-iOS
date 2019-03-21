@@ -7,7 +7,9 @@
 //
 
 #import "WYAMineCreateReviewSuccessFootView.h"
+
 #import "WYAMineCreateDynamicModel.h"
+
 @interface WYAMineCreateReviewSuccessFootView ()
 @property (nonatomic, strong) UIView * commentsView; // 关于评论的视图
 @property (nonatomic, strong) UIButton * showCommentsButton;
@@ -57,10 +59,9 @@
                     view.hidden = YES;
                     [view removeFromSuperview];
                 }
-                self.showCommentsButton.hidden = YES;
+                self.showCommentsButton.hidden   = YES;
                 self.showCommentsButton.selected = model.show;
                 [self.heights removeAllObjects];
-
             }
 
             {
@@ -88,7 +89,7 @@
 }
 
 #pragma mark ======= Private Method
-- (CGFloat)getCommentsHeight{
+- (CGFloat)getCommentsHeight {
     CGFloat height = 0.0f;
     if (self.model.comments.count > 0) {
         // 判断当前评论的条数大于0条
@@ -113,7 +114,7 @@
     return height;
 }
 
-- (void)layoutConmmentSubViews{
+- (void)layoutConmmentSubViews {
     UIView * lastView;
     for (NSInteger index = 0; index < self.commentsView.subviews.count; index++) {
         UIView * view       = self.commentsView.subviews[index];
@@ -210,7 +211,7 @@
     NSRange range = [text.string rangeOfString:@"更多"];
     [text yy_setColor:[UIColor blueColor] range:range];
     [text yy_setTextHighlight:textHighlight range:range];
-    text.yy_font = FONT(12);
+    text.yy_font           = FONT(12);
     text.yy_baselineOffset = [NSNumber numberWithInt:-2];
     YYLabel * seeMore      = [YYLabel new];
     seeMore.attributedText = text;
@@ -228,7 +229,7 @@
 #pragma mark ======= Public Method
 + (CGFloat)getFootHeightWithModel:(WYAMineCreateDynamicModel *)model {
     WYAMineCreateReviewSuccessFootView * cell = [[WYAMineCreateReviewSuccessFootView alloc] initWithReuseIdentifier:@"xa"];
-    cell.model                         = model;
+    cell.model                                = model;
     [cell setNeedsLayout];
     [cell layoutIfNeeded];
     return cell.showCommentsButton.cmam_bottom;

@@ -6,8 +6,8 @@
 //  Copyright © 2019 WeiYiAn. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "WYAMineCollectionMaterialModel.h"
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 @class WYAMineCollectionMaterialTableViewCell;
@@ -15,7 +15,7 @@ typedef void (^ShowAllBodyAction)(NSIndexPath * cellIndexPath);
 /// 收藏点击事件
 typedef void (^CollectionAction)(WYAMineCollectionMaterialTableViewCell * target);
 /// 转发点击事件
-typedef void(^ForwardingAction) (WYAMineCollectionMaterialTableViewCell * target);
+typedef void (^ForwardingAction)(WYAMineCollectionMaterialTableViewCell * target);
 
 @interface WYAMineCollectionMaterialTableViewCell : UITableViewCell
 @property (nonatomic, strong) WYAMineCollectionMaterialModel * model;
