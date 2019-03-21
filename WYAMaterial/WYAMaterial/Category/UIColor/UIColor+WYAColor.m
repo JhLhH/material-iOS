@@ -77,4 +77,7 @@
     return [UIColor wya_hex:@"#ff9100"];
 }
 
++ (UIColor *)wya_goldenLevelTextColor{
+    return [UIColor wya_hex:@"#C4903F"];
+}
 @end

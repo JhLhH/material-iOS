@@ -162,7 +162,6 @@
         _model = model;
         [self.userHeaderButton sd_setImageWithURL:[NSURL URLWithString:_model.userIconName] forState:0];
         self.userNameLabel.text = _model.userName;
-        [self.userLevelIconView sd_setImageWithURL:[NSURL URLWithString:_model.userInfoImgString] placeholderImage:nil];
         self.userLevelLabel.text          = _model.userInfoString;
         self.userTimeLabel.text           = _model.timeString;
         self.userContentLabel.text        = _model.bodyString;
@@ -197,7 +196,7 @@
     if (!_userHeaderButton) {
         _userHeaderButton = ({
             UIButton * object          = [[UIButton alloc] init];
-            object.backgroundColor     = randomColor;
+            object.backgroundColor     = [UIColor wya_lightBlackColor];
             object.layer.cornerRadius  = 22 * SizeAdapter;
             object.layer.masksToBounds = YES;
             object;
@@ -210,7 +209,7 @@
     if (!_userNameLabel) {
         _userNameLabel = ({
             UILabel * object     = [[UILabel alloc] init];
-            object.textColor     = [UIColor blackColor];
+            object.textColor     = [UIColor wya_textBlackColor];
             object.font          = FONT(15);
             object.textAlignment = NSTextAlignmentCenter;
             object;
@@ -223,7 +222,7 @@
     if (!_userLevelIconView) {
         _userLevelIconView = ({
             UIImageView * object   = [[UIImageView alloc] init];
-            object.backgroundColor = [UIColor orangeColor];
+            object.image = [UIImage imageNamed:@"icon_huizhang"];
             object;
         });
     }
@@ -234,7 +233,7 @@
     if (!_userLevelLabel) {
         _userLevelLabel = ({
             UILabel * object = [[UILabel alloc] init];
-            object.textColor = [UIColor orangeColor];
+            object.textColor = [UIColor wya_goldenColor];
             object.font      = FONT(11);
             object;
         });
@@ -258,7 +257,7 @@
     if (!_userContentLabel) {
         _userContentLabel = ({
             UILabel * object     = [[UILabel alloc] init];
-            object.textColor     = [UIColor blackColor];
+            object.textColor     = [UIColor wya_textBlackColor];
             object.font          = FONT(14);
             object.numberOfLines = 0;
             object;
@@ -298,10 +297,14 @@
         _collectionButton = ({
             UIButton * object = [[UIButton alloc] init];
             [object setTitle:@"收藏" forState:0];
-            [object setTitleColor:[UIColor blackColor] forState:0];
-            [object setTitleColor:[UIColor orangeColor] forState:UIControlStateHighlighted];
+            [object setTitleColor:[UIColor wya_textBlackColor] forState:0];
+            [object setImage:[UIImage imageNamed:@"icon_collect"] forState:UIControlStateNormal];
+            [object setImage:[UIImage imageNamed:@"icon_collect_press"] forState:UIControlStateSelected];
             [object addTarget:self action:@selector(collectionButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
             object.titleLabel.font = FONT(12);
+            CGFloat space = 6*SizeAdapter;
+            object.imageEdgeInsets = UIEdgeInsetsMake(0, -space / 2.0, 0, space / 2.0);
+            object.titleEdgeInsets = UIEdgeInsetsMake(0, space / 2.0, 0, -space / 2.0);
             object;
         });
     }
@@ -313,8 +316,13 @@
         _forwardingButton = ({
             UIButton * object = [[UIButton alloc] init];
             [object setTitle:@"转发" forState:0];
-            [object setTitleColor:[UIColor blackColor] forState:0];
+            [object setTitle:@"已转发" forState:UIControlStateSelected];
+            [object setTitleColor:[UIColor wya_textBlackColor] forState:0];
+            [object setImage:[UIImage imageNamed:@"icon_zhuanfa"] forState:UIControlStateNormal];
             object.titleLabel.font = FONT(12);
+            CGFloat space = 6*SizeAdapter;
+            object.imageEdgeInsets = UIEdgeInsetsMake(0, -space / 2.0, 0, space / 2.0);
+            object.titleEdgeInsets = UIEdgeInsetsMake(0, space / 2.0, 0, -space / 2.0);
             [object addTarget:self action:@selector(forwardingButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
             object;
         });
@@ -339,6 +347,7 @@
     }
 }
 - (void)collectionButtonClicked:(UIButton *)sender {
+    sender.selected = !sender.isSelected;
     if (self.collectionActionBlock) {
         self.collectionActionBlock(self);
     }

@@ -60,7 +60,6 @@
         [self.contentView addSubview:self.userBodyImageView];
         [self.contentView addSubview:self.forwardingButton];
         [self.contentView addSubview:self.collectionButton];
-        //        [self.contentView addSubview:self.auditImgView];
         [self.contentView addSubview:self.lineView];
     }
     return self;
@@ -100,12 +99,6 @@
         make.right.equalTo(self.contentView.mas_right).offset(-15 * SizeAdapter);
         make.height.mas_equalTo(self.contentHeight);
     }];
-
-    //    [self.auditImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-    //        make.right.equalTo(self.contentView.mas_right).offset(-14*SizeAdapter);
-    //        make.bottom.equalTo(self.userContentLabel.mas_top).offset(24*SizeAdapter);
-    //        make.size.mas_equalTo(CGSizeMake(60*SizeAdapter, 60*SizeAdapter));
-    //    }];
 
     [self.showAllBodyButton mas_remakeConstraints:^(MASConstraintMaker * make) {
         make.left.mas_equalTo(self.userContentLabel.mas_left);
@@ -173,14 +166,6 @@
         self.userTimeLabel.text           = _model.mineCollectionTimeString;
         self.userContentLabel.text        = _model.mineCollectionBodyString;
         self.userBodyImageView.imageArray = _model.mineCollectionBodyImgArray;
-        //        if ([_model.mineCreateAuditType isEqualToString:@"正在审核"]) {
-        //            self.auditImgView.backgroundColor = [UIColor greenColor];
-        //        }if ([_model.mineCreateAuditType isEqualToString:@"审核失败"]) {
-        //            self.auditImgView.backgroundColor = [UIColor wya_grayBGColor];
-        //
-        //        }else{
-        //            self.auditImgView.backgroundColor = [UIColor orangeColor];
-        //        }
         // 判断全文按钮是否显示
         CGFloat height = [_model.mineCollectionBodyString wya_heightWithFontSize:14 width:CONTENT_WIDTH];
         if (height > DEFAULT_CONTENT_HEIGHT) {
@@ -317,6 +302,9 @@
             [object setTitleColor:[UIColor orangeColor] forState:UIControlStateHighlighted];
             [object addTarget:self action:@selector(collectionButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
             object.titleLabel.font = FONT(12);
+            CGFloat space = 6*SizeAdapter;
+            object.imageEdgeInsets = UIEdgeInsetsMake(0, -space / 2.0, 0, space / 2.0);
+            object.titleEdgeInsets = UIEdgeInsetsMake(0, space / 2.0, 0, -space / 2.0);
             object;
         });
     }
@@ -330,6 +318,9 @@
             [object setTitle:@"转发" forState:0];
             [object setTitleColor:[UIColor blackColor] forState:0];
             object.titleLabel.font = FONT(12);
+            CGFloat space = 6*SizeAdapter;
+            object.imageEdgeInsets = UIEdgeInsetsMake(0, -space / 2.0, 0, space / 2.0);
+            object.titleEdgeInsets = UIEdgeInsetsMake(0, space / 2.0, 0, -space / 2.0);
             [object addTarget:self action:@selector(forwardingButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
             object;
         });
@@ -346,18 +337,6 @@
     }
     return _lineView;
 }
-
-//- (UIImageView *)auditImgView{
-//    if(!_auditImgView){
-//        _auditImgView = ({
-//            UIImageView * object = [[UIImageView alloc]init];
-//            object.layer.cornerRadius = 30*SizeAdapter;
-//            object.layer.masksToBounds = YES;
-//            object;
-//        });
-//    }
-//    return _auditImgView;
-//}
 #pragma mark ======= Event
 - (void)forwardingButtonClicked:(UIButton *)sender {
     if (self.forwardingActionBlock) {

@@ -81,25 +81,25 @@
             [button setTitle:title forState:UIControlStateNormal];
             [button setTitleColor:[UIColor wya_textBlackColor] forState:UIControlStateNormal];
             [button setTitleColor:[UIColor wya_whiteColor] forState:UIControlStateSelected];
-            [button wya_setBackgroundColor:[UIColor blackColor] forState:UIControlStateSelected];
-            [button wya_setBackgroundColor:[UIColor groupTableViewBackgroundColor] forState:UIControlStateNormal];
+            [button wya_setBackgroundColor:[UIColor wya_textBlackColor] forState:UIControlStateSelected];
+            [button wya_setBackgroundColor:[UIColor wya_bgColor] forState:UIControlStateNormal];
 
-            button.backgroundColor          = [UIColor groupTableViewBackgroundColor];
+            button.backgroundColor          = [UIColor wya_bgColor];
             button.titleLabel.textAlignment = NSTextAlignmentCenter;
-            button.titleLabel.font          = FONT(15);
-            button.layer.cornerRadius       = 15;
+            button.titleLabel.font          = FONT(14);
+            button.layer.cornerRadius       = 14*SizeAdapter;
             button.layer.masksToBounds      = YES;
             [button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
             //根据计算文字的大小
-            NSDictionary * attributes = @{NSFontAttributeName : [UIFont systemFontOfSize:15 * SizeAdapter]};
+            NSDictionary * attributes = @{NSFontAttributeName : [UIFont systemFontOfSize:14 * SizeAdapter]};
             CGFloat length            = [_contentArray[i] boundingRectWithSize:CGSizeMake(ScreenWidth, 0) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil].size.width + 15;
             //设置button的frame
-            button.frame = CGRectMake(10 * SizeAdapter + w, h, length + 15, 27);
+            button.frame = CGRectMake(10 * SizeAdapter + w, h, length + 15, 27*SizeAdapter);
             //当button的位置超出屏幕边缘时换行 ScreenWidth 只是button所在父视图的宽度
             if (10 + w + length + 15 > ScreenWidth) {
                 w            = 0;                                      //换行时将w置为0
                 h            = h + button.frame.size.height + 10;      //距离父视图也变化
-                button.frame = CGRectMake(10 + w, h, length + 15, 30); //重设button的frame
+                button.frame = CGRectMake(10 + w, h, length + 15, 27*SizeAdapter); //重设button的frame
             }
             w = button.frame.size.width + button.frame.origin.x;
             if (i == _contentArray.count - 1) {
@@ -155,7 +155,7 @@
             UILabel * object = [[UILabel alloc] init];
             object.font      = FONTS(16);
             object.text      = @"标签分类";
-            object.textColor = [UIColor blackColor];
+            object.textColor = [UIColor wya_textBlackColor];
             object;
         });
     }
@@ -167,8 +167,10 @@
         _resetButton = ({
             UIButton * object = [[UIButton alloc] init];
             [object setTitle:@"重置" forState:UIControlStateNormal];
-            object.backgroundColor = [UIColor whiteColor];
+            object.backgroundColor = [UIColor wya_textWhitColorl];
             object.titleLabel.font = FONT(16);
+            object.layer.borderColor = [UIColor wya_lineColor].CGColor;
+            object.layer.borderWidth = 0.5;
             [object setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [object addTarget:self action:@selector(resetButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
             object;
@@ -182,9 +184,11 @@
         _sureButton = ({
             UIButton * object = [[UIButton alloc] init];
             [object setTitle:@"确定" forState:UIControlStateNormal];
-            object.backgroundColor = [UIColor orangeColor];
+            object.backgroundColor = [UIColor wya_goldenColor];
             object.titleLabel.font = FONT(16);
-            [object setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            object.layer.borderColor = [UIColor wya_lineColor].CGColor;
+            object.layer.borderWidth = 0.5;
+            [object setTitleColor:[UIColor wya_textWhitColorl] forState:UIControlStateNormal];
             [object addTarget:self action:@selector(sureButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
             object;
         });

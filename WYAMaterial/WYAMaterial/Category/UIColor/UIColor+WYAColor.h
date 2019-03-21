@@ -47,6 +47,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIColor *)wya_textLightGrayColor;
 /// 橙色文字
 + (UIColor *)wya_textOrangeColor;
+/// 代理级别字体颜色
++ (UIColor *)wya_goldenLevelTextColor;
 
 @end
 

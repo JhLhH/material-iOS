@@ -44,12 +44,12 @@
     if (!_leftButton) {
         _leftButton = ({
             UIButton * object = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, BTNWIDTH, BTNHEIGHT)];
-            UIImage * image   = [UIImage wya_imageWithColor:randomColor size:CGSizeMake(60, 60) rate:1];
+//            UIImage * image   = [UIImage wya_imageWithColor:randomColor size:CGSizeMake(60, 60) rate:1];
             [object setTitle:@"我的收藏" forState:0];
-            object.titleLabel.font = FONT(14);
-            [object setTitleColor:[UIColor blackColor] forState:0];
-            [object setImage:image forState:0];
-            [object wya_setButtonImageLocationTopWithSpace:20];
+            object.titleLabel.font = FONT(13);
+            [object setTitleColor:[UIColor wya_blackColor] forState:0];
+            [object setImage:[UIImage imageNamed:@"mine_icon_collect"] forState:0];
+            [object wya_setButtonImageLocationTopWithSpace:23*SizeAdapter];
             [object addTarget:self action:@selector(leftBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
             object;
         });
@@ -61,12 +61,12 @@
     if (!_centerButton) {
         _centerButton = ({
             UIButton * object = [[UIButton alloc] initWithFrame:CGRectMake(BTNWIDTH, 0, BTNWIDTH, BTNHEIGHT)];
-            UIImage * image   = [UIImage wya_imageWithColor:randomColor size:CGSizeMake(60, 60) rate:1];
+//            UIImage * image   = [UIImage wya_imageWithColor:randomColor size:CGSizeMake(25*SizeAdapter, 23*SizeAdapter) rate:1];
             [object setTitle:@"我的创建" forState:0];
-            object.titleLabel.font = FONT(14);
-            [object setTitleColor:[UIColor blackColor] forState:0];
-            [object setImage:image forState:0];
-            [object wya_setButtonImageLocationTopWithSpace:20];
+            object.titleLabel.font = FONT(13);
+            [object setTitleColor:[UIColor wya_blackColor] forState:0];
+            [object setImage:[UIImage imageNamed:@"mine_icon_create"] forState:0];
+            [object wya_setButtonImageLocationTopWithSpace:23*SizeAdapter];
             [object addTarget:self action:@selector(centerButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
 
             object;
@@ -79,12 +79,11 @@
     if (!_rightButton) {
         _rightButton = ({
             UIButton * object = [[UIButton alloc] initWithFrame:CGRectMake(2 * BTNWIDTH, 0, BTNWIDTH, BTNHEIGHT)];
-            UIImage * image   = [UIImage wya_imageWithColor:randomColor size:CGSizeMake(60, 60) rate:1];
             [object setTitle:@"历史通知" forState:0];
-            object.titleLabel.font = FONT(14);
-            [object setTitleColor:[UIColor blackColor] forState:0];
-            [object setImage:image forState:0];
-            [object wya_setButtonImageLocationTopWithSpace:20];
+            object.titleLabel.font = FONT(13);
+            [object setTitleColor:[UIColor wya_blackColor] forState:0];
+            [object setImage:[UIImage imageNamed:@"mine_iocn_inform"] forState:0];
+            [object wya_setButtonImageLocationTopWithSpace:23*SizeAdapter];
             [object addTarget:self action:@selector(rightButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
 
             object;
