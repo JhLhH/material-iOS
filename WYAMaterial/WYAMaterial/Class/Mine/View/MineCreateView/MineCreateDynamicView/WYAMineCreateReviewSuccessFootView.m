@@ -14,6 +14,7 @@
 @property (nonatomic, strong) UIView * commentsView; // 关于评论的视图
 @property (nonatomic, strong) UIButton * showCommentsButton;
 @property (nonatomic, strong) NSMutableArray * heights;
+@property (nonatomic, strong) UIView * line;
 @end
 
 @implementation WYAMineCreateReviewSuccessFootView
@@ -24,6 +25,7 @@
         self.contentView.backgroundColor = [UIColor whiteColor];
         [self.contentView addSubview:self.commentsView];
         [self.contentView addSubview:self.showCommentsButton];
+        [self.contentView addSubview:self.line];
     }
     return self;
 }
@@ -31,9 +33,9 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
 
-    CGFloat commentsView_x      = 53 * SizeAdapter;
+    CGFloat commentsView_x      = 69 * SizeAdapter;
     CGFloat commentsView_y      = 0;
-    CGFloat commentsView_width  = ScreenWidth - 69 * SizeAdapter;
+    CGFloat commentsView_width  = ScreenWidth - 83 * SizeAdapter;
     CGFloat commentsView_height = [self getCommentsHeight];
     CGRect commentsView_rect    = CGRectMake(commentsView_x, commentsView_y, commentsView_width, commentsView_height);
     self.commentsView.frame     = commentsView_rect;
@@ -46,6 +48,14 @@
     CGFloat showCommentsButton_height = self.showCommentsButton.hidden ? 0 : 30 * SizeAdapter;
     CGRect showCommentsButton_rect    = CGRectMake(showCommentsButton_x, showCommentsButton_y, showCommentsButton_width, showCommentsButton_height);
     self.showCommentsButton.frame     = showCommentsButton_rect;
+    [self.showCommentsButton wya_setButtonImageLoctionRightWithSpace:3];
+
+    CGFloat line_x = 0;
+    CGFloat line_y = self.contentView.cmam_height - 1 * SizeAdapter;
+    CGFloat line_width = ScreenWidth;
+    CGFloat line_height = 1 * SizeAdapter;
+    CGRect line_rect = CGRectMake(line_x, line_y,  line_width, line_height);
+    self.line.frame = line_rect;
 }
 
 #pragma mark ======= Setter
@@ -99,14 +109,14 @@
             if (self.model.show) {
                 // 判断当前评论是否是展开的状态
                 for (NSNumber * number in self.heights) {
-                    allHeight = allHeight + [number floatValue] + 10 * SizeAdapter;
+                    allHeight = allHeight + [number floatValue] + 15 * SizeAdapter;
                 }
             } else {
-                allHeight = [self.heights[0] floatValue] + [self.heights[1] floatValue] + 20 * SizeAdapter;
+                allHeight = [self.heights[0] floatValue] + [self.heights[1] floatValue] + 30 * SizeAdapter;
             }
         } else {
             for (NSNumber * number in self.heights) {
-                allHeight = allHeight + [number floatValue] + 10 * SizeAdapter;
+                allHeight = allHeight + [number floatValue] + 20 * SizeAdapter;
             }
         }
         height = allHeight;
@@ -120,7 +130,7 @@
         UIView * view       = self.commentsView.subviews[index];
         CGFloat height      = [self.heights[index] floatValue];
         CGFloat view_x      = 5 * SizeAdapter;
-        CGFloat view_y      = lastView.cmam_bottom;
+        CGFloat view_y      = lastView.cmam_bottom + 5 * SizeAdapter;
         CGFloat view_width  = self.commentsView.cmam_width - 10 * SizeAdapter;
         CGFloat view_height = height + 10 * SizeAdapter;
         CGRect view_rect    = CGRectMake(view_x, view_y, view_width, view_height);
@@ -134,12 +144,12 @@
     NSMutableAttributedString * text = [self commentsAttributedStringWithModel:model];
 
     YYLabel * label               = [[YYLabel alloc] init];
-    label.preferredMaxLayoutWidth = ScreenWidth - 79 * SizeAdapter;
+    label.preferredMaxLayoutWidth = ScreenWidth - 93 * SizeAdapter;
     label.numberOfLines           = 0;
     label.attributedText          = text;
 
     if (model.show) {
-        CGSize introSize      = CGSizeMake(ScreenWidth - 79 * SizeAdapter, CGFLOAT_MAX);
+        CGSize introSize      = CGSizeMake(ScreenWidth - 93 * SizeAdapter, CGFLOAT_MAX);
         YYTextLayout * layout = [YYTextLayout layoutWithContainerSize:introSize text:text];
         label.textLayout      = layout;
         CGFloat introHeight   = layout.textBoundingSize.height + 10 * SizeAdapter;
@@ -168,16 +178,16 @@
     NSRange closeRange               = [string rangeOfString:closeString options:NSCaseInsensitiveSearch];
 
     [text yy_setFont:FONTS(12) range:nameRange];
-    [text yy_setColor:[UIColor blackColor] range:nameRange];
-    [text yy_setFont:FONTS(13) range:commentsRange];
-    [text yy_setColor:[UIColor lightGrayColor] range:commentsRange];
+    [text yy_setColor:[UIColor wya_textLightBlackColor] range:nameRange];
+    [text yy_setFont:FONTS(12) range:commentsRange];
+    [text yy_setColor:[UIColor wya_textDarkGrayColor] range:commentsRange];
     text.yy_lineSpacing = 2 * SizeAdapter;
-
+    text.yy_kern        = [NSNumber numberWithInt:1 * SizeAdapter];
     if (model.show) {
         // 当前评论处于展开状态，添加收起评论，以及相关事件
         WeakSelf(weakSelf);
-        [text yy_setFont:FONT(13) range:closeRange];
-        [text yy_setColor:[UIColor blueColor] range:closeRange];
+        [text yy_setFont:FONT(12) range:closeRange];
+        [text yy_setColor:[UIColor wya_blueColor] range:closeRange];
 
         YYTextHighlight * textHighlight = [YYTextHighlight new];
         [textHighlight setColor:[UIColor redColor]];
@@ -198,7 +208,7 @@
     NSMutableAttributedString * text = [[NSMutableAttributedString alloc] initWithString:@"...更多"];
 
     YYTextHighlight * textHighlight = [YYTextHighlight new];
-    [textHighlight setColor:[UIColor blueColor]];
+    [textHighlight setColor:[UIColor wya_blueColor]];
     WeakSelf(weakSelf);
     textHighlight.tapAction = ^(UIView * containerView, NSAttributedString * text, NSRange range, CGRect rect) {
         StrongSelf(strongSelf);
@@ -209,7 +219,7 @@
 
     };
     NSRange range = [text.string rangeOfString:@"更多"];
-    [text yy_setColor:[UIColor blueColor] range:range];
+    [text yy_setColor:[UIColor wya_blueColor] range:range];
     [text yy_setTextHighlight:textHighlight range:range];
     text.yy_font           = FONT(12);
     text.yy_baselineOffset = [NSNumber numberWithInt:-2];
@@ -232,15 +242,17 @@
     cell.model                                = model;
     [cell setNeedsLayout];
     [cell layoutIfNeeded];
-    return cell.showCommentsButton.cmam_bottom;
+    return cell.showCommentsButton.cmam_bottom + 10 * SizeAdapter;
 }
 
 #pragma mark ======= Getter
 - (UIView *)commentsView {
     if (!_commentsView) {
         _commentsView = ({
-            UIView * object        = [[UIView alloc] init];
-            object.backgroundColor = [UIColor wya_bgColor];
+            UIView * object            = [[UIView alloc] init];
+            object.backgroundColor     = [UIColor wya_hex:@"#F2F2F5"];
+            object.layer.cornerRadius  = 5 * SizeAdapter;
+            object.layer.masksToBounds = YES;
             object;
         });
     }
@@ -253,7 +265,9 @@
             UIButton * object = [[UIButton alloc] init];
             [object setTitle:@"更多评论" forState:UIControlStateNormal];
             [object setTitle:@"收起评论" forState:UIControlStateSelected];
-            [object setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+            [object setTitleColor:[UIColor wya_blueColor] forState:UIControlStateNormal];
+            [object setImage:[UIImage imageNamed:@"icon_down"] forState:UIControlStateNormal];
+            [object setImage:[UIImage imageNamed:@"icon_up"] forState:UIControlStateSelected];
             [object setBackgroundColor:[UIColor wya_bgColor]];
             object.titleLabel.font = FONT(13);
             object.hidden          = YES;
@@ -270,7 +284,6 @@
     }
     return _showCommentsButton;
 }
-
 - (NSMutableArray *)heights {
     if (!_heights) {
         _heights = ({
@@ -279,6 +292,17 @@
         });
     }
     return _heights;
+}
+
+- (UIView *)line{
+    if(!_line){
+        _line = ({
+            UIView * object = [[UIView alloc]init];
+            object.backgroundColor = [UIColor wya_lineColor];
+            object;
+        });
+    }
+    return _line;
 }
 /*
 // Only override drawRect: if you perform custom drawing.

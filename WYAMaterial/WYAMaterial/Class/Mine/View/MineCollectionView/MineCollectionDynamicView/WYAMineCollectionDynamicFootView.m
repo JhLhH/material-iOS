@@ -13,6 +13,7 @@
 @property (nonatomic, strong) UIView * commentsView; // 关于评论的视图
 @property (nonatomic, strong) UIButton * showCommentsButton;
 @property (nonatomic, strong) NSMutableArray * heights;
+@property (nonatomic, strong) UIView * line;
 @end
 
 @implementation WYAMineCollectionDynamicFootView
@@ -23,6 +24,7 @@
         self.contentView.backgroundColor = [UIColor whiteColor];
         [self.contentView addSubview:self.commentsView];
         [self.contentView addSubview:self.showCommentsButton];
+        [self.contentView addSubview:self.line];
     }
     return self;
 }
@@ -47,6 +49,13 @@
     self.showCommentsButton.frame     = showCommentsButton_rect;
 
     [self.showCommentsButton wya_setButtonImageLoctionRightWithSpace:3];
+    
+    CGFloat line_x = 0;
+    CGFloat line_y = self.contentView.cmam_height - 1 * SizeAdapter;
+    CGFloat line_width = ScreenWidth;
+    CGFloat line_height = 1 * SizeAdapter;
+    CGRect line_rect = CGRectMake(line_x, line_y,  line_width, line_height);
+    self.line.frame = line_rect;
 }
 
 #pragma mark ======= Setter
@@ -233,7 +242,7 @@
     cell.model                              = model;
     [cell setNeedsLayout];
     [cell layoutIfNeeded];
-    return cell.showCommentsButton.cmam_bottom;
+    return cell.showCommentsButton.cmam_bottom + 10 * SizeAdapter;
 }
 
 #pragma mark ======= Getter
@@ -286,6 +295,16 @@
     return _heights;
 }
 
+- (UIView *)line{
+    if(!_line){
+        _line = ({
+            UIView * object = [[UIView alloc]init];
+            object.backgroundColor = [UIColor wya_lineColor];
+            object;
+        });
+    }
+    return _line;
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

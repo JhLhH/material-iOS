@@ -78,13 +78,11 @@
     [self.navBar wya_addRightNavBarButtonWithNormalTitle:@[ @"发布" ] normalColor:@[ [UIColor wya_whiteColor] ] highlightedColor:@[ [UIColor wya_whiteColor] ]];
     self.rightBarButtonItemTitleFont = 15 * SizeAdapter;
     self.navBackGroundColor             = [[UIColor blackColor] colorWithAlphaComponent:0.5f];
-
     self.agentRingTableView.tableHeaderView = self.agentRingCoverView;
     self.navTitleColor                      = [UIColor whiteColor];
     [self.view addSubview:self.agentRingTableView];
-    [self.view addSubview:self.noticeBar];
-//    [self.view addSubview:self.gifAnimatedImageView];
     [self.view addSubview:self.refreshView];
+    [self.view addSubview:self.noticeBar];
     [self.view addSubview:self.commentsView];
 }
 
@@ -101,7 +99,31 @@
 
 - (void)addAgentRingRefresh {
     NSLog(@"调用一次");
-    self.gifAnimatedImageView.hidden = NO;
+    self.refreshView.hidden = NO;
+    [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.9 initialSpringVelocity:10 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        CGFloat object_x             = 32 * SizeAdapter;
+        CGFloat object_y             = self.noticeBar.cmam_bottom + 20 * SizeAdapter;
+        CGFloat object_width         = 32 * SizeAdapter;
+        CGFloat object_height        = 32 * SizeAdapter;
+        CGRect object_rect           = CGRectMake(object_x, object_y, object_width, object_height);
+        self.refreshView.frame = object_rect;
+        self.refreshView.alpha = 1;
+    } completion:^(BOOL finished) {
+
+    }];
+
+    [UIView animateWithDuration:0.5 delay:1 usingSpringWithDamping:0.9 initialSpringVelocity:10 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        CGFloat object_x             = 32 * SizeAdapter;
+        CGFloat object_y             = WYAStatusBarHeight;
+        CGFloat object_width         = 32 * SizeAdapter;
+        CGFloat object_height        = 32 * SizeAdapter;
+        CGRect object_rect           = CGRectMake(object_x, object_y, object_width, object_height);
+        self.refreshView.frame = object_rect;
+        self.refreshView.alpha = 0;
+        self.isRefresh = NO;
+    } completion:^(BOOL finished) {
+
+    }];
 }
 
 - (void)showImageBrowserWithModel:(WYAAgentRingModel *)model index:(NSInteger)index {
@@ -224,7 +246,13 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return [WYAAgentRingSectionFootView getFootHeightWithModel:self.dataSource[section]];
+    WYAAgentRingModel * model = self.dataSource[section];
+    if (model.comments.count > 0) {
+        return [WYAAgentRingSectionFootView getFootHeightWithModel:self.dataSource[section]];
+    } else {
+        return 1 * SizeAdapter;
+    }
+
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -232,20 +260,28 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    WYAAgentRingSectionFootView * footView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"foot"];
-    footView.model                         = self.dataSource[section];
-    footView.stretchBlock                  = ^(WYAAgentRingModel * _Nonnull model) {
-        NSLog(@"model.show==%d", model.show);
-        [tableView beginUpdates];
-        [tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
-        [tableView endUpdates];
-    };
-    footView.singleCommentsBlock = ^(WYAAgentRingModel * _Nonnull model) {
-        [tableView beginUpdates];
-        [tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
-        [tableView endUpdates];
-    };
-    return footView;
+    WYAAgentRingModel * model = self.dataSource[section];
+    if (model.comments.count > 0) {
+        WYAAgentRingSectionFootView * footView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"foot"];
+        footView.model                         = self.dataSource[section];
+        footView.stretchBlock                  = ^(WYAAgentRingModel * _Nonnull model) {
+            NSLog(@"model.show==%d", model.show);
+            [tableView beginUpdates];
+            [tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
+            [tableView endUpdates];
+        };
+        footView.singleCommentsBlock = ^(WYAAgentRingModel * _Nonnull model) {
+            [tableView beginUpdates];
+            [tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
+            [tableView endUpdates];
+        };
+        return footView;
+    } else {
+        UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 1 * SizeAdapter)];
+        view.backgroundColor = [UIColor wya_lineColor];
+        return view;
+    }
+
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -267,7 +303,7 @@
             object.estimatedRowHeight           = 0;
             object.estimatedSectionFooterHeight = 0;
             object.estimatedSectionHeaderHeight = 0;
-            object.backgroundColor              = [UIColor whiteColor];
+            object.backgroundColor              = [UIColor wya_textBlackColor];
             object.separatorStyle               = UITableViewCellSeparatorStyleNone;
             [object registerClass:[WYAAgentRingCell class] forCellReuseIdentifier:@"cell"];
             [object registerClass:[WYAAgentRingSectionFootView class] forHeaderFooterViewReuseIdentifier:@"foot"];
@@ -393,13 +429,15 @@
 - (WYARefreshView *)refreshView{
     if(!_refreshView){
         _refreshView = ({
-            CGFloat object_x             = 50;
-            CGFloat object_y             = self.noticeBar.cmam_bottom + 20 * SizeAdapter;
-            CGFloat object_width         = 60 * SizeAdapter;
-            CGFloat object_height        = 60 * SizeAdapter;
+            CGFloat object_x             = 32 * SizeAdapter;
+            CGFloat object_y             = WYAStatusBarHeight;
+            CGFloat object_width         = 32 * SizeAdapter;
+            CGFloat object_height        = 32 * SizeAdapter;
             CGRect object_rect           = CGRectMake(object_x, object_y, object_width, object_height);
             WYARefreshView * object = [[WYARefreshView alloc]init];
             object.frame = object_rect;
+            object.hidden = YES;
+            object.alpha = 0;
             object;
        });
     }

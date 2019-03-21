@@ -10,8 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WYALoginVIew : UIView
-
+@interface WYALoginView : UIView
+@property (nonatomic, copy) void(^loginBlock)(void);
 @end
 
 NS_ASSUME_NONNULL_END

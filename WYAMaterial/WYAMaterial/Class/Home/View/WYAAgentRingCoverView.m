@@ -19,6 +19,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
+        self.backgroundColor = [UIColor wya_whiteColor];
         [self addSubview:self.agentRingCoverImageView];
         [self addSubview:self.userHeaderImageView];
     }

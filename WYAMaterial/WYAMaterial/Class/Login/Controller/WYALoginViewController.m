@@ -7,11 +7,17 @@
 //
 
 #import "WYALoginViewController.h"
+#import "RootViewController.h"
+
+#import "WYAReviewLoginView.h"
+#import "WYALoginView.h"
 
 #import "WXApi.h"
 
-@interface WYALoginViewController ()
 
+@interface WYALoginViewController ()
+@property (nonatomic, strong) WYAReviewLoginView * reviewLoginView;
+@property (nonatomic, strong) WYALoginView * loginView;
 @end
 
 @implementation WYALoginViewController
@@ -23,28 +29,36 @@
     [self setupUI];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
+
 #pragma mark ======= Private Method
 - (void)setupUI {
     self.navBar.hidden    = YES;
-    CGFloat object_x      = (ScreenWidth - 100 * SizeAdapter) / 2;
-    CGFloat object_y      = (ScreenHeight - 100 * SizeAdapter) / 2;
-    CGFloat object_width  = 100 * SizeAdapter;
-    CGFloat object_height = 100 * SizeAdapter;
-    CGRect object_rect    = CGRectMake(object_x, object_y, object_width, object_height);
-    UIButton * object     = [[UIButton alloc] initWithFrame:object_rect];
-    [object setTitle:@"微信登录" forState:UIControlStateNormal];
-    [object setTitleColor:[UIColor wya_whiteColor] forState:UIControlStateNormal];
-    [object setBackgroundImage:[UIImage wya_createImageWithColor:[UIColor redColor]] forState:UIControlStateNormal];
-    [object addCallBackAction:^(UIButton * button) {
+
+    [self.view addSubview:self.reviewLoginView];
+//    [self.view addSubview:self.loginView];
+}
+
+- (void)reviewLogin{
+    RootViewController * rootViewController = [[RootViewController alloc] init];
+    Window.rootViewController = rootViewController;
+}
+
+- (void)loginClick{
+    if ([WXApi isWXAppInstalled]) {
         SendAuthReq * req = [[SendAuthReq alloc] init];
         req.openID        = @"wx808acd6db9965c72";
         req.scope         = @"snsapi_userinfo";
         req.state         = @"123";
         //第三方向微信终端发送一个SendAuthReq消息结构
         [WXApi sendReq:req];
+    } else {
+        [UIView wya_showCenterToastWithMessage:@"您未安装微信无法登陆"];
+    }
 
-    }];
-    [self.view addSubview:object];
+
 }
 
 /*
@@ -57,4 +71,42 @@
 }
 */
 
+#pragma mark ======= Lazy
+- (WYAReviewLoginView *)reviewLoginView{
+    if(!_reviewLoginView){
+        _reviewLoginView = ({
+            CGFloat reviewLoginView_x = 0;
+            CGFloat reviewLoginView_y = 0;
+            CGFloat reviewLoginView_width = self.view.cmam_width;
+            CGFloat reviewLoginView_height = self.view.cmam_height;
+            CGRect reviewLoginView_rect = CGRectMake(reviewLoginView_x, reviewLoginView_y,  reviewLoginView_width, reviewLoginView_height);
+            WYAReviewLoginView * object = [[WYAReviewLoginView alloc]init];
+            object.frame = reviewLoginView_rect;
+            object.loginBlock = ^{
+                [self reviewLogin];
+            };
+            object;
+       });
+    }
+    return _reviewLoginView;
+}
+
+- (WYALoginView *)loginView{
+    if(!_loginView){
+        _loginView = ({
+            CGFloat object_x = 0;
+            CGFloat object_y = 0;
+            CGFloat object_width = self.view.cmam_width;
+            CGFloat object_height = self.view.cmam_height;
+            CGRect object_rect = CGRectMake(object_x, object_y,  object_width, object_height);
+            WYALoginView * object = [[WYALoginView alloc]init];
+            object.frame = object_rect;
+            object.loginBlock = ^{
+                [self loginClick];
+            };
+            object;
+       });
+    }
+    return _loginView;
+}
 @end

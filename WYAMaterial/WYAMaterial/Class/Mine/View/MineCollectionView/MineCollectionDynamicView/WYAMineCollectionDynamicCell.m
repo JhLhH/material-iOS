@@ -466,8 +466,8 @@
             UIButton * object = [[UIButton alloc] init];
             [object setTitle:@"全文" forState:UIControlStateNormal];
             [object setTitle:@"收起" forState:UIControlStateSelected];
-            [object setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-            [object setTitleColor:[UIColor blueColor] forState:UIControlStateSelected];
+            [object setTitleColor:[UIColor wya_blueColor] forState:UIControlStateNormal];
+            [object setTitleColor:[UIColor wya_blueColor] forState:UIControlStateSelected];
             object.hidden                     = YES;
             object.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
             object.titleLabel.font            = FONT(15);
