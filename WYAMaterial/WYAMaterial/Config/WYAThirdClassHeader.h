@@ -24,4 +24,6 @@
 #import <WYAKit/WYACameraViewController.h>
 #import <WYAKit/WYAPhotoBrowser.h>
 #import <WYAKit/WYANoticeBar.h>
+#import <WYAKit/WYARealmBaseManager.h>
+#import <WYAKit/WYAImageBrowser.h>
 #endif /* WYAThirdClassHeader_h */

@@ -24,6 +24,11 @@
 		2193EE9922408FD200FD61B9 /* WYAMineCollectionDynamicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2193EE9822408FD200FD61B9 /* WYAMineCollectionDynamicModel.m */; };
 		2193EE9D2240919900FD61B9 /* WYAMineCollectionDynamicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2193EE9C2240919900FD61B9 /* WYAMineCollectionDynamicCell.m */; };
 		2193EEA02240925500FD61B9 /* WYAMineCollectionDynamicFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2193EE9F2240925500FD61B9 /* WYAMineCollectionDynamicFootView.m */; };
+		2193EEAF2242181E00FD61B9 /* WYASendDynamicDraftModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2193EEAE2242181E00FD61B9 /* WYASendDynamicDraftModel.m */; };
+		2193EEB2224218AC00FD61B9 /* WYASendDynamicViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2193EEB1224218AC00FD61B9 /* WYASendDynamicViewModel.m */; };
+		2193EEBB22423BA300FD61B9 /* WYASendDynamicImageEditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2193EEB922423BA300FD61B9 /* WYASendDynamicImageEditCell.m */; };
+		2193EEBC22423BA300FD61B9 /* WYASendDynamicImageEditCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2193EEBA22423BA300FD61B9 /* WYASendDynamicImageEditCell.xib */; };
+		2193EEBF22426DE900FD61B9 /* WYAAgentRingCommentsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2193EEBE22426DE900FD61B9 /* WYAAgentRingCommentsView.m */; };
 		21B6BD7B2239FA0100962255 /* WYAAgentRingCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B6BD7A2239FA0100962255 /* WYAAgentRingCoverView.m */; };
 		21F1C4C0223A05F800527496 /* WYAAgentRingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F1C4BF223A05F800527496 /* WYAAgentRingCell.m */; };
 		952DE2B9223A074B0098B208 /* WYAMineHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 952DE2B8223A074B0098B208 /* WYAMineHeaderView.m */; };
@@ -124,6 +129,15 @@
 		2193EE9C2240919900FD61B9 /* WYAMineCollectionDynamicCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WYAMineCollectionDynamicCell.m; path = WYAMaterial/Class/Mine/Model/MineCollectionModel/MineCollectionDynamicModel/WYAMineCollectionDynamicCell.m; sourceTree = SOURCE_ROOT; };
 		2193EE9E2240925500FD61B9 /* WYAMineCollectionDynamicFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WYAMineCollectionDynamicFootView.h; path = WYAMaterial/Class/Mine/Model/MineCollectionModel/MineCollectionDynamicModel/WYAMineCollectionDynamicFootView.h; sourceTree = SOURCE_ROOT; };
 		2193EE9F2240925500FD61B9 /* WYAMineCollectionDynamicFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WYAMineCollectionDynamicFootView.m; path = WYAMaterial/Class/Mine/Model/MineCollectionModel/MineCollectionDynamicModel/WYAMineCollectionDynamicFootView.m; sourceTree = SOURCE_ROOT; };
+		2193EEAD2242181E00FD61B9 /* WYASendDynamicDraftModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYASendDynamicDraftModel.h; sourceTree = "<group>"; };
+		2193EEAE2242181E00FD61B9 /* WYASendDynamicDraftModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYASendDynamicDraftModel.m; sourceTree = "<group>"; };
+		2193EEB0224218AC00FD61B9 /* WYASendDynamicViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYASendDynamicViewModel.h; sourceTree = "<group>"; };
+		2193EEB1224218AC00FD61B9 /* WYASendDynamicViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYASendDynamicViewModel.m; sourceTree = "<group>"; };
+		2193EEB822423BA300FD61B9 /* WYASendDynamicImageEditCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYASendDynamicImageEditCell.h; sourceTree = "<group>"; };
+		2193EEB922423BA300FD61B9 /* WYASendDynamicImageEditCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYASendDynamicImageEditCell.m; sourceTree = "<group>"; };
+		2193EEBA22423BA300FD61B9 /* WYASendDynamicImageEditCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WYASendDynamicImageEditCell.xib; sourceTree = "<group>"; };
+		2193EEBD22426DE900FD61B9 /* WYAAgentRingCommentsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAAgentRingCommentsView.h; sourceTree = "<group>"; };
+		2193EEBE22426DE900FD61B9 /* WYAAgentRingCommentsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAAgentRingCommentsView.m; sourceTree = "<group>"; };
 		21B6BD792239FA0100962255 /* WYAAgentRingCoverView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAAgentRingCoverView.h; sourceTree = "<group>"; };
 		21B6BD7A2239FA0100962255 /* WYAAgentRingCoverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAAgentRingCoverView.m; sourceTree = "<group>"; };
 		21F1C4BE223A05F800527496 /* WYAAgentRingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAAgentRingCell.h; sourceTree = "<group>"; };
@@ -363,6 +377,46 @@
 			path = MineCollectionView;
 			sourceTree = "<group>";
 		};
+		2193EEA92242177D00FD61B9 /* SendDynamicController */ = {
+			isa = PBXGroup;
+			children = (
+				211F6800223B8E8300F7ACBB /* WYASendDynamicViewController.h */,
+				211F6801223B8E8300F7ACBB /* WYASendDynamicViewController.m */,
+			);
+			path = SendDynamicController;
+			sourceTree = "<group>";
+		};
+		2193EEAA2242179900FD61B9 /* SendDynamicViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2193EEB0224218AC00FD61B9 /* WYASendDynamicViewModel.h */,
+				2193EEB1224218AC00FD61B9 /* WYASendDynamicViewModel.m */,
+			);
+			path = SendDynamicViewModel;
+			sourceTree = "<group>";
+		};
+		2193EEAB224217A400FD61B9 /* SendDynamicView */ = {
+			isa = PBXGroup;
+			children = (
+				211F6804223B95B100F7ACBB /* WYACameraCell.h */,
+				211F6803223B95B100F7ACBB /* WYACameraCell.m */,
+				211F6805223B95B100F7ACBB /* WYACameraCell.xib */,
+				2193EEB822423BA300FD61B9 /* WYASendDynamicImageEditCell.h */,
+				2193EEB922423BA300FD61B9 /* WYASendDynamicImageEditCell.m */,
+				2193EEBA22423BA300FD61B9 /* WYASendDynamicImageEditCell.xib */,
+			);
+			path = SendDynamicView;
+			sourceTree = "<group>";
+		};
+		2193EEAC224217AE00FD61B9 /* SendDynamicModel */ = {
+			isa = PBXGroup;
+			children = (
+				2193EEAD2242181E00FD61B9 /* WYASendDynamicDraftModel.h */,
+				2193EEAE2242181E00FD61B9 /* WYASendDynamicDraftModel.m */,
+			);
+			path = SendDynamicModel;
+			sourceTree = "<group>";
+		};
 		2D58A82D018BD5D3B50876E6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -585,10 +639,9 @@
 		95C2FF4320F0533500ED829B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				2193EEA92242177D00FD61B9 /* SendDynamicController */,
 				95C2FF4420F0533500ED829B /* WYAHomeViewController.h */,
 				95C2FF4520F0533500ED829B /* WYAHomeViewController.m */,
-				211F6800223B8E8300F7ACBB /* WYASendDynamicViewController.h */,
-				211F6801223B8E8300F7ACBB /* WYASendDynamicViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -733,6 +786,7 @@
 		95DD8CB82239E24F00731A7E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2193EEAB224217A400FD61B9 /* SendDynamicView */,
 				95DD8CE22239E6FB00731A7E /* WYAHomeView.h */,
 				95DD8CE32239E6FB00731A7E /* WYAHomeView.m */,
 				21B6BD792239FA0100962255 /* WYAAgentRingCoverView.h */,
@@ -741,9 +795,8 @@
 				21F1C4BF223A05F800527496 /* WYAAgentRingCell.m */,
 				211F67FD223A5EC000F7ACBB /* WYAAgentRingSectionFootView.h */,
 				211F67FE223A5EC000F7ACBB /* WYAAgentRingSectionFootView.m */,
-				211F6804223B95B100F7ACBB /* WYACameraCell.h */,
-				211F6803223B95B100F7ACBB /* WYACameraCell.m */,
-				211F6805223B95B100F7ACBB /* WYACameraCell.xib */,
+				2193EEBD22426DE900FD61B9 /* WYAAgentRingCommentsView.h */,
+				2193EEBE22426DE900FD61B9 /* WYAAgentRingCommentsView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -751,6 +804,7 @@
 		95DD8CB92239E24F00731A7E /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				2193EEAA2242179900FD61B9 /* SendDynamicViewModel */,
 				95DD8CD92239E6BC00731A7E /* WYAHomeViewModel.h */,
 				95DD8CDA2239E6BC00731A7E /* WYAHomeViewModel.m */,
 				211F67FA223A337800F7ACBB /* WYAAgentRingViewModel.h */,
@@ -762,6 +816,7 @@
 		95DD8CBA2239E24F00731A7E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2193EEAC224217AE00FD61B9 /* SendDynamicModel */,
 				95DD8CCD2239E68800731A7E /* WYAHomeModel.h */,
 				95DD8CCE2239E68800731A7E /* WYAHomeModel.m */,
 				211F67F7223A31A700F7ACBB /* WYAAgentRingModel.h */,
@@ -997,6 +1052,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				958FB47620F0574A00F44489 /* Assets.xcassets in Resources */,
+				2193EEBC22423BA300FD61B9 /* WYASendDynamicImageEditCell.xib in Resources */,
 				95C2FEDB20F0528C00ED829B /* LaunchScreen.storyboard in Resources */,
 				211F6807223B95B200F7ACBB /* WYACameraCell.xib in Resources */,
 			);
@@ -1083,6 +1139,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2193EEAF2242181E00FD61B9 /* WYASendDynamicDraftModel.m in Sources */,
 				2193EE9922408FD200FD61B9 /* WYAMineCollectionDynamicModel.m in Sources */,
 				95DD8CD52239E6A100731A7E /* WYAMineModel.m in Sources */,
 				211F67F9223A31A700F7ACBB /* WYAAgentRingModel.m in Sources */,
@@ -1098,6 +1155,7 @@
 				955D7723223CFDE300B3B1EE /* WYAImgTextBodyView.m in Sources */,
 				2193EE9D2240919900FD61B9 /* WYAMineCollectionDynamicCell.m in Sources */,
 				95F63234223A599F00BFC68C /* WYAMineCreateDynamicViewController.m in Sources */,
+				2193EEB2224218AC00FD61B9 /* WYASendDynamicViewModel.m in Sources */,
 				95DD8CDE2239E6CE00731A7E /* WYAMineViewModel.m in Sources */,
 				95C2FF8520F0533600ED829B /* RootControllerModel.m in Sources */,
 				211F6802223B8E8300F7ACBB /* WYASendDynamicViewController.m in Sources */,
@@ -1111,6 +1169,7 @@
 				955D7716223CE2EF00B3B1EE /* WYASettingViewController.m in Sources */,
 				2193EE9422408F7800FD61B9 /* WYAMineCollectionDynamicViewModel.m in Sources */,
 				955D771D223CEA4100B3B1EE /* WYAImageTextTableViewCell.m in Sources */,
+				2193EEBB22423BA300FD61B9 /* WYASendDynamicImageEditCell.m in Sources */,
 				211F67FF223A5EC000F7ACBB /* WYAAgentRingSectionFootView.m in Sources */,
 				95C2FF8620F0533600ED829B /* AppDelegate.m in Sources */,
 				955D7712223CD9E900B3B1EE /* WYAMineBodyView.m in Sources */,
@@ -1128,6 +1187,7 @@
 				952DE2BC223A2A300098B208 /* WYAMineTableViewCell.m in Sources */,
 				2193EEA02240925500FD61B9 /* WYAMineCollectionDynamicFootView.m in Sources */,
 				95DD8CC92239E65400731A7E /* WYAMaterialViewController.m in Sources */,
+				2193EEBF22426DE900FD61B9 /* WYAAgentRingCommentsView.m in Sources */,
 				95DD8CC62239E2C300731A7E /* WYAMaterialViewModel.m in Sources */,
 				211F67FC223A337800F7ACBB /* WYAAgentRingViewModel.m in Sources */,
 				95DD8CE72239E70900731A7E /* WYALoginVIew.m in Sources */,

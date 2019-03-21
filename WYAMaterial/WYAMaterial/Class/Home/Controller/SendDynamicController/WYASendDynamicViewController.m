@@ -8,9 +8,13 @@
 
 #import "WYASendDynamicViewController.h"
 #import "WYACameraCell.h"
+#import "WYASendDynamicImageEditCell.h"
+
+#import "WYASendDynamicViewModel.h"
+#import "WYASendDynamicDraftModel.h"
 
 #define CameraCell @"WYACameraCell"
-#define EditCameraCell @"WYAEditCameraCell"
+#define EditCameraCell @"WYASendDynamicImageEditCell"
 
 @interface WYASendDynamicViewController () <WYANavBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong) UIView * textSuperView;
@@ -18,6 +22,7 @@
 @property (nonatomic, strong) UICollectionView * collectionView;
 @property (nonatomic, strong) NSMutableArray * dataSource;
 @property (nonatomic, assign) BOOL allImage;
+@property (nonatomic, strong) WYASendDynamicDraftModel * model;
 @end
 
 @implementation WYASendDynamicViewController
@@ -26,6 +31,7 @@
     [super viewDidLoad];
     [self configNavBar];
     [self configUI];
+    [self getHistoryDataSource];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -53,6 +59,16 @@
     [self.view addSubview:self.collectionView];
 }
 
+- (void)getHistoryDataSource {
+    self.model = [WYASendDynamicViewModel lookupSendDynamicDraft];
+    if (self.model) {
+        self.textView.text = self.model.text;
+        self.dataSource = [NSKeyedUnarchiver unarchiveObjectWithData:self.model.imageDatas];
+        [self.collectionView reloadData];
+        [self changeCollectionViewFrame];
+    }
+}
+
 - (void)changeCollectionViewFrame{
     CGFloat height = (ScreenWidth - 40 * SizeAdapter) / 3;
     CGFloat row = (self.dataSource.count + (self.allImage ? 0 : 1)) / 3;
@@ -71,12 +87,43 @@
 
 #pragma mark ======= WYANavBarDelegate
 - (void)wya_goBackPressed:(UIButton *)sender {
+    WYAAlertController * alert =
+    [WYAAlertController wya_alertWithTitle:@"是否保存草稿？"
+                                   Message:nil
+                          AlertLayoutStyle:WYAAlertLayoutStyleHorizontal];
+    alert.backgroundButton.enabled = NO;
+    alert.presentStyle             = WYAPopupPresentStyleBounce;
+    alert.dismissStyle             = WYAPopupDismissStyleShrink;
+    // 创建 action
+    WYAAlertAction * defaultAction =
+    [WYAAlertAction wya_actionWithTitle:@"不保留"
+                                  style:WYAAlertActionStyleCancel
+                                handler:^{
+                                    [WYASendDynamicViewModel deleteSendDynamicDraft];
+                                    [self.navigationController popViewControllerAnimated:YES];
+    }];
 
-//    if (self.textView.text) {
-//        WYAUserDefaultSetObjectForKey(self.textView.text, @"sendDynamicText")
-//    }
+    WYAAlertAction * cancelAction =
+    [WYAAlertAction wya_actionWithTitle:@"保留"
+                                  style:WYAAlertActionStyleDefault
+                                handler:^{
+                                    BOOL isSuccess;
+                                    if (self.model) {
+                                        isSuccess = [WYASendDynamicViewModel updateSendDynamicDraftWithText:self.textView.text images:self.dataSource];
+                                    } else {
+                                        isSuccess = [WYASendDynamicViewModel saveSendDynamicDraftWithText:self.textView.text images:self.dataSource];
+                                    }
+                                    if (isSuccess) {
+                                        [self.navigationController popViewControllerAnimated:YES];
+                                    } else {
+                                        [UIView wya_showBottomToastWithMessage:@"保存失败"];
+                                    }
+    }];
 
-    [self.navigationController popViewControllerAnimated:YES];
+    [alert wya_addAction:defaultAction];
+    [alert wya_addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
+
 }
 
 /// 自定义右侧按钮点击事件
@@ -99,10 +146,10 @@
                                                   forIndexPath:indexPath];
         return cell;
     } else {
-        WYAEditCameraCell * cell =
+        WYASendDynamicImageEditCell * cell =
         [collectionView dequeueReusableCellWithReuseIdentifier:EditCameraCell
                                                   forIndexPath:indexPath];
-        cell.image               = self.dataSource[indexPath.item];
+        cell.imgView.image               = self.dataSource[indexPath.item];
         cell.editBlock           = ^{
             [self.dataSource removeObjectAtIndex:indexPath.item];
             self.allImage = NO;
@@ -222,7 +269,7 @@
             object.dataSource         = self;
             object.backgroundColor    = [UIColor wya_whiteColor];
             [object registerNib:[UINib nibWithNibName:@"WYACameraCell" bundle:nil] forCellWithReuseIdentifier:CameraCell];
-            [object registerClass:[WYAEditCameraCell class] forCellWithReuseIdentifier:EditCameraCell];
+            [object registerNib:[UINib nibWithNibName:@"WYASendDynamicImageEditCell" bundle:nil] forCellWithReuseIdentifier:EditCameraCell];
             object;
         });
     }

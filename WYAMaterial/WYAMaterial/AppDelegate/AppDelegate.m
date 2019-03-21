@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "RootViewController.h"
+#import "WYALoginViewController.h"
 #import "WYAMaterialViewController.h"
 @interface AppDelegate ()
 
@@ -17,10 +18,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [WXApi registerApp:@"wx808acd6db9965c72"];
     [Bugly startWithAppId:@"209aebc96b"];
-//    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+
     self.window                             = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor             = [UIColor whiteColor];
+//    WYALoginViewController * login = [[WYALoginViewController alloc]init];
     RootViewController * rootViewController = [[RootViewController alloc] init];
     self.window.rootViewController          = rootViewController;
     [self.window makeKeyAndVisible];
@@ -49,4 +52,32 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+    return [WXApi handleOpenURL:url delegate:self];
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options{
+    return [WXApi handleOpenURL:url delegate:self];
+}
+
+#pragma mark ======= WXApiDelegate
+- (void)onReq:(BaseReq *)req{
+    NSLog(@"req==%@",req);
+}
+
+- (void)onResp:(BaseResp *)resp{
+    NSLog(@"resp==%@",resp);
+    SendAuthResp * sendResp = (SendAuthResp *)resp;
+    WYAUserDefaultObjectForKey(sendResp.code);
+}
+
+#pragma mark ======= Private Method
+- (void)getData{
+    // 先判断本地是否有access_token,如果有把token上传至后台，然后根据返回值进行操作
+    //    if (access_tken) {
+    //        // 上传至后台
+    //    } else {
+    //        // 需要用户去授权登录，将获取的code上传至后台，后台返回access_token保存至本地
+    //    }
+}
 @end

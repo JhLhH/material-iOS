@@ -14,24 +14,46 @@
 #import "WYAAgentRingCell.h"
 #import "WYAAgentRingCoverView.h"
 #import "WYAAgentRingSectionFootView.h"
-
+#import "WYAAgentRingCommentsView.h"
+#import <YYImage/YYImage.h>
+#import <IQKeyboardManager/IQKeyboardManager.h>
 @interface WYAHomeViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) WYAAgentRingViewModel * viewModel;
 @property (nonatomic, strong) NSArray * dataSource;
+@property (nonatomic, assign) BOOL isRefresh; // 判断是否已经触发了刷新
+@property (nonatomic, assign) CGFloat lastOffset_y; // 记录tableview最后偏移量
+@property (nonatomic, assign) CGFloat lastAlpha;    // 记录tableview最后的透明度
+
 @property (nonatomic, strong) WYAAgentRingCoverView * agentRingCoverView;
 @property (nonatomic, strong) UITableView * agentRingTableView;
 @property (nonatomic, strong) UIButton * sendDynamicButton; // 发动态按钮
 @property (nonatomic, strong) WYANoticeBar * noticeBar;
+@property (nonatomic, strong) YYAnimatedImageView * gifAnimatedImageView;
+@property (nonatomic, strong) WYAAgentRingCommentsView * commentsView;
 
 @end
 
 @implementation WYAHomeViewController
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navTitle = @"首页";
     [self setupUI];
     [self getNetWorkDataSource];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
+}
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self.agentRingTableView forKeyPath:@"contentOffset"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,17 +68,52 @@
 #pragma mark ======= Private Method
 - (void)setupUI {
     self.automaticallyAdjustsScrollViewInsets = NO;
+    [self.navBar wya_addRightNavBarButtonWithNormalTitle:@[@"发布"] normalColor:@[[UIColor whiteColor]] highlightedColor:@[[UIColor whiteColor]]];
     self.navBar.backgroundColor  = [[UIColor blackColor] colorWithAlphaComponent:0.5f];
     self.agentRingTableView.tableHeaderView = self.agentRingCoverView;
     self.navTitleColor = [UIColor whiteColor];
     [self.view addSubview:self.agentRingTableView];
     [self.view addSubview:self.noticeBar];
     [self.view addSubview:self.sendDynamicButton];
+    [self.view addSubview:self.gifAnimatedImageView];
+    [self.view addSubview:self.commentsView];
 }
 
 - (void)getNetWorkDataSource {
     self.dataSource = [self.viewModel testSource];
     [self.agentRingTableView reloadData];
+}
+
+- (void)wya_customrRightBarButtonItemPressed:(UIButton *)sender{
+
+}
+
+- (void)addAgentRingRefresh{
+    NSLog(@"调用一次");
+    self.gifAnimatedImageView.hidden = NO;
+}
+
+- (void)showImageBrowserWithModel:(WYAAgentRingModel *)model index:(NSInteger)index{
+    NSMutableArray * array = [NSMutableArray array];
+    for (NSInteger i = 0; i < model.urls.count; i++) {
+        [array addObject:[UIImage imageNamed:@"1"]];
+    }
+    WYAImageBrowser * imageBrowser = [[WYAImageBrowser alloc]init];
+    imageBrowser.frame = Window.bounds;
+    imageBrowser.images = [array copy];
+    imageBrowser.selectIndex = index;
+    imageBrowser.pageControlNormalColor = [UIColor wya_hex:@"#FFFFFF"];
+    imageBrowser.pageControlSelectColor = [UIColor wya_hex:@"#E7C083"];
+    __block WYAImageBrowser * imageB = imageBrowser;
+    imageBrowser.imageSelectBlock = ^(NSInteger index) {
+        [imageB removeFromSuperview];
+    };
+    [Window addSubview:imageBrowser];
+}
+
+- (void)agentRingCommentEdit{
+    self.commentsView.hidden = NO;
+    [self.commentsView.textView becomeFirstResponder];
 }
 
 #pragma mark ======= KVO
@@ -68,15 +125,45 @@
         NSLog(@"New:%f",point_y);
 
 
-        if (WYANavBarHeight > point_y >= WYANavBarHeight/2) {
-            // 浅色
-            CGFloat alp = (WYANavBarHeight - point_y) / WYANavBarHeight;
-            NSLog(@"alp==%f",alp);
-            self.navBar.backgroundColor = [[UIColor blackColor]colorWithAlphaComponent: + 0.5];
-        } else if (0 > point_y >= -WYANavBarHeight/2) {
-            // 深色
-            self.navBar.backgroundColor  = [[UIColor blackColor] colorWithAlphaComponent:0.5f];
+        if (point_y < -100) {
+            if (self.isRefresh == NO) {
+                [self addAgentRingRefresh];
+                self.isRefresh = YES;
+            }
+        } else if (point_y == 0) {
+            if (self.isRefresh == YES) {
+                self.isRefresh = NO;
+            }
         }
+
+        if (point_y > 0) {
+            if (self.lastOffset_y) {
+                if (point_y > self.lastOffset_y) {
+                    // 回弹
+                    CGFloat ccc = (point_y - self.lastOffset_y)/100;
+                    NSLog(@"ccc==%f",ccc);
+                    NSLog(@"lastAlp==%f",self.lastAlpha);
+                    if (self.lastAlpha) {
+                        self.lastAlpha = self.lastAlpha + ccc;
+                    } else {
+                        self.lastAlpha = 0.5 + ccc;
+                    }
+                    self.navBar.backgroundColor  = [[UIColor blackColor] colorWithAlphaComponent:self.lastAlpha > 1 ? 1 : self.lastAlpha];
+                }else{
+                    // 下拉
+                    CGFloat ppp = (self.lastOffset_y - point_y)/100;
+                    NSLog(@"ppp==%f",ppp);
+                    if (self.lastAlpha) {
+                        self.lastAlpha = self.lastAlpha - ppp;
+                    }
+
+                    self.navBar.backgroundColor  = [[UIColor blackColor] colorWithAlphaComponent:self.lastAlpha < 0.5 ? 0.5 : self.lastAlpha];
+                }
+            }
+            self.lastOffset_y = point_y;
+        }
+
+
     } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
@@ -92,6 +179,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    WeakSelf(weakSelf);
     WYAAgentRingCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.model              = self.dataSource[indexPath.section];
     cell.stretchBlock = ^(WYAAgentRingModel * _Nonnull model) {
@@ -106,12 +194,14 @@
 
     };
     cell.commentsBlock = ^(WYAAgentRingModel * _Nonnull model) {
-
+        [weakSelf agentRingCommentEdit];
     };
     cell.praiseBlock = ^(WYAAgentRingModel * _Nonnull model) {
 
     };
-//    cell.
+    cell.imageBlock = ^(WYAAgentRingModel * _Nonnull model, NSInteger index) {
+        [weakSelf showImageBrowserWithModel:model index:index];
+    };
     return cell;
 }
 
@@ -173,6 +263,9 @@
             [object registerClass:[WYAAgentRingCell class] forCellReuseIdentifier:@"cell"];
             [object registerClass:[WYAAgentRingSectionFootView class] forHeaderFooterViewReuseIdentifier:@"foot"];
             [object addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
+//            UIRefreshControl * refreshControl = [[UIRefreshControl alloc]init];
+//            [refreshControl addTarget:self action:@selector(refreshClick) forControlEvents:UIControlEventValueChanged];
+//            object.refreshControl = refreshControl;
             object;
         });
     }
@@ -186,7 +279,7 @@
             CGFloat object_x      = 0;
             CGFloat object_y      = 0;
             CGFloat object_width  = self.agentRingTableView.cmam_width;
-            CGFloat object_height = 200;
+            CGFloat object_height = 248 * SizeAdapter;
             CGRect object_rect    = CGRectMake(object_x, object_y, object_width, object_height);
 
             WYAAgentRingCoverView * object = [[WYAAgentRingCoverView alloc] init];
@@ -266,4 +359,49 @@
     return _noticeBar;
 }
 
+
+- (YYAnimatedImageView *)gifAnimatedImageView{
+    if(!_gifAnimatedImageView){
+        _gifAnimatedImageView = ({
+            CGFloat object_x = 50;
+            CGFloat object_y = self.noticeBar.cmam_bottom + 20 * SizeAdapter;
+            CGFloat object_width = 60 * SizeAdapter;
+            CGFloat object_height = 60 * SizeAdapter;
+            CGRect object_rect = CGRectMake(object_x, object_y,  object_width, object_height);
+            UIImage * image = [YYImage imageNamed:@"wya-applogo1"];
+            YYAnimatedImageView * object = [[YYAnimatedImageView alloc]initWithImage:image];
+            object.frame = object_rect;
+            object.hidden = YES;
+            object;
+       });
+    }
+    return _gifAnimatedImageView;
+}
+
+- (WYAAgentRingCommentsView *)commentsView{
+    if(!_commentsView){
+        _commentsView = ({
+            CGFloat object_x = 0;
+            CGFloat object_y = ScreenHeight - WYATabBarHeight - 49 * SizeAdapter;
+            CGFloat object_width = ScreenWidth;
+            CGFloat object_height = 49 * SizeAdapter;
+            CGRect object_rect = CGRectMake(object_x, object_y,  object_width, object_height);
+            WYAAgentRingCommentsView * object = [[WYAAgentRingCommentsView alloc]init];
+            object.frame = object_rect;
+            object.backgroundColor = [UIColor wya_whiteColor];
+            object.hidden = YES;
+            object.frameChangeBlock = ^(WYAAgentRingCommentsView * _Nonnull view, CGFloat height) {
+                CGFloat view_x = view.cmam_left;
+                CGFloat view_y = ScreenHeight - WYATabBarHeight - height;
+                CGFloat view_width = view.cmam_width;
+                CGFloat view_height = height;
+                CGRect view_rect = CGRectMake(view_x, view_y,  view_width, view_height);
+                view.frame = view_rect;
+            };
+            
+            object;
+       });
+    }
+    return _commentsView;
+}
 @end

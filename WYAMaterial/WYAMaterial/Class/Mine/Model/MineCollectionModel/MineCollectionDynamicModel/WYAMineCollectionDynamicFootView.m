@@ -30,9 +30,9 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
 
-    CGFloat commentsView_x      = 53 * SizeAdapter;
+    CGFloat commentsView_x      = 69 * SizeAdapter;
     CGFloat commentsView_y      = 0;
-    CGFloat commentsView_width  = ScreenWidth - 69 * SizeAdapter;
+    CGFloat commentsView_width  = ScreenWidth - 83 * SizeAdapter;
     CGFloat commentsView_height = [self getCommentsHeight];
     CGRect commentsView_rect    = CGRectMake(commentsView_x, commentsView_y, commentsView_width, commentsView_height);
     self.commentsView.frame     = commentsView_rect;
@@ -42,7 +42,7 @@
     CGFloat showCommentsButton_x      = self.commentsView.cmam_left;
     CGFloat showCommentsButton_y      = self.commentsView.cmam_bottom;
     CGFloat showCommentsButton_width  = self.commentsView.cmam_width;
-    CGFloat showCommentsButton_height = self.showCommentsButton.hidden ? 0 : 30 * SizeAdapter;
+    CGFloat showCommentsButton_height = self.showCommentsButton.hidden ? 0 : 40 * SizeAdapter;
     CGRect showCommentsButton_rect    = CGRectMake(showCommentsButton_x, showCommentsButton_y, showCommentsButton_width, showCommentsButton_height);
     self.showCommentsButton.frame     = showCommentsButton_rect;
 }
@@ -134,12 +134,12 @@
     NSMutableAttributedString * text = [self commentsAttributedStringWithModel:model];
 
     YYLabel * label               = [[YYLabel alloc] init];
-    label.preferredMaxLayoutWidth = ScreenWidth - 79 * SizeAdapter;
+    label.preferredMaxLayoutWidth = ScreenWidth - 93 * SizeAdapter;
     label.numberOfLines           = 0;
     label.attributedText          = text;
 
     if (model.show) {
-        CGSize introSize      = CGSizeMake(ScreenWidth - 79 * SizeAdapter, CGFLOAT_MAX);
+        CGSize introSize      = CGSizeMake(ScreenWidth - 93 * SizeAdapter, CGFLOAT_MAX);
         YYTextLayout * layout = [YYTextLayout layoutWithContainerSize:introSize text:text];
         label.textLayout      = layout;
         CGFloat introHeight   = layout.textBoundingSize.height + 10 * SizeAdapter;
@@ -168,16 +168,16 @@
     NSRange closeRange               = [string rangeOfString:closeString options:NSCaseInsensitiveSearch];
 
     [text yy_setFont:FONTS(12) range:nameRange];
-    [text yy_setColor:[UIColor blackColor] range:nameRange];
-    [text yy_setFont:FONTS(13) range:commentsRange];
-    [text yy_setColor:[UIColor lightGrayColor] range:commentsRange];
+    [text yy_setColor:[UIColor wya_hex:@"#584F60"] range:nameRange];
+    [text yy_setFont:FONTS(12) range:commentsRange];
+    [text yy_setColor:[UIColor wya_hex:@"#666666"] range:commentsRange];
     text.yy_lineSpacing = 2 * SizeAdapter;
-
+    text.yy_kern = [NSNumber numberWithInt:1 * SizeAdapter];
     if (model.show) {
         // 当前评论处于展开状态，添加收起评论，以及相关事件
         WeakSelf(weakSelf);
-        [text yy_setFont:FONT(13) range:closeRange];
-        [text yy_setColor:[UIColor blueColor] range:closeRange];
+        [text yy_setFont:FONT(12) range:closeRange];
+        [text yy_setColor:[UIColor wya_hex:@"#4787F2"] range:closeRange];
 
         YYTextHighlight * textHighlight = [YYTextHighlight new];
         [textHighlight setColor:[UIColor redColor]];
@@ -198,7 +198,7 @@
     NSMutableAttributedString * text = [[NSMutableAttributedString alloc] initWithString:@"...更多"];
 
     YYTextHighlight * textHighlight = [YYTextHighlight new];
-    [textHighlight setColor:[UIColor blueColor]];
+    [textHighlight setColor:[UIColor wya_hex:@"#4787F2"]];
     WeakSelf(weakSelf);
     textHighlight.tapAction = ^(UIView * containerView, NSAttributedString * text, NSRange range, CGRect rect) {
         StrongSelf(strongSelf);
@@ -240,7 +240,9 @@
     if (!_commentsView) {
         _commentsView = ({
             UIView * object        = [[UIView alloc] init];
-            object.backgroundColor = [UIColor wya_bgColor];
+            object.backgroundColor = [UIColor wya_hex:@"#F2F2F5"];
+            object.layer.cornerRadius = 5 * SizeAdapter;
+            object.layer.masksToBounds = YES;
             object;
         });
     }
