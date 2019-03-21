@@ -7,6 +7,7 @@
 //
 
 #import "WYAAgentRingCell.h"
+
 #import "WYAAgentRingModel.h"
 
 @interface WYAAgentRingCell ()
@@ -230,6 +231,7 @@
         self.userReleaseTimeLabel.text    = model.time;
         self.userReleaseContentLabel.text = model.content;
         self.forwardingButton.selected    = model.forwarding;
+        self.commentsButton.selected      = model.urls > 0 ? YES : NO;
         [self.collectionButton setTitle:[NSString stringWithFormat:@"%d", model.collection] forState:UIControlStateNormal];
         [self.praiseButton setTitle:[NSString stringWithFormat:@"%d", model.person] forState:UIControlStateNormal];
 
@@ -306,8 +308,8 @@
 - (UIImageView *)userLevelImageView {
     if (!_userLevelImageView) {
         _userLevelImageView = ({
-            UIImageView * object   = [[UIImageView alloc] init];
-            object.backgroundColor = randomColor;
+            UIImageView * object = [[UIImageView alloc] init];
+            object.image         = [UIImage imageNamed:@"icon_huizhang"];
             object;
         });
     }
@@ -332,12 +334,12 @@
             CGFloat space     = 6.f;
             UIButton * object = [[UIButton alloc] init];
             [object setTitle:@"转发" forState:UIControlStateNormal];
-            [object setTitle:@"已转" forState:UIControlStateSelected];
             [object setTitleColor:[UIColor wya_blackTextColor] forState:UIControlStateNormal];
             //            [object setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
             object.titleLabel.font            = FONT(12);
             object.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-            [object setImage:[UIImage imageNamed:@"点赞已选"] forState:UIControlStateNormal];
+            [object setImage:[UIImage imageNamed:@"icon_zhuanfa"] forState:UIControlStateNormal];
+            [object setImage:[UIImage imageNamed:@"icon_zhuanfablack"] forState:UIControlStateNormal];
             object.imageEdgeInsets = UIEdgeInsetsMake(0, -space / 2.0, 0, space / 2.0);
             object.titleEdgeInsets = UIEdgeInsetsMake(0, space / 2.0, 0, -space / 2.0);
             [object addCallBackAction:^(UIButton * button) {
@@ -393,10 +395,10 @@
             CGFloat space     = 6 * SizeAdapter;
             UIButton * object = [[UIButton alloc] init];
             [object setTitle:@"评论" forState:UIControlStateNormal];
-            [object setTitle:@"已评" forState:UIControlStateSelected];
             [object setTitleColor:[UIColor wya_blackTextColor] forState:UIControlStateNormal];
             object.titleLabel.font = FONT(12);
-            [object setImage:[UIImage imageNamed:@"点赞已选"] forState:UIControlStateNormal];
+            [object setImage:[UIImage imageNamed:@"icon_pinglun"] forState:UIControlStateNormal];
+            [object setImage:[UIImage imageNamed:@"icon_pinglun_press"] forState:UIControlStateSelected];
             object.imageEdgeInsets = UIEdgeInsetsMake(0, -space / 2.0, 0, space / 2.0);
             object.titleEdgeInsets = UIEdgeInsetsMake(0, space / 2.0, 0, -space / 2.0);
             [object addCallBackAction:^(UIButton * button) {
@@ -417,7 +419,7 @@
             UIButton * object      = [[UIButton alloc] init];
             object.titleLabel.font = FONT(12);
             [object setTitleColor:[UIColor wya_blackTextColor] forState:UIControlStateNormal];
-            [object setImage:[UIImage imageNamed:@"点赞已选"] forState:UIControlStateNormal];
+            [object setImage:[UIImage imageNamed:@"icon_collect_press"] forState:UIControlStateNormal];
             object.imageEdgeInsets = UIEdgeInsetsMake(0, -space / 2.0, 0, space / 2.0);
             object.titleEdgeInsets = UIEdgeInsetsMake(0, space / 2.0, 0, -space / 2.0);
             [object addCallBackAction:^(UIButton * button) {
@@ -438,7 +440,8 @@
             UIButton * object = [[UIButton alloc] init];
             [object setTitleColor:[UIColor wya_blackTextColor] forState:UIControlStateNormal];
             object.titleLabel.font = FONT(12);
-            [object setImage:[UIImage imageNamed:@"点赞已选"] forState:UIControlStateNormal];
+            [object setImage:[UIImage imageNamed:@"icon_dianzan"] forState:UIControlStateNormal];
+            [object setImage:[UIImage imageNamed:@"icon_dianzan_press"] forState:UIControlStateSelected];
             object.imageEdgeInsets = UIEdgeInsetsMake(0, -space / 2.0, 0, space / 2.0);
             object.titleEdgeInsets = UIEdgeInsetsMake(0, space / 2.0, 0, -space / 2.0);
             [object addCallBackAction:^(UIButton * button) {

@@ -319,7 +319,7 @@
             CGRect object_rect    = CGRectMake(object_x, object_y, object_width, object_height);
 
             UIButton * object = [[UIButton alloc] initWithFrame:object_rect];
-            [object setBackgroundImage:[UIImage wya_createImageWithColor:[UIColor redColor]] forState:UIControlStateNormal];
+            [object setImage:[UIImage imageNamed:@"icon_add"] forState:UIControlStateNormal];
             object.layer.cornerRadius  = object_width / 2;
             object.layer.masksToBounds = YES;
             [object addCallBackAction:^(UIButton * button) {
@@ -346,7 +346,7 @@
             WYANoticeBar * object = [[WYANoticeBar alloc]
                 initWithFrame:object_rect];
             object.showNoticeButton      = YES;
-            object.noticeButtonImage     = [UIImage imageNamed:@"1"];
+            object.noticeButtonImage     = [UIImage imageNamed:@"icon_notice"];
             object.showRightButton       = NO;
             object.showText              = @"待修改通知栏文字";
             object.showTextColor         = [UIColor wya_whiteColor];

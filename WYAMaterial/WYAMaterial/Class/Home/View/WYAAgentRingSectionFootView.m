@@ -46,6 +46,8 @@
     CGFloat showCommentsButton_height = self.showCommentsButton.hidden ? 0 : 40 * SizeAdapter;
     CGRect showCommentsButton_rect    = CGRectMake(showCommentsButton_x, showCommentsButton_y, showCommentsButton_width, showCommentsButton_height);
     self.showCommentsButton.frame     = showCommentsButton_rect;
+
+    [self.showCommentsButton wya_setButtonImageLoctionRightWithSpace:3];
 }
 
 #pragma mark ======= Setter
@@ -256,6 +258,8 @@
             [object setTitle:@"更多评论" forState:UIControlStateNormal];
             [object setTitle:@"收起评论" forState:UIControlStateSelected];
             [object setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+            [object setImage:[UIImage imageNamed:@"icon_down"] forState:UIControlStateNormal];
+            [object setImage:[UIImage imageNamed:@"icon_up"] forState:UIControlStateSelected];
             [object setBackgroundColor:[UIColor wya_bgColor]];
             object.titleLabel.font = FONT(13);
             object.hidden          = YES;
