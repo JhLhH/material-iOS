@@ -83,7 +83,7 @@
         _sendButton = ({
             UIButton * object = [[UIButton alloc] init];
             [object setTitle:@"发送" forState:UIControlStateNormal];
-            [object setTitleColor:[UIColor wya_blackTextColor] forState:UIControlStateNormal];
+            [object setTitleColor:[UIColor wya_textBlackColor] forState:UIControlStateNormal];
             object.titleLabel.font = FONT(15);
             [object addTarget:self action:@selector(sendComments) forControlEvents:UIControlEventTouchUpInside];
             object;

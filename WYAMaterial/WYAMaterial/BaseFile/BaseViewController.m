@@ -37,7 +37,7 @@
 - (void)addCustomNavBar {
     NSArray * arrViewControllers = self.navigationController.viewControllers;
     if ([arrViewControllers indexOfObject:self] > 0) {
-        [self.navBar wya_goBackButtonWithImage:@"fanhui"];
+        [self.navBar wya_goBackButtonWithImage:@"icon_back"];
     }
     [self.view addSubview:self.navBar];
 }

@@ -64,9 +64,9 @@
 - (UILabel *)timeLabel {
     if (!_timeLabel) {
         _timeLabel = ({
-            UILabel * object = [[UILabel alloc] init];
-            object.font      = FONT(11);
-            object.textColor = [UIColor wya_grayTitleColor];
+            UILabel * object = [[UILabel alloc]init];
+            object.font = FONT(11);
+            object.textColor = [UIColor wya_textGrayColor];
             object;
         });
     }
@@ -76,9 +76,9 @@
 - (UILabel *)noticeContentLabel {
     if (!_noticeContentLabel) {
         _noticeContentLabel = ({
-            UILabel * object     = [[UILabel alloc] init];
-            object.font          = FONT(15);
-            object.textColor     = [UIColor wya_blackTextColor];
+            UILabel * object = [[UILabel alloc]init];
+            object.font = FONT(15);
+            object.textColor = [UIColor wya_textBlackColor];
             object.numberOfLines = 0;
             object;
         });

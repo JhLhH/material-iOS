@@ -29,10 +29,10 @@
     return self;
 }
 #pragma mark ======= Private Method
-- (void)setUI {
-    self.backgroundColor     = [UIColor whiteColor];
-    self.layer.shadowColor   = [UIColor wya_grayBGColor].CGColor;
-    self.layer.shadowOffset  = CGSizeMake(0, 0);
+- (void)setUI{
+    self.backgroundColor = [UIColor whiteColor];
+    self.layer.shadowColor = [UIColor wya_bgColor].CGColor;
+    self.layer.shadowOffset = CGSizeMake(0,0);
     self.layer.shadowOpacity = 1;
     self.layer.shadowRadius  = 2;
     self.layer.cornerRadius  = 10;

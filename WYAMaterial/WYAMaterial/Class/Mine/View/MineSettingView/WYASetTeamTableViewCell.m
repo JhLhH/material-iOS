@@ -90,9 +90,9 @@
 - (UILabel *)leftContentLabel {
     if (!_leftContentLabel) {
         _leftContentLabel = ({
-            UILabel * object = [[UILabel alloc] init];
-            object.textColor = [UIColor wya_grayTitleColor];
-            object.font      = FONT(12);
+            UILabel * object = [[UILabel alloc]init];
+            object.textColor = [UIColor wya_textGrayColor];
+            object.font = FONT(12);
             object;
         });
     }

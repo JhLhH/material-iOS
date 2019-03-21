@@ -54,7 +54,7 @@
 }
 
 - (void)configUI {
-    self.view.backgroundColor = [UIColor wya_grayBGColor];
+    self.view.backgroundColor = [UIColor wya_bgColor];
     [self.view addSubview:self.textSuperView];
     [self.textSuperView addSubview:self.textView];
     [self.view addSubview:self.collectionView];

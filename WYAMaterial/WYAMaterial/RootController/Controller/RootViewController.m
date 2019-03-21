@@ -37,17 +37,17 @@
     NSMutableArray * array           = [NSMutableArray array];
     RootControllerModel * item1Model = [RootControllerModel modelWithTitle:@"首页"
                                                                  className:@"WYAHomeViewController"
-                                                           normalImageName:@"home_normal"
-                                                         selectedImageName:@"home_selected"];
+                                                           normalImageName:@"icon_shouye"
+                                                         selectedImageName:@"icon_shouye_press"];
     RootControllerModel * item2Model = [RootControllerModel modelWithTitle:@"素材库"
                                                                  className:@"WYAMaterialViewController"
-                                                           normalImageName:@"More_normal"
-                                                         selectedImageName:@"More_selected"];
+                                                           normalImageName:@"icon_sucai"
+                                                         selectedImageName:@"icon_sucai_press"];
 
     RootControllerModel * item3Model = [RootControllerModel modelWithTitle:@"我的"
                                                                  className:@"WYAMineViewController"
-                                                           normalImageName:@"More_normal"
-                                                         selectedImageName:@"More_selected"];
+                                                           normalImageName:@"icon_me"
+                                                         selectedImageName:@"icon_me_press"];
     [array addObject:item1Model];
     [array addObject:item2Model];
     [array addObject:item3Model];
@@ -82,11 +82,11 @@
         nav.tabBarItem.image         = [model normalImage];
         nav.tabBarItem.selectedImage = [model selectedImage];
         CGFloat fontSize             = self.tabBarTitleFont == 0 ? 14 : self.tabBarTitleFont;
-        [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : self.normalTitleColor == nil ? WYA_RGB_COLOR(102, 102, 102) : self.normalTitleColor,
+        [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : self.normalTitleColor == nil ? [UIColor wya_textBlackColor] : self.normalTitleColor,
                                                              NSFontAttributeName : FONT(fontSize) }
                                                  forState:UIControlStateNormal];
 
-        [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:self.selectedTitleColor == nil ? WYA_RGB_COLOR(77, 154, 247) : self.selectedTitleColor, NSForegroundColorAttributeName, nil] forState:(UIControlStateSelected)];
+        [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:self.selectedTitleColor == nil ? [UIColor wya_textBlackColor] : self.selectedTitleColor, NSForegroundColorAttributeName, nil] forState:(UIControlStateSelected)];
         [viewControllers addObject:nav];
     }
     self.viewControllers = viewControllers;

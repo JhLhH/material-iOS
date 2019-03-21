@@ -175,14 +175,14 @@
         _bgView = ({
             UIView * object               = [[UIView alloc] init];
             object.userInteractionEnabled = YES;
-            object.backgroundColor        = [UIColor whiteColor];
-            object.layer.shadowColor      = [UIColor wya_grayBGColor].CGColor;
-            object.layer.shadowOffset     = CGSizeMake(0, 0);
-            object.layer.shadowOpacity    = 1;
-            object.layer.shadowRadius     = 2;
-            object.layer.cornerRadius     = 10;
-            object.layer.masksToBounds    = YES;
-            object.clipsToBounds          = NO;
+            object.backgroundColor = [UIColor whiteColor];
+            object.layer.shadowColor = [UIColor wya_bgColor].CGColor;
+            object.layer.shadowOffset = CGSizeMake(0,0);
+            object.layer.shadowOpacity = 1;
+            object.layer.shadowRadius = 2;
+            object.layer.cornerRadius = 10;
+            object.layer.masksToBounds = YES;
+            object.clipsToBounds = NO;
             object;
         });
     }
@@ -220,10 +220,10 @@
 - (UILabel *)userNameLabel {
     if (!_userNameLabel) {
         _userNameLabel = ({
-            UILabel * object     = [[UILabel alloc] init];
-            object.font          = FONT(18);
-            object.textColor     = [UIColor wya_blackTextColor];
-            object.text          = @"寂地鲸鱼";
+            UILabel * object = [[UILabel alloc]init];
+            object.font = FONT(18);
+            object.textColor = [UIColor wya_textBlackColor];
+            object.text = @"寂地鲸鱼";
             object.textAlignment = NSTextAlignmentCenter;
             object;
         });

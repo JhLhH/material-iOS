@@ -9,40 +9,72 @@
 #import "UIColor+WYAColor.h"
 
 @implementation UIColor (WYAColor)
-/// 白色
+#pragma mark ======= 基本配色
 + (UIColor *)wya_whiteColor {
     return [UIColor wya_hex:@"#FFFFFF"];
 }
-/// 蓝色
+
++ (UIColor *)wya_goldenColor{
+    return [UIColor wya_hex:@"#e7c083"];
+}
+
 + (UIColor *)wya_blueColor {
-    return [UIColor wya_hex:@"#108DE7"];
+    return [UIColor wya_hex:@"#4787f2"];
 }
-/// 底部tabbarNormal灰色
-+ (UIColor *)wya_grayTabbarTextColor {
-    return [UIColor wya_hex:@"#909090"];
+
++ (UIColor *)wya_blackColor{
+    return [UIColor wya_hex:@"333333"];
 }
-/// 背景色
+
++ (UIColor *)wya_lightBlackColor{
+    return [UIColor wya_hex:@"#584f60"];
+}
+
++ (UIColor *)wya_redColor {
+    return [UIColor wya_hex:@"#ff3c4a"];
+}
+
++ (UIColor *)wya_greenColor{
+    return [UIColor wya_hex:@"#26be76"];
+}
+
+
 + (UIColor *)wya_bgColor {
-    return [UIColor wya_hex:@"#F6F6F6"];
+    return [UIColor wya_hex:@"#f5f5f7"];
 }
-/// 灰色背景
-+ (UIColor *)wya_grayBGColor {
-    return [UIColor wya_hex:@"#DEDEDE"];
+
++ (UIColor *)wya_lineColor{
+    return [UIColor wya_hex:@"#e8e8e8"];
 }
-/// 灰色标题
-+ (UIColor *)wya_grayTitleColor {
-    return [UIColor wya_hex:@"#BEBEBE"];
+
+
+#pragma mark ======= 字体颜色
++ (UIColor *)wya_textLightBlackColor{
+    return [UIColor wya_hex:@"#584f60"];
 }
-/// 黑色标题
-+ (UIColor *)wya_blackTitleColor {
-    return [UIColor wya_hex:@"#000000"];
-}
-/// 黑色文字内容颜色
-+ (UIColor *)wya_blackTextColor {
+
++ (UIColor *)wya_textBlackColor{
     return [UIColor wya_hex:@"#333333"];
 }
-/// 红色
-+ (UIColor *)wya_redColor {
-    return [UIColor wya_hex:@"#FF352D"];
+
++ (UIColor *)wya_textWhitColorl{
+    return [UIColor wya_hex:@"#ffffff"];
 }
+
++ (UIColor *)wya_textDarkGrayColor{
+    return [UIColor wya_hex:@"#777777"];
+}
+
++ (UIColor *)wya_textGrayColor{
+    return [UIColor wya_hex:@"#999999"];
+}
+
++ (UIColor *)wya_textLightGrayColor{
+    return [UIColor wya_hex:@"#bbbbbb"];
+}
+
++ (UIColor *)wya_textOrangeColor{
+    return [UIColor wya_hex:@"#ff9100"];
+}
+
 @end
