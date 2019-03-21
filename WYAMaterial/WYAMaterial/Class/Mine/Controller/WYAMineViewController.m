@@ -48,7 +48,7 @@
 - (WYAMineHeaderView *)headerView {
     if (!_headerView) {
         _headerView = ({
-            WYAMineHeaderView * object = [[WYAMineHeaderView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, WYAStatusBarHeight + 270*SizeAdapter)];
+            WYAMineHeaderView * object = [[WYAMineHeaderView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 290*SizeAdapter)];
             object.model               = [WYAMineUserInfoModel initWithResults:@" "];
             object.settingActionBlock  = ^{
                 WYASettingViewController * tempVc = [[WYASettingViewController alloc] init];
@@ -64,7 +64,7 @@
 - (WYAMineBodyView *)bodyView {
     if (!_bodyView) {
         _bodyView = ({
-            WYAMineBodyView * object     = [[WYAMineBodyView alloc] initWithFrame:CGRectMake(10*SizeAdapter, self.headerView.cmam_bottom, ScreenWidth - 20*SizeAdapter, 130*SizeAdapter)];
+            WYAMineBodyView * object     = [[WYAMineBodyView alloc] initWithFrame:CGRectMake(10*SizeAdapter, self.headerView.cmam_bottom + 20*SizeAdapter, ScreenWidth - 20*SizeAdapter, 130*SizeAdapter)];
             object.collectionActionBlock = ^{
                 WYAMineCollectionViewController * tempVc = [[WYAMineCollectionViewController alloc] init];
                 tempVc.selectIndex                       = 0;

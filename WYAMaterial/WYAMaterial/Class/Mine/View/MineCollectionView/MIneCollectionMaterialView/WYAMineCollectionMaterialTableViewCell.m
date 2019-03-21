@@ -161,7 +161,6 @@
         _model = model;
         [self.userHeaderButton sd_setImageWithURL:[NSURL URLWithString:_model.mineCollectionUserIconName] forState:0];
         self.userNameLabel.text = _model.mineCollectionUserName;
-        [self.userLevelIconView sd_setImageWithURL:[NSURL URLWithString:_model.mineCollectionUserInfoImgString] placeholderImage:nil];
         self.userLevelLabel.text          = _model.mineCollectionUserInfoString;
         self.userTimeLabel.text           = _model.mineCollectionTimeString;
         self.userContentLabel.text        = _model.mineCollectionBodyString;
@@ -221,7 +220,7 @@
     if (!_userLevelIconView) {
         _userLevelIconView = ({
             UIImageView * object   = [[UIImageView alloc] init];
-            object.backgroundColor = [UIColor orangeColor];
+            object.image = [UIImage imageNamed:@"icon_huizhang"];
             object;
         });
     }
@@ -232,7 +231,7 @@
     if (!_userLevelLabel) {
         _userLevelLabel = ({
             UILabel * object = [[UILabel alloc] init];
-            object.textColor = [UIColor orangeColor];
+            object.textColor = [UIColor wya_goldenLevelTextColor];
             object.font      = FONT(11);
             object;
         });
@@ -258,7 +257,7 @@
     if (!_userContentLabel) {
         _userContentLabel = ({
             UILabel * object     = [[UILabel alloc] init];
-            object.textColor     = [UIColor blackColor];
+            object.textColor     = [UIColor wya_textBlackColor];
             object.font          = FONT(14);
             object.numberOfLines = 0;
             object;
@@ -298,8 +297,9 @@
         _collectionButton = ({
             UIButton * object = [[UIButton alloc] init];
             [object setTitle:@"收藏" forState:0];
-            [object setTitleColor:[UIColor blackColor] forState:0];
-            [object setTitleColor:[UIColor orangeColor] forState:UIControlStateHighlighted];
+            [object setTitleColor:[UIColor wya_textBlackColor] forState:0];
+            [object setImage:[UIImage imageNamed:@"icon_collect"] forState:UIControlStateNormal];
+            [object setImage:[UIImage imageNamed:@"icon_collect_press"] forState:UIControlStateSelected];
             [object addTarget:self action:@selector(collectionButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
             object.titleLabel.font = FONT(12);
             CGFloat space = 6*SizeAdapter;
@@ -316,7 +316,9 @@
         _forwardingButton = ({
             UIButton * object = [[UIButton alloc] init];
             [object setTitle:@"转发" forState:0];
-            [object setTitleColor:[UIColor blackColor] forState:0];
+            //            [object setTitle:@"已转发" forState:UIControlStateSelected];
+            [object setTitleColor:[UIColor wya_textBlackColor] forState:0];
+            [object setImage:[UIImage imageNamed:@"icon_zhuanfa"] forState:UIControlStateNormal];
             object.titleLabel.font = FONT(12);
             CGFloat space = 6*SizeAdapter;
             object.imageEdgeInsets = UIEdgeInsetsMake(0, -space / 2.0, 0, space / 2.0);
@@ -344,6 +346,7 @@
     }
 }
 - (void)collectionButtonClicked:(UIButton *)sender {
+    sender.selected = !sender.isSelected;
     if (self.collectionActionBlock) {
         self.collectionActionBlock(self);
     }

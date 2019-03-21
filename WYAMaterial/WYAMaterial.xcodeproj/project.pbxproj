@@ -45,6 +45,8 @@
 		953855792242795800AF7450 /* WYAMineCreateMaterialImgBodyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 953855782242795800AF7450 /* WYAMineCreateMaterialImgBodyView.m */; };
 		9538557E224325E900AF7450 /* WYAMineCollectionMaterialImgBodyview.m in Sources */ = {isa = PBXBuildFile; fileRef = 9538557D224325E900AF7450 /* WYAMineCollectionMaterialImgBodyview.m */; };
 		953855812243260300AF7450 /* WYAMineCollectionMaterialTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 953855802243260300AF7450 /* WYAMineCollectionMaterialTableViewCell.m */; };
+		9538558522437E5700AF7450 /* WYASendMaterialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9538558422437E5700AF7450 /* WYASendMaterialViewController.m */; };
+		953855882243857500AF7450 /* WYAMineCreateMaterialFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 953855872243857500AF7450 /* WYAMineCreateMaterialFootView.m */; };
 		955D770F223B913C00B3B1EE /* WYAContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 955D770E223B913C00B3B1EE /* WYAContentView.m */; };
 		955D7712223CD9E900B3B1EE /* WYAMineBodyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 955D7711223CD9E900B3B1EE /* WYAMineBodyView.m */; };
 		955D7716223CE2EF00B3B1EE /* WYASettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 955D7715223CE2EF00B3B1EE /* WYASettingViewController.m */; };
@@ -183,6 +185,10 @@
 		9538557D224325E900AF7450 /* WYAMineCollectionMaterialImgBodyview.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAMineCollectionMaterialImgBodyview.m; sourceTree = "<group>"; };
 		9538557F2243260300AF7450 /* WYAMineCollectionMaterialTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAMineCollectionMaterialTableViewCell.h; sourceTree = "<group>"; };
 		953855802243260300AF7450 /* WYAMineCollectionMaterialTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAMineCollectionMaterialTableViewCell.m; sourceTree = "<group>"; };
+		9538558322437E5700AF7450 /* WYASendMaterialViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYASendMaterialViewController.h; sourceTree = "<group>"; };
+		9538558422437E5700AF7450 /* WYASendMaterialViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYASendMaterialViewController.m; sourceTree = "<group>"; };
+		953855862243857500AF7450 /* WYAMineCreateMaterialFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAMineCreateMaterialFootView.h; sourceTree = "<group>"; };
+		953855872243857500AF7450 /* WYAMineCreateMaterialFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAMineCreateMaterialFootView.m; sourceTree = "<group>"; };
 		955D770D223B913C00B3B1EE /* WYAContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAContentView.h; sourceTree = "<group>"; };
 		955D770E223B913C00B3B1EE /* WYAContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAContentView.m; sourceTree = "<group>"; };
 		955D7710223CD9E900B3B1EE /* WYAMineBodyView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAMineBodyView.h; sourceTree = "<group>"; };
@@ -545,6 +551,8 @@
 				953855752242792700AF7450 /* WYAMineCreateMaterialTableViewCell.m */,
 				953855772242795800AF7450 /* WYAMineCreateMaterialImgBodyView.h */,
 				953855782242795800AF7450 /* WYAMineCreateMaterialImgBodyView.m */,
+				953855862243857500AF7450 /* WYAMineCreateMaterialFootView.h */,
+				953855872243857500AF7450 /* WYAMineCreateMaterialFootView.m */,
 			);
 			path = MineCreateMaterialView;
 			sourceTree = "<group>";
@@ -569,6 +577,15 @@
 				9538557D224325E900AF7450 /* WYAMineCollectionMaterialImgBodyview.m */,
 			);
 			path = MIneCollectionMaterialView;
+			sourceTree = "<group>";
+		};
+		9538558222437E2B00AF7450 /* SendMaterial */ = {
+			isa = PBXGroup;
+			children = (
+				9538558322437E5700AF7450 /* WYASendMaterialViewController.h */,
+				9538558422437E5700AF7450 /* WYASendMaterialViewController.m */,
+			);
+			path = SendMaterial;
 			sourceTree = "<group>";
 		};
 		955D771A223CEA0200B3B1EE /* ImgTextView */ = {
@@ -796,6 +813,7 @@
 		95DD8CAA2239E23800731A7E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				9538558222437E2B00AF7450 /* SendMaterial */,
 				952DE2C3223A46570098B208 /* ArticleController */,
 				952DE2C2223A464C0098B208 /* ImgTextController */,
 				95DD8CC72239E65400731A7E /* WYAMaterialViewController.h */,
@@ -1241,6 +1259,7 @@
 				95DD8CD52239E6A100731A7E /* WYAMineModel.m in Sources */,
 				95DAE467224120D00044E97D /* WYASettingTableViewCell.m in Sources */,
 				9538557E224325E900AF7450 /* WYAMineCollectionMaterialImgBodyview.m in Sources */,
+				9538558522437E5700AF7450 /* WYASendMaterialViewController.m in Sources */,
 				211F67F9223A31A700F7ACBB /* WYAAgentRingModel.m in Sources */,
 				9538556E224274A800AF7450 /* WYAMineCreateMaterialModel.m in Sources */,
 				95DD8CE42239E6FB00731A7E /* WYAHomeView.m in Sources */,
@@ -1261,6 +1280,7 @@
 				2193EEB2224218AC00FD61B9 /* WYASendDynamicViewModel.m in Sources */,
 				95DD8CDE2239E6CE00731A7E /* WYAMineViewModel.m in Sources */,
 				95C2FF8520F0533600ED829B /* RootControllerModel.m in Sources */,
+				953855882243857500AF7450 /* WYAMineCreateMaterialFootView.m in Sources */,
 				211F6802223B8E8300F7ACBB /* WYASendDynamicViewController.m in Sources */,
 				955D770F223B913C00B3B1EE /* WYAContentView.m in Sources */,
 				95C2FEDE20F0528C00ED829B /* main.m in Sources */,

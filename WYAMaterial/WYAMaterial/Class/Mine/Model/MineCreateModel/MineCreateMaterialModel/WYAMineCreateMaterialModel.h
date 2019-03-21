@@ -31,6 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isShowContent;
 /// 审核状态
 @property (nonatomic, copy) NSString * mineCreateAuditType;
+/// 失败原因
+@property (nonatomic, copy) NSString * failReasonString;
 
 /**
  获取图文数据模型
