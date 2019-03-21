@@ -21,13 +21,13 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TVE-dr-Qem">
                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MdU-MY-6fJ">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MdU-MY-6fJ">
                         <rect key="frame" x="25" y="0.0" width="25" height="25"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="25" id="1OQ-db-zoZ"/>
                             <constraint firstAttribute="height" constant="25" id="Lf4-t1-8aD"/>
                         </constraints>
+                        <state key="normal" backgroundImage="icon_delete"/>
                         <connections>
                             <action selector="buttonClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Tp3-VS-mwt"/>
                         </connections>
@@ -48,4 +48,7 @@
             <point key="canvasLocation" x="137.59999999999999" y="122.33883058470765"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="icon_delete" width="16" height="16"/>
+    </resources>
 </document>

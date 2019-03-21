@@ -19,6 +19,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
+        self.backgroundColor = [UIColor wya_whiteColor];
         [self addSubview:self.agentRingCoverImageView];
         [self addSubview:self.userHeaderImageView];
     }
@@ -31,14 +32,14 @@
     CGFloat agentRingCoverImageView_x      = self.cmam_left;
     CGFloat agentRingCoverImageView_y      = self.cmam_top;
     CGFloat agentRingCoverImageView_width  = self.cmam_width;
-    CGFloat agentRingCoverImageView_height = self.cmam_height - 23 * SizeAdapter;
+    CGFloat agentRingCoverImageView_height = self.cmam_height - 30 * SizeAdapter;
     CGRect agentRingCoverImageView_rect    = CGRectMake(agentRingCoverImageView_x, agentRingCoverImageView_y, agentRingCoverImageView_width, agentRingCoverImageView_height);
     self.agentRingCoverImageView.frame     = agentRingCoverImageView_rect;
 
     CGFloat userHeaderImageView_width  = 68 * SizeAdapter;
     CGFloat userHeaderImageView_height = userHeaderImageView_width;
     CGFloat userHeaderImageView_x      = self.cmam_right - userHeaderImageView_width - 15 * SizeAdapter;
-    CGFloat userHeaderImageView_y      = self.cmam_height - userHeaderImageView_height;
+    CGFloat userHeaderImageView_y      = self.cmam_height - userHeaderImageView_height - 7 * SizeAdapter;
 
     CGRect userHeaderImageView_rect = CGRectMake(userHeaderImageView_x, userHeaderImageView_y, userHeaderImageView_width, userHeaderImageView_height);
     self.userHeaderImageView.frame  = userHeaderImageView_rect;

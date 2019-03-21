@@ -14,6 +14,9 @@
 		211F6806223B95B200F7ACBB /* WYACameraCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 211F6803223B95B100F7ACBB /* WYACameraCell.m */; };
 		211F6807223B95B200F7ACBB /* WYACameraCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 211F6805223B95B100F7ACBB /* WYACameraCell.xib */; };
 		21271DD220F59341008EBAD1 /* BaseNetWorking.m in Sources */ = {isa = PBXBuildFile; fileRef = 21271DD120F59341008EBAD1 /* BaseNetWorking.m */; };
+		213B0FF42243A78000A1FF75 /* WYAReviewLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 213B0FF32243A78000A1FF75 /* WYAReviewLoginView.m */; };
+		21586AB22243B1FC00013F43 /* WYABottomLineTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 21586AB12243B1FC00013F43 /* WYABottomLineTextField.m */; };
+		21690E5722436E8F00333F88 /* WYARefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21690E5622436E8F00333F88 /* WYARefreshView.m */; };
 		2193EE79223FD40F00FD61B9 /* WYAMineCreateReviewSuccessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2193EE78223FD40F00FD61B9 /* WYAMineCreateReviewSuccessCell.m */; };
 		2193EE7D223FD49C00FD61B9 /* WYAMineCreateReviewFailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2193EE7C223FD49C00FD61B9 /* WYAMineCreateReviewFailCell.m */; };
 		2193EE82223FD6A800FD61B9 /* WYAMineCreateDynamicViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2193EE81223FD6A800FD61B9 /* WYAMineCreateDynamicViewModel.m */; };
@@ -74,7 +77,7 @@
 		95DD8CDB2239E6BC00731A7E /* WYAHomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD8CDA2239E6BC00731A7E /* WYAHomeViewModel.m */; };
 		95DD8CDE2239E6CE00731A7E /* WYAMineViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD8CDD2239E6CE00731A7E /* WYAMineViewModel.m */; };
 		95DD8CE42239E6FB00731A7E /* WYAHomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD8CE32239E6FB00731A7E /* WYAHomeView.m */; };
-		95DD8CE72239E70900731A7E /* WYALoginVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD8CE62239E70900731A7E /* WYALoginVIew.m */; };
+		95DD8CE72239E70900731A7E /* WYALoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD8CE62239E70900731A7E /* WYALoginView.m */; };
 		95DE135021ECB55700B5867B /* UIColor+WYAColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DE134F21ECB55700B5867B /* UIColor+WYAColor.m */; };
 		95F6322E223A592800BFC68C /* WYAMineCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95F6322D223A592800BFC68C /* WYAMineCreateViewController.m */; };
 		95F63231223A597600BFC68C /* WYAMineCreateMaterialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95F63230223A597600BFC68C /* WYAMineCreateMaterialViewController.m */; };
@@ -119,6 +122,12 @@
 		211F6805223B95B100F7ACBB /* WYACameraCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WYACameraCell.xib; sourceTree = "<group>"; };
 		21271DD020F59341008EBAD1 /* BaseNetWorking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseNetWorking.h; sourceTree = "<group>"; };
 		21271DD120F59341008EBAD1 /* BaseNetWorking.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseNetWorking.m; sourceTree = "<group>"; };
+		213B0FF22243A78000A1FF75 /* WYAReviewLoginView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAReviewLoginView.h; sourceTree = "<group>"; };
+		213B0FF32243A78000A1FF75 /* WYAReviewLoginView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAReviewLoginView.m; sourceTree = "<group>"; };
+		21586AB02243B1FC00013F43 /* WYABottomLineTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYABottomLineTextField.h; sourceTree = "<group>"; };
+		21586AB12243B1FC00013F43 /* WYABottomLineTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYABottomLineTextField.m; sourceTree = "<group>"; };
+		21690E5522436E8F00333F88 /* WYARefreshView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYARefreshView.h; sourceTree = "<group>"; };
+		21690E5622436E8F00333F88 /* WYARefreshView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYARefreshView.m; sourceTree = "<group>"; };
 		2193EE77223FD40F00FD61B9 /* WYAMineCreateReviewSuccessCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WYAMineCreateReviewSuccessCell.h; path = WYAMaterial/Class/Mine/View/MineCreateView/MineCreateDynamicView/WYAMineCreateReviewSuccessCell.h; sourceTree = SOURCE_ROOT; };
 		2193EE78223FD40F00FD61B9 /* WYAMineCreateReviewSuccessCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WYAMineCreateReviewSuccessCell.m; path = WYAMaterial/Class/Mine/View/MineCreateView/MineCreateDynamicView/WYAMineCreateReviewSuccessCell.m; sourceTree = SOURCE_ROOT; };
 		2193EE7B223FD49C00FD61B9 /* WYAMineCreateReviewFailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAMineCreateReviewFailCell.h; sourceTree = "<group>"; };
@@ -246,8 +255,8 @@
 		95DD8CDD2239E6CE00731A7E /* WYAMineViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAMineViewModel.m; sourceTree = "<group>"; };
 		95DD8CE22239E6FB00731A7E /* WYAHomeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAHomeView.h; sourceTree = "<group>"; };
 		95DD8CE32239E6FB00731A7E /* WYAHomeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAHomeView.m; sourceTree = "<group>"; };
-		95DD8CE52239E70900731A7E /* WYALoginVIew.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYALoginVIew.h; sourceTree = "<group>"; };
-		95DD8CE62239E70900731A7E /* WYALoginVIew.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYALoginVIew.m; sourceTree = "<group>"; };
+		95DD8CE52239E70900731A7E /* WYALoginView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYALoginView.h; sourceTree = "<group>"; };
+		95DD8CE62239E70900731A7E /* WYALoginView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYALoginView.m; sourceTree = "<group>"; };
 		95DE134E21ECB55700B5867B /* UIColor+WYAColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+WYAColor.h"; sourceTree = "<group>"; };
 		95DE134F21ECB55700B5867B /* UIColor+WYAColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+WYAColor.m"; sourceTree = "<group>"; };
 		95F6322C223A592800BFC68C /* WYAMineCreateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAMineCreateViewController.h; sourceTree = "<group>"; };
@@ -871,8 +880,12 @@
 		95DD8CB62239E24200731A7E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				95DD8CE52239E70900731A7E /* WYALoginVIew.h */,
-				95DD8CE62239E70900731A7E /* WYALoginVIew.m */,
+				21586AB02243B1FC00013F43 /* WYABottomLineTextField.h */,
+				21586AB12243B1FC00013F43 /* WYABottomLineTextField.m */,
+				95DD8CE52239E70900731A7E /* WYALoginView.h */,
+				95DD8CE62239E70900731A7E /* WYALoginView.m */,
+				213B0FF22243A78000A1FF75 /* WYAReviewLoginView.h */,
+				213B0FF32243A78000A1FF75 /* WYAReviewLoginView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -891,6 +904,8 @@
 				211F67FE223A5EC000F7ACBB /* WYAAgentRingSectionFootView.m */,
 				2193EEBD22426DE900FD61B9 /* WYAAgentRingCommentsView.h */,
 				2193EEBE22426DE900FD61B9 /* WYAAgentRingCommentsView.m */,
+				21690E5522436E8F00333F88 /* WYARefreshView.h */,
+				21690E5622436E8F00333F88 /* WYARefreshView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1240,6 +1255,7 @@
 				2193EEAF2242181E00FD61B9 /* WYASendDynamicDraftModel.m in Sources */,
 				953855792242795800AF7450 /* WYAMineCreateMaterialImgBodyView.m in Sources */,
 				2193EE9922408FD200FD61B9 /* WYAMineCollectionDynamicModel.m in Sources */,
+				21586AB22243B1FC00013F43 /* WYABottomLineTextField.m in Sources */,
 				95DD8CD52239E6A100731A7E /* WYAMineModel.m in Sources */,
 				95DAE467224120D00044E97D /* WYASettingTableViewCell.m in Sources */,
 				9538557E224325E900AF7450 /* WYAMineCollectionMaterialImgBodyview.m in Sources */,
@@ -1260,6 +1276,7 @@
 				955D7723223CFDE300B3B1EE /* WYAImgTextBodyView.m in Sources */,
 				2193EE9D2240919900FD61B9 /* WYAMineCollectionDynamicCell.m in Sources */,
 				95F63234223A599F00BFC68C /* WYAMineCreateDynamicViewController.m in Sources */,
+				213B0FF42243A78000A1FF75 /* WYAReviewLoginView.m in Sources */,
 				2193EEB2224218AC00FD61B9 /* WYASendDynamicViewModel.m in Sources */,
 				95DD8CDE2239E6CE00731A7E /* WYAMineViewModel.m in Sources */,
 				95C2FF8520F0533600ED829B /* RootControllerModel.m in Sources */,
@@ -1278,6 +1295,7 @@
 				2193EEBB22423BA300FD61B9 /* WYASendDynamicImageEditCell.m in Sources */,
 				211F67FF223A5EC000F7ACBB /* WYAAgentRingSectionFootView.m in Sources */,
 				95C2FF8620F0533600ED829B /* AppDelegate.m in Sources */,
+				21690E5722436E8F00333F88 /* WYARefreshView.m in Sources */,
 				955D7712223CD9E900B3B1EE /* WYAMineBodyView.m in Sources */,
 				2193EE8A22407E1600FD61B9 /* WYAMineCreateReviewSuccessFootView.m in Sources */,
 				95F63247223B37E300BFC68C /* WYANoticeTableViewCell.m in Sources */,
@@ -1298,7 +1316,7 @@
 				95DD8CC62239E2C300731A7E /* WYAMaterialViewModel.m in Sources */,
 				211F67FC223A337800F7ACBB /* WYAAgentRingViewModel.m in Sources */,
 				953855722242774900AF7450 /* WYAMineCollectionMaterialModel.m in Sources */,
-				95DD8CE72239E70900731A7E /* WYALoginVIew.m in Sources */,
+				95DD8CE72239E70900731A7E /* WYALoginView.m in Sources */,
 				95F63231223A597600BFC68C /* WYAMineCreateMaterialViewController.m in Sources */,
 				95C2FF8020F0533600ED829B /* WYAHomeViewController.m in Sources */,
 				95F6322E223A592800BFC68C /* WYAMineCreateViewController.m in Sources */,

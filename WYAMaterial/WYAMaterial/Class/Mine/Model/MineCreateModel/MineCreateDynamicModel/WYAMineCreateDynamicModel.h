@@ -53,6 +53,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, assign) int reviewStatus;
 
+@property (nonatomic, copy) NSString * failReslut;
+
 @property (nonatomic, assign) BOOL show;
 
 @property (nonatomic, assign) BOOL contentShow;

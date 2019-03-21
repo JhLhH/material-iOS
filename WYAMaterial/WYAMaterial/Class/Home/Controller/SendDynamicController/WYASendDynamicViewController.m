@@ -43,14 +43,17 @@
 - (void)configNavBar {
     self.navTitle               = @"发布动态";
     self.navBar.delegate        = self;
-    self.navBar.navTitleColor   = [UIColor whiteColor];
-    self.navBar.backgroundColor = [UIColor blackColor];
+    self.navBar.navTitleColor   = [UIColor wya_whiteColor];
+    self.navTitleFont = 18 * SizeAdapter;
+    self.navBar.backgroundColor = [UIColor wya_textBlackColor];
+    self.leftBarButtonItemTitleFont = 15 * SizeAdapter;
+    self.rightBarButtonItemTitleFont = 15 * SizeAdapter;
     [self.navBar wya_goBackButtonWithTitle:@"取消"
                                normalColor:[UIColor wya_whiteColor]
                           highlightedColor:nil];
     [self.navBar wya_addRightNavBarButtonWithNormalTitle:@[ @"发布" ]
-                                             normalColor:@[ [UIColor whiteColor] ]
-                                        highlightedColor:nil];
+                                             normalColor:@[ [UIColor wya_whiteColor] ]
+                                        highlightedColor:@[ [UIColor wya_whiteColor] ]];
 }
 
 - (void)configUI {
@@ -76,13 +79,14 @@
     CGFloat column = (self.dataSource.count + (self.allImage ? 0 : 1)) % 3;
     if (row > 0) {
         if (column > 0) {
-            self.collectionView.cmam_height = (height + 20 * SizeAdapter) * (row + 1);
+            self.collectionView.cmam_height = (height + 20 * SizeAdapter) * (row + 1) + 20 * SizeAdapter;
         } else {
-            self.collectionView.cmam_height = (height + 20 * SizeAdapter) * row;
+            self.collectionView.cmam_height = (height + 20 * SizeAdapter) * row + 20 * SizeAdapter;
         }
     } else {
-        self.collectionView.cmam_height = height + 20 * SizeAdapter;
+        self.collectionView.cmam_height = height + 20 * SizeAdapter + 20 * SizeAdapter;
     }
+
 }
 
 #pragma mark ======= WYANavBarDelegate
@@ -259,7 +263,7 @@
             CGFloat object_x      = 0;
             CGFloat object_y      = self.textSuperView.cmam_bottom;
             CGFloat object_width  = self.view.cmam_width;
-            CGFloat object_height = (ScreenWidth - 40 * SizeAdapter) / 3 + 20 * SizeAdapter;
+            CGFloat object_height = (ScreenWidth - 40 * SizeAdapter) / 3 + 40 * SizeAdapter;
             CGRect object_rect    = CGRectMake(object_x, object_y, object_width, object_height);
 
             UICollectionView * object = [[UICollectionView alloc] initWithFrame:object_rect collectionViewLayout:layout];

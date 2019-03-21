@@ -131,6 +131,7 @@
     }
     model.comments     = [arr copy];
     model.reviewStatus = status;
+    model.failReslut = @"这个是失败原因，哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈的his哈佛和地方的花覅股好多个已还是丢回的";
     return model;
 }
 @end

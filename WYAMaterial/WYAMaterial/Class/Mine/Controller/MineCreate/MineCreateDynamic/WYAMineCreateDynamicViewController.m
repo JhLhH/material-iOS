@@ -117,7 +117,7 @@
     if (model.reviewStatus == 1) {
         return [WYAMineCreateReviewSuccessFootView getFootHeightWithModel:model];
     } else {
-        return 0.01;
+        return 1 * SizeAdapter;
     }
 }
 
@@ -143,7 +143,9 @@
         };
         return foot;
     } else {
-        return [[UIView alloc] init];
+        UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 1 * SizeAdapter)];
+        view.backgroundColor = [UIColor wya_lineColor];
+        return view;
     }
 }
 

@@ -24,9 +24,9 @@
 
     self.window                 = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
-    //    WYALoginViewController * login = [[WYALoginViewController alloc]init];
-    RootViewController * rootViewController = [[RootViewController alloc] init];
-    self.window.rootViewController          = rootViewController;
+    WYALoginViewController * login = [[WYALoginViewController alloc]init];
+//    RootViewController * rootViewController = [[RootViewController alloc] init];
+    self.window.rootViewController          = login;
     [self.window makeKeyAndVisible];
     return YES;
 }

@@ -83,7 +83,12 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return [WYAMineCollectionDynamicFootView getFootHeightWithModel:self.dataSource[section]];
+    WYAMineCollectionDynamicModel * model = self.dataSource[section];
+    if (model.comments.count > 0) {
+        return [WYAMineCollectionDynamicFootView getFootHeightWithModel:self.dataSource[section]];
+    } else {
+        return 1 * SizeAdapter;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -91,20 +96,27 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    WYAMineCollectionDynamicFootView * foot = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"foot"];
-    foot.model                              = self.dataSource[section];
-    foot.stretchBlock                       = ^(WYAMineCollectionDynamicModel * _Nonnull model) {
-        NSLog(@"model.show==%d", model.show);
-        [tableView beginUpdates];
-        [tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
-        [tableView endUpdates];
-    };
-    foot.singleCommentsBlock = ^(WYAMineCollectionDynamicModel * _Nonnull model) {
-        [tableView beginUpdates];
-        [tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
-        [tableView endUpdates];
-    };
-    return foot;
+    WYAMineCollectionDynamicModel * model = self.dataSource[section];
+    if (model.comments.count > 0) {
+        WYAMineCollectionDynamicFootView * foot = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"foot"];
+        foot.model                              = self.dataSource[section];
+        foot.stretchBlock                       = ^(WYAMineCollectionDynamicModel * _Nonnull model) {
+            NSLog(@"model.show==%d", model.show);
+            [tableView beginUpdates];
+            [tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
+            [tableView endUpdates];
+        };
+        foot.singleCommentsBlock = ^(WYAMineCollectionDynamicModel * _Nonnull model) {
+            [tableView beginUpdates];
+            [tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
+            [tableView endUpdates];
+        };
+        return foot;
+    } else {
+        UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 1 * SizeAdapter)];
+        view.backgroundColor = [UIColor wya_lineColor];
+        return view;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
