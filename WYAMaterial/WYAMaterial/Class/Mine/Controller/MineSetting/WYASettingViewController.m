@@ -7,27 +7,131 @@
 //
 
 #import "WYASettingViewController.h"
+#import "WYASettingTableViewCell.h"
+#import "WYASetTeamTableViewCell.h"
 
-@interface WYASettingViewController ()
+#import "WYAMineModel.h"
 
+#define SETTING_CELLID @"WYASettingTableViewCell"
+#define SETEAM_CELLID @"WYASetTeamTableViewCell"
+
+@interface WYASettingViewController ()<UITableViewDelegate,UITableViewDataSource>
+@property (nonatomic, strong) UITableView * tableView;
+@property (nonatomic, strong) UIButton * logOutButton;
+@property (nonatomic, strong) NSArray * dataSource;
 @end
 
 @implementation WYASettingViewController
-
+#pragma mark ======= LifeCircle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navTitle = @"个人中心设置";
-    // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.logOutButton];
+    [self.logOutButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.view.mas_centerX);
+        make.bottom.equalTo(self.view.mas_bottom).offset(-WYABottomHeight);
+        make.size.mas_equalTo(CGSizeMake(300, 48));
+    }];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark ======= Lazy
+- (UIButton *)logOutButton{
+    if(!_logOutButton){
+        _logOutButton = ({
+            UIButton * object = [[UIButton alloc]init];
+            [object setTitle:@"退出登录" forState:UIControlStateNormal];
+            [object setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            object.layer.cornerRadius = 24;
+            object.layer.masksToBounds = YES;
+            [object wya_setBackgroundColor:[UIColor blackColor] forState:UIControlStateNormal];
+            object;
+       });
+    }
+    return _logOutButton;
 }
-*/
+
+- (UITableView *)tableView{
+    if(!_tableView){
+        _tableView = ({
+            UITableView * object = [[UITableView alloc]initWithFrame:CGRectMake(0, WYATopHeight, ScreenWidth, ScreenHeight - WYATopHeight - WYABottomHeight - 48) style:UITableViewStylePlain];
+            object.delegate       = self;
+            object.dataSource     = self;
+            object.backgroundColor = [UIColor whiteColor];
+            object.tableFooterView = [UIView new];
+            [object registerClass:[WYASettingTableViewCell class] forCellReuseIdentifier:SETTING_CELLID];
+            [object registerClass:[WYASetTeamTableViewCell class] forCellReuseIdentifier:SETEAM_CELLID];
+            object;
+       });
+    }
+    return _tableView;
+}
+- (NSArray *)dataSource{
+    if(!_dataSource){
+        _dataSource = ({
+            WYAMinSettingModel * model = [WYAMinSettingModel initWithReqults:@""];
+            NSMutableArray * array = [NSMutableArray array];
+            [array addObject:@[@"头像",model.userIconUrl]];
+            [array addObject:@[@"昵称",model.userName]];
+            [array addObject:@[@"手机号",model.userPhoneNum]];
+            [array addObject:@[@"微信号",model.weCheatNum]];
+
+            NSArray * teamArray = [WYAMinSettingTeamModel getModelWithReqults:@" "];
+
+            NSArray * object = @[[array copy],teamArray];
+            object;
+        });
+    }
+    return _dataSource;
+}
+#pragma mark ======= Delegate
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return self.dataSource.count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.dataSource[section] count];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        return 55;
+    }
+    return 70;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        WYASettingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SETTING_CELLID];
+        cell.row = indexPath.row;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.dataArray = [self.dataSource[0] wya_safeObjectAtIndex:indexPath.row];
+        return cell;
+    }
+    WYASetTeamTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SETEAM_CELLID];
+    cell.model = [self.dataSource[1] wya_safeObjectAtIndex:indexPath.row];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    UIView * footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 15)];
+    footView.backgroundColor = [UIColor wya_hex:@"#F2F2F2"];
+    return footView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return section == 0 ? 12 : 0.01;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+}
+
 
 @end

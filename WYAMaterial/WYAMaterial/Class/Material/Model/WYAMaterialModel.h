@@ -33,6 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSArray * bodyImgArray;
 /// 转发数量
 @property (nonatomic, copy) NSString * forwardingNumber;
+/// 是否需要展开
+@property (nonatomic, assign) BOOL isShowContent;
 
 /**
  获取图文数据模型

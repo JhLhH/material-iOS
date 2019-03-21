@@ -11,7 +11,6 @@
 @interface WYANoticeTableViewCell()
 @property (nonatomic, strong) UILabel * noticeContentLabel;
 @property (nonatomic, strong) UILabel * timeLabel;
-@property (nonatomic, strong) UIView * bgView;
 @end
 
 @implementation WYANoticeTableViewCell
@@ -19,10 +18,9 @@
 #pragma mark ======= LifeCircle
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        [self.bgView addSubview:self.noticeContentLabel];
-        [self.bgView addSubview:self.timeLabel];
-        [self.contentView addSubview:self.bgView];
-        self.backgroundColor = [UIColor wya_grayBGColor];
+        [self.contentView addSubview:self.noticeContentLabel];
+        [self.contentView addSubview:self.timeLabel];
+        self.contentView.backgroundColor = [UIColor whiteColor];
     }
     return self;
 }
@@ -30,22 +28,23 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
 
-    [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.mas_offset(self.contentView);
-        make.bottom.equalTo(self.contentView.mas_bottom).offset(-15);
-    }];
+    CGFloat height;
+    if ([_model.contentString wya_heightWithFontSize:15 width:ScreenWidth - 87] > 70) {
+        height = [_model.contentString wya_heightWithFontSize:15 width:ScreenWidth - 87];
+    }else{
+        height = 70;
+    }
 
-    CGFloat height = [_model.contentString wya_heightWithFontSize:14 width:ScreenWidth-20];
     [self.noticeContentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView.mas_top).offset(5);
-        make.left.equalTo(self.contentView.mas_left).offset(10);
-        make.size.mas_equalTo(CGSizeMake(ScreenWidth - 20, height));
+        make.centerY.mas_equalTo(self.contentView);
+        make.left.equalTo(self.contentView.mas_left).offset(17);
+        make.size.mas_equalTo(CGSizeMake(ScreenWidth - 87, height));
     }];
 
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.noticeContentLabel.mas_bottom).offset(5);
-        make.left.mas_equalTo(self.noticeContentLabel.mas_left);
-        make.size.mas_equalTo(CGSizeMake(ScreenWidth - 20, 20));
+        make.centerY.mas_equalTo(self.contentView);
+        make.right.equalTo(self.contentView.mas_right).offset(16);
+        make.size.mas_equalTo(CGSizeMake(70, 20));
     }];
 }
 
@@ -66,7 +65,7 @@
     if(!_timeLabel){
         _timeLabel = ({
             UILabel * object = [[UILabel alloc]init];
-            object.font = FONT(12);
+            object.font = FONT(11);
             object.textColor = [UIColor wya_grayTitleColor];
             object;
        });
@@ -78,7 +77,7 @@
     if(!_noticeContentLabel){
         _noticeContentLabel = ({
             UILabel * object = [[UILabel alloc]init];
-            object.font = FONT(14);
+            object.font = FONT(15);
             object.textColor = [UIColor wya_blackTextColor];
             object.numberOfLines = 0;
             object;
@@ -87,19 +86,10 @@
     return _noticeContentLabel;
 }
 
-- (UIView *)bgView{
-    if(!_bgView){
-        _bgView = ({
-            UIView * object = [[UIView alloc]init];
-            object.backgroundColor = [UIColor wya_whiteColor];
-            object;
-        });
-    }
-    return _bgView;
-}
+
 #pragma mark ======= Public Method
 + (CGFloat)getCellHeightWithModel:(WYAMineNoticeModel *)model{
-    CGFloat cellHeight = 5 + [model.contentString wya_heightWithFontSize:14 width:ScreenWidth-20] + 5 + 35;
+    CGFloat cellHeight = [model.contentString wya_heightWithFontSize:15 width:ScreenWidth - 87] > 70 ? [model.contentString wya_heightWithFontSize:15 width:ScreenWidth - 87] + 20 : 70 + 20;
     return cellHeight;
 }
 

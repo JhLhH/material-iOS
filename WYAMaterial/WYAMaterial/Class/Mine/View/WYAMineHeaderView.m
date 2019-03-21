@@ -31,7 +31,7 @@
         [self addSubview:self.bgImageView];
 
         [self.bgView addSubview:self.userIconImageButton];
-        [self.bgView addSubview:self.editImageView];
+//        [self.bgView addSubview:self.editImageView];
         [self.bgView addSubview:self.userNameLabel];
         [self.bgView addSubview:self.userInfoLabel];
         [self.bgView addSubview:self.userinfoImageView];
@@ -76,11 +76,11 @@
         make.size.mas_equalTo(CGSizeMake(95, 95));
     }];
 
-    [self.editImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.userIconImageButton.mas_right).offset(0);
-        make.bottom.equalTo(self.userIconImageButton.mas_bottom).offset(0);
-        make.size.mas_equalTo(CGSizeMake(30, 30));
-    }];
+//    [self.editImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.equalTo(self.userIconImageButton.mas_right).offset(0);
+//        make.bottom.equalTo(self.userIconImageButton.mas_bottom).offset(0);
+//        make.size.mas_equalTo(CGSizeMake(30, 30));
+//    }];
 
     [self.userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.userIconImageButton.mas_bottom).offset(15);
@@ -272,9 +272,9 @@
 
 - (void)userIconButtonClicked:(UIButton *)sender{
     NSLog(@"点击头像");
-    if (self.editUserIconActionBlock) {
-        self.editUserIconActionBlock();
-    }
+//    if (self.editUserIconActionBlock) {
+//        self.editUserIconActionBlock();
+//    }
 }
 
 

@@ -37,10 +37,40 @@
 
 + (NSArray *)getModelsWithResults:(id)results{
     NSMutableArray * array = [NSMutableArray array];
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 3; i++) {
         WYAMineNoticeModel * model = [[WYAMineNoticeModel alloc]init];
         model.contentString = @"通知内容有多少内容文字统统就在这个页面展通知内容有多少内容文字统统就在这个页面展社交新零售数字素材库";
-        model.timeString = @"2019.03.15 11：11:11 - 2019.03.15 21：21:21";
+        model.timeString = @"下午6:01";
+        [array addObject:model];
+    }
+    return [array copy];
+}
+
+@end
+
+@implementation WYAMinSettingModel
+
++ (instancetype)initWithReqults:(id)results{
+    WYAMinSettingModel * model = [[WYAMinSettingModel alloc]init];
+    model.userIconUrl = @"1";
+    model.userName = @"漩涡鸣人";
+    model.userPhoneNum = @"12345678901";
+    model.weCheatNum = @"xuanwomingren123";
+    return model;
+}
+@end
+
+@implementation WYAMinSettingTeamModel
+
++ (NSArray *)getModelWithReqults:(id)results{
+    NSMutableArray * array = [NSMutableArray array];
+    for (int i = 0; i < 8; i++) {
+        WYAMinSettingTeamModel * model = [[WYAMinSettingTeamModel alloc]init];
+        model.teamIcon = @"1";
+        model.teamName = @"漩涡鸣人";
+        model.teamIntroduction = @"七代火影";
+        model.teamState = @"切换团队";
+
         [array addObject:model];
     }
     return [array copy];
