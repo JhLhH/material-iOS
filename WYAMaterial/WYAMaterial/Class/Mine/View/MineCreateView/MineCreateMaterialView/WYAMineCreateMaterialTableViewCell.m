@@ -322,6 +322,9 @@
             [object setTitleColor:[UIColor orangeColor] forState:UIControlStateHighlighted];
             [object addTarget:self action:@selector(collectionButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
             object.titleLabel.font = FONT(12);
+            CGFloat space = 6*SizeAdapter;
+            object.imageEdgeInsets = UIEdgeInsetsMake(0, -space / 2.0, 0, space / 2.0);
+            object.titleEdgeInsets = UIEdgeInsetsMake(0, space / 2.0, 0, -space / 2.0);
             object;
         });
     }
@@ -335,6 +338,9 @@
             [object setTitle:@"转发" forState:0];
             [object setTitleColor:[UIColor blackColor] forState:0];
             object.titleLabel.font = FONT(12);
+            CGFloat space = 6*SizeAdapter;
+            object.imageEdgeInsets = UIEdgeInsetsMake(0, -space / 2.0, 0, space / 2.0);
+            object.titleEdgeInsets = UIEdgeInsetsMake(0, space / 2.0, 0, -space / 2.0);
             [object addTarget:self action:@selector(forwardingButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
             object;
         });

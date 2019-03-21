@@ -66,9 +66,9 @@
             WYAMaterialViewController * vc = [[WYAMaterialViewController alloc] init];
             vc.selectIndex                 = 0;
             vc.menuViewStyle               = WYAMenuViewStyleLine;
-            vc.titleColorSelected          = WYA_RGB_COLOR(226, 193, 139);
-            vc.titleColorNormal            = [UIColor whiteColor];
-            vc.progressColor               = WYA_RGB_COLOR(226, 193, 139);
+            vc.titleColorSelected          = [UIColor wya_goldenColor];
+            vc.titleColorNormal            = [UIColor wya_goldenColor];
+            vc.progressColor               = [UIColor wya_goldenColor];
             vc.progressViewBottomSpace     = 5;
             vc.progressWidth               = 25;
             vc.progressHeight              = 3;

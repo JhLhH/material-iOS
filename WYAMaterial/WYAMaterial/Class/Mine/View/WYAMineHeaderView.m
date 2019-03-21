@@ -15,7 +15,7 @@
 @property (nonatomic, strong) UILabel * titleLabel;
 @property (nonatomic, strong) UIView * bgView;
 @property (nonatomic, strong) UIButton * userIconImageButton;
-@property (nonatomic, strong) UIImageView * editImageView;
+//@property (nonatomic, strong) UIImageView * editImageView;
 @property (nonatomic, strong) UILabel * userNameLabel;
 @property (nonatomic, strong) UILabel * userInfoLabel;
 @property (nonatomic, strong) UIImageView * userinfoImageView;
@@ -46,7 +46,7 @@
 
     [self.bgImageView mas_makeConstraints:^(MASConstraintMaker * make) {
         make.top.left.right.mas_equalTo(self);
-        make.height.mas_equalTo(200);
+        make.height.mas_equalTo(200*SizeAdapter);
     }];
 
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker * make) {
@@ -57,21 +57,21 @@
 
     [self.settingButton mas_makeConstraints:^(MASConstraintMaker * make) {
         make.centerY.mas_equalTo(self.titleLabel.mas_centerY);
-        make.right.equalTo(self.titleLabel.mas_right).offset(-10);
-        make.size.mas_equalTo(CGSizeMake(40, 40));
+        make.right.equalTo(self.titleLabel.mas_right).offset(-14*SizeAdapter);
+        make.size.mas_equalTo(CGSizeMake(22*SizeAdapter, 21*SizeAdapter));
     }];
 
     [self.bgView mas_makeConstraints:^(MASConstraintMaker * make) {
-        make.top.equalTo(self.bgImageView.mas_bottom).offset(-30);
-        make.left.equalTo(self.mas_left).offset(10);
-        make.right.equalTo(self.mas_right).offset(-10);
-        make.height.mas_equalTo(155);
+        make.top.equalTo(self.mas_top).offset(160*SizeAdapter);
+        make.left.equalTo(self.mas_left).offset(10*SizeAdapter);
+        make.right.equalTo(self.mas_right).offset(-10*SizeAdapter);
+        make.height.mas_equalTo(130*SizeAdapter);
     }];
 
     [self.userIconImageButton mas_makeConstraints:^(MASConstraintMaker * make) {
         make.centerX.mas_equalTo(self.bgView.mas_centerX);
-        make.top.equalTo(self.bgView.mas_top).offset(-95 * 0.5);
-        make.size.mas_equalTo(CGSizeMake(95, 95));
+        make.bottom.equalTo(self.bgImageView.mas_bottom).offset(11*SizeAdapter);
+        make.size.mas_equalTo(CGSizeMake(95*SizeAdapter, 95*SizeAdapter));
     }];
 
     //    [self.editImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -81,25 +81,25 @@
     //    }];
 
     [self.userNameLabel mas_makeConstraints:^(MASConstraintMaker * make) {
-        make.top.equalTo(self.userIconImageButton.mas_bottom).offset(15);
+        make.top.equalTo(self.userIconImageButton.mas_bottom).offset(16*SizeAdapter);
         make.centerX.mas_equalTo(self.bgView.mas_centerX);
-        make.height.mas_equalTo(25);
+        make.height.mas_equalTo(17*SizeAdapter);
         make.width.mas_equalTo(ScreenWidth);
     }];
 
-    CGFloat width = [self.userInfoLabel.text wya_widthWithFontSize:14 height:20];
+    CGFloat width = [self.userInfoLabel.text wya_widthWithFontSize:15 height:14*SizeAdapter];
 
     [self.userInfoLabel mas_makeConstraints:^(MASConstraintMaker * make) {
-        make.top.equalTo(self.userNameLabel.mas_bottom).offset(15);
+        make.top.equalTo(self.userNameLabel.mas_bottom).offset(13*SizeAdapter);
         make.centerX.mas_equalTo(self.bgView.mas_centerX);
-        make.height.mas_equalTo(20);
+        make.height.mas_equalTo(14*SizeAdapter);
         make.width.mas_equalTo(width);
     }];
 
     [self.userinfoImageView mas_makeConstraints:^(MASConstraintMaker * make) {
         make.right.equalTo(self.userInfoLabel.mas_left).offset(0);
-        make.top.equalTo(self.userNameLabel.mas_bottom).offset(15);
-        make.size.mas_equalTo(CGSizeMake(20, 20));
+        make.top.equalTo(self.userNameLabel.mas_bottom).offset(9*SizeAdapter);
+        make.size.mas_equalTo(CGSizeMake(18*SizeAdapter, 19*SizeAdapter));
     }];
 }
 
@@ -109,7 +109,7 @@
         _model = model;
         [self.userIconImageButton sd_setBackgroundImageWithURL:[NSURL URLWithString:_model.userIconUrlString] forState:UIControlStateNormal];
         self.userNameLabel.text = _model.userNameString;
-        self.userInfoLabel.text = @"啊实打实大重视程度发";
+        self.userInfoLabel.text = @"二级代理";
         [self layoutIfNeeded];
     }
 }
@@ -145,9 +145,7 @@
     if (!_settingButton) {
         _settingButton = ({
             UIButton * object = [[UIButton alloc] init];
-            [object setTitle:@"设置" forState:UIControlStateNormal];
-            [object setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            object.titleLabel.font = FONT(14);
+            [object setBackgroundImage:[UIImage imageNamed:@"icon_setup"] forState:UIControlStateNormal];
             [object addTarget:self action:@selector(settingButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
             object;
         });
@@ -161,7 +159,7 @@
             UILabel * object              = [[UILabel alloc] init];
             object.userInteractionEnabled = YES;
             object.text                   = @"个人中心";
-            object.textColor              = [UIColor whiteColor];
+            object.textColor              = [UIColor wya_textWhitColorl];
             object.font                   = FONT(18);
             object.textAlignment          = NSTextAlignmentCenter;
             object;
@@ -175,12 +173,12 @@
         _bgView = ({
             UIView * object               = [[UIView alloc] init];
             object.userInteractionEnabled = YES;
-            object.backgroundColor = [UIColor whiteColor];
+            object.backgroundColor = [UIColor wya_whiteColor];
             object.layer.shadowColor = [UIColor wya_bgColor].CGColor;
             object.layer.shadowOffset = CGSizeMake(0,0);
             object.layer.shadowOpacity = 1;
             object.layer.shadowRadius = 2;
-            object.layer.cornerRadius = 10;
+            object.layer.cornerRadius = 7.5*SizeAdapter;
             object.layer.masksToBounds = YES;
             object.clipsToBounds = NO;
             object;
@@ -203,19 +201,19 @@
     return _userIconImageButton;
 }
 
-- (UIImageView *)editImageView {
-    if (!_editImageView) {
-        _editImageView = ({
-            UIImageView * object          = [[UIImageView alloc] init];
-            object.userInteractionEnabled = YES;
-            object.backgroundColor        = [UIColor orangeColor];
-            object.layer.cornerRadius     = 15;
-            object.layer.masksToBounds    = YES;
-            object;
-        });
-    }
-    return _editImageView;
-}
+//- (UIImageView *)editImageView {
+//    if (!_editImageView) {
+//        _editImageView = ({
+//            UIImageView * object          = [[UIImageView alloc] init];
+//            object.userInteractionEnabled = YES;
+//            object.backgroundColor        = [UIColor orangeColor];
+//            object.layer.cornerRadius     = 15;
+//            object.layer.masksToBounds    = YES;
+//            object;
+//        });
+//    }
+//    return _editImageView;
+//}
 
 - (UILabel *)userNameLabel {
     if (!_userNameLabel) {
@@ -235,8 +233,8 @@
     if (!_userInfoLabel) {
         _userInfoLabel = ({
             UILabel * object     = [[UILabel alloc] init];
-            object.font          = FONT(14);
-            object.textColor     = [UIColor orangeColor];
+            object.font          = FONT(15);
+            object.textColor     = [UIColor wya_goldenLevelTextColor];
             object.text          = @"二级代理";
             object.textAlignment = NSTextAlignmentCenter;
             object;
@@ -249,9 +247,7 @@
     if (!_userinfoImageView) {
         _userinfoImageView = ({
             UIImageView * object       = [[UIImageView alloc] init];
-            object.backgroundColor     = [UIColor redColor];
-            object.layer.cornerRadius  = 10;
-            object.layer.masksToBounds = YES;
+            object.image = [UIImage imageNamed:@"icon_huizhang"];
             object;
         });
     }

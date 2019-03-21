@@ -33,18 +33,30 @@
     self.navBar.backgroundColor = [UIColor blackColor];
     self.navBar.isShowLine      = NO;
     self.navBar.delegate        = self;
-    [self.navBar wya_addRightNavBarButtonWithNormalTitle:@[ @"筛选" ]
-                                             normalColor:@[ [UIColor whiteColor] ]
-                                        highlightedColor:@[ [UIColor grayColor] ]];
+    [self.navBar wya_addRightNavBarButtonWithNormalImage:@[@"icon_release",@"icon_filter"] highlightedImg:@[]];
     [self.view addSubview:self.navBar];
 }
 
 - (void)wya_rightBarButtonItemPressed:(UIButton *)sender {
-    NSLog(@"筛选");
-    if (!self.screeningView.screenViewIsShow) {
-        [self.screeningView showScreenView];
-    } else {
-        [self.screeningView hidenScreenView];
+    NSInteger indexTag = sender.tag - 2000;
+    NSLog(@"筛选%ld", sender.tag);
+    switch (indexTag) {
+        case 0:
+            {
+                NSLog(@"发布素材");
+            }
+            break;
+        case 1:
+        {
+            if (!self.screeningView.screenViewIsShow) {
+                [self.screeningView showScreenView];
+            } else {
+                [self.screeningView hidenScreenView];
+            }
+        }
+            break;
+        default:
+            break;
     }
 }
 
@@ -106,9 +118,7 @@
         [self.navBar wya_addRightNavBarButtonWithNormalTitle:@[]];
     } else {
         self.navBar.navTitle = @"图文";
-        [self.navBar wya_addRightNavBarButtonWithNormalTitle:@[ @"筛选" ]
-                                                 normalColor:@[ [UIColor whiteColor] ]
-                                            highlightedColor:@[ [UIColor grayColor] ]];
+        [self.navBar wya_addRightNavBarButtonWithNormalImage:@[@"icon_release",@"icon_filter"] highlightedImg:@[]];
     }
 }
 

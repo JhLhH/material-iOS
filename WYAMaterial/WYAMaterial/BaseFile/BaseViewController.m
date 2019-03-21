@@ -137,8 +137,8 @@
             object.delegate        = self;
             object.navTitle        = @"素材库";
             object.isShowLine      = NO;
-            object.navTitleColor   = [UIColor whiteColor];
-            object.backgroundColor = [UIColor blackColor];
+            object.navTitleColor   = [UIColor wya_textWhitColorl];
+            object.backgroundColor = [UIColor wya_blackColor];
             object;
         });
     }

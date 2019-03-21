@@ -48,7 +48,7 @@
 - (WYAMineHeaderView *)headerView {
     if (!_headerView) {
         _headerView = ({
-            WYAMineHeaderView * object = [[WYAMineHeaderView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 330)];
+            WYAMineHeaderView * object = [[WYAMineHeaderView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, WYAStatusBarHeight + 270*SizeAdapter)];
             object.model               = [WYAMineUserInfoModel initWithResults:@" "];
             object.settingActionBlock  = ^{
                 WYASettingViewController * tempVc = [[WYASettingViewController alloc] init];
@@ -64,14 +64,14 @@
 - (WYAMineBodyView *)bodyView {
     if (!_bodyView) {
         _bodyView = ({
-            WYAMineBodyView * object     = [[WYAMineBodyView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.headerView.frame) + 20, ScreenWidth - 20, 200)];
+            WYAMineBodyView * object     = [[WYAMineBodyView alloc] initWithFrame:CGRectMake(10*SizeAdapter, self.headerView.cmam_bottom, ScreenWidth - 20*SizeAdapter, 130*SizeAdapter)];
             object.collectionActionBlock = ^{
                 WYAMineCollectionViewController * tempVc = [[WYAMineCollectionViewController alloc] init];
                 tempVc.selectIndex                       = 0;
                 tempVc.menuViewStyle                     = WYAMenuViewStyleLine;
-                tempVc.titleColorSelected                = WYA_RGB_COLOR(226, 193, 139);
-                tempVc.titleColorNormal                  = [UIColor whiteColor];
-                tempVc.progressColor                     = WYA_RGB_COLOR(226, 193, 139);
+                tempVc.titleColorSelected                = [UIColor wya_goldenColor];
+                tempVc.titleColorNormal                  = [UIColor wya_goldenColor];
+                tempVc.progressColor                     = [UIColor wya_goldenColor];
                 tempVc.progressViewBottomSpace           = 5;
                 tempVc.progressWidth                     = 25;
                 tempVc.progressHeight                    = 3;
@@ -84,9 +84,9 @@
                 WYAMineCreateViewController * tempVc = [[WYAMineCreateViewController alloc] init];
                 tempVc.selectIndex                   = 0;
                 tempVc.menuViewStyle                 = WYAMenuViewStyleLine;
-                tempVc.titleColorSelected            = WYA_RGB_COLOR(226, 193, 139);
-                tempVc.titleColorNormal              = [UIColor whiteColor];
-                tempVc.progressColor                 = WYA_RGB_COLOR(226, 193, 139);
+                tempVc.titleColorSelected            = [UIColor wya_goldenColor];
+                tempVc.titleColorNormal              = [UIColor wya_goldenColor];
+                tempVc.progressColor                 = [UIColor wya_goldenColor];
                 tempVc.progressViewBottomSpace       = 5;
                 tempVc.progressWidth                 = 25;
                 tempVc.progressHeight                = 3;
