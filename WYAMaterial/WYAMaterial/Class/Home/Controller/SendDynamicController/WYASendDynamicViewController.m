@@ -160,6 +160,7 @@
             [collectionView dequeueReusableCellWithReuseIdentifier:EditCameraCell
                                                       forIndexPath:indexPath];
         cell.imgView.image = self.dataSource[indexPath.item];
+        cell.imgView.contentMode = UIViewContentModeScaleAspectFill;
         cell.editBlock     = ^{
             [self.dataSource removeObjectAtIndex:indexPath.item];
             self.allImage = NO;
