@@ -69,7 +69,7 @@
     if (!_userHeaderImageView) {
         _userHeaderImageView = ({
             UIImageView * object       = [[UIImageView alloc] init];
-            object.image = [UIImage imageNamed:@"pic_moren"];
+            object.image = [UIImage imageNamed:@"pic_shouyeportrait"];
             object.layer.cornerRadius  = 8 * SizeAdapter;
             object.layer.masksToBounds = YES;
             object;

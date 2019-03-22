@@ -10,7 +10,7 @@
 #import "WYAMaterialCameraCell.h"
 #import "WYASendMaterialImageEditCell.h"
 #import "WYAMaterialLabelView.h"
-
+#import "WYAmaterialLabelViewController.h"
 
 
 #define CameraCell @"WYAMaterialCameraCell"
@@ -311,9 +311,16 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if(!_associatedLabelView){
         _associatedLabelView = ({
             WYAMaterialLabelView * object = [[WYAMaterialLabelView alloc]init];
+            [object addTarget:self action:@selector(associatedLabelViewPressed:) forControlEvents:UIControlEventTouchUpInside];
             object;
        });
     }
     return _associatedLabelView;
+}
+#pragma mark ======= Event
+- (void)associatedLabelViewPressed:(UIButton *)sender{
+    WYAmaterialLabelViewController * vc = [[WYAmaterialLabelViewController alloc]init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 @end

@@ -15,10 +15,10 @@
 @interface WYAContentView ()
 
 @property (nonatomic, strong) UILabel * titleLabel;
-@property (nonatomic, strong) UIView * btnBgView; //承载按钮的View
+@property (nonatomic, strong) UIScrollView * bgScrollView; //承载按钮的View
 @property (nonatomic, strong) UIButton * resetButton;
 @property (nonatomic, strong) UIButton * sureButton;
-@property (nonatomic, assign) NSInteger selectedTag; // 被选中的按钮的tag
+//@property (nonatomic, assign) NSInteger selectedTag; // 被选中的按钮的tag
 @property (nonatomic, assign) CGFloat btnBgViewHeight;
 @property (nonatomic, strong) NSMutableArray * selectedTitleArray;
 @end
@@ -33,7 +33,7 @@
         [self addSubview:self.titleLabel];
         [self addSubview:self.resetButton];
         [self addSubview:self.sureButton];
-        [self addSubview:self.btnBgView];
+        [self addSubview:self.bgScrollView];
         self.btnBgViewHeight = 100;
     }
     return self;
@@ -48,11 +48,11 @@
         make.size.mas_equalTo(CGSizeMake(70 * SizeAdapter, 16 * SizeAdapter));
     }];
 
-    [self.btnBgView mas_makeConstraints:^(MASConstraintMaker * make) {
+    [self.bgScrollView mas_makeConstraints:^(MASConstraintMaker * make) {
         make.left.equalTo(self.mas_left).offset(0);
         make.right.equalTo(self.mas_right).offset(0);
         make.top.equalTo(self.titleLabel.mas_bottom).offset(20 * SizeAdapter);
-        make.height.mas_equalTo(self.btnBgViewHeight);
+        make.height.mas_equalTo(self.btnBgViewHeight > 300*SizeAdapter ? 300*SizeAdapter : self.btnBgViewHeight);
     }];
 
     [self.resetButton mas_makeConstraints:^(MASConstraintMaker * make) {
@@ -66,6 +66,7 @@
         make.right.equalTo(self.mas_right).offset(0);
         make.size.mas_equalTo(CGSizeMake(ScreenWidth * 0.5, 44));
     }];
+    self.bgScrollView.contentSize = CGSizeMake(0, self.btnBgViewHeight);
 }
 
 #pragma mark ======= Setter
@@ -92,20 +93,23 @@
             [button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
             //根据计算文字的大小
             NSDictionary * attributes = @{NSFontAttributeName : [UIFont systemFontOfSize:14 * SizeAdapter]};
-            CGFloat length            = [_contentArray[i] boundingRectWithSize:CGSizeMake(ScreenWidth, 0) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil].size.width + 15;
+            CGFloat length            = [_contentArray[i] boundingRectWithSize:CGSizeMake(ScreenWidth, 0) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil].size.width + 15*SizeAdapter;
             //设置button的frame
-            button.frame = CGRectMake(10 * SizeAdapter + w, h, length + 15, 27*SizeAdapter);
+            button.frame = CGRectMake(10 * SizeAdapter + w, h, length + 15*SizeAdapter, 27*SizeAdapter);
             //当button的位置超出屏幕边缘时换行 ScreenWidth 只是button所在父视图的宽度
-            if (10 + w + length + 15 > ScreenWidth) {
+            if (10*SizeAdapter + w + length + 15*SizeAdapter > ScreenWidth) {
                 w            = 0;                                      //换行时将w置为0
-                h            = h + button.frame.size.height + 10;      //距离父视图也变化
-                button.frame = CGRectMake(10 + w, h, length + 15, 27*SizeAdapter); //重设button的frame
+                h            = h + button.frame.size.height + 10*SizeAdapter;      //距离父视图也变化
+                button.frame = CGRectMake(10*SizeAdapter + w, h, length + 15*SizeAdapter, 27*SizeAdapter); //重设button的frame
             }
             w = button.frame.size.width + button.frame.origin.x;
             if (i == _contentArray.count - 1) {
                 self.btnBgViewHeight = CGRectGetMaxY(button.frame);
             }
-            [self.btnBgView addSubview:button];
+            if (self.btnBgViewHeight > 300*SizeAdapter) {
+                self.bgScrollView.scrollEnabled = YES;
+            }
+            [self.bgScrollView addSubview:button];
         }
         [self layoutIfNeeded];
     }
@@ -140,6 +144,18 @@
     }
 }
 #pragma mark ======= Lazy
+
+- (UIScrollView *)bgScrollView{
+    if(!_bgScrollView){
+        _bgScrollView = ({
+            UIScrollView * object = [[UIScrollView alloc]init];
+            object.scrollEnabled = NO;
+            object;
+        });
+    }
+    return _bgScrollView;
+}
+
 - (NSMutableArray *)selectedTitleArray {
     if (!_selectedTitleArray) {
         _selectedTitleArray = ({
@@ -195,15 +211,4 @@
     }
     return _sureButton;
 }
-
-- (UIView *)btnBgView {
-    if (!_btnBgView) {
-        _btnBgView = ({
-            UIView * object = [[UIView alloc] init];
-            object;
-        });
-    }
-    return _btnBgView;
-}
-
 @end
