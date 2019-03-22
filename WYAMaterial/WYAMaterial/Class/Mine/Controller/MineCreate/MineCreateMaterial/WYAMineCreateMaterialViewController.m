@@ -13,7 +13,7 @@
 #import "WYAMineCreateMaterialFootView.h"
 
 #define CREATE_MATERIAL_CELLID @"WYAMineCreateMaterialTableViewCell"
-
+#define CREATE_MATERIAL_FOOT @"createMaterialFoot"
 @interface WYAMineCreateMaterialViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) NSMutableArray * dataSources;
@@ -24,7 +24,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navBar.hidden        = YES;
-    self.view.backgroundColor = randomColor;
     [self.view addSubview:self.tableView];
 }
 #pragma mark ======= Lazy
@@ -38,9 +37,10 @@
             object.estimatedRowHeight           = 0;
             object.estimatedSectionFooterHeight = 0;
             object.estimatedSectionHeaderHeight = 0;
+            object.backgroundColor = [UIColor whiteColor];
             object.separatorStyle = UITableViewCellSeparatorStyleNone;
             [object registerClass:[WYAMineCreateMaterialTableViewCell class] forCellReuseIdentifier:CREATE_MATERIAL_CELLID];
-            [object registerClass:[WYAMineCreateMaterialFootView class] forHeaderFooterViewReuseIdentifier:@"foot"];
+            [object registerClass:[WYAMineCreateMaterialFootView class] forHeaderFooterViewReuseIdentifier:CREATE_MATERIAL_FOOT];
             object;
         });
     }
@@ -104,7 +104,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
      WYAMineCreateMaterialModel * model = [self.dataSources wya_safeObjectAtIndex:section];
     if ([model.mineCreateAuditType isEqualToString:@"审核失败"]) {
-        WYAMineCreateMaterialFootView * footView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"foot"];
+        WYAMineCreateMaterialFootView * footView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:CREATE_MATERIAL_FOOT];
         footView.model = model;
         return footView;
     }

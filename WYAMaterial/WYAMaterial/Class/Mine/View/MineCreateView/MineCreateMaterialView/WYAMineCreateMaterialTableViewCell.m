@@ -182,7 +182,8 @@
         self.lineView.hidden = YES;
         if ([_model.mineCreateAuditType isEqualToString:@"正在审核"]) {
             self.auditImgView.image = [UIImage imageNamed:@"icon_inreview"];
-
+            self.userTimeLabel.hidden = NO;
+            self.lineView.hidden = NO;
         }if ([_model.mineCreateAuditType isEqualToString:@"审核失败"]) {
             self.auditImgView.image = [UIImage imageNamed:@"icon_fail"];
         }else if ([_model.mineCreateAuditType isEqualToString:@"审核成功"]){

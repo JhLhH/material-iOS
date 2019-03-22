@@ -10,6 +10,7 @@
 
 @interface WYAMineCreateMaterialFootView ()
 @property (nonatomic, strong) UILabel * reasonLabel;
+@property (nonatomic, strong) UILabel * timeLabel;
 @property (nonatomic, strong) UIButton * deleteButton;
 @property (nonatomic, strong) UIButton * editorButton;
 @property (nonatomic, strong) UIView * lineView;
@@ -21,6 +22,7 @@
     self = [super initWithReuseIdentifier:reuseIdentifier];
     if (self) {
         [self addSubview:self.reasonLabel];
+        [self addSubview:self.timeLabel];
         [self addSubview:self.deleteButton];
         [self addSubview:self.editorButton];
         [self addSubview:self.lineView];
@@ -35,14 +37,22 @@
     CGFloat height = [_model.failReasonString wya_heightWithFontSize:12 width:width];
     [self.reasonLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).offset(left);
-        make.top.equalTo(self.mas_top).offset(17*SizeAdapter);
+        make.top.equalTo(self.mas_top).offset(10*SizeAdapter);
         make.size.mas_equalTo(CGSizeMake(width, height));
     }];
+
     [self.editorButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.mas_right).offset(-15*SizeAdapter);
         make.top.equalTo(self.reasonLabel.mas_bottom).offset(10*SizeAdapter);
         make.size.mas_equalTo(CGSizeMake(70*SizeAdapter, 13*SizeAdapter));
     }];
+
+    [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.mas_left).offset(left);
+        make.centerY.mas_equalTo(self.deleteButton.mas_centerY);
+        make.size.mas_equalTo(CGSizeMake(70*SizeAdapter, 13*SizeAdapter));
+    }];
+
     [self.deleteButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.editorButton.mas_left).offset(-49*SizeAdapter);
         make.top.equalTo(self.reasonLabel.mas_bottom).offset(10*SizeAdapter);
@@ -60,7 +70,7 @@
     if (model) {
         _model = model;
         self.reasonLabel.text = _model.failReasonString;
-        self.reasonLabel.backgroundColor = [UIColor brownColor];
+        self.timeLabel.text = _model.mineCreateTimeString;
         [self layoutIfNeeded];
     }
 }
@@ -121,13 +131,26 @@
     }
     return _lineView;
 }
+
+- (UILabel *)timeLabel{
+    if(!_timeLabel){
+        _timeLabel = ({
+            UILabel * object = [[UILabel alloc]init];
+            object.textColor = [UIColor wya_textGrayColor];
+            object.font = FONT(10);
+            object;
+        });
+    }
+    return _timeLabel;
+}
 #pragma mark ======= Public Method
 + (CGFloat)footViewHeightWithModel:(WYAMineCreateMaterialModel *)model{
     CGFloat contentWidth = ScreenWidth - 93*SizeAdapter;
     CGFloat height = [model.failReasonString wya_heightWithFontSize:12 width:contentWidth];
     if ([model.mineCreateAuditType isEqualToString:@"审核失败"]) {
-        return height + 51*SizeAdapter;
+        return height + 40*SizeAdapter;
     }
     return 0.01;
 }
+
 @end
