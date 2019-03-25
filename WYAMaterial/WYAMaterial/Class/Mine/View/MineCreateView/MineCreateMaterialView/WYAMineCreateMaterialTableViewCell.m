@@ -113,7 +113,7 @@
     [self.showAllBodyButton mas_remakeConstraints:^(MASConstraintMaker * make) {
         make.left.mas_equalTo(self.userContentLabel.mas_left);
         make.top.equalTo(self.userContentLabel.mas_bottom).offset(0);
-        make.size.mas_equalTo(CGSizeMake(40 * SizeAdapter, self.showAllBodyButton.hidden ? 0 : 40 * SizeAdapter));
+        make.size.mas_equalTo(CGSizeMake(40 * SizeAdapter, self.showAllBodyButton.hidden ? 0 : 10 * SizeAdapter));
 
     }];
 
@@ -132,11 +132,17 @@
             make.top.equalTo(self.showAllBodyButton.mas_bottom).offset(15 * SizeAdapter);
             make.size.mas_equalTo(CGSizeMake(CONTENT_WIDTH, height));
         }];
-    } else {
+    } else if(_model.mineCreateBodyImgArray.count == 1){
         [self.userBodyImageView mas_remakeConstraints:^(MASConstraintMaker * make) {
             make.left.mas_equalTo(self.userContentLabel.mas_left);
             make.top.equalTo(self.showAllBodyButton.mas_bottom).offset(15 * SizeAdapter);
             make.size.mas_equalTo(CGSizeMake(200 * SizeAdapter, 200 * SizeAdapter));
+        }];
+    }else{
+        [self.userBodyImageView mas_remakeConstraints:^(MASConstraintMaker * make) {
+            make.left.mas_equalTo(self.userContentLabel.mas_left);
+            make.top.equalTo(self.showAllBodyButton.mas_bottom).offset(15 * SizeAdapter);
+            make.size.mas_equalTo(CGSizeMake(200 * SizeAdapter, 0));
         }];
     }
 
@@ -174,7 +180,7 @@
         self.userLevelLabel.text          = _model.mineCreateUserInfoString;
         self.userTimeLabel.text           = _model.mineCreateTimeString;
         self.userContentLabel.text        = _model.mineCreateBodyString;
-        self.userBodyImageView.imageArray = _model.mineCreateBodyImgArray;
+        self.userBodyImageView.imageArray = _model.mineCreateBodyImgArray.count > 0 ? _model.mineCreateBodyImgArray:nil;
 
         self.userTimeLabel.hidden = YES;
         self.forwardingButton.hidden = YES;
@@ -422,8 +428,10 @@
             index = 2;
         }
         bodyImgHeight = index * (ITEM_MARGIN + ITEM_WH);
-    } else {
+    } else if(model.mineCreateBodyImgArray.count == 1){
         bodyImgHeight = 200 * SizeAdapter;
+    }else{
+        bodyImgHeight = 0;
     }
 
     CGFloat bottomHeight;

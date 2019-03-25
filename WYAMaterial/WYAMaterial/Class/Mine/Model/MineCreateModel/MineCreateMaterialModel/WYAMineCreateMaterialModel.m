@@ -58,8 +58,12 @@
             model.mineCreateBodyImgArray = [tempArray copy];
             [tempArray removeAllObjects];
         } else {
-
-            model.mineCreateBodyImgArray = @[ @"1", @"1", @"1", @"1", @"1", @"2", @"2", @"2", @"2" ];
+            if (i==7) {
+                model.mineCreateBodyImgArray = @[];
+                model.mineCreateUserName = @"啦啦啦啦啦";
+            }else{
+                model.mineCreateBodyImgArray = @[ @"1", @"1", @"1", @"1", @"1", @"2", @"2", @"2", @"2" ];
+            }
         }
         model.mineCreateForwardingNumber = @"666";
         [array addObject:model];

@@ -104,7 +104,7 @@
     [self.showAllBodyButton mas_remakeConstraints:^(MASConstraintMaker * make) {
         make.left.mas_equalTo(self.userContentLabel.mas_left);
         make.top.equalTo(self.userContentLabel.mas_bottom).offset(0);
-        make.size.mas_equalTo(CGSizeMake(40 * SizeAdapter, self.showAllBodyButton.hidden ? 0 : 40 * SizeAdapter));
+        make.size.mas_equalTo(CGSizeMake(40 * SizeAdapter, self.showAllBodyButton.hidden ? 0 : 10 * SizeAdapter));
 
     }];
 
@@ -123,11 +123,17 @@
             make.top.equalTo(self.showAllBodyButton.mas_bottom).offset(15 * SizeAdapter);
             make.size.mas_equalTo(CGSizeMake(CONTENT_WIDTH, height));
         }];
-    } else {
+    } else if(_model.bodyImgArray.count == 1){
         [self.userBodyImageView mas_remakeConstraints:^(MASConstraintMaker * make) {
             make.left.mas_equalTo(self.userContentLabel.mas_left);
             make.top.equalTo(self.showAllBodyButton.mas_bottom).offset(15 * SizeAdapter);
             make.size.mas_equalTo(CGSizeMake(200 * SizeAdapter, 200 * SizeAdapter));
+        }];
+    }else{
+        [self.userBodyImageView mas_remakeConstraints:^(MASConstraintMaker * make) {
+            make.left.mas_equalTo(self.userContentLabel.mas_left);
+            make.top.equalTo(self.showAllBodyButton.mas_bottom).offset(15 * SizeAdapter);
+            make.size.mas_equalTo(CGSizeMake(200 * SizeAdapter, 0));
         }];
     }
 
@@ -165,7 +171,7 @@
         self.userLevelLabel.text          = _model.userInfoString;
         self.userTimeLabel.text           = _model.timeString;
         self.userContentLabel.text        = _model.bodyString;
-        self.userBodyImageView.imageArray = _model.bodyImgArray;
+        self.userBodyImageView.imageArray = _model.bodyImgArray.count > 0 ? _model.bodyImgArray : nil;
 
         // 判断全文按钮是否显示
         CGFloat height = [_model.bodyString wya_heightWithFontSize:14 width:CONTENT_WIDTH];
@@ -385,8 +391,10 @@
             index = 2;
         }
         bodyImgHeight = index * (ITEM_MARGIN + ITEM_WH);
-    } else {
+    } else if(model.bodyImgArray.count == 1){
         bodyImgHeight = 200 * SizeAdapter;
+    }else{
+        bodyImgHeight = 0;
     }
 
     return 70 * SizeAdapter + contentHeight + 15 * SizeAdapter + bodyImgHeight + 52 * SizeAdapter;
