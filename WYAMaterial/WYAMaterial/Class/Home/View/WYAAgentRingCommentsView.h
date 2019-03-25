@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <IQKeyboardManager/IQTextView.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WYAAgentRingCommentsView : UIView
-@property (nonatomic, strong) UITextView * textView;
+@property (nonatomic, strong) IQTextView * textView;
 
 /**
  设置自身高度变化的block

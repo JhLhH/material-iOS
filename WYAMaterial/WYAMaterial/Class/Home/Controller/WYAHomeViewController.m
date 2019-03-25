@@ -396,6 +396,7 @@
             object.noticeButtonImage     = [UIImage imageNamed:@"icon_notice"];
             object.showRightButton       = NO;
             object.showText              = @"待修改通知栏文字";
+            object.showTextFont          = 12;
             object.showTextColor         = [UIColor wya_whiteColor];
             object.noticeBackgroundColor = [[UIColor wya_blackColor] colorWithAlphaComponent:0.5];
             object;
