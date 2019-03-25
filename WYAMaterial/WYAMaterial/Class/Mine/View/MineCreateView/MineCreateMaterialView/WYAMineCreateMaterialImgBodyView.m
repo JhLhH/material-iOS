@@ -30,11 +30,11 @@
 }
 #pragma mark ======= Setter
 - (void)setImageArray:(NSArray *)imageArray {
+    for (UIView * view in self.subviews) {
+        [view removeFromSuperview];
+    }
     if (imageArray) {
         _imageArray = imageArray;
-        for (UIView * view in self.subviews) {
-            [view removeFromSuperview];
-        }
         if (_imageArray.count > 1) {
             // 循环创建按钮图片
             for (int i = 0; i < imageArray.count; i++) {

@@ -307,7 +307,6 @@
     } else {
         return 1 * SizeAdapter;
     }
-
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -336,7 +335,6 @@
         view.backgroundColor = [UIColor wya_lineColor];
         return view;
     }
-
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -363,9 +361,6 @@
             [object registerClass:[WYAAgentRingCell class] forCellReuseIdentifier:@"cell"];
             [object registerClass:[WYAAgentRingSectionFootView class] forHeaderFooterViewReuseIdentifier:@"foot"];
             [object addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
-            //            UIRefreshControl * refreshControl = [[UIRefreshControl alloc]init];
-            //            [refreshControl addTarget:self action:@selector(refreshClick) forControlEvents:UIControlEventValueChanged];
-            //            object.refreshControl = refreshControl;
             object;
         });
     }
@@ -375,7 +370,6 @@
 - (WYAAgentRingCoverView *)agentRingCoverView {
     if (!_agentRingCoverView) {
         _agentRingCoverView = ({
-
             CGFloat object_x      = 0;
             CGFloat object_y      = 0;
             CGFloat object_width  = self.agentRingTableView.cmam_width;
@@ -410,8 +404,6 @@
     return _dataSource;
 }
 
-
-
 - (WYANoticeBar *)noticeBar {
     if (!_noticeBar) {
         _noticeBar = ({
@@ -421,7 +413,6 @@
             CGFloat object_width  = ScreenWidth;
             CGFloat object_height = 30 * SizeAdapter;
             CGRect object_rect    = CGRectMake(object_x, object_y, object_width, object_height);
-
             WYANoticeBar * object = [[WYANoticeBar alloc]
                 initWithFrame:object_rect];
             object.showNoticeButton      = YES;

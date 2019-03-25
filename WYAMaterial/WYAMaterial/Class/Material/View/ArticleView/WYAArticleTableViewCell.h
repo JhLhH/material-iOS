@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface WYAArticleTableViewCell : UITableViewCell
 @property (nonatomic, strong) WYAArticleModel * model;
 @property (nonatomic, copy) void (^DidSelectActionBlock)(WYAArticleTableViewCell * taraget);
+@property(nonatomic, copy) void (^ForwardingActionBlock)(WYAArticleTableViewCell *taraget);
 + (CGFloat)getCellHeightWithModel:(WYAArticleModel *)model;
 @end
 

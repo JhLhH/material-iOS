@@ -28,7 +28,12 @@
             [tempArray removeAllObjects];
         } else {
             model.mineCollectionBodyString   = @"店主不用铺货、无需发货、申请成为店主后会拥有属于自己的独立店铺，订单、商品和售后都来，店主不用铺货、无需发货、申请成为店主后会拥有属于自己的独立店铺，订单、商品和售后都来，店主不用铺货、无需发货、申请成为店主后会拥有属于自己的独立店铺，订单、商品和售后都来,店主不用铺货、无需发货、申请成为店主后会拥有属于自己的独立店铺，订单、商品和售后都来，店主不用铺货、无需发货、申请成为店主后会拥有属于自己的独立店铺，订单、商品和售后都来,店主不用铺货、无需发货、申请成为店主后会拥有属于自己的独立店铺，订单、商品和售后都来，店主不用铺货、无需发货、申请成为店主后会拥有属于自己的独立店铺，订单、商品和售后都来";
+            if (i== 7) {
+                model.mineCollectionUserName = @"无图无图";
+                model.mineCollectionBodyImgArray = @[];
+            }else{
             model.mineCollectionBodyImgArray = @[ @"1", @"1", @"1", @"1", @"1", @"2", @"2", @"2", @"2" ];
+            }
         }
         model.mineCollectionForwardingNumber = @"666";
         [array addObject:model];

@@ -103,7 +103,7 @@
     [self.showAllBodyButton mas_remakeConstraints:^(MASConstraintMaker * make) {
         make.left.mas_equalTo(self.userContentLabel.mas_left);
         make.top.equalTo(self.userContentLabel.mas_bottom).offset(0);
-        make.size.mas_equalTo(CGSizeMake(40 * SizeAdapter, self.showAllBodyButton.hidden ? 0 : 40 * SizeAdapter));
+        make.size.mas_equalTo(CGSizeMake(40 * SizeAdapter, self.showAllBodyButton.hidden ? 0 : 10 * SizeAdapter));
 
     }];
 
@@ -122,11 +122,17 @@
             make.top.equalTo(self.showAllBodyButton.mas_bottom).offset(15 * SizeAdapter);
             make.size.mas_equalTo(CGSizeMake(CONTENT_WIDTH, height));
         }];
-    } else {
+    } else if(_model.mineCollectionBodyImgArray.count == 1){
         [self.userBodyImageView mas_remakeConstraints:^(MASConstraintMaker * make) {
             make.left.mas_equalTo(self.userContentLabel.mas_left);
             make.top.equalTo(self.showAllBodyButton.mas_bottom).offset(15 * SizeAdapter);
             make.size.mas_equalTo(CGSizeMake(200 * SizeAdapter, 200 * SizeAdapter));
+        }];
+    }else{
+        [self.userBodyImageView mas_remakeConstraints:^(MASConstraintMaker * make) {
+            make.left.mas_equalTo(self.userContentLabel.mas_left);
+            make.top.equalTo(self.showAllBodyButton.mas_bottom).offset(15 * SizeAdapter);
+            make.size.mas_equalTo(CGSizeMake(200 * SizeAdapter, 0));
         }];
     }
 
@@ -164,7 +170,7 @@
         self.userLevelLabel.text          = _model.mineCollectionUserInfoString;
         self.userTimeLabel.text           = _model.mineCollectionTimeString;
         self.userContentLabel.text        = _model.mineCollectionBodyString;
-        self.userBodyImageView.imageArray = _model.mineCollectionBodyImgArray;
+        self.userBodyImageView.imageArray = _model.mineCollectionBodyImgArray.count > 0 ? _model.mineCollectionBodyImgArray : nil ;
         // 判断全文按钮是否显示
         CGFloat height = [_model.mineCollectionBodyString wya_heightWithFontSize:14 width:CONTENT_WIDTH];
         if (height > DEFAULT_CONTENT_HEIGHT) {
@@ -385,8 +391,10 @@
             index = 2;
         }
         bodyImgHeight = index * (ITEM_MARGIN + ITEM_WH);
-    } else {
+    } else if(model.mineCollectionBodyImgArray.count == 1){
         bodyImgHeight = 200 * SizeAdapter;
+    }else{
+        bodyImgHeight = 0;
     }
 
     return 70 * SizeAdapter + contentHeight + 15 * SizeAdapter + bodyImgHeight + 52 * SizeAdapter;

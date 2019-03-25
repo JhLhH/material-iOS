@@ -10,6 +10,7 @@
 
 @interface WYAArticleDetailViewController ()
 @property (nonatomic, strong) UIButton * rightButton;
+@property (nonatomic, strong) WYAAlertController * shareController;
 @end
 
 @implementation WYAArticleDetailViewController
@@ -27,6 +28,21 @@
     [self.rightButton wya_setButtonImageLoctionRightWithSpace:3*SizeAdapter];
 }
 #pragma mark ======= Lazy
+- (WYAAlertController *)shareController{
+    if(!_shareController){
+        _shareController = ({
+            WYAMaterialShareView * shareView = [WYAMaterialShareView sharedInstance];
+            shareView.isOnlyFriendCircle = YES;
+            shareView.cancleActionBlock = ^{
+                [self dismissViewControllerAnimated:YES completion:nil];
+            };
+            WYAAlertController * object = [WYAAlertController wya_alertWithCustomView:shareView AlertStyle:WYAAlertStyleCustomSheet];
+            object;
+        });
+    }
+    return _shareController;
+}
+
 - (UIButton *)rightButton {
     if (!_rightButton) {
         _rightButton = ({
@@ -45,6 +61,6 @@
     return _rightButton;
 }
 - (void)rightButtonPressed:(UIButton *)sender {
-
+    [self presentViewController:self.shareController animated:YES completion:nil];
 }
 @end

@@ -19,6 +19,7 @@
 @interface WYAArticleViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) NSMutableArray * dataSource;
+@property (nonatomic, strong) WYAAlertController * shareController;
 @end
 
 @implementation WYAArticleViewController
@@ -54,6 +55,21 @@
     }
     return _dataSource;
 }
+- (WYAAlertController *)shareController{
+    if(!_shareController){
+        _shareController = ({
+            WYAMaterialShareView * shareView = [WYAMaterialShareView sharedInstance];
+            shareView.isOnlyFriendCircle = YES;
+            shareView.cancleActionBlock = ^{
+                [self dismissViewControllerAnimated:YES completion:nil];
+            };
+            WYAAlertController * object = [WYAAlertController wya_alertWithCustomView:shareView AlertStyle:WYAAlertStyleCustomSheet];
+            object;
+        });
+    }
+    return _shareController;
+}
+
 #pragma mark ======= Delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -77,6 +93,9 @@
     cell.selectionStyle            = UITableViewCellSelectionStyleNone;
     cell.DidSelectActionBlock      = ^(WYAArticleTableViewCell * _Nonnull taraget) {
         [self didSelectActionBlockWithModel:taraget.model];
+    };
+    cell.ForwardingActionBlock = ^(WYAArticleTableViewCell * _Nonnull taraget) {
+        [self presentViewController:self.shareController animated:YES completion:nil];
     };
     return cell;
 }
