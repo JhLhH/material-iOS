@@ -7,6 +7,7 @@
 //
 
 #import "WYAMineCreateDynamicViewController.h"
+#import "WYASendDynamicViewController.h"
 
 #import "WYAMineCreateReviewFailCell.h"
 #import "WYAMineCreateReviewSuccessCell.h"
@@ -43,22 +44,21 @@
     [self.mineCreateTableView reloadData];
 }
 
-- (void)showImageBrowserWithModel:(WYAMineCreateDynamicModel *)model index:(NSInteger)index {
+- (void)showImageBrowserWithModel:(WYAMineCreateDynamicModel *)model views:(NSArray *)views index:(NSInteger)index {
     NSMutableArray * array = [NSMutableArray array];
     for (NSInteger i = 0; i < model.urls.count; i++) {
         [array addObject:[UIImage imageNamed:@"1"]];
     }
-    WYAImageBrowser * imageBrowser      = [[WYAImageBrowser alloc] init];
-    imageBrowser.frame                  = Window.bounds;
-    imageBrowser.images                 = [array copy];
-    imageBrowser.selectIndex            = index;
-    imageBrowser.pageControlNormalColor = [[UIColor wya_whiteColor] colorWithAlphaComponent:0.5];
-    imageBrowser.pageControlSelectColor = [UIColor wya_hex:@"#E7C083"];
-    __block WYAImageBrowser * imageB    = imageBrowser;
-    imageBrowser.imageSelectBlock       = ^(NSInteger index) {
-        [imageB removeFromSuperview];
-    };
-    [Window addSubview:imageBrowser];
+    [WYAImageBrowser showImageBrowserWithCurrentImageIndex:index imageCount:model.urls.count datasource:nil placeHoldImageBlock:^UIImage *(WYAImageBrowser *browser, NSInteger index) {
+        return [UIImage imageNamed:@"1"];
+    } HighQualityImageURLBlock:nil AssetBlock:nil SourceImageViewBlock:^UIImageView *(WYAImageBrowser *browser, NSInteger index) {
+        return views[index];
+    }];
+}
+
+- (void)againEditDynamicWithModel:(WYAMineCreateDynamicModel *)model{
+    WYASendDynamicViewController * sendDynamic = [[WYASendDynamicViewController alloc] init];
+    [self.navigationController pushViewController:sendDynamic animated:YES];
 }
 
 #pragma mark ======= UITableViewDataSource
@@ -93,8 +93,8 @@
         cell.praiseBlock = ^(WYAMineCreateDynamicModel * _Nonnull model) {
 
         };
-        cell.imageBlock = ^(WYAMineCreateDynamicModel * _Nonnull model, NSInteger index) {
-            [weakSelf showImageBrowserWithModel:model index:index];
+        cell.imageBlock = ^(WYAMineCreateDynamicModel * _Nonnull model, NSArray * _Nonnull views, NSInteger index) {
+            [weakSelf showImageBrowserWithModel:model views:views index:index];
         };
         return cell;
     } else if (dynamicModel.reviewStatus == 0) {
@@ -105,6 +105,15 @@
             [tableView reloadRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationNone];
             [tableView endUpdates];
         };
+        cell.imageBlock = ^(WYAMineCreateDynamicModel * _Nonnull model, NSArray * _Nonnull views, NSInteger index) {
+            [weakSelf showImageBrowserWithModel:model views:views index:index];
+        };
+        cell.deleteBlock = ^(WYAMineCreateDynamicModel * _Nonnull model) {
+
+        };
+        cell.againEditBlock = ^(WYAMineCreateDynamicModel * _Nonnull model) {
+
+        };
         return cell;
     } else {
         WYAMineCreateReviewingCell * cell = [tableView dequeueReusableCellWithIdentifier:@"ing" forIndexPath:indexPath];
@@ -113,6 +122,9 @@
             [tableView beginUpdates];
             [tableView reloadRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationNone];
             [tableView endUpdates];
+        };
+        cell.imageBlock = ^(WYAMineCreateDynamicModel * _Nonnull model, NSArray * _Nonnull views, NSInteger index) {
+            [weakSelf showImageBrowserWithModel:model views:views index:index];
         };
         return cell;
     }

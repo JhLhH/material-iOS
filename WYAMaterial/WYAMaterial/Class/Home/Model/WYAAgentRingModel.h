@@ -52,6 +52,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL contentShow;
 
+@property (nonatomic, copy) NSString * personPraise;
+
+@property (nonatomic, copy) NSString * personCollection;
 @end
 
 NS_ASSUME_NONNULL_END

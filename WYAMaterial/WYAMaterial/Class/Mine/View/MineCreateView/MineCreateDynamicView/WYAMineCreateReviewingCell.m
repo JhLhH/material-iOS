@@ -93,9 +93,15 @@
         make.height.mas_equalTo([self userReleaseImagesViewHeightWith:self.model]);
     }];
 
+    [self.userReleaseTimeLabel mas_remakeConstraints:^(MASConstraintMaker * make) {
+        make.left.mas_equalTo(self.userReleaseImagesView.mas_left);
+        make.top.mas_equalTo(self.userReleaseImagesView.mas_bottom).with.offset(10 * SizeAdapter);
+        make.size.mas_equalTo(CGSizeMake(60 * SizeAdapter, 20 * SizeAdapter));
+    }];
+
     [self.reviewStatusImageView mas_remakeConstraints:^(MASConstraintMaker * make) {
         make.right.mas_equalTo(self.contentView.mas_right).with.offset(-17 * SizeAdapter);
-        make.top.mas_equalTo(self.contentView).with.offset(30 * SizeAdapter);
+        make.top.mas_equalTo(self.contentView).with.offset(40 * SizeAdapter);
         make.size.mas_equalTo(CGSizeMake(60 * SizeAdapter, 60 * SizeAdapter));
     }];
 }
@@ -173,7 +179,7 @@
 #pragma mark ======= Public Method
 + (CGFloat)getCellHeightWithModel:(WYAMineCreateDynamicModel *)model {
     CGFloat height        = 85 * SizeAdapter;
-    CGFloat contantHeight = [model.content wya_heightWithFontSize:14 width:ScreenWidth - 88 * SizeAdapter];
+    CGFloat contantHeight = [model.content wya_heightWithFontSize:14 width:ScreenWidth - 88 * SizeAdapter] - 8 * SizeAdapter;
     if (model.contentShow) {
         height = height + contantHeight;
     } else {
@@ -186,7 +192,7 @@
 
     WYAMineCreateReviewingCell * cell = [[WYAMineCreateReviewingCell alloc] init];
     CGFloat imageH                    = [cell userReleaseImagesViewHeightWith:model];
-    return height + imageH + 10 * SizeAdapter;
+    return height + imageH + 50 * SizeAdapter;
 }
 
 #pragma mark ======= Setter
@@ -200,7 +206,7 @@
         self.userReleaseContentLabel.text = model.content;
         
         // 判断全文按钮是否显示
-        CGFloat height = [model.content wya_heightWithFontSize:14 width:ScreenWidth - 88 * SizeAdapter];
+        CGFloat height = [model.content wya_heightWithFontSize:14 width:ScreenWidth - 88 * SizeAdapter] - 8 * SizeAdapter;
         if (height > 40 * SizeAdapter) {
             self.showButton.hidden = NO;
         } else {
@@ -231,7 +237,7 @@
                 object.layer.masksToBounds = YES;
                 [object addCallBackAction:^(UIButton * button) {
                     if (self.imageBlock) {
-                        self.imageBlock(model, button.tag);
+                        self.imageBlock(model, self.userReleaseImagesView.subviews, button.tag);
                     }
                 }];
                 [self.userReleaseImagesView addSubview:object];
@@ -314,6 +320,19 @@
         });
     }
     return _userReleaseImagesView;
+}
+
+- (UILabel *)userReleaseTimeLabel {
+    if (!_userReleaseTimeLabel) {
+        _userReleaseTimeLabel = ({
+            UILabel * object     = [[UILabel alloc] init];
+            object.font          = FONT(10);
+            object.textAlignment = NSTextAlignmentLeft;
+            object.textColor     = [UIColor wya_textGrayColor];
+            object;
+        });
+    }
+    return _userReleaseTimeLabel;
 }
 
 - (UIButton *)showButton {

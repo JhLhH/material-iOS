@@ -24,6 +24,10 @@
         self.textView.layer.cornerRadius  = 4 * SizeAdapter;
         self.textView.layer.masksToBounds = YES;
         self.textView.inputAccessoryView  = [[UIView alloc] init];
+        self.textView.text = @"请输入内容";
+        self.textView.textColor = [UIColor wya_textLightGrayColor];
+        self.textView.font = FONT(15);
+        self.textView.selectedRange = NSMakeRange(0, 0);
         [self addSubview:self.textView];
         [self addSubview:self.sendButton];
     }
@@ -57,9 +61,33 @@
 }
 
 #pragma mark ======= UITextViewDelegate
-- (void)textViewDidChange:(UITextView *)textView {
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    return YES;
+}
 
-    CGFloat maxHeight = 90 * SizeAdapter;
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView {
+    if (textView.text.length < 1) {
+        textView.text      = @"请输入内容";
+        textView.textColor = [UIColor wya_textLightGrayColor];
+        textView.font      = FONT(15);
+         textView.selectedRange = NSMakeRange(0, 0);
+    } else {
+        if ([textView.text isEqualToString:@"请输入内容"]) {
+            textView.text      = @"请输入内容";
+            textView.textColor = [UIColor wya_textLightGrayColor];
+            textView.font      = FONT(15);
+        } else {
+            textView.textColor = [UIColor wya_blackColor];
+        }
+    }
+
+    return YES;
+}
+- (void)textViewDidChange:(UITextView *)textView {
+    textView.textColor = [UIColor wya_blackColor];
+    textView.text = [textView.text stringByReplacingOccurrencesOfString:@"请输入内容" withString:@""];
+    textView.selectedRange = NSMakeRange(textView.text.length, 0);
+    CGFloat maxHeight = 52 * SizeAdapter;
 
     CGRect frame          = textView.frame;
     CGSize constraintSize = CGSizeMake(frame.size.width, MAXFLOAT);

@@ -205,7 +205,7 @@
 #pragma mark ======= Public Method
 + (CGFloat)getCellHeightWithModel:(WYAAgentRingModel *)model {
     CGFloat height        = 85 * SizeAdapter;
-    CGFloat contantHeight = [model.content wya_heightWithFontSize:14 width:ScreenWidth - 88 * SizeAdapter];
+    CGFloat contantHeight = [model.content wya_heightWithFontSize:14 width:ScreenWidth - 88 * SizeAdapter] - 8 * SizeAdapter;
     if (model.contentShow) {
         height = height + contantHeight;
     } else {
@@ -234,11 +234,11 @@
         self.commentsButton.selected      = model.urls > 0 ? YES : NO;
         self.collectionButton.selected    = model.collection;
         self.praiseButton.selected        = model.person;
-        [self.collectionButton setTitle:[NSString stringWithFormat:@"%d", model.collection] forState:UIControlStateNormal];
-        [self.praiseButton setTitle:[NSString stringWithFormat:@"%d", model.person] forState:UIControlStateNormal];
+        [self.collectionButton setTitle:model.personCollection forState:UIControlStateNormal];
+        [self.praiseButton setTitle:model.personPraise forState:UIControlStateNormal];
 
         // 判断全文按钮是否显示
-        CGFloat height = [model.content wya_heightWithFontSize:14 width:ScreenWidth - 88 * SizeAdapter];
+        CGFloat height = [model.content wya_heightWithFontSize:14 width:ScreenWidth - 88 * SizeAdapter] - 8 * SizeAdapter;
         if (height > 40 * SizeAdapter) {
             self.showButton.hidden = NO;
         } else {
@@ -269,7 +269,7 @@
                 object.layer.masksToBounds = YES;
                 [object addCallBackAction:^(UIButton * button) {
                     if (self.imageBlock) {
-                        self.imageBlock(model, button.tag);
+                        self.imageBlock(model, self.userReleaseImagesView.subviews, button.tag);
                     }
                 }];
                 [self.userReleaseImagesView addSubview:object];

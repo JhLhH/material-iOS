@@ -67,12 +67,19 @@
 }
 
 - (void)getHistoryDataSource {
-    self.model = [WYASendDynamicViewModel lookupSendDynamicDraft];
-    if (self.model) {
-        self.textView.text = self.model.text;
-        self.dataSource    = [NSKeyedUnarchiver unarchiveObjectWithData:self.model.imageDatas];
+    if (self.text || self.images) {
+        self.textView.text = self.text;
+        self.dataSource = [self.images mutableCopy];
         [self.collectionView reloadData];
         [self changeCollectionViewFrame];
+    } else {
+        self.model = [WYASendDynamicViewModel lookupSendDynamicDraft];
+        if (self.model) {
+            self.textView.text = self.model.text;
+            self.dataSource    = [NSKeyedUnarchiver unarchiveObjectWithData:self.model.imageDatas];
+            [self.collectionView reloadData];
+            [self changeCollectionViewFrame];
+        }
     }
 }
 
@@ -94,6 +101,12 @@
 
 #pragma mark ======= WYANavBarDelegate
 - (void)wya_customLeftBarButtonItemPressed:(UIButton *)sender{
+
+    if (self.text || self.images) {
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }
+
     WYAAlertController * alert =
     [WYAAlertController wya_alertWithTitle:@"是否保存草稿？"
                                    Message:nil

@@ -99,12 +99,6 @@
         make.height.mas_equalTo([self userReleaseImagesViewHeightWith:self.model]);
     }];
 
-//    [self.userReleaseTimeLabel mas_remakeConstraints:^(MASConstraintMaker * make) {
-//        make.left.mas_equalTo(self.userReleaseImagesView.mas_left);
-//        make.top.mas_equalTo(self.userReleaseImagesView.mas_bottom).with.offset(10 * SizeAdapter);
-//        make.size.mas_equalTo(CGSizeMake(60 * SizeAdapter, 20 * SizeAdapter));
-//    }];
-
     [self.resultLabel mas_remakeConstraints:^(MASConstraintMaker * make) {
         make.left.right.mas_equalTo(self.userReleaseImagesView);
         make.top.mas_equalTo(self.userReleaseImagesView.mas_bottom).with.offset(10 * SizeAdapter);
@@ -123,9 +117,15 @@
         make.size.mas_equalTo(CGSizeMake(60 * SizeAdapter, 26 * SizeAdapter));
     }];
 
+    [self.userReleaseTimeLabel mas_remakeConstraints:^(MASConstraintMaker * make) {
+        make.left.mas_equalTo(self.resultLabel.mas_left);
+        make.centerY.mas_equalTo(self.deleteButton.mas_centerY);
+        make.size.mas_equalTo(CGSizeMake(60 * SizeAdapter, 20 * SizeAdapter));
+    }];
+
     [self.reviewStatusImageView mas_remakeConstraints:^(MASConstraintMaker * make) {
         make.right.mas_equalTo(self.contentView.mas_right).with.offset(-17 * SizeAdapter);
-        make.top.mas_equalTo(self.contentView).with.offset(30 * SizeAdapter);
+        make.top.mas_equalTo(self.contentView).with.offset(40 * SizeAdapter);
         make.size.mas_equalTo(CGSizeMake(60 * SizeAdapter, 60 * SizeAdapter));
     }];
 }
@@ -294,7 +294,7 @@
 #pragma mark ======= Public Method
 + (CGFloat)getCellHeightWithModel:(WYAMineCreateDynamicModel *)model {
     CGFloat height        = 85 * SizeAdapter;
-    CGFloat contantHeight = [model.content wya_heightWithFontSize:14 width:ScreenWidth - 88 * SizeAdapter];
+    CGFloat contantHeight = [model.content wya_heightWithFontSize:14 width:ScreenWidth - 88 * SizeAdapter] - 8 * SizeAdapter;
     if (model.contentShow) {
         height = height + contantHeight;
     } else {
@@ -308,7 +308,7 @@
     WYAMineCreateReviewFailCell * cell = [[WYAMineCreateReviewFailCell alloc] init];
     CGFloat imageH                     = [cell userReleaseImagesViewHeightWith:model];
     CGFloat failResultHeight = [cell configYYLabelWithModel:model];
-    return height + imageH + failResultHeight + 50 * SizeAdapter;
+    return height + imageH + failResultHeight + 70 * SizeAdapter;
 }
 
 #pragma mark ======= Setter
@@ -322,7 +322,7 @@
         self.userReleaseContentLabel.text = model.content;
 
         // 判断全文按钮是否显示
-        CGFloat height = [model.content wya_heightWithFontSize:14 width:ScreenWidth - 88 * SizeAdapter];
+        CGFloat height = [model.content wya_heightWithFontSize:14 width:ScreenWidth - 88 * SizeAdapter] - 8 * SizeAdapter;
         if (height > 40 * SizeAdapter) {
             self.showButton.hidden = NO;
         } else {
@@ -353,7 +353,7 @@
                 object.layer.masksToBounds = YES;
                 [object addCallBackAction:^(UIButton * button) {
                     if (self.imageBlock) {
-                        self.imageBlock(model, button.tag);
+                        self.imageBlock(model, self.userReleaseImagesView.subviews, button.tag);
                     }
                 }];
                 [self.userReleaseImagesView addSubview:object];
@@ -418,9 +418,9 @@
     if (!_userReleaseTimeLabel) {
         _userReleaseTimeLabel = ({
             UILabel * object     = [[UILabel alloc] init];
-            object.font          = FONT(13);
-            object.textAlignment = NSTextAlignmentRight;
-            object.textColor     = [UIColor grayColor];
+            object.font          = FONT(10);
+            object.textAlignment = NSTextAlignmentLeft;
+            object.textColor     = [UIColor wya_textGrayColor];
             object;
         });
     }
@@ -499,7 +499,9 @@
             object.imageEdgeInsets = UIEdgeInsetsMake(0, -space / 2.0, 0, space / 2.0);
             object.titleEdgeInsets = UIEdgeInsetsMake(0, space / 2.0, 0, -space / 2.0);
             [object addCallBackAction:^(UIButton * button){
-
+                if (self.deleteBlock) {
+                    self.deleteBlock(self.model);
+                }
             }];
             object;
         });
@@ -514,12 +516,14 @@
             UIButton * object = [[UIButton alloc] init];
             [object setTitle:@"重新编辑" forState:UIControlStateNormal];
             [object setTitleColor:[UIColor wya_blueColor] forState:UIControlStateNormal];
-            [object setImage:[UIImage imageNamed:@"图层1053"] forState:UIControlStateNormal];
+            [object setImage:[UIImage imageNamed:@"icon_edtior"] forState:UIControlStateNormal];
             object.titleLabel.font = FONT(11);
             object.imageEdgeInsets = UIEdgeInsetsMake(0, -space / 2.0, 0, space / 2.0);
             object.titleEdgeInsets = UIEdgeInsetsMake(0, space / 2.0, 0, -space / 2.0);
             [object addCallBackAction:^(UIButton * button){
-
+                if (self.againEditBlock) {
+                    self.againEditBlock(self.model);
+                }
             }];
             object;
         });

@@ -11,6 +11,7 @@
 #import "WYAMineCreateDynamicModel.h"
 
 @interface WYAMineCreateReviewSuccessFootView ()
+@property (nonatomic, strong) UIView * bgView;
 @property (nonatomic, strong) UIView * commentsView; // 关于评论的视图
 @property (nonatomic, strong) UIButton * showCommentsButton;
 @property (nonatomic, strong) NSMutableArray * heights;
@@ -23,8 +24,9 @@
     self = [super initWithReuseIdentifier:reuseIdentifier];
     if (self) {
         self.contentView.backgroundColor = [UIColor whiteColor];
-        [self.contentView addSubview:self.commentsView];
-        [self.contentView addSubview:self.showCommentsButton];
+        [self.contentView addSubview:self.bgView];
+        [self.bgView addSubview:self.commentsView];
+        [self.bgView addSubview:self.showCommentsButton];
         [self.contentView addSubview:self.line];
     }
     return self;
@@ -33,7 +35,7 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
 
-    CGFloat commentsView_x      = 69 * SizeAdapter;
+    CGFloat commentsView_x      = 0;
     CGFloat commentsView_y      = 0;
     CGFloat commentsView_width  = ScreenWidth - 83 * SizeAdapter;
     CGFloat commentsView_height = [self getCommentsHeight];
@@ -49,6 +51,13 @@
     CGRect showCommentsButton_rect    = CGRectMake(showCommentsButton_x, showCommentsButton_y, showCommentsButton_width, showCommentsButton_height);
     self.showCommentsButton.frame     = showCommentsButton_rect;
     [self.showCommentsButton wya_setButtonImageLoctionRightWithSpace:3];
+
+    CGFloat bgView_x = 69 * SizeAdapter;
+    CGFloat bgView_y = 0;
+    CGFloat bgView_width = ScreenWidth - 83 * SizeAdapter;
+    CGFloat bgView_height = self.commentsView.cmam_height + self.showCommentsButton.cmam_height;
+    CGRect bgView_rect = CGRectMake(bgView_x, bgView_y,  bgView_width, bgView_height);
+    self.bgView.frame = bgView_rect;
 
     CGFloat line_x = 0;
     CGFloat line_y = self.contentView.cmam_height - 1 * SizeAdapter;
@@ -108,16 +117,28 @@
 
             if (self.model.show) {
                 // 判断当前评论是否是展开的状态
-                for (NSNumber * number in self.heights) {
-                    allHeight = allHeight + [number floatValue] + 15 * SizeAdapter;
+                for (NSInteger index = 0; index < self.heights.count; index++) {
+                    NSNumber * number = self.heights[index];
+                    if (index == 0) {
+                        allHeight = allHeight + [number floatValue] + 15 * SizeAdapter;
+                    } else {
+                        allHeight = allHeight + [number floatValue];
+                    }
                 }
             } else {
-                allHeight = [self.heights[0] floatValue] + [self.heights[1] floatValue] + 30 * SizeAdapter;
+                allHeight = [self.heights[0] floatValue] + [self.heights[1] floatValue] + 15 * SizeAdapter;
             }
         } else {
-            for (NSNumber * number in self.heights) {
-                allHeight = allHeight + [number floatValue] + 20 * SizeAdapter;
+
+            for (NSInteger index = 0; index < self.heights.count; index++) {
+                NSNumber * number = self.heights[index];
+                if (index == 0) {
+                    allHeight = allHeight + [number floatValue] + 15 * SizeAdapter;
+                } else {
+                    allHeight = allHeight + [number floatValue];
+                }
             }
+            allHeight = allHeight + 15 * SizeAdapter;
         }
         height = allHeight;
     }
@@ -129,10 +150,10 @@
     for (NSInteger index = 0; index < self.commentsView.subviews.count; index++) {
         UIView * view       = self.commentsView.subviews[index];
         CGFloat height      = [self.heights[index] floatValue];
-        CGFloat view_x      = 5 * SizeAdapter;
-        CGFloat view_y      = lastView.cmam_bottom + 5 * SizeAdapter;
-        CGFloat view_width  = self.commentsView.cmam_width - 10 * SizeAdapter;
-        CGFloat view_height = height + 10 * SizeAdapter;
+        CGFloat view_x      = 10 * SizeAdapter;
+        CGFloat view_y      = lastView.cmam_bottom + (index == 0 ? 15 * SizeAdapter : 0 * SizeAdapter);
+        CGFloat view_width  = self.commentsView.cmam_width - 20 * SizeAdapter;
+        CGFloat view_height = height;
         CGRect view_rect    = CGRectMake(view_x, view_y, view_width, view_height);
         view.frame          = view_rect;
         lastView            = view;
@@ -144,19 +165,19 @@
     NSMutableAttributedString * text = [self commentsAttributedStringWithModel:model];
 
     YYLabel * label               = [[YYLabel alloc] init];
-    label.preferredMaxLayoutWidth = ScreenWidth - 93 * SizeAdapter;
+    label.preferredMaxLayoutWidth = ScreenWidth - 103 * SizeAdapter;
     label.numberOfLines           = 0;
     label.attributedText          = text;
 
     if (model.show) {
-        CGSize introSize      = CGSizeMake(ScreenWidth - 93 * SizeAdapter, CGFLOAT_MAX);
+        CGSize introSize      = CGSizeMake(ScreenWidth - 103 * SizeAdapter, CGFLOAT_MAX);
         YYTextLayout * layout = [YYTextLayout layoutWithContainerSize:introSize text:text];
         label.textLayout      = layout;
-        CGFloat introHeight   = layout.textBoundingSize.height + 10 * SizeAdapter;
+        CGFloat introHeight   = layout.textBoundingSize.height;
         [self.heights addObject:[NSNumber numberWithFloat:introHeight]];
     } else {
         [self addSeeMoreButtonWithYYLabel:label commentsModel:model];
-        [self.heights addObject:[NSNumber numberWithFloat:30 * SizeAdapter]];
+        [self.heights addObject:[NSNumber numberWithFloat:35 * SizeAdapter]];
     }
 
     return label;
@@ -246,13 +267,24 @@
 }
 
 #pragma mark ======= Getter
+- (UIView *)bgView{
+    if(!_bgView){
+        _bgView = ({
+            UIView * object = [[UIView alloc]init];
+            object.backgroundColor     = [UIColor wya_hex:@"#F2F2F5"];
+            object.layer.cornerRadius  = 5 * SizeAdapter;
+            object.layer.masksToBounds = YES;
+            object;
+        });
+    }
+    return _bgView;
+}
+
 - (UIView *)commentsView {
     if (!_commentsView) {
         _commentsView = ({
             UIView * object            = [[UIView alloc] init];
             object.backgroundColor     = [UIColor wya_hex:@"#F2F2F5"];
-            object.layer.cornerRadius  = 5 * SizeAdapter;
-            object.layer.masksToBounds = YES;
             object;
         });
     }

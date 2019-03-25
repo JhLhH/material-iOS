@@ -36,9 +36,12 @@
 #pragma mark ======= Private Method
 - (void)setupUI {
     self.navBar.hidden    = YES;
-
-    [self.view addSubview:self.reviewLoginView];
-//    [self.view addSubview:self.loginView];
+//    if (<#condition#>) {
+        // 当前是在审核状态
+        [self.view addSubview:self.reviewLoginView];
+//    } else {
+//        [self.view addSubview:self.loginView];
+//    }
 }
 
 - (void)reviewLogin{
@@ -55,23 +58,29 @@
         //第三方向微信终端发送一个SendAuthReq消息结构
         [WXApi sendReq:req];
     } else {
-        [UIView wya_showCenterToastWithMessage:@"您未安装微信无法登陆"];
+        WYAAlertController * alert =
+        [WYAAlertController wya_alertWithTitle:@"您没有安装微信，请安装后登录"
+                                       Message:nil
+                              AlertLayoutStyle:WYAAlertLayoutStyleHorizontal];
+        alert.backgroundButton.enabled = NO;
+        alert.presentStyle             = WYAPopupPresentStyleBounce;
+        alert.dismissStyle             = WYAPopupDismissStyleShrink;
+        // 创建 action
+        WYAAlertAction * defaultAction =
+        [WYAAlertAction wya_actionWithTitle:@"确定"
+                                      style:WYAAlertActionStyleDefault
+                                    handler:^{
+
+                                    }];
+        [alert wya_addAction:defaultAction];
+
+        [self presentViewController:alert animated:YES completion:nil];
     }
 
 
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-#pragma mark ======= Lazy
+#pragma mark ======= Getter
 - (WYAReviewLoginView *)reviewLoginView{
     if(!_reviewLoginView){
         _reviewLoginView = ({
