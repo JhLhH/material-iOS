@@ -26,4 +26,5 @@
 #import <WYAKit/WYAPhotoBrowser.h>
 #import <WYAKit/WYARealmBaseManager.h>
 #import <WYAKit/WYATextView.h>
+
 #endif /* WYAThirdClassHeader_h */

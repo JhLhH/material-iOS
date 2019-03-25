@@ -12,11 +12,15 @@
 
 #import "WYAMaterialModel.h"
 
+#import "WYAMaterialShareView.h"
+
 #define IMGTEXT_CELLID @"WYAImageTextTableViewCell"
 
 @interface WYAImgTextViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) NSMutableArray * dataSources;
+@property (nonatomic, strong) WYAAlertController * shareController;
+@property (nonatomic, strong) WYAMaterialShareView * shareView;
 @end
 
 @implementation WYAImgTextViewController
@@ -78,6 +82,9 @@
     cell.forwardingActionBlock = ^(WYAImageTextTableViewCell * _Nonnull target) {
         // 转发
         NSLog(@"转发");
+        [self presentViewController:self.shareController animated:YES completion:^{
+            [UIView wya_showCenterToastWithMessage:@"文案已复制到剪切板"];
+        }];
     };
     cell.showAllBodyActionBlock = ^(NSIndexPath * _Nonnull cellIndexPath) {
         NSArray<NSIndexPath *> * indexPathArray = @[ cellIndexPath ];
@@ -85,6 +92,20 @@
         [self.tableView reloadRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
     };
     return cell;
+}
+
+
+- (WYAAlertController *)shareController{
+    if(!_shareController){
+        _shareController = ({
+            WYAMaterialShareView * shareView = [WYAMaterialShareView sharedInstance];
+//            shareView.isOnlyFriendCircle = YES;
+            WYAAlertController * object = [WYAAlertController wya_alertWithCustomView:shareView AlertStyle:WYAAlertStyleCustomSheet];
+
+            object;
+       });
+    }
+    return _shareController;
 }
 
 @end

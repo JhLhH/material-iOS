@@ -33,7 +33,7 @@
     [self.logOutButton mas_makeConstraints:^(MASConstraintMaker * make) {
         make.centerX.mas_equalTo(self.view.mas_centerX);
         make.bottom.equalTo(self.view.mas_bottom).offset(-WYABottomHeight);
-        make.size.mas_equalTo(CGSizeMake(300, 48));
+        make.size.mas_equalTo(CGSizeMake(ScreenWidth, 48));
     }];
 }
 
@@ -43,10 +43,12 @@
         _logOutButton = ({
             UIButton * object = [[UIButton alloc] init];
             [object setTitle:@"退出登录" forState:UIControlStateNormal];
-            [object setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            object.layer.cornerRadius  = 24;
-            object.layer.masksToBounds = YES;
-            [object wya_setBackgroundColor:[UIColor wya_blackColor] forState:UIControlStateNormal];
+            [object setTitleColor:[UIColor wya_textBlackColor] forState:UIControlStateNormal];
+//            object.layer.cornerRadius  = 24;
+//            object.layer.masksToBounds = YES;
+            object.layer.borderColor = [UIColor wya_lineColor].CGColor;
+            object.layer.borderWidth = 0.5;
+            [object wya_setBackgroundColor:[UIColor wya_whiteColor] forState:UIControlStateNormal];
             object;
         });
     }
@@ -59,7 +61,7 @@
             UITableView * object   = [[UITableView alloc] initWithFrame:CGRectMake(0, WYATopHeight, ScreenWidth, ScreenHeight - WYATopHeight - WYABottomHeight - 48) style:UITableViewStylePlain];
             object.delegate        = self;
             object.dataSource      = self;
-            object.backgroundColor = [UIColor whiteColor];
+            object.backgroundColor = [UIColor wya_bgColor];
             object.tableFooterView = [UIView new];
             [object registerClass:[WYASettingTableViewCell class] forCellReuseIdentifier:SETTING_CELLID];
             [object registerClass:[WYASetTeamTableViewCell class] forCellReuseIdentifier:SETEAM_CELLID];
@@ -118,13 +120,13 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    UIView * footView        = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 15)];
+    UIView * footView        = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 15*SizeAdapter)];
     footView.backgroundColor = [UIColor wya_hex:@"#F2F2F2"];
     return footView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return section == 0 ? 12 : 0.01;
+    return section == 0 ? 12*SizeAdapter : 0.01;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
