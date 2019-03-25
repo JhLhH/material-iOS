@@ -194,6 +194,7 @@
             [object setImage:[UIImage imageNamed:@"pic_moren"] forState:0];
             object.layer.cornerRadius  = 95 * 0.5*SizeAdapter;
             object.layer.masksToBounds = YES;
+            object.userInteractionEnabled = NO;
             [object addTarget:self action:@selector(userIconButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
             object;
         });

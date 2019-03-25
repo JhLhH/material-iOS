@@ -73,13 +73,10 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
 
     self.navTitle = @"首页";
-    self.navTitleFont = 18 * SizeAdapter;
-    self.navTitleColor = [UIColor wya_whiteColor];
     [self.navBar wya_addRightNavBarButtonWithNormalTitle:@[ @"发布" ] normalColor:@[ [UIColor wya_whiteColor] ] highlightedColor:@[ [UIColor wya_whiteColor] ]];
     self.rightBarButtonItemTitleFont = 15 * SizeAdapter;
     self.navBackGroundColor             = [[UIColor wya_blackColor] colorWithAlphaComponent:0.5f];
     self.agentRingTableView.tableHeaderView = self.agentRingCoverView;
-    self.navTitleColor                      = [UIColor whiteColor];
     [self.view addSubview:self.agentRingTableView];
     [self.view addSubview:self.refreshView];
     [self.view addSubview:self.noticeBar];
