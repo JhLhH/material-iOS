@@ -47,6 +47,13 @@
 		953855812243260300AF7450 /* WYAMineCollectionMaterialTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 953855802243260300AF7450 /* WYAMineCollectionMaterialTableViewCell.m */; };
 		9538558522437E5700AF7450 /* WYASendMaterialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9538558422437E5700AF7450 /* WYASendMaterialViewController.m */; };
 		953855882243857500AF7450 /* WYAMineCreateMaterialFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 953855872243857500AF7450 /* WYAMineCreateMaterialFootView.m */; };
+		9538559122447B6400AF7450 /* WYAMaterialCameraCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9538558B22447B6300AF7450 /* WYAMaterialCameraCell.m */; };
+		9538559222447B6400AF7450 /* WYAMaterialCameraCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9538558C22447B6300AF7450 /* WYAMaterialCameraCell.xib */; };
+		9538559322447B6400AF7450 /* WYASendMaterialImageEditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9538558E22447B6400AF7450 /* WYASendMaterialImageEditCell.m */; };
+		9538559422447B6400AF7450 /* WYASendMaterialImageEditCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9538558F22447B6400AF7450 /* WYASendMaterialImageEditCell.xib */; };
+		9538559A22448BB900AF7450 /* WYAMaterialLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9538559922448BB900AF7450 /* WYAMaterialLabelView.m */; };
+		9538559D224490E200AF7450 /* WYAmaterialLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9538559C224490E200AF7450 /* WYAmaterialLabelViewController.m */; };
+		953855A0224491FE00AF7450 /* WYALabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9538559F224491FE00AF7450 /* WYALabelView.m */; };
 		955D770F223B913C00B3B1EE /* WYAContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 955D770E223B913C00B3B1EE /* WYAContentView.m */; };
 		955D7712223CD9E900B3B1EE /* WYAMineBodyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 955D7711223CD9E900B3B1EE /* WYAMineBodyView.m */; };
 		955D7716223CE2EF00B3B1EE /* WYASettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 955D7715223CE2EF00B3B1EE /* WYASettingViewController.m */; };
@@ -76,7 +83,6 @@
 		95DD8CD82239E6AF00731A7E /* WYALoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD8CD72239E6AF00731A7E /* WYALoginViewModel.m */; };
 		95DD8CDB2239E6BC00731A7E /* WYAHomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD8CDA2239E6BC00731A7E /* WYAHomeViewModel.m */; };
 		95DD8CDE2239E6CE00731A7E /* WYAMineViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD8CDD2239E6CE00731A7E /* WYAMineViewModel.m */; };
-		95DD8CE42239E6FB00731A7E /* WYAHomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD8CE32239E6FB00731A7E /* WYAHomeView.m */; };
 		95DD8CE72239E70900731A7E /* WYALoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DD8CE62239E70900731A7E /* WYALoginView.m */; };
 		95DE135021ECB55700B5867B /* UIColor+WYAColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DE134F21ECB55700B5867B /* UIColor+WYAColor.m */; };
 		95F6322E223A592800BFC68C /* WYAMineCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95F6322D223A592800BFC68C /* WYAMineCreateViewController.m */; };
@@ -189,6 +195,18 @@
 		9538558422437E5700AF7450 /* WYASendMaterialViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYASendMaterialViewController.m; sourceTree = "<group>"; };
 		953855862243857500AF7450 /* WYAMineCreateMaterialFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAMineCreateMaterialFootView.h; sourceTree = "<group>"; };
 		953855872243857500AF7450 /* WYAMineCreateMaterialFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAMineCreateMaterialFootView.m; sourceTree = "<group>"; };
+		9538558B22447B6300AF7450 /* WYAMaterialCameraCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYAMaterialCameraCell.m; sourceTree = "<group>"; };
+		9538558C22447B6300AF7450 /* WYAMaterialCameraCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WYAMaterialCameraCell.xib; sourceTree = "<group>"; };
+		9538558D22447B6400AF7450 /* WYASendMaterialImageEditCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYASendMaterialImageEditCell.h; sourceTree = "<group>"; };
+		9538558E22447B6400AF7450 /* WYASendMaterialImageEditCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYASendMaterialImageEditCell.m; sourceTree = "<group>"; };
+		9538558F22447B6400AF7450 /* WYASendMaterialImageEditCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WYASendMaterialImageEditCell.xib; sourceTree = "<group>"; };
+		9538559022447B6400AF7450 /* WYAMaterialCameraCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYAMaterialCameraCell.h; sourceTree = "<group>"; };
+		9538559822448BB900AF7450 /* WYAMaterialLabelView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAMaterialLabelView.h; sourceTree = "<group>"; };
+		9538559922448BB900AF7450 /* WYAMaterialLabelView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAMaterialLabelView.m; sourceTree = "<group>"; };
+		9538559B224490E200AF7450 /* WYAmaterialLabelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAmaterialLabelViewController.h; sourceTree = "<group>"; };
+		9538559C224490E200AF7450 /* WYAmaterialLabelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAmaterialLabelViewController.m; sourceTree = "<group>"; };
+		9538559E224491FE00AF7450 /* WYALabelView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYALabelView.h; sourceTree = "<group>"; };
+		9538559F224491FE00AF7450 /* WYALabelView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYALabelView.m; sourceTree = "<group>"; };
 		955D770D223B913C00B3B1EE /* WYAContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAContentView.h; sourceTree = "<group>"; };
 		955D770E223B913C00B3B1EE /* WYAContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAContentView.m; sourceTree = "<group>"; };
 		955D7710223CD9E900B3B1EE /* WYAMineBodyView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAMineBodyView.h; sourceTree = "<group>"; };
@@ -253,8 +271,6 @@
 		95DD8CDA2239E6BC00731A7E /* WYAHomeViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAHomeViewModel.m; sourceTree = "<group>"; };
 		95DD8CDC2239E6CE00731A7E /* WYAMineViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAMineViewModel.h; sourceTree = "<group>"; };
 		95DD8CDD2239E6CE00731A7E /* WYAMineViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAMineViewModel.m; sourceTree = "<group>"; };
-		95DD8CE22239E6FB00731A7E /* WYAHomeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAHomeView.h; sourceTree = "<group>"; };
-		95DD8CE32239E6FB00731A7E /* WYAHomeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAHomeView.m; sourceTree = "<group>"; };
 		95DD8CE52239E70900731A7E /* WYALoginView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYALoginView.h; sourceTree = "<group>"; };
 		95DD8CE62239E70900731A7E /* WYALoginView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYALoginView.m; sourceTree = "<group>"; };
 		95DE134E21ECB55700B5867B /* UIColor+WYAColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+WYAColor.h"; sourceTree = "<group>"; };
@@ -584,13 +600,33 @@
 			children = (
 				9538558322437E5700AF7450 /* WYASendMaterialViewController.h */,
 				9538558422437E5700AF7450 /* WYASendMaterialViewController.m */,
+				9538559B224490E200AF7450 /* WYAmaterialLabelViewController.h */,
+				9538559C224490E200AF7450 /* WYAmaterialLabelViewController.m */,
 			);
 			path = SendMaterial;
+			sourceTree = "<group>";
+		};
+		9538558A22447AFB00AF7450 /* SendMaterialView */ = {
+			isa = PBXGroup;
+			children = (
+				9538559022447B6400AF7450 /* WYAMaterialCameraCell.h */,
+				9538558B22447B6300AF7450 /* WYAMaterialCameraCell.m */,
+				9538558C22447B6300AF7450 /* WYAMaterialCameraCell.xib */,
+				9538558D22447B6400AF7450 /* WYASendMaterialImageEditCell.h */,
+				9538558E22447B6400AF7450 /* WYASendMaterialImageEditCell.m */,
+				9538558F22447B6400AF7450 /* WYASendMaterialImageEditCell.xib */,
+				9538559822448BB900AF7450 /* WYAMaterialLabelView.h */,
+				9538559922448BB900AF7450 /* WYAMaterialLabelView.m */,
+				9538559E224491FE00AF7450 /* WYALabelView.h */,
+				9538559F224491FE00AF7450 /* WYALabelView.m */,
+			);
+			path = SendMaterialView;
 			sourceTree = "<group>";
 		};
 		955D771A223CEA0200B3B1EE /* ImgTextView */ = {
 			isa = PBXGroup;
 			children = (
+				9538558A22447AFB00AF7450 /* SendMaterialView */,
 				955D771B223CEA4100B3B1EE /* WYAImageTextTableViewCell.h */,
 				955D771C223CEA4100B3B1EE /* WYAImageTextTableViewCell.m */,
 				955D7721223CFDE300B3B1EE /* WYAImgTextBodyView.h */,
@@ -894,8 +930,6 @@
 			isa = PBXGroup;
 			children = (
 				2193EEAB224217A400FD61B9 /* SendDynamicView */,
-				95DD8CE22239E6FB00731A7E /* WYAHomeView.h */,
-				95DD8CE32239E6FB00731A7E /* WYAHomeView.m */,
 				21B6BD792239FA0100962255 /* WYAAgentRingCoverView.h */,
 				21B6BD7A2239FA0100962255 /* WYAAgentRingCoverView.m */,
 				21F1C4BE223A05F800527496 /* WYAAgentRingCell.h */,
@@ -1164,7 +1198,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9538559422447B6400AF7450 /* WYASendMaterialImageEditCell.xib in Resources */,
 				958FB47620F0574A00F44489 /* Assets.xcassets in Resources */,
+				9538559222447B6400AF7450 /* WYAMaterialCameraCell.xib in Resources */,
 				2193EEBC22423BA300FD61B9 /* WYASendDynamicImageEditCell.xib in Resources */,
 				95C2FEDB20F0528C00ED829B /* LaunchScreen.storyboard in Resources */,
 				211F6807223B95B200F7ACBB /* WYACameraCell.xib in Resources */,
@@ -1257,17 +1293,18 @@
 				2193EE9922408FD200FD61B9 /* WYAMineCollectionDynamicModel.m in Sources */,
 				21586AB22243B1FC00013F43 /* WYABottomLineTextField.m in Sources */,
 				95DD8CD52239E6A100731A7E /* WYAMineModel.m in Sources */,
+				9538559D224490E200AF7450 /* WYAmaterialLabelViewController.m in Sources */,
 				95DAE467224120D00044E97D /* WYASettingTableViewCell.m in Sources */,
 				9538557E224325E900AF7450 /* WYAMineCollectionMaterialImgBodyview.m in Sources */,
 				9538558522437E5700AF7450 /* WYASendMaterialViewController.m in Sources */,
 				211F67F9223A31A700F7ACBB /* WYAAgentRingModel.m in Sources */,
 				9538556E224274A800AF7450 /* WYAMineCreateMaterialModel.m in Sources */,
-				95DD8CE42239E6FB00731A7E /* WYAHomeView.m in Sources */,
 				95DD8CDB2239E6BC00731A7E /* WYAHomeViewModel.m in Sources */,
 				2193EE87223FD70900FD61B9 /* WYAMineCreateDynamicModel.m in Sources */,
 				2193EE7D223FD49C00FD61B9 /* WYAMineCreateReviewFailCell.m in Sources */,
 				211F6806223B95B200F7ACBB /* WYACameraCell.m in Sources */,
 				953855762242792700AF7450 /* WYAMineCreateMaterialTableViewCell.m in Sources */,
+				9538559A22448BB900AF7450 /* WYAMaterialLabelView.m in Sources */,
 				953855812243260300AF7450 /* WYAMineCollectionMaterialTableViewCell.m in Sources */,
 				955D77582240C99C00B3B1EE /* WYAArticleTableViewCell.m in Sources */,
 				95DD8CCC2239E66400731A7E /* WYALoginViewController.m in Sources */,
@@ -1283,9 +1320,11 @@
 				953855882243857500AF7450 /* WYAMineCreateMaterialFootView.m in Sources */,
 				211F6802223B8E8300F7ACBB /* WYASendDynamicViewController.m in Sources */,
 				955D770F223B913C00B3B1EE /* WYAContentView.m in Sources */,
+				9538559122447B6400AF7450 /* WYAMaterialCameraCell.m in Sources */,
 				95C2FEDE20F0528C00ED829B /* main.m in Sources */,
 				2193EE79223FD40F00FD61B9 /* WYAMineCreateReviewSuccessCell.m in Sources */,
 				2193EE8D2240881D00FD61B9 /* WYAMineCreateReviewingCell.m in Sources */,
+				953855A0224491FE00AF7450 /* WYALabelView.m in Sources */,
 				95DD8CD82239E6AF00731A7E /* WYALoginViewModel.m in Sources */,
 				95DE135021ECB55700B5867B /* UIColor+WYAColor.m in Sources */,
 				21F1C4C0223A05F800527496 /* WYAAgentRingCell.m in Sources */,
@@ -1318,6 +1357,7 @@
 				953855722242774900AF7450 /* WYAMineCollectionMaterialModel.m in Sources */,
 				95DD8CE72239E70900731A7E /* WYALoginView.m in Sources */,
 				95F63231223A597600BFC68C /* WYAMineCreateMaterialViewController.m in Sources */,
+				9538559322447B6400AF7450 /* WYASendMaterialImageEditCell.m in Sources */,
 				95C2FF8020F0533600ED829B /* WYAHomeViewController.m in Sources */,
 				95F6322E223A592800BFC68C /* WYAMineCreateViewController.m in Sources */,
 				95C2FF8220F0533600ED829B /* WYAMineViewController.m in Sources */,

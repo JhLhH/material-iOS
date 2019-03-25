@@ -1,8 +1,8 @@
 //
-//  WYAHomeView.h
+//  WYALabelView.h
 //  WYAMaterial
 //
-//  Created by 李俊恒 on 2019/3/14.
+//  Created by 李俊恒 on 2019/3/22.
 //  Copyright © 2019 WeiYiAn. All rights reserved.
 //
 
@@ -10,8 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WYAHomeView : UIView
-
+@interface WYALabelView : UIView
+@property (nonatomic, strong) NSArray * labelArray;
 @end
 
 NS_ASSUME_NONNULL_END

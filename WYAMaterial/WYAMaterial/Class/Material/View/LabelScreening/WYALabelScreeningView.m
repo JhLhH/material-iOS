@@ -63,7 +63,10 @@
 - (WYAContentView *)contentView {
     if (!_contentView) {
         _contentView = ({
-            self.contentViewHeight   = 114 + (self.dataSources.count / 3) * 40;
+            self.contentViewHeight   = 114*SizeAdapter + (self.dataSources.count / 3) * 40*SizeAdapter;
+            if (self.contentViewHeight > 420*SizeAdapter) {
+                self.contentViewHeight = 420*SizeAdapter;
+            }
             WYAContentView * object  = [[WYAContentView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, self.contentViewHeight)];
             object.contentArray      = self.dataSources;
             object.resetButtonAction = ^{
@@ -90,7 +93,7 @@
 - (NSArray *)dataSources {
     if (!_dataSources) {
         _dataSources = ({
-            NSArray * object = @[ @"测试", @"演讲速成手啊啊", @"高效率思维", @"提高效率", @"测试", @"商务英语", @"提高效率", @"测试", @"商务英语", @"高效率思维", @"高效率思维", @"高效率思维", @"高效率思维" ];
+            NSArray * object = @[ @"测试", @"演讲速成手啊啊", @"高效率思维", @"提高效率", @"测试", @"商务英语", @"提高效率", @"测试", @"商务英语", @"高效率思维", @"高效率思维", @"高效率思维", @"高效率思维" , @"演讲速成手啊啊", @"高效率思维", @"提高效率", @"测试", @"商务英语", @"提高效率", @"测试", @"商务英语", @"高效率思维", @"高效率思维", @"高效率思维", @"高效率思维" , @"演讲速成手啊啊", @"高效率思维", @"提高效率", @"测试", @"商务英语", @"提高效率", @"测试", @"商务英语", @"高效率思维", @"高效率思维", @"高效率思维", @"高效率思维" , @"演讲速成手啊啊", @"高效率思维", @"提高效率", @"测试", @"商务英语", @"提高效率", @"测试", @"商务英语", @"高效率思维", @"高效率思维", @"高效率思维", @"高效率思维" , @"演讲速成手啊啊", @"高效率思维", @"提高效率", @"测试", @"商务英语", @"提高效率", @"测试", @"商务英语", @"高效率思维", @"高效率思维", @"高效率思维", @"高效率思维" , @"演讲速成手啊啊", @"高效率思维", @"提高效率", @"测试", @"商务英语", @"提高效率", @"测试", @"商务英语", @"高效率思维", @"高效率思维", @"高效率思维", @"高效率思维" , @"演讲速成手啊啊", @"高效率思维", @"提高效率", @"测试", @"商务英语", @"提高效率", @"测试", @"商务英语", @"高效率思维", @"高效率思维", @"高效率思维", @"高效率思维" ];
 
             object;
         });

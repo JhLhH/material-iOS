@@ -49,6 +49,7 @@
                 NSLog(@"发布素材");
                 WYASendMaterialViewController * vc = [[WYASendMaterialViewController alloc]init];
                 vc.hidesBottomBarWhenPushed = YES;
+                vc.materialType = MaterialTypeCreate;
                 [self.navigationController pushViewController:vc animated:YES];
             }
             break;
