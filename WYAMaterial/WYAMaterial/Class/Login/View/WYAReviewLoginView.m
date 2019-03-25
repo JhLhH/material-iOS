@@ -102,12 +102,16 @@
     self.wyaImageView.frame = wyaImageView_rect;
 }
 
-#pragma mark ======= Lazy
+#pragma mark ======= Getter
 - (UIImageView *)bgImageView{
     if(!_bgImageView){
         _bgImageView = ({
             UIImageView * object = [[UIImageView alloc]init];
-            [object setImage:[UIImage imageNamed:@"750-1334"]];
+            if (WYAiPhoneX) {
+                object.image = [UIImage imageNamed:@"1242-2208"];
+            } else {
+                object.image = [UIImage imageNamed:@"750-1334"];
+            }
             object.contentMode = UIViewContentModeScaleAspectFill;
             object;
         });

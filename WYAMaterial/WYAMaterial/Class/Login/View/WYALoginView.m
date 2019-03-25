@@ -71,20 +71,17 @@
     self.wyaImageView.frame = wyaImageView_rect;
 }
 
-/*
- // Only override drawRect: if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect {
- // Drawing code
- }
- */
-
-
+#pragma mark ======= Getter
 - (UIImageView *)bgImageView{
     if(!_bgImageView){
         _bgImageView = ({
             UIImageView * object = [[UIImageView alloc]init];
-            object.image = [UIImage imageNamed:@"750-1334"];
+            if (WYAiPhoneX) {
+                object.image = [UIImage imageNamed:@"1242-2208"];
+            } else {
+                object.image = [UIImage imageNamed:@"750-1334"];
+            }
+            object.contentMode = UIViewContentModeScaleAspectFill;
             object;
         });
     }

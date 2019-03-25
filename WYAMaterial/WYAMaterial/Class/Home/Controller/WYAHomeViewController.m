@@ -26,7 +26,7 @@
 @property (nonatomic, assign) BOOL isRefresh;       // 判断是否已经触发了刷新
 @property (nonatomic, assign) CGFloat lastOffset_y; // 记录tableview最后偏移量
 @property (nonatomic, assign) CGFloat lastAlpha;    // 记录tableview最后的透明度
-
+@property (nonatomic, assign) CGFloat lastNoticeAlpha;
 @property (nonatomic, strong) WYAAgentRingCoverView * agentRingCoverView;
 @property (nonatomic, strong) UITableView * agentRingTableView;
 @property (nonatomic, strong) WYANoticeBar * noticeBar;
@@ -41,6 +41,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
+    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
 }
 
 - (void)viewDidLoad {
@@ -48,6 +49,7 @@
 
     [self setupUI];
     [self getNetWorkDataSource];
+    [self addNotice];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -57,6 +59,7 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self.agentRingTableView forKeyPath:@"contentOffset"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -97,6 +100,10 @@
     [self.navigationController pushViewController:sendDynamic animated:YES];
 }
 
+- (void)addNotice{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBorardWillHidden) name:UIKeyboardWillHideNotification object:nil];
+}
+
 - (void)addAgentRingRefresh {
     NSLog(@"调用一次");
     self.refreshView.hidden = NO;
@@ -127,22 +134,20 @@
     }];
 }
 
-- (void)showImageBrowserWithModel:(WYAAgentRingModel *)model index:(NSInteger)index {
+- (void)keyBorardWillHidden{
+    self.commentsView.hidden = YES;
+}
+
+- (void)showImageBrowserWithModel:(WYAAgentRingModel *)model views:(NSArray *)views index:(NSInteger)index {
     NSMutableArray * array = [NSMutableArray array];
     for (NSInteger i = 0; i < model.urls.count; i++) {
         [array addObject:[UIImage imageNamed:@"1"]];
     }
-    WYAImageBrowser * imageBrowser      = [[WYAImageBrowser alloc] init];
-    imageBrowser.frame                  = Window.bounds;
-    imageBrowser.images                 = [array copy];
-    imageBrowser.selectIndex            = index;
-    imageBrowser.pageControlNormalColor = [[UIColor wya_whiteColor] colorWithAlphaComponent:0.5];
-    imageBrowser.pageControlSelectColor = [UIColor wya_hex:@"#E7C083"];
-    __block WYAImageBrowser * imageB    = imageBrowser;
-    imageBrowser.imageSelectBlock       = ^(NSInteger index) {
-        [imageB removeFromSuperview];
-    };
-    [Window addSubview:imageBrowser];
+    [WYAImageBrowser showImageBrowserWithCurrentImageIndex:index imageCount:model.urls.count datasource:nil placeHoldImageBlock:^UIImage *(WYAImageBrowser *browser, NSInteger index) {
+        return [UIImage imageNamed:@"1"];
+    } HighQualityImageURLBlock:nil AssetBlock:nil SourceImageViewBlock:^UIImageView *(WYAImageBrowser *browser, NSInteger index) {
+        return views[index];
+    }];
 }
 
 - (void)agentRingCommentEdit {
@@ -156,7 +161,7 @@
 
         NSValue * newvalue = change[NSKeyValueChangeNewKey];
         CGFloat point_y    = newvalue.UIOffsetValue.vertical;
-        NSLog(@"New:%f", point_y);
+//        NSLog(@"New:%f", point_y);
 
         if (point_y < -100) {
             if (self.isRefresh == NO) {
@@ -173,9 +178,9 @@
             if (self.lastOffset_y) {
                 if (point_y > self.lastOffset_y) {
                     // 回弹
-                    CGFloat ccc = (point_y - self.lastOffset_y) / 100;
-                    NSLog(@"ccc==%f", ccc);
-                    NSLog(@"lastAlp==%f", self.lastAlpha);
+                    CGFloat ccc = (point_y - self.lastOffset_y) / 182 * SizeAdapter;
+//                    NSLog(@"ccc==%f", ccc);
+//                    NSLog(@"lastAlp==%f", self.lastAlpha);
                     if (self.lastAlpha) {
                         self.lastAlpha = self.lastAlpha + ccc;
                     } else {
@@ -184,13 +189,33 @@
                     self.navBar.backgroundColor = [[UIColor wya_blackColor] colorWithAlphaComponent:self.lastAlpha > 1 ? 1 : self.lastAlpha];
                 } else {
                     // 下拉
-                    CGFloat ppp = (self.lastOffset_y - point_y) / 100;
-                    NSLog(@"ppp==%f", ppp);
+                    CGFloat ppp = (self.lastOffset_y - point_y) / 182 * SizeAdapter;
+//                    NSLog(@"ppp==%f", ppp);
                     if (self.lastAlpha) {
                         self.lastAlpha = self.lastAlpha - ppp;
                     }
 
                     self.navBar.backgroundColor = [[UIColor wya_blackColor] colorWithAlphaComponent:self.lastAlpha < 0.5 ? 0.5 : self.lastAlpha];
+                }
+
+                if (point_y > self.lastOffset_y) {
+                    CGFloat ccc = (point_y - self.lastOffset_y) / 182 * SizeAdapter;
+                    NSLog(@"ccc==%f", ccc);
+                    NSLog(@"lastNoticeAlpha==%f", self.lastNoticeAlpha);
+                    if (self.lastNoticeAlpha) {
+                        self.lastNoticeAlpha = self.lastNoticeAlpha - ccc;
+                    } else {
+                        self.lastNoticeAlpha = 1 - ccc;
+                    }
+                    self.noticeBar.alpha = self.lastNoticeAlpha;
+                } else if (point_y < self.lastOffset_y) {
+
+                    CGFloat ppp = (self.lastOffset_y - point_y) / 182 * SizeAdapter;
+                    NSLog(@"ppp==%f", ppp);
+                    if (self.lastNoticeAlpha) {
+                        self.lastNoticeAlpha = self.lastNoticeAlpha + ppp;
+                    }
+                    self.noticeBar.alpha = self.lastNoticeAlpha;
                 }
             }
             self.lastOffset_y = point_y;
@@ -231,8 +256,8 @@
     cell.praiseBlock = ^(WYAAgentRingModel * _Nonnull model) {
 
     };
-    cell.imageBlock = ^(WYAAgentRingModel * _Nonnull model, NSInteger index) {
-        [weakSelf showImageBrowserWithModel:model index:index];
+    cell.imageBlock = ^(WYAAgentRingModel * _Nonnull model, NSArray * _Nonnull views, NSInteger index) {
+        [self showImageBrowserWithModel:model views:views index:index];
     };
     return cell;
 }

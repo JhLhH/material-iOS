@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WYASendDynamicViewController : BaseViewController
 
+@property (nonatomic, copy) NSString * text;
+
+@property (nonatomic, copy) NSArray * images;
+
 @end
 
 NS_ASSUME_NONNULL_END
