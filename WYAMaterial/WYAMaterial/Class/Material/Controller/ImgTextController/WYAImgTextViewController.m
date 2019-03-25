@@ -99,7 +99,7 @@
     if(!_shareController){
         _shareController = ({
             WYAMaterialShareView * shareView = [WYAMaterialShareView sharedInstance];
-            shareView.isOnlyFriendCircle = YES;
+//            shareView.isOnlyFriendCircle = YES;
             WYAAlertController * object = [WYAAlertController wya_alertWithCustomView:shareView AlertStyle:WYAAlertStyleCustomSheet];
 
             object;

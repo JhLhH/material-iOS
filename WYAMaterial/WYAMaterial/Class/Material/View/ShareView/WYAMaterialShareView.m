@@ -102,8 +102,8 @@
             [object setImage:[UIImage imageNamed:@"icon_pengyouquan"] forState:UIControlStateNormal];
             [object setTitle:@"朋友圈" forState:UIControlStateNormal];
             object.titleLabel.font = FONT(10);
-//            object.imageView.layer.cornerRadius = 30*SizeAdapter;
-//            object.imageView.layer.masksToBounds = YES;
+            object.imageView.layer.cornerRadius = 30*SizeAdapter;
+            object.imageView.layer.masksToBounds = YES;
 //            object.imageView.bounds = CGRectMake(0, 0, 60*SizeAdapter, 60*SizeAdapter);
             [object setTitleColor:[UIColor wya_hex:@"#868686"] forState:UIControlStateNormal];
             object;
@@ -119,6 +119,8 @@
             [object setImage:[UIImage imageNamed:@"icon_shoudong"] forState:UIControlStateNormal];
             [object setTitle:@"手动发圈" forState:UIControlStateNormal];
             object.titleLabel.font = FONT(10);
+            object.imageView.layer.cornerRadius = 30*SizeAdapter;
+            object.imageView.layer.masksToBounds = YES;
             [object setTitleColor:[UIColor wya_hex:@"#868686"] forState:UIControlStateNormal];
             object;
        });
