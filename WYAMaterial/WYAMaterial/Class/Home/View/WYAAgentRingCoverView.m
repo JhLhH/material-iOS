@@ -65,6 +65,8 @@
             object.image = [UIImage imageNamed:@"pic_shouyeportrait"];
             object.layer.cornerRadius  = 8 * SizeAdapter;
             object.layer.masksToBounds = YES;
+            object.layer.borderColor = [UIColor wya_goldenColor].CGColor;
+            object.layer.borderWidth = 0.5 * SizeAdapter;
             object;
         });
     }

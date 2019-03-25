@@ -289,6 +289,8 @@
             [object setBackgroundImage:[UIImage wya_createImageWithColor:randomColor] forState:UIControlStateNormal];
             object.layer.cornerRadius  = 22 * SizeAdapter;
             object.layer.masksToBounds = YES;
+            object.layer.borderColor = [UIColor wya_goldenColor].CGColor;
+            object.layer.borderWidth = 0.5 * SizeAdapter;
             object;
         });
     }
