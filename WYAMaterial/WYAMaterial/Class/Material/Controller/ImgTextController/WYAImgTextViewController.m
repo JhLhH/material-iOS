@@ -12,15 +12,12 @@
 
 #import "WYAMaterialModel.h"
 
-#import "WYAMaterialShareView.h"
-
 #define IMGTEXT_CELLID @"WYAImageTextTableViewCell"
 
 @interface WYAImgTextViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) NSMutableArray * dataSources;
 @property (nonatomic, strong) WYAAlertController * shareController;
-@property (nonatomic, strong) WYAMaterialShareView * shareView;
 @end
 
 @implementation WYAImgTextViewController
@@ -32,6 +29,20 @@
     [self.view addSubview:self.tableView];
 }
 #pragma mark ======= Lazy
+
+- (WYAAlertController *)shareController{
+    if(!_shareController){
+        _shareController = ({
+            WYAMaterialShareView * shareView = [WYAMaterialShareView sharedInstance];
+            shareView.cancleActionBlock = ^{
+                [self dismissViewControllerAnimated:YES completion:nil];
+            };
+            WYAAlertController * object = [WYAAlertController wya_alertWithCustomView:shareView AlertStyle:WYAAlertStyleCustomSheet];
+            object;
+        });
+    }
+    return _shareController;
+}
 
 - (UITableView *)tableView {
     if (!_tableView) {
@@ -92,20 +103,6 @@
         [self.tableView reloadRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
     };
     return cell;
-}
-
-
-- (WYAAlertController *)shareController{
-    if(!_shareController){
-        _shareController = ({
-            WYAMaterialShareView * shareView = [WYAMaterialShareView sharedInstance];
-//            shareView.isOnlyFriendCircle = YES;
-            WYAAlertController * object = [WYAAlertController wya_alertWithCustomView:shareView AlertStyle:WYAAlertStyleCustomSheet];
-
-            object;
-       });
-    }
-    return _shareController;
 }
 
 @end

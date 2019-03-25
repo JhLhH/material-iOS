@@ -27,4 +27,7 @@
 #import <WYAKit/WYARealmBaseManager.h>
 #import <WYAKit/WYATextView.h>
 
+/*自定义View(多个地方使用)*/
+#import "WYAMaterialShareView.h"
+
 #endif /* WYAThirdClassHeader_h */

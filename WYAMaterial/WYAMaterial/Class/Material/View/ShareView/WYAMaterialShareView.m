@@ -10,7 +10,11 @@
 @interface WYAMaterialShareView()
 @property (nonatomic, strong) UIView * topView;
 @property (nonatomic, strong) UIButton *  friendCircleBtn; // 朋友圈
+@property (nonatomic, strong) UIImageView * friendCircleBtnImageView;
+@property (nonatomic, strong) UILabel * friendCircleBtnLabel;
 @property (nonatomic, strong) UIButton * handSendCircleBtn; // 手动发圈
+@property (nonatomic, strong) UIImageView * handSendCircleBtnImageView;
+@property (nonatomic, strong) UILabel * handSendCircleBtnLabel;
 @property (nonatomic, strong) UIButton * cancleButton;
 @end
 
@@ -26,12 +30,20 @@
 }
 - (void)setIsOnlyFriendCircle:(BOOL)isOnlyFriendCircle{
     _isOnlyFriendCircle = isOnlyFriendCircle;
+    if (_isOnlyFriendCircle) {
+        self.handSendCircleBtnLabel.text = @"发送给好友";
+        self.handSendCircleBtnImageView.image = [UIImage imageNamed:@"icon_shoudong"];
+    }
     [self layoutIfNeeded];
 }
 #pragma mark ======= LifeCircle
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
+        [self.friendCircleBtn addSubview:self.friendCircleBtnImageView];
+        [self.friendCircleBtn addSubview:self.friendCircleBtnLabel];
         [self.topView addSubview:self.friendCircleBtn];
+        [self.handSendCircleBtn addSubview:self.handSendCircleBtnImageView];
+        [self.handSendCircleBtn addSubview:self.handSendCircleBtnLabel];
         [self.topView addSubview:self.handSendCircleBtn];
         [self addSubview:self.topView];
         [self addSubview:self.cancleButton];
@@ -52,24 +64,47 @@
         make.left.right.top.mas_equalTo(self);
         make.height.mas_equalTo(120*SizeAdapter);
     }];
-    if (!_isOnlyFriendCircle) {
-        [self.friendCircleBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.topView.mas_left).offset(72*SizeAdapter);
-            make.top.equalTo(self.topView.mas_top).offset(0);
-            make.bottom.equalTo(self.topView.mas_bottom).offset(0);
-            make.width.mas_equalTo(116*SizeAdapter);
-        }];
-        [self.handSendCircleBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.topView.mas_right).offset(-72*SizeAdapter);
-            make.centerY.mas_equalTo(self.topView.mas_centerY);
-            make.height.mas_equalTo(116*SizeAdapter);
-            make.width.mas_equalTo(116*SizeAdapter);
-        }];
-    }else{
-        [self.friendCircleBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.top.bottom.mas_equalTo(self.topView);
-        }];
-    }
+
+    [self.friendCircleBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.topView.mas_left).offset(70*SizeAdapter);
+        make.centerY.mas_equalTo(self.topView.mas_centerY);
+        make.height.mas_equalTo(120*SizeAdapter);
+        make.width.mas_equalTo(120*SizeAdapter);
+    }];
+
+    [self.friendCircleBtnImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.friendCircleBtn.mas_left).offset(30*SizeAdapter);
+        make.top.equalTo(self.friendCircleBtn.mas_top).offset(21*SizeAdapter);
+        make.height.mas_equalTo(60*SizeAdapter);
+        make.width.mas_equalTo(60*SizeAdapter);
+    }];
+    [self.friendCircleBtnLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.friendCircleBtn.mas_left).offset(30*SizeAdapter);
+        make.top.equalTo(self.friendCircleBtnImageView.mas_bottom).offset(9*SizeAdapter);
+        make.height.mas_equalTo(10*SizeAdapter);
+        make.width.mas_equalTo(60*SizeAdapter);
+    }];
+
+
+    [self.handSendCircleBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.topView.mas_right).offset(-70*SizeAdapter);
+        make.centerY.mas_equalTo(self.topView.mas_centerY);
+        make.height.mas_equalTo(120*SizeAdapter);
+        make.width.mas_equalTo(120*SizeAdapter);
+    }];
+
+    [self.handSendCircleBtnImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.handSendCircleBtn.mas_right).offset(-30*SizeAdapter);
+        make.top.equalTo(self.handSendCircleBtn.mas_top).offset(21*SizeAdapter);
+        make.height.mas_equalTo(60*SizeAdapter);
+        make.width.mas_equalTo(60*SizeAdapter);
+    }];
+    [self.handSendCircleBtnLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.handSendCircleBtn.mas_right).offset(-30*SizeAdapter);
+        make.top.equalTo(self.handSendCircleBtnImageView.mas_bottom).offset(9*SizeAdapter);
+        make.height.mas_equalTo(10*SizeAdapter);
+        make.width.mas_equalTo(60*SizeAdapter);
+    }];
 
 
     [self.cancleButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -82,6 +117,23 @@
 
 }
 
+#pragma mark ======= Event
+
+- (void)friendCircleBtnClicked:(UIButton *)sender{
+    if (self.shareWeChateActionBlock) {
+        self.shareWeChateActionBlock(self.friendCircleBtnLabel.text);
+    }
+}
+- (void)handSendCircleBtn:(UIButton *)sender{
+    if (self.openWeChateActionBlock) {
+        self.openWeChateActionBlock(self.handSendCircleBtnLabel.text);
+    }
+}
+- (void)cancleButton:(UIButton *)sender{
+    if (self.cancleActionBlock) {
+        self.cancleActionBlock();
+    }
+}
 #pragma mark ======= Lazy
 
 - (UIView *)topView{
@@ -99,33 +151,77 @@
     if(!_friendCircleBtn){
         _friendCircleBtn = ({
             UIButton * object = [[UIButton alloc]init];
-            [object setImage:[UIImage imageNamed:@"icon_pengyouquan"] forState:UIControlStateNormal];
-            [object setTitle:@"朋友圈" forState:UIControlStateNormal];
-            object.titleLabel.font = FONT(10);
-            object.imageView.layer.cornerRadius = 30*SizeAdapter;
-            object.imageView.layer.masksToBounds = YES;
-//            object.imageView.bounds = CGRectMake(0, 0, 60*SizeAdapter, 60*SizeAdapter);
-            [object setTitleColor:[UIColor wya_hex:@"#868686"] forState:UIControlStateNormal];
+            [object addTarget:self action:@selector(friendCircleBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
             object;
        });
     }
     return _friendCircleBtn;
 }
 
+- (UIImageView *)friendCircleBtnImageView{
+    if(!_friendCircleBtnImageView){
+        _friendCircleBtnImageView = ({
+            UIImageView * object = [[UIImageView alloc]init];
+            object.image  = [UIImage imageNamed:@"icon_pengyouquan"];
+            object.layer.cornerRadius = 30*SizeAdapter;
+            object.layer.masksToBounds = YES;
+            object;
+       });
+    }
+    return _friendCircleBtnImageView;
+}
+
+- (UILabel *)friendCircleBtnLabel{
+    if(!_friendCircleBtnLabel){
+        _friendCircleBtnLabel = ({
+            UILabel * object = [[UILabel alloc]init];
+            object.text = @"朋友圈";
+            object.font = FONT(10);
+            object.textAlignment = NSTextAlignmentCenter;
+            object.textColor = [UIColor wya_hex:@"#868686"];
+            object;
+       });
+    }
+    return _friendCircleBtnLabel;
+}
+
+
 - (UIButton *)handSendCircleBtn{
     if(!_handSendCircleBtn){
         _handSendCircleBtn = ({
             UIButton * object = [[UIButton alloc]init];
-            [object setImage:[UIImage imageNamed:@"icon_shoudong"] forState:UIControlStateNormal];
-            [object setTitle:@"手动发圈" forState:UIControlStateNormal];
-            object.titleLabel.font = FONT(10);
-            object.imageView.layer.cornerRadius = 30*SizeAdapter;
-            object.imageView.layer.masksToBounds = YES;
-            [object setTitleColor:[UIColor wya_hex:@"#868686"] forState:UIControlStateNormal];
+            [object addTarget:self action:@selector(handSendCircleBtn:) forControlEvents:UIControlEventTouchUpInside];
+            object;
+        });
+    }
+    return _handSendCircleBtn;
+}
+
+- (UIImageView *)handSendCircleBtnImageView{
+    if(!_handSendCircleBtnImageView){
+        _handSendCircleBtnImageView = ({
+            UIImageView * object = [[UIImageView alloc]init];
+            object.image  = [UIImage imageNamed:@"icon_shoudong"];
+            object.layer.cornerRadius = 30*SizeAdapter;
+            object.layer.masksToBounds = YES;
             object;
        });
     }
-    return _handSendCircleBtn;
+    return _handSendCircleBtnImageView;
+}
+
+- (UILabel *)handSendCircleBtnLabel{
+    if(!_handSendCircleBtnLabel){
+        _handSendCircleBtnLabel = ({
+            UILabel * object = [[UILabel alloc]init];
+            object.text = @"手动发圈";
+            object.font = FONT(10);
+            object.textAlignment = NSTextAlignmentCenter;
+            object.textColor = [UIColor wya_hex:@"#868686"];
+            object;
+       });
+    }
+    return _handSendCircleBtnLabel;
 }
 
 - (UIButton *)cancleButton{
@@ -136,8 +232,9 @@
             [object setTitleColor:[UIColor wya_textBlackColor] forState:UIControlStateNormal];
             object.titleLabel.font = FONT(18);
             object.backgroundColor = [UIColor wya_whiteColor];
+            [object addTarget:self action:@selector(cancleButton:) forControlEvents:UIControlEventTouchUpInside];
             object;
-       });
+        });
     }
     return _cancleButton;
 }

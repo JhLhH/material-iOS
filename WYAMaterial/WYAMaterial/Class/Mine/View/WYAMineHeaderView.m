@@ -71,7 +71,7 @@
     [self.userIconImageButton mas_makeConstraints:^(MASConstraintMaker * make) {
         make.centerX.mas_equalTo(self.bgView.mas_centerX);
         make.bottom.equalTo(self.bgImageView.mas_bottom).offset(11*SizeAdapter);
-        make.size.mas_equalTo(CGSizeMake(95*SizeAdapter, 95*SizeAdapter));
+        make.size.mas_equalTo(CGSizeMake(95, 95));
     }];
 
     //    [self.editImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -192,7 +192,7 @@
         _userIconImageButton = ({
             UIButton * object          = [[UIButton alloc] init];
             [object setImage:[UIImage imageNamed:@"pic_moren"] forState:0];
-            object.layer.cornerRadius  = 95 * 0.5*SizeAdapter;
+            object.layer.cornerRadius  = 47.5;
             object.layer.masksToBounds = YES;
             object.userInteractionEnabled = NO;
             [object addTarget:self action:@selector(userIconButtonClicked:) forControlEvents:UIControlEventTouchUpInside];

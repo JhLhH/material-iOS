@@ -223,6 +223,9 @@
 
 - (void)forwardingButtonClicked:(UIButton *)sender{
     NSLog(@"转发");
+    if (self.ForwardingActionBlock) {
+        self.ForwardingActionBlock(self);
+    }
 }
 
 @end
