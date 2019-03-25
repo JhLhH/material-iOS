@@ -135,6 +135,59 @@
     self.commentsView.hidden = YES;
 }
 
+- (void)setupNavBarBackgroundWithY:(CGFloat)point_y{
+    if (point_y > 0) {
+        if (self.lastOffset_y) {
+            if (point_y > self.lastOffset_y) {
+                // 回弹
+                CGFloat ccc = (point_y - self.lastOffset_y) / 182 * SizeAdapter;
+
+                if (self.lastAlpha) {
+                    self.lastAlpha = self.lastAlpha + ccc;
+                } else {
+                    self.lastAlpha = 0.5 + ccc;
+                }
+                self.navBar.backgroundColor = [[UIColor wya_blackColor] colorWithAlphaComponent:self.lastAlpha > 1 ? 1 : self.lastAlpha];
+            } else {
+                // 下拉
+                CGFloat ppp = (self.lastOffset_y - point_y) / 182 * SizeAdapter;
+
+                if (self.lastAlpha) {
+                    self.lastAlpha = self.lastAlpha - ppp;
+                }
+
+                self.navBar.backgroundColor = [[UIColor wya_blackColor] colorWithAlphaComponent:self.lastAlpha < 0.5 ? 0.5 : self.lastAlpha];
+            }
+        }
+        self.lastOffset_y = point_y;
+    }
+}
+
+- (void)setupNoticeBarWithY:(CGFloat)point_y{
+    if (point_y > 0) {
+        if (point_y > self.lastOffset_y) {
+            CGFloat ccc = (point_y - self.lastOffset_y) / 182 * SizeAdapter;
+//            NSLog(@"ccc==%f", ccc);
+//            NSLog(@"lastNoticeAlpha==%f", self.lastNoticeAlpha);
+            if (self.lastNoticeAlpha) {
+                self.lastNoticeAlpha = self.lastNoticeAlpha - ccc;
+            } else {
+                self.lastNoticeAlpha = 1 - ccc;
+            }
+            self.noticeBar.alpha = self.lastNoticeAlpha;
+        } else if (point_y < self.lastOffset_y) {
+
+            CGFloat ppp = (self.lastOffset_y - point_y) / 182 * SizeAdapter;
+//            NSLog(@"ppp==%f", ppp);
+            if (self.lastNoticeAlpha) {
+                self.lastNoticeAlpha = self.lastNoticeAlpha + ppp;
+            }
+            self.noticeBar.alpha = self.lastNoticeAlpha;
+        }
+        self.lastOffset_y = point_y;
+    }
+}
+
 - (void)showImageBrowserWithModel:(WYAAgentRingModel *)model views:(NSArray *)views index:(NSInteger)index {
     NSMutableArray * array = [NSMutableArray array];
     for (NSInteger i = 0; i < model.urls.count; i++) {
@@ -147,9 +200,33 @@
     }];
 }
 
+/**
+ 评论点击事件
+ */
 - (void)agentRingCommentEdit {
     self.commentsView.hidden = NO;
     [self.commentsView.textView becomeFirstResponder];
+}
+
+/**
+ 转发事件
+ */
+- (void)forwardClick{
+
+}
+
+/**
+ 收藏事件
+ */
+- (void)collectionClick{
+
+}
+
+/**
+ 点赞事件
+ */
+- (void)praiseClick{
+
 }
 
 #pragma mark ======= KVO
@@ -158,7 +235,6 @@
 
         NSValue * newvalue = change[NSKeyValueChangeNewKey];
         CGFloat point_y    = newvalue.UIOffsetValue.vertical;
-//        NSLog(@"New:%f", point_y);
 
         if (point_y < -100) {
             if (self.isRefresh == NO) {
@@ -171,52 +247,8 @@
             }
         }
 
-        if (point_y > 0) {
-            if (self.lastOffset_y) {
-                if (point_y > self.lastOffset_y) {
-                    // 回弹
-                    CGFloat ccc = (point_y - self.lastOffset_y) / 182 * SizeAdapter;
-//                    NSLog(@"ccc==%f", ccc);
-//                    NSLog(@"lastAlp==%f", self.lastAlpha);
-                    if (self.lastAlpha) {
-                        self.lastAlpha = self.lastAlpha + ccc;
-                    } else {
-                        self.lastAlpha = 0.5 + ccc;
-                    }
-                    self.navBar.backgroundColor = [[UIColor wya_blackColor] colorWithAlphaComponent:self.lastAlpha > 1 ? 1 : self.lastAlpha];
-                } else {
-                    // 下拉
-                    CGFloat ppp = (self.lastOffset_y - point_y) / 182 * SizeAdapter;
-//                    NSLog(@"ppp==%f", ppp);
-                    if (self.lastAlpha) {
-                        self.lastAlpha = self.lastAlpha - ppp;
-                    }
-
-                    self.navBar.backgroundColor = [[UIColor wya_blackColor] colorWithAlphaComponent:self.lastAlpha < 0.5 ? 0.5 : self.lastAlpha];
-                }
-
-                if (point_y > self.lastOffset_y) {
-                    CGFloat ccc = (point_y - self.lastOffset_y) / 182 * SizeAdapter;
-                    NSLog(@"ccc==%f", ccc);
-                    NSLog(@"lastNoticeAlpha==%f", self.lastNoticeAlpha);
-                    if (self.lastNoticeAlpha) {
-                        self.lastNoticeAlpha = self.lastNoticeAlpha - ccc;
-                    } else {
-                        self.lastNoticeAlpha = 1 - ccc;
-                    }
-                    self.noticeBar.alpha = self.lastNoticeAlpha;
-                } else if (point_y < self.lastOffset_y) {
-
-                    CGFloat ppp = (self.lastOffset_y - point_y) / 182 * SizeAdapter;
-                    NSLog(@"ppp==%f", ppp);
-                    if (self.lastNoticeAlpha) {
-                        self.lastNoticeAlpha = self.lastNoticeAlpha + ppp;
-                    }
-                    self.noticeBar.alpha = self.lastNoticeAlpha;
-                }
-            }
-            self.lastOffset_y = point_y;
-        }
+        [self setupNavBarBackgroundWithY:point_y];
+        [self setupNoticeBarWithY:point_y];
 
     } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
@@ -242,16 +274,16 @@
         [tableView endUpdates];
     };
     cell.forwardingBlock = ^(WYAAgentRingModel * _Nonnull model) {
-
+        [weakSelf forwardClick];
     };
     cell.collectionBlock = ^(WYAAgentRingModel * _Nonnull model) {
-
+        [weakSelf collectionClick];
     };
     cell.commentsBlock = ^(WYAAgentRingModel * _Nonnull model) {
         [weakSelf agentRingCommentEdit];
     };
     cell.praiseBlock = ^(WYAAgentRingModel * _Nonnull model) {
-
+        [weakSelf praiseClick];
     };
     cell.imageBlock = ^(WYAAgentRingModel * _Nonnull model, NSArray * _Nonnull views, NSInteger index) {
         [self showImageBrowserWithModel:model views:views index:index];
@@ -443,7 +475,9 @@
                 CGRect view_rect    = CGRectMake(view_x, view_y, view_width, view_height);
                 view.frame          = view_rect;
             };
-
+            object.sendCommentsBlock = ^(NSString * _Nonnull text) {
+                self.commentsView = nil;
+            };
             object;
         });
     }

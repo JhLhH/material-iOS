@@ -54,6 +54,7 @@
 #pragma mark ======= Private Method
 - (void)sendComments {
     [self.textView resignFirstResponder];
+    self.textView.text = nil;
     self.hidden = YES;
     if (self.sendCommentsBlock) {
         self.sendCommentsBlock(self.textView.text);
