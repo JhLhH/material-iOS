@@ -49,6 +49,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="icon_delete" width="15" height="15"/>
+        <image name="icon_delete" width="16" height="16"/>
     </resources>
 </document>

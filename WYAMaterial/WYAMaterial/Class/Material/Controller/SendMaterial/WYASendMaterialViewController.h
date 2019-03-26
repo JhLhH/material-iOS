@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-
+#import "WYAMineCreateMaterialModel.h"
 NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM (NSInteger, MaterialType){
     MaterialTypeCreate = 0,
@@ -15,6 +15,10 @@ typedef NS_ENUM (NSInteger, MaterialType){
 };
 @interface WYASendMaterialViewController : BaseViewController
 @property (nonatomic, assign) MaterialType materialType;
+//@property (nonatomic, strong) NSArray <UIImage *> * imageArray;
+//@property (nonatomic, copy) NSString * contentString;
+//@property (nonatomic, copy) NSString * labelText;
+@property (nonatomic, strong) WYAMineCreateMaterialModel * editorModel;
 @end
 
 NS_ASSUME_NONNULL_END

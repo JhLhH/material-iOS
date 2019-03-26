@@ -292,6 +292,11 @@
     if (!_userBodyImageView) {
         _userBodyImageView = ({
             WYAMineCollectionMaterialImgBodyview * object = [[WYAMineCollectionMaterialImgBodyview alloc] init];
+            object.ImageButtonAction = ^(NSArray * _Nonnull views, NSInteger index) {
+                if (self.showImageActionBlock) {
+                    self.showImageActionBlock(self, views, index);
+                }
+            };
             object;
         });
     }

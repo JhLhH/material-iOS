@@ -33,7 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString * mineCreateAuditType;
 /// 失败原因
 @property (nonatomic, copy) NSString * failReasonString;
-
+/// 选择标签的文字
+@property (nonatomic, copy) NSString * labelString;
 /**
  获取图文数据模型
 

@@ -318,6 +318,11 @@
     if (!_userBodyImageView) {
         _userBodyImageView = ({
             WYAMineCreateMaterialImgBodyView * object = [[WYAMineCreateMaterialImgBodyView alloc] init];
+            object.ImageButtonAction = ^(NSArray * _Nonnull views, NSInteger index) {
+                if (self.showImageActionBlock) {
+                    self.showImageActionBlock(self, views, index);
+                }
+            };
             object;
         });
     }
@@ -437,7 +442,7 @@
     CGFloat bottomHeight;
 
     if ([model.mineCreateAuditType isEqualToString:@"审核失败"]) {
-        bottomHeight = 37 * SizeAdapter;
+        bottomHeight = 0 * SizeAdapter;
     } else {
         bottomHeight = 52 * SizeAdapter;
     }

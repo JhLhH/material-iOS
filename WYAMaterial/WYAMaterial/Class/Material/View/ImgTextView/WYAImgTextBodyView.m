@@ -44,20 +44,35 @@
                 CGFloat btnY      = (IMGHEIGHT + MARGIN) * row;
                 UIImage * image   = [UIImage imageNamed:[imageArray wya_safeObjectAtIndex:0]];
                 UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-                [button setImage:image forState:0];
+                [button setBackgroundImage:image forState:0];
                 button.tag                 = BASETAG + i;
                 button.frame               = CGRectMake(btnX, btnY, IMGWIDTH, IMGHEIGHT);
                 button.layer.cornerRadius  = 2 * SizeAdapter;
                 button.layer.masksToBounds = YES;
+                [button addTarget:self action:@selector(listButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
                 [self addSubview:button];
             }
         } else {
-            UIImageView * bodyImageView       = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 200 * SizeAdapter, 200 * SizeAdapter)];
-            bodyImageView.image               = [UIImage imageNamed:imageArray[0]];
+            UIButton * bodyImageView       = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 200 * SizeAdapter, 200 * SizeAdapter)];
+            [bodyImageView setBackgroundImage:[UIImage imageNamed:imageArray[0]] forState:UIControlStateNormal];
             bodyImageView.layer.cornerRadius  = 2 * SizeAdapter;
             bodyImageView.layer.masksToBounds = YES;
+            bodyImageView.tag = BASETAG + 0;
+            [bodyImageView addTarget:self action:@selector(oneImgButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:bodyImageView];
         }
+    }
+}
+
+#pragma mark ======= Event
+- (void)listButtonClicked:(UIButton *)sender{
+    if (self.ImageButtonAction) {
+        self.ImageButtonAction(self.subviews, sender.tag - BASETAG);
+    }
+}
+- (void)oneImgButtonClicked:(UIButton *)sender{
+    if (self.ImageButtonAction) {
+        self.ImageButtonAction(self.subviews, sender.tag - BASETAG);
     }
 }
 @end

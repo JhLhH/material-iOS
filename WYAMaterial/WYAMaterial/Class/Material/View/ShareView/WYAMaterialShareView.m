@@ -31,8 +31,8 @@
 - (void)setIsOnlyFriendCircle:(BOOL)isOnlyFriendCircle{
     _isOnlyFriendCircle = isOnlyFriendCircle;
     if (_isOnlyFriendCircle) {
-        self.handSendCircleBtnLabel.text = @"发送给好友";
-        self.handSendCircleBtnImageView.image = [UIImage imageNamed:@"icon_shoudong"];
+        self.handSendCircleBtnLabel.text = @"好友";
+        self.handSendCircleBtnImageView.image = [UIImage imageNamed:@"icon_haoyou"];
     }
     [self layoutIfNeeded];
 }
@@ -121,12 +121,17 @@
 
 - (void)friendCircleBtnClicked:(UIButton *)sender{
     if (self.shareWeChateActionBlock) {
-        self.shareWeChateActionBlock(self.friendCircleBtnLabel.text);
+        self.shareWeChateActionBlock();
     }
 }
 - (void)handSendCircleBtn:(UIButton *)sender{
+    if([self.handSendCircleBtnLabel.text isEqualToString:@"手动发圈"]){
     if (self.openWeChateActionBlock) {
-        self.openWeChateActionBlock(self.handSendCircleBtnLabel.text);
+        self.openWeChateActionBlock();
+    }}else if([self.handSendCircleBtnLabel.text isEqualToString:@"好友"]){
+        if (self.sendWeChateFriendActionBlock) {
+            self.sendWeChateFriendActionBlock();
+        }
     }
 }
 - (void)cancleButton:(UIButton *)sender{

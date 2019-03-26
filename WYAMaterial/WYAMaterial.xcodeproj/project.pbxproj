@@ -62,6 +62,7 @@
 		955D771D223CEA4100B3B1EE /* WYAImageTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 955D771C223CEA4100B3B1EE /* WYAImageTextTableViewCell.m */; };
 		955D7723223CFDE300B3B1EE /* WYAImgTextBodyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 955D7722223CFDE300B3B1EE /* WYAImgTextBodyView.m */; };
 		955D77582240C99C00B3B1EE /* WYAArticleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 955D77572240C99C00B3B1EE /* WYAArticleTableViewCell.m */; };
+		957468992249CEA000CECE82 /* WYASaveSendMaterialModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 957468982249CEA000CECE82 /* WYASaveSendMaterialModel.m */; };
 		958FB47620F0574A00F44489 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 958FB47520F0574A00F44489 /* Assets.xcassets */; };
 		95C2FEDB20F0528C00ED829B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95C2FED920F0528C00ED829B /* LaunchScreen.storyboard */; };
 		95C2FEDE20F0528C00ED829B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 95C2FEDD20F0528C00ED829B /* main.m */; };
@@ -225,6 +226,8 @@
 		955D7722223CFDE300B3B1EE /* WYAImgTextBodyView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAImgTextBodyView.m; sourceTree = "<group>"; };
 		955D77562240C99C00B3B1EE /* WYAArticleTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAArticleTableViewCell.h; sourceTree = "<group>"; };
 		955D77572240C99C00B3B1EE /* WYAArticleTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAArticleTableViewCell.m; sourceTree = "<group>"; };
+		957468972249CEA000CECE82 /* WYASaveSendMaterialModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYASaveSendMaterialModel.h; sourceTree = "<group>"; };
+		957468982249CEA000CECE82 /* WYASaveSendMaterialModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYASaveSendMaterialModel.m; sourceTree = "<group>"; };
 		958FB47520F0574A00F44489 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		95C2FECB20F0528B00ED829B /* WYAMaterial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WYAMaterial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95C2FEDA20F0528C00ED829B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -888,6 +891,8 @@
 			children = (
 				95DD8CBE2239E29400731A7E /* WYAMaterialModel.h */,
 				95DD8CBF2239E29400731A7E /* WYAMaterialModel.m */,
+				957468972249CEA000CECE82 /* WYASaveSendMaterialModel.h */,
+				957468982249CEA000CECE82 /* WYASaveSendMaterialModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1381,6 +1386,7 @@
 				2193EEBF22426DE900FD61B9 /* WYAAgentRingCommentsView.m in Sources */,
 				95DD8CC62239E2C300731A7E /* WYAMaterialViewModel.m in Sources */,
 				211F67FC223A337800F7ACBB /* WYAAgentRingViewModel.m in Sources */,
+				957468992249CEA000CECE82 /* WYASaveSendMaterialModel.m in Sources */,
 				953855722242774900AF7450 /* WYAMineCollectionMaterialModel.m in Sources */,
 				95DD8CE72239E70900731A7E /* WYALoginView.m in Sources */,
 				95F63231223A597600BFC68C /* WYAMineCreateMaterialViewController.m in Sources */,

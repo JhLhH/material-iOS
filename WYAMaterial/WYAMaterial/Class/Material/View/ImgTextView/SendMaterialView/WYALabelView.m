@@ -81,6 +81,9 @@
             NSString * title  = [_labelArray wya_safeObjectAtIndex:i];
             UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
             button.tag        = BASETAG + i;
+            if ([self.selectedLabelString isEqualToString:title]) {
+                button.selected = YES;
+            }
             [button setTitle:title forState:UIControlStateNormal];
             [button setTitleColor:[UIColor wya_textBlackColor] forState:UIControlStateNormal];
             [button setTitleColor:[UIColor wya_whiteColor] forState:UIControlStateSelected];
@@ -127,6 +130,11 @@
         }
     }
     sender.selected =YES;
+    if (sender.selected) {
+        if (self.SelecrtedLabelAction) {
+            self.SelecrtedLabelAction(sender.titleLabel.text);
+        }
+    }
 }
 
 

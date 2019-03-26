@@ -13,7 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WYAMineCreateMaterialFootView : UITableViewHeaderFooterView
 @property (nonatomic, strong) WYAMineCreateMaterialModel * model;
-
+@property(nonatomic, copy) void (^DeleteMaterialActionBlock)(WYAMineCreateMaterialFootView * target);
+@property(nonatomic, copy) void (^EditorMaterialActionBlock)(WYAMineCreateMaterialFootView * target);
 /**
  获取脚视图高度
 

@@ -11,7 +11,7 @@
 #import "WYAMineCreateMaterialModel.h"
 #import "WYAMineCreateMaterialTableViewCell.h"
 #import "WYAMineCreateMaterialFootView.h"
-
+#import "WYASendMaterialViewController.h"
 #define CREATE_MATERIAL_CELLID @"WYAMineCreateMaterialTableViewCell"
 #define CREATE_MATERIAL_FOOT @"createMaterialFoot"
 @interface WYAMineCreateMaterialViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -89,8 +89,12 @@
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:cellIndexPath.section] withRowAnimation:UITableViewRowAnimationNone];
 
     };
+    cell.showImageActionBlock = ^(WYAMineCreateMaterialTableViewCell * _Nonnull target, NSArray * _Nonnull views, NSInteger index) {
+        [self showImageBrowserWithModel:target.model views:views index:index];
+    };
     return cell;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     WYAMineCreateMaterialModel * model = [self.dataSources wya_safeObjectAtIndex:section];
     return [WYAMineCreateMaterialFootView footViewHeightWithModel:model];
@@ -106,9 +110,28 @@
     if ([model.mineCreateAuditType isEqualToString:@"审核失败"]) {
         WYAMineCreateMaterialFootView * footView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:CREATE_MATERIAL_FOOT];
         footView.model = model;
+        footView.DeleteMaterialActionBlock = ^(WYAMineCreateMaterialFootView * _Nonnull target) {
+            [self.dataSources removeObject:target.model];
+            [self.tableView reloadData];
+        };
+        footView.EditorMaterialActionBlock = ^(WYAMineCreateMaterialFootView * _Nonnull target) {
+            WYASendMaterialViewController * vc = [[WYASendMaterialViewController alloc]init];
+            vc.hidesBottomBarWhenPushed = YES;
+            vc.editorModel = target.model;
+            vc.materialType = MaterialTypeEditor;
+            [self.navigationController pushViewController:vc animated:YES];
+        };
         return footView;
     }
     return [[UIView alloc]init];
 }
+#pragma mark ======= 图片预览
+- (void)showImageBrowserWithModel:(WYAMineCreateMaterialModel *)model views:(NSArray *)views index:(NSInteger)index {
 
+    [WYAImageBrowser showImageBrowserWithCurrentImageIndex:index imageCount:model.mineCreateBodyImgArray.count datasource:nil placeHoldImageBlock:^UIImage *(WYAImageBrowser *browser, NSInteger index) {
+        return [UIImage imageNamed:@"1"];
+    } HighQualityImageURLBlock:nil AssetBlock:nil SourceImageViewBlock:^UIImageView *(WYAImageBrowser *browser, NSInteger index) {
+        return views[index];
+    }];
+}
 @end

@@ -102,7 +102,20 @@
         //3.传入数组，对当前cell进行刷新
         [self.tableView reloadRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
     };
+    cell.showImageActionBlock = ^(WYAImageTextTableViewCell * _Nonnull target, NSArray * _Nonnull views, NSInteger index) {
+        [self showImageBrowserWithModel:target.model views:views index:index];
+    };
     return cell;
 }
 
+#pragma mark ======= 图片预览
+
+- (void)showImageBrowserWithModel:(WYAImageTextModel *)model views:(NSArray *)views index:(NSInteger)index {
+
+    [WYAImageBrowser showImageBrowserWithCurrentImageIndex:index imageCount:model.bodyImgArray.count datasource:nil placeHoldImageBlock:^UIImage *(WYAImageBrowser *browser, NSInteger index) {
+        return [UIImage imageNamed:@"1"];
+    } HighQualityImageURLBlock:nil AssetBlock:nil SourceImageViewBlock:^UIImageView *(WYAImageBrowser *browser, NSInteger index) {
+        return views[index];
+    }];
+} 
 @end
