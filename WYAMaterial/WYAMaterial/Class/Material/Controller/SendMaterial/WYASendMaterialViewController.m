@@ -46,7 +46,6 @@
     }else{
         self.navTitle = @"编辑";
         self.textView.text = self.editorModel.mineCreateBodyString;
-        [self.textView becomeFirstResponder];
         self.associatedLabelView.rightInfoString = self.editorModel.labelString;
         NSMutableArray * imageArray = [NSMutableArray array];
         for (NSString * imgName in self.editorModel.mineCreateBodyImgArray) {
@@ -76,13 +75,46 @@
 - (void)wya_customLeftBarButtonItemPressed:(UIButton *)sender{
     if (self.materialType == MaterialTypeCreate) {
         // 在点击取消按钮时需要确认是否保存草稿
-        [self createPop];
+        if (![self.textView.text isEqualToString:@"请输入文字"] || self.dataSource.count > 0) {
+            [self createPop];
+        }else{
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     }else{
         // 是否放弃编辑
+        [self isContinueEditor];
     }
 }
 - (void)wya_customrRightBarButtonItemPressed:(UIButton *)sender{
     // 发布状态判断：发布成功、请等待总部审核、发布失败、含有敏感词汇请及时修改
+}
+
+- (void)isContinueEditor{
+    WYAAlertController * alert =
+    [WYAAlertController wya_alertWithTitle:@"是否继续编辑？"
+                                   Message:nil
+                          AlertLayoutStyle:WYAAlertLayoutStyleHorizontal];
+    alert.backgroundButton.enabled = NO;
+    alert.presentStyle             = WYAPopupPresentStyleBounce;
+    alert.dismissStyle             = WYAPopupDismissStyleShrink;
+    // 创建 action
+    WYAAlertAction * defaultAction =
+    [WYAAlertAction wya_actionWithTitle:@"放弃"
+                                  style:WYAAlertActionStyleCancel
+                                handler:^{
+                                    [self.navigationController popViewControllerAnimated:YES];
+                                }];
+
+    WYAAlertAction * cancelAction =
+    [WYAAlertAction wya_actionWithTitle:@"继续"
+                                  style:WYAAlertActionStyleDefault
+                                handler:^{
+
+                                }];
+
+    [alert wya_addAction:defaultAction];
+    [alert wya_addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 - (void)createPop{
     WYAAlertController * alert =

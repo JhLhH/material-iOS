@@ -63,7 +63,7 @@
 - (WYAContentView *)contentView {
     if (!_contentView) {
         _contentView = ({
-            self.contentViewHeight   = 114*SizeAdapter + (self.dataSources.count / 3) * 40*SizeAdapter;
+            self.contentViewHeight   = 130*SizeAdapter + (self.dataSources.count / 3) * 40*SizeAdapter;
             if (self.contentViewHeight > 420*SizeAdapter) {
                 self.contentViewHeight = 420*SizeAdapter;
             }

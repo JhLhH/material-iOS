@@ -24,7 +24,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) SendWeChateFriendActionBlock  sendWeChateFriendActionBlock;
 /// 取消
 @property (nonatomic, copy) CancleActionBlock cancleActionBlock;
-
+/// 分享的图片
+@property (nonatomic, strong) NSArray <UIImage *> * imgArray;
+/// 文字
+@property (nonatomic, copy) NSString * contentString;
+/// 文章链接
+@property (nonatomic, copy) NSString * articleURL;
 + (instancetype)sharedInstance;
 @end
 

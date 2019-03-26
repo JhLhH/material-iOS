@@ -26,7 +26,7 @@
 #import <WYAKit/WYAPhotoBrowser.h>
 #import <WYAKit/WYARealmBaseManager.h>
 #import <WYAKit/WYATextView.h>
-
+#import "WXApi.h"
 /*自定义View(多个地方使用)*/
 #import "WYAMaterialShareView.h"
 

@@ -63,6 +63,7 @@
 		955D7723223CFDE300B3B1EE /* WYAImgTextBodyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 955D7722223CFDE300B3B1EE /* WYAImgTextBodyView.m */; };
 		955D77582240C99C00B3B1EE /* WYAArticleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 955D77572240C99C00B3B1EE /* WYAArticleTableViewCell.m */; };
 		957468992249CEA000CECE82 /* WYASaveSendMaterialModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 957468982249CEA000CECE82 /* WYASaveSendMaterialModel.m */; };
+		9574689C2249FCF200CECE82 /* WYASaveImageToFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 9574689B2249FCF200CECE82 /* WYASaveImageToFile.m */; };
 		958FB47620F0574A00F44489 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 958FB47520F0574A00F44489 /* Assets.xcassets */; };
 		95C2FEDB20F0528C00ED829B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95C2FED920F0528C00ED829B /* LaunchScreen.storyboard */; };
 		95C2FEDE20F0528C00ED829B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 95C2FEDD20F0528C00ED829B /* main.m */; };
@@ -228,6 +229,8 @@
 		955D77572240C99C00B3B1EE /* WYAArticleTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAArticleTableViewCell.m; sourceTree = "<group>"; };
 		957468972249CEA000CECE82 /* WYASaveSendMaterialModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYASaveSendMaterialModel.h; sourceTree = "<group>"; };
 		957468982249CEA000CECE82 /* WYASaveSendMaterialModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYASaveSendMaterialModel.m; sourceTree = "<group>"; };
+		9574689A2249FCF200CECE82 /* WYASaveImageToFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYASaveImageToFile.h; sourceTree = "<group>"; };
+		9574689B2249FCF200CECE82 /* WYASaveImageToFile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYASaveImageToFile.m; sourceTree = "<group>"; };
 		958FB47520F0574A00F44489 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		95C2FECB20F0528B00ED829B /* WYAMaterial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WYAMaterial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95C2FEDA20F0528C00ED829B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -637,6 +640,8 @@
 			children = (
 				953855A222486A6500AF7450 /* WYAMaterialShareView.h */,
 				953855A322486A6500AF7450 /* WYAMaterialShareView.m */,
+				9574689A2249FCF200CECE82 /* WYASaveImageToFile.h */,
+				9574689B2249FCF200CECE82 /* WYASaveImageToFile.m */,
 			);
 			path = ShareView;
 			sourceTree = "<group>";
@@ -1353,6 +1358,7 @@
 				211F6802223B8E8300F7ACBB /* WYASendDynamicViewController.m in Sources */,
 				955D770F223B913C00B3B1EE /* WYAContentView.m in Sources */,
 				9538559122447B6400AF7450 /* WYAMaterialCameraCell.m in Sources */,
+				9574689C2249FCF200CECE82 /* WYASaveImageToFile.m in Sources */,
 				95C2FEDE20F0528C00ED829B /* main.m in Sources */,
 				2193EE79223FD40F00FD61B9 /* WYAMineCreateReviewSuccessCell.m in Sources */,
 				2193EE8D2240881D00FD61B9 /* WYAMineCreateReviewingCell.m in Sources */,

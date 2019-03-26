@@ -32,12 +32,12 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    CGFloat width = ScreenWidth - 93*SizeAdapter;
-    CGFloat left = 71*SizeAdapter;
+    CGFloat width = ScreenWidth - 74*SizeAdapter;
+    CGFloat left = 62*SizeAdapter;
     CGFloat height = [_model.failReasonString wya_heightWithFontSize:12 width:width];
     [self.reasonLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).offset(left);
-        make.top.equalTo(self.mas_top).offset(10*SizeAdapter);
+        make.top.equalTo(self.mas_top).offset(17*SizeAdapter);
         make.size.mas_equalTo(CGSizeMake(width, height));
     }];
 
