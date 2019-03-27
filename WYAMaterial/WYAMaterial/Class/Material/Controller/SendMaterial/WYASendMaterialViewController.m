@@ -75,7 +75,7 @@
 - (void)wya_customLeftBarButtonItemPressed:(UIButton *)sender{
     if (self.materialType == MaterialTypeCreate) {
         // 在点击取消按钮时需要确认是否保存草稿
-        if (![self.textView.text isEqualToString:@"请输入文字"] || self.dataSource.count > 0) {
+        if (![self.textView.text isEqualToString:@"请输入文字"] || self.dataSource.count > 0 || ![self.associatedLabelView.rightInfoString isEqualToString:@"去关联"]) {
             [self createPop];
         }else{
             [self.navigationController popViewControllerAnimated:YES];

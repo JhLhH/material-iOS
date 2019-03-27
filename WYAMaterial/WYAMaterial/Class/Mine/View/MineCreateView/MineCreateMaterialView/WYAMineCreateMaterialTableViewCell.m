@@ -236,7 +236,7 @@
         _userHeaderButton = ({
             UIButton * object          = [[UIButton alloc] init];
             object.backgroundColor     = [UIColor wya_lightBlackColor];
-            object.layer.cornerRadius  = 22 * SizeAdapter;
+            object.layer.cornerRadius  = 20 * SizeAdapter;
             object.layer.masksToBounds = YES;
             object;
         });
