@@ -9,6 +9,8 @@
 #import "WYAMineCollectionDynamicFootView.h"
 #import "WYAMineCollectionDynamicModel.h"
 
+#import "WYAViewSettingModel.h"
+
 @interface WYAMineCollectionDynamicFootView ()
 @property (nonatomic, strong) UIView * bgView;
 @property (nonatomic, strong) UIView * commentsView; // 关于评论的视图
@@ -36,7 +38,7 @@
 
     CGFloat commentsView_x      = 0;
     CGFloat commentsView_y      = 0;
-    CGFloat commentsView_width  = ScreenWidth - 83 * SizeAdapter;
+    CGFloat commentsView_width  = ScreenWidth - (bgViewLeft + bgViewRight) * SizeAdapter;
     CGFloat commentsView_height = [self getCommentsHeight];
     CGRect commentsView_rect    = CGRectMake(commentsView_x, commentsView_y, commentsView_width, commentsView_height);
     self.commentsView.frame     = commentsView_rect;
@@ -46,15 +48,15 @@
     CGFloat showCommentsButton_x      = self.commentsView.cmam_left;
     CGFloat showCommentsButton_y      = self.commentsView.cmam_bottom;
     CGFloat showCommentsButton_width  = self.commentsView.cmam_width;
-    CGFloat showCommentsButton_height = self.showCommentsButton.hidden ? 0 : 40 * SizeAdapter;
+    CGFloat showCommentsButton_height = self.showCommentsButton.hidden ? 0 : showCommentsButtonHeight * SizeAdapter;
     CGRect showCommentsButton_rect    = CGRectMake(showCommentsButton_x, showCommentsButton_y, showCommentsButton_width, showCommentsButton_height);
     self.showCommentsButton.frame     = showCommentsButton_rect;
 
     [self.showCommentsButton wya_setButtonImageLoctionRightWithSpace:3];
 
-    CGFloat bgView_x = 69 * SizeAdapter;
+    CGFloat bgView_x = bgViewLeft * SizeAdapter;
     CGFloat bgView_y = 0;
-    CGFloat bgView_width = ScreenWidth - 83 * SizeAdapter;
+    CGFloat bgView_width = ScreenWidth - (bgViewLeft + bgViewRight) * SizeAdapter;
     CGFloat bgView_height = self.commentsView.cmam_height + self.showCommentsButton.cmam_height;
     CGRect bgView_rect = CGRectMake(bgView_x, bgView_y,  bgView_width, bgView_height);
     self.bgView.frame = bgView_rect;
@@ -120,25 +122,25 @@
                 for (NSInteger index = 0; index < self.heights.count; index++) {
                     NSNumber * number = self.heights[index];
                     if (index == 0) {
-                        allHeight = allHeight + [number floatValue] + 15 * SizeAdapter;
+                        allHeight = allHeight + [number floatValue] + onlyOneCommentsTop * SizeAdapter;
                     } else {
                         allHeight = allHeight + [number floatValue];
                     }
                 }
             } else {
-                allHeight = [self.heights[0] floatValue] + [self.heights[1] floatValue] + 15 * SizeAdapter;
+                allHeight = [self.heights[0] floatValue] + [self.heights[1] floatValue] + onlyOneCommentsTop * SizeAdapter;
             }
         } else {
 
             for (NSInteger index = 0; index < self.heights.count; index++) {
                 NSNumber * number = self.heights[index];
                 if (index == 0) {
-                    allHeight = allHeight + [number floatValue] + 15 * SizeAdapter;
+                    allHeight = allHeight + [number floatValue] + singleCommentsTop * SizeAdapter;
                 } else {
                     allHeight = allHeight + [number floatValue];
                 }
             }
-            allHeight = allHeight + 15 * SizeAdapter;
+            allHeight = allHeight + singleCommentsTop * SizeAdapter;
         }
         height = allHeight;
     }
@@ -150,9 +152,15 @@
     for (NSInteger index = 0; index < self.commentsView.subviews.count; index++) {
         UIView * view       = self.commentsView.subviews[index];
         CGFloat height      = [self.heights[index] floatValue];
-        CGFloat view_x      = 10 * SizeAdapter;
-        CGFloat view_y      = lastView.cmam_bottom + (index == 0 ? 15 * SizeAdapter : 0 * SizeAdapter);
-        CGFloat view_width  = self.commentsView.cmam_width - 20 * SizeAdapter;
+        CGFloat view_x      = singleCommentsLeft * SizeAdapter;
+        CGFloat view_y;
+        if (self.model.comments.count > 2) {
+            view_y = lastView.cmam_bottom + (index == 0 ? onlyOneCommentsTop * SizeAdapter : 0 * SizeAdapter);
+        } else {
+            view_y = lastView.cmam_bottom + (index == 0 ? singleCommentsTop * SizeAdapter : 0 * SizeAdapter);
+        }
+
+        CGFloat view_width  = self.commentsView.cmam_width - (singleCommentsLeft * 2) * SizeAdapter;
         CGFloat view_height = height;
         CGRect view_rect    = CGRectMake(view_x, view_y, view_width, view_height);
         view.frame          = view_rect;
@@ -163,21 +171,23 @@
 - (YYLabel *)configYYLabelWithModel:(WYAMineCollectionDynamicCommentsModel *)model {
 
     NSMutableAttributedString * text = [self commentsAttributedStringWithModel:model];
-
+    CGFloat width = ScreenWidth - (bgViewLeft
+                                   + bgViewRight
+                                   + singleCommentsLeft * 2) * SizeAdapter;
     YYLabel * label               = [[YYLabel alloc] init];
-    label.preferredMaxLayoutWidth = ScreenWidth - 103 * SizeAdapter;
+    label.preferredMaxLayoutWidth = width;
     label.numberOfLines           = 0;
     label.attributedText          = text;
 
     if (model.show) {
-        CGSize introSize      = CGSizeMake(ScreenWidth - 103 * SizeAdapter, CGFLOAT_MAX);
+        CGSize introSize      = CGSizeMake(width, CGFLOAT_MAX);
         YYTextLayout * layout = [YYTextLayout layoutWithContainerSize:introSize text:text];
         label.textLayout      = layout;
         CGFloat introHeight   = layout.textBoundingSize.height;
         [self.heights addObject:[NSNumber numberWithFloat:introHeight]];
     } else {
         [self addSeeMoreButtonWithYYLabel:label commentsModel:model];
-        [self.heights addObject:[NSNumber numberWithFloat:35 * SizeAdapter]];
+        [self.heights addObject:[NSNumber numberWithFloat:singleCommentsHeight * SizeAdapter]];
     }
 
     return label;
@@ -198,16 +208,16 @@
     NSRange nameRange                = [string rangeOfString:model.personName options:NSCaseInsensitiveSearch];
     NSRange closeRange               = [string rangeOfString:closeString options:NSCaseInsensitiveSearch];
 
-    [text yy_setFont:FONTS(12) range:nameRange];
+    [text yy_setFont:FONT(singleCommentsFont) range:nameRange];
     [text yy_setColor:[UIColor wya_textLightBlackColor] range:nameRange];
-    [text yy_setFont:FONTS(12) range:commentsRange];
+    [text yy_setFont:FONT(singleCommentsFont) range:commentsRange];
     [text yy_setColor:[UIColor wya_textDarkGrayColor] range:commentsRange];
     text.yy_lineSpacing = 2 * SizeAdapter;
     text.yy_kern        = [NSNumber numberWithInt:1 * SizeAdapter];
     if (model.show) {
         // 当前评论处于展开状态，添加收起评论，以及相关事件
         WeakSelf(weakSelf);
-        [text yy_setFont:FONT(12) range:closeRange];
+        [text yy_setFont:FONT(singleCommentsFont) range:closeRange];
         [text yy_setColor:[UIColor wya_blueColor] range:closeRange];
 
         YYTextHighlight * textHighlight = [YYTextHighlight new];
@@ -237,12 +247,12 @@
         if (strongSelf.singleCommentsBlock) {
             strongSelf.singleCommentsBlock(strongSelf.model);
         }
-
     };
+
     NSRange range = [text.string rangeOfString:@"更多"];
     [text yy_setColor:[UIColor wya_blueColor] range:range];
     [text yy_setTextHighlight:textHighlight range:range];
-    text.yy_font           = FONT(12);
+    text.yy_font           = FONT(singleCommentsFont);
     text.yy_baselineOffset = [NSNumber numberWithInt:-2];
     YYLabel * seeMore      = [YYLabel new];
     seeMore.attributedText = text;

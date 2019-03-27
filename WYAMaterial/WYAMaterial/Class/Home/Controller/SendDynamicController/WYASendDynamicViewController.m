@@ -128,6 +128,9 @@
                                   style:WYAAlertActionStyleDefault
                                 handler:^{
                                     BOOL isSuccess;
+                                    if ([self.textView.text isEqualToString:@"请输入文字"]) {
+                                        self.textView.text = @"";
+                                    }
                                     if (self.model) {
                                         isSuccess = [WYASendDynamicViewModel updateSendDynamicDraftWithText:self.textView.text images:self.dataSource];
                                     } else {
@@ -270,6 +273,13 @@
         [alert wya_addAction:photoAction];
         [alert wya_addAction:ablumAction];
         [self presentViewController:alert animated:YES completion:nil];
+    } else {
+        [WYAImageBrowser showImageBrowserWithCurrentImageIndex:indexPath.item imageCount:self.dataSource.count datasource:nil placeHoldImageBlock:^UIImage *(WYAImageBrowser *browser, NSInteger index) {
+            return [UIImage imageNamed:@"1"];
+        } HighQualityImageURLBlock:nil AssetBlock:nil SourceImageViewBlock:^UIImageView *(WYAImageBrowser *browser, NSInteger index) {
+            WYASendDynamicImageEditCell * cell = (WYASendDynamicImageEditCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:indexPath.section]];
+            return cell.imgView;
+        }];
     }
 }
 

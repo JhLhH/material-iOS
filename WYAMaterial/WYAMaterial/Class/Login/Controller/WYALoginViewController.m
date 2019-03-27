@@ -38,9 +38,9 @@
     self.navBar.hidden    = YES;
 //    if (<#condition#>) {
         // 当前是在审核状态
-        [self.view addSubview:self.reviewLoginView];
+//        [self.view addSubview:self.reviewLoginView];
 //    } else {
-//        [self.view addSubview:self.loginView];
+        [self.view addSubview:self.loginView];
 //    }
 }
 
@@ -50,7 +50,8 @@
 }
 
 - (void)loginClick{
-    if ([WXApi isWXAppInstalled]) {
+    BOOL isSuccess = [WXApi isWXAppInstalled];
+    if (isSuccess == YES) {
         SendAuthReq * req = [[SendAuthReq alloc] init];
         req.openID        = @"wx808acd6db9965c72";
         req.scope         = @"snsapi_userinfo";

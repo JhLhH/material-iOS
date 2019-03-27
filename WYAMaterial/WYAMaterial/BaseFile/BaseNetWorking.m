@@ -19,8 +19,8 @@ static const NSUInteger kDefaultTimeoutInterval = 6;
     manager.requestSerializer.timeoutInterval = kDefaultTimeoutInterval;
 
     // 声明上传的是json格式的参数，需要你和后台约定好，不然会出现后台无法获取到你上传的参数问题
-    manager.requestSerializer = [AFHTTPRequestSerializer serializer]; // 上传普通格式
-    //    manager.requestSerializer = [AFJSONRequestSerializer serializer]; // 上传JSON格式
+//    manager.requestSerializer = [AFHTTPRequestSerializer serializer]; // 上传普通格式
+        manager.requestSerializer = [AFJSONRequestSerializer serializer]; // 上传JSON格式
 
     // 声明获取到的数据格式
     manager.responseSerializer = [AFHTTPResponseSerializer serializer]; // AFN不会解析,数据是data，需要自己解析
@@ -31,9 +31,9 @@ static const NSUInteger kDefaultTimeoutInterval = 6;
 }
 
 + (void)GetWithUrl:(NSString *)urlString
-            Params:(NSMutableDictionary *)params
-           Success:(Success)success
-              Fail:(Fail)fail {
+            params:(NSMutableDictionary *)params
+           success:(Success)success
+              fail:(Fail)fail {
     AFHTTPSessionManager * manager = [self AFManager];
 
     NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
@@ -62,11 +62,17 @@ static const NSUInteger kDefaultTimeoutInterval = 6;
 }
 
 + (void)PostWithUrl:(NSString *)urlString
-             Params:(NSMutableDictionary *)params
-            Success:(Success)success
-               Fail:(Fail)fail {
+       headerParams:(NSMutableDictionary *)headerParams
+             params:(NSMutableDictionary *)params
+            success:(Success)success
+               fail:(Fail)fail {
     AFHTTPSessionManager * manager = [self AFManager];
 
+    if (headerParams) {
+        for (NSString * key in headerParams.allKeys) {
+            [manager.requestSerializer setValue:headerParams[key] forHTTPHeaderField:key];
+        }
+    }
     NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
     NSString * token              = [userDefaults objectForKey:@"access_token"];
     NSMutableDictionary * dic     = [NSMutableDictionary dictionaryWithDictionary:params];
@@ -80,8 +86,8 @@ static const NSUInteger kDefaultTimeoutInterval = 6;
 
         }
         success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
-
-            id jsonObj = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSString * str = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
+            id jsonObj = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
 
             success(jsonObj);
 
@@ -95,13 +101,13 @@ static const NSUInteger kDefaultTimeoutInterval = 6;
 
 + (void)UploadImageWithUrl:(NSString *)urlString
                     params:(NSMutableDictionary *)params
-                    Images:(NSArray<UIImage *> *)images
-                ImageNames:(NSArray<NSString *> *)imageNames
-                 ImageType:(ImageType)type
-     ImageCompressionRatio:(float)ratio
+                    images:(NSArray<UIImage *> *)images
+                imageNames:(NSArray<NSString *> *)imageNames
+                 imageType:(ImageType)type
+     imageCompressionRatio:(float)ratio
                   progress:(Progress)progress
-                   Success:(Success)success
-                      Fail:(Fail)fail {
+                   success:(Success)success
+                      fail:(Fail)fail {
     if (images.count == 0) {
         fail(@"上传图片个数不能小于1个");
         return;
@@ -155,12 +161,12 @@ static const NSUInteger kDefaultTimeoutInterval = 6;
 }
 
 + (void)UploadVideoWithUrl:(NSString *)urlString
-                    Params:(NSMutableDictionary *)params
-                VideoPaths:(NSArray *)videoPaths
-                VideoNames:(NSArray *)videoNames
+                    params:(NSMutableDictionary *)params
+                videoPaths:(NSArray *)videoPaths
+                videoNames:(NSArray *)videoNames
                   progress:(Progress)progress
-                   Success:(Success)success
-                      Fail:(Fail)fail {
+                   success:(Success)success
+                      fail:(Fail)fail {
     if (videoPaths.count == 0) {
         fail(@"上传视频个数不能小于1个");
         return;
@@ -205,12 +211,12 @@ static const NSUInteger kDefaultTimeoutInterval = 6;
 }
 
 + (void)UploadFileWithUrl:(NSString *)urlString
-                   Params:(NSMutableDictionary *)params
-                FilePaths:(NSArray *)filePaths
-                FileNames:(NSArray *)fileNames
+                   params:(NSMutableDictionary *)params
+                filePaths:(NSArray *)filePaths
+                fileNames:(NSArray *)fileNames
                  progress:(Progress)progress
-                  Success:(Success)success
-                     Fail:(Fail)fail {
+                  success:(Success)success
+                     fail:(Fail)fail {
     if (filePaths.count == 0) {
         fail(@"上传文件个数不能小于1个");
         return;
@@ -255,11 +261,11 @@ static const NSUInteger kDefaultTimeoutInterval = 6;
 }
 
 + (NSURLSessionDownloadTask *)DownloadFileWithUrl:(NSString *)urlString
-                                           Params:(NSMutableDictionary *)params
-                                         FilePath:(NSString *)filePath
+                                           params:(NSMutableDictionary *)params
+                                         filePath:(NSString *)filePath
                                          progress:(Progress)progress
-                                          Success:(Success)success
-                                             Fail:(Fail)fail {
+                                          success:(Success)success
+                                             fail:(Fail)fail {
     AFHTTPSessionManager * manager          = [self AFManager];
     urlString                               = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
     NSURLRequest * reuqest                  = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		210C86EE224B0AFB001A154E /* WYAViewSettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 210C86ED224B0AFB001A154E /* WYAViewSettingModel.m */; };
 		211F67F9223A31A700F7ACBB /* WYAAgentRingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 211F67F8223A31A700F7ACBB /* WYAAgentRingModel.m */; };
 		211F67FC223A337800F7ACBB /* WYAAgentRingViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 211F67FB223A337800F7ACBB /* WYAAgentRingViewModel.m */; };
 		211F67FF223A5EC000F7ACBB /* WYAAgentRingSectionFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211F67FE223A5EC000F7ACBB /* WYAAgentRingSectionFootView.m */; };
@@ -117,6 +118,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		210C86EC224B0AFB001A154E /* WYAViewSettingModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAViewSettingModel.h; sourceTree = "<group>"; };
+		210C86ED224B0AFB001A154E /* WYAViewSettingModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAViewSettingModel.m; sourceTree = "<group>"; };
 		211F67F7223A31A700F7ACBB /* WYAAgentRingModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAAgentRingModel.h; sourceTree = "<group>"; };
 		211F67F8223A31A700F7ACBB /* WYAAgentRingModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYAAgentRingModel.m; sourceTree = "<group>"; };
 		211F67FA223A337800F7ACBB /* WYAAgentRingViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYAAgentRingViewModel.h; sourceTree = "<group>"; };
@@ -475,6 +478,8 @@
 			children = (
 				2193EEAD2242181E00FD61B9 /* WYASendDynamicDraftModel.h */,
 				2193EEAE2242181E00FD61B9 /* WYASendDynamicDraftModel.m */,
+				210C86EC224B0AFB001A154E /* WYAViewSettingModel.h */,
+				210C86ED224B0AFB001A154E /* WYAViewSettingModel.m */,
 			);
 			path = SendDynamicModel;
 			sourceTree = "<group>";
@@ -1345,6 +1350,7 @@
 				95DD8CDE2239E6CE00731A7E /* WYAMineViewModel.m in Sources */,
 				95C2FF8520F0533600ED829B /* RootControllerModel.m in Sources */,
 				953855882243857500AF7450 /* WYAMineCreateMaterialFootView.m in Sources */,
+				210C86EE224B0AFB001A154E /* WYAViewSettingModel.m in Sources */,
 				211F6802223B8E8300F7ACBB /* WYASendDynamicViewController.m in Sources */,
 				955D770F223B913C00B3B1EE /* WYAContentView.m in Sources */,
 				9538559122447B6400AF7450 /* WYAMaterialCameraCell.m in Sources */,

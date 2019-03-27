@@ -9,6 +9,7 @@
 #import "WYAMineCreateReviewSuccessFootView.h"
 
 #import "WYAMineCreateDynamicModel.h"
+#import "WYAViewSettingModel.h"
 
 @interface WYAMineCreateReviewSuccessFootView ()
 @property (nonatomic, strong) UIView * bgView;

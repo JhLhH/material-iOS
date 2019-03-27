@@ -135,7 +135,7 @@
     self.commentsView.hidden = YES;
 }
 
-- (void)setupNavBarBackgroundWithY:(CGFloat)point_y{
+- (void)setupNavBarBackgroundAndNoticeBarWithY:(CGFloat)point_y{
     if (point_y > 0) {
         if (self.lastOffset_y) {
             if (point_y > self.lastOffset_y) {
@@ -158,41 +158,32 @@
 
                 self.navBar.backgroundColor = [[UIColor wya_blackColor] colorWithAlphaComponent:self.lastAlpha < 0.5 ? 0.5 : self.lastAlpha];
             }
-        }
-        self.lastOffset_y = point_y;
-    }
-}
 
-- (void)setupNoticeBarWithY:(CGFloat)point_y{
-    if (point_y > 0) {
-        if (point_y > self.lastOffset_y) {
-            CGFloat ccc = (point_y - self.lastOffset_y) / 182 * SizeAdapter;
-//            NSLog(@"ccc==%f", ccc);
-//            NSLog(@"lastNoticeAlpha==%f", self.lastNoticeAlpha);
-            if (self.lastNoticeAlpha) {
-                self.lastNoticeAlpha = self.lastNoticeAlpha - ccc;
-            } else {
-                self.lastNoticeAlpha = 1 - ccc;
-            }
-            self.noticeBar.alpha = self.lastNoticeAlpha;
-        } else if (point_y < self.lastOffset_y) {
+            if (point_y > self.lastOffset_y) {
+                CGFloat ccc = (point_y - self.lastOffset_y) / 182 * SizeAdapter;
+                //            NSLog(@"ccc==%f", ccc);
+                //            NSLog(@"lastNoticeAlpha==%f", self.lastNoticeAlpha);
+                if (self.lastNoticeAlpha) {
+                    self.lastNoticeAlpha = self.lastNoticeAlpha - ccc;
+                } else {
+                    self.lastNoticeAlpha = 1 - ccc;
+                }
+                self.noticeBar.alpha = self.lastNoticeAlpha;
+            } else if (point_y < self.lastOffset_y) {
 
-            CGFloat ppp = (self.lastOffset_y - point_y) / 182 * SizeAdapter;
-//            NSLog(@"ppp==%f", ppp);
-            if (self.lastNoticeAlpha) {
-                self.lastNoticeAlpha = self.lastNoticeAlpha + ppp;
+                CGFloat ppp = (self.lastOffset_y - point_y) / 182 * SizeAdapter;
+                //            NSLog(@"ppp==%f", ppp);
+                if (self.lastNoticeAlpha) {
+                    self.lastNoticeAlpha = self.lastNoticeAlpha + ppp;
+                }
+                self.noticeBar.alpha = self.lastNoticeAlpha;
             }
-            self.noticeBar.alpha = self.lastNoticeAlpha;
         }
         self.lastOffset_y = point_y;
     }
 }
 
 - (void)showImageBrowserWithModel:(WYAAgentRingModel *)model views:(NSArray *)views index:(NSInteger)index {
-    NSMutableArray * array = [NSMutableArray array];
-    for (NSInteger i = 0; i < model.urls.count; i++) {
-        [array addObject:[UIImage imageNamed:@"1"]];
-    }
     [WYAImageBrowser showImageBrowserWithCurrentImageIndex:index imageCount:model.urls.count datasource:nil placeHoldImageBlock:^UIImage *(WYAImageBrowser *browser, NSInteger index) {
         return [UIImage imageNamed:@"1"];
     } HighQualityImageURLBlock:nil AssetBlock:nil SourceImageViewBlock:^UIImageView *(WYAImageBrowser *browser, NSInteger index) {
@@ -247,8 +238,7 @@
             }
         }
 
-        [self setupNavBarBackgroundWithY:point_y];
-        [self setupNoticeBarWithY:point_y];
+        [self setupNavBarBackgroundAndNoticeBarWithY:point_y];
 
     } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];

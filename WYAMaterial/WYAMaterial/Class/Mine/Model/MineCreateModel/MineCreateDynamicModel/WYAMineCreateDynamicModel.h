@@ -62,6 +62,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString * personPraise;
 
 @property (nonatomic, copy) NSString * personCollection;
+
+@property (nonatomic, assign) CGFloat height;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -58,9 +58,9 @@ typedef void (^Progress)(float progress);
  @param fail 失败
  */
 + (void)GetWithUrl:(NSString *)urlString
-            Params:(NSMutableDictionary *)params
-           Success:(Success)success
-              Fail:(Fail)fail;
+            params:(NSMutableDictionary *)params
+           success:(Success)success
+              fail:(Fail)fail;
 
 /**
  Post请求
@@ -71,9 +71,10 @@ typedef void (^Progress)(float progress);
  @param fail 失败
  */
 + (void)PostWithUrl:(NSString *)urlString
-             Params:(NSMutableDictionary *)params
-            Success:(Success)success
-               Fail:(Fail)fail;
+       headerParams:(NSMutableDictionary *)headerParams
+             params:(NSMutableDictionary *)params
+            success:(Success)success
+               fail:(Fail)fail;
 
 /**
  上传图片
@@ -90,13 +91,13 @@ typedef void (^Progress)(float progress);
  */
 + (void)UploadImageWithUrl:(NSString *)urlString
                     params:(NSMutableDictionary *)params
-                    Images:(NSArray<UIImage *> *)images
-                ImageNames:(NSArray<NSString *> *)imageNames
-                 ImageType:(ImageType)type
-     ImageCompressionRatio:(float)ratio
+                    images:(NSArray<UIImage *> *)images
+                imageNames:(NSArray<NSString *> *)imageNames
+                 imageType:(ImageType)type
+     imageCompressionRatio:(float)ratio
                   progress:(Progress)progress
-                   Success:(Success)success
-                      Fail:(Fail)fail;
+                   success:(Success)success
+                      fail:(Fail)fail;
 
 /**
  上传视频
@@ -110,12 +111,12 @@ typedef void (^Progress)(float progress);
  @param fail 失败
  */
 + (void)UploadVideoWithUrl:(NSString *)urlString
-                    Params:(NSMutableDictionary *)params
-                VideoPaths:(NSArray *)videoPaths
-                VideoNames:(NSArray *)videoNames
+                    params:(NSMutableDictionary *)params
+                videoPaths:(NSArray *)videoPaths
+                videoNames:(NSArray *)videoNames
                   progress:(Progress)progress
-                   Success:(Success)success
-                      Fail:(Fail)fail;
+                   success:(Success)success
+                      fail:(Fail)fail;
 
 /**
  上传文件（图片，视频也属于文件的一种）
@@ -129,12 +130,12 @@ typedef void (^Progress)(float progress);
  @param fail 失败
  */
 + (void)UploadFileWithUrl:(NSString *)urlString
-                   Params:(NSMutableDictionary *)params
-                FilePaths:(NSArray *)filePaths
-                FileNames:(NSArray *)fileNames
+                   params:(NSMutableDictionary *)params
+                filePaths:(NSArray *)filePaths
+                fileNames:(NSArray *)fileNames
                  progress:(Progress)progress
-                  Success:(Success)success
-                     Fail:(Fail)fail;
+                  success:(Success)success
+                     fail:(Fail)fail;
 
 /**
  下载文件
@@ -148,9 +149,9 @@ typedef void (^Progress)(float progress);
  @return 下载管理器
  */
 + (NSURLSessionDownloadTask *)DownloadFileWithUrl:(NSString *)urlString
-                                           Params:(NSMutableDictionary *)params
-                                         FilePath:(NSString *)filePath
+                                           params:(NSMutableDictionary *)params
+                                         filePath:(NSString *)filePath
                                          progress:(Progress)progress
-                                          Success:(Success)success
-                                             Fail:(Fail)fail;
+                                          success:(Success)success
+                                             fail:(Fail)fail;
 @end

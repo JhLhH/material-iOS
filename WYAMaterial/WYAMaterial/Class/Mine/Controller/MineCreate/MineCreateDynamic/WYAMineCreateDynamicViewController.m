@@ -56,8 +56,43 @@
     }];
 }
 
+- (void)deleteDynamicWithModel:(WYAMineCreateDynamicModel *)model{
+    WYAAlertController * alert =
+    [WYAAlertController wya_alertWithTitle:@"确定删除？"
+                                   Message:nil
+                          AlertLayoutStyle:WYAAlertLayoutStyleHorizontal];
+    alert.backgroundButton.enabled = NO;
+    alert.presentStyle             = WYAPopupPresentStyleBounce;
+    alert.dismissStyle             = WYAPopupDismissStyleShrink;
+    // 创建 action
+    WYAAlertAction * defaultAction =
+    [WYAAlertAction wya_actionWithTitle:@"放弃"
+                                  style:WYAAlertActionStyleCancel
+                                handler:^{
+
+
+                                }];
+    WYAAlertAction * cancelAction =
+    [WYAAlertAction wya_actionWithTitle:@"确定"
+                                  style:WYAAlertActionStyleDefault
+                                handler:^{
+
+
+                                }];
+    [alert wya_addAction:defaultAction];
+    [alert wya_addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 - (void)againEditDynamicWithModel:(WYAMineCreateDynamicModel *)model{
     WYASendDynamicViewController * sendDynamic = [[WYASendDynamicViewController alloc] init];
+    sendDynamic.text = model.content;
+    NSMutableArray * arr = [NSMutableArray array];
+    for (id obj in model.urls) {
+        UIImage * image = [UIImage imageNamed:@"1"];
+        [arr addObject:image];
+    }
+    sendDynamic.images = arr;
     [self.navigationController pushViewController:sendDynamic animated:YES];
 }
 
@@ -77,9 +112,7 @@
         WYAMineCreateReviewSuccessCell * cell = [tableView dequeueReusableCellWithIdentifier:@"success" forIndexPath:indexPath];
         cell.model                            = dynamicModel;
         cell.stretchBlock                     = ^(WYAMineCreateDynamicModel * _Nonnull model) {
-            [tableView beginUpdates];
-            [tableView reloadRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationNone];
-            [tableView endUpdates];
+            [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationNone];
         };
         cell.forwardingBlock = ^(WYAMineCreateDynamicModel * _Nonnull model) {
 
@@ -101,18 +134,21 @@
         WYAMineCreateReviewFailCell * cell = [tableView dequeueReusableCellWithIdentifier:@"fail" forIndexPath:indexPath];
         cell.model                         = dynamicModel;
         cell.stretchBlock                  = ^(WYAMineCreateDynamicModel * _Nonnull model) {
-            [tableView beginUpdates];
-            [tableView reloadRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationNone];
-            [tableView endUpdates];
+//            [tableView beginUpdates];
+            [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationNone];
+//            [tableView endUpdates];
         };
         cell.imageBlock = ^(WYAMineCreateDynamicModel * _Nonnull model, NSArray * _Nonnull views, NSInteger index) {
             [weakSelf showImageBrowserWithModel:model views:views index:index];
         };
+        cell.singleCommentsBlock = ^(WYAMineCreateDynamicModel * _Nonnull model) {
+            [tableView reloadRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationNone];
+        };
         cell.deleteBlock = ^(WYAMineCreateDynamicModel * _Nonnull model) {
-
+            [weakSelf deleteDynamicWithModel:model];
         };
         cell.againEditBlock = ^(WYAMineCreateDynamicModel * _Nonnull model) {
-
+            [weakSelf againEditDynamicWithModel:model];
         };
         return cell;
     } else {

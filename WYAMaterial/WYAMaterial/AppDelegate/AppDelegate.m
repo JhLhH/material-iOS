@@ -10,7 +10,7 @@
 #import "RootViewController.h"
 #import "WYALoginViewController.h"
 #import "WYAMaterialViewController.h"
-
+#import "WYALoginViewModel.h"
 @interface AppDelegate ()
 
 @end
@@ -70,15 +70,29 @@
     NSLog(@"resp==%@", resp);
     SendAuthResp * sendResp = (SendAuthResp *)resp;
     WYAUserDefaultObjectForKey(sendResp.code);
+    [WYALoginViewModel loginWithCode:sendResp.code success:^(id data) {
+        NSLog(@"data==%@",data);
+        if ([[data[@"status"] stringValue] isEqualToString:@"1"]) {
+            [UIView wya_showCenterToastWithMessage:data[@"msg"]];
+            NSDictionary * dic = data[@"data"];
+            WYAUserDefaultSetObjectForKey(dic[@"access_token"], @"access_token");
+            RootViewController * rootViewController = [[RootViewController alloc] init];
+            Window.rootViewController = rootViewController;
+        }
+    } fail:^(NSString *errorDes) {
+        NSLog(@"errorDes==%@",errorDes);
+    }];
 }
 
 #pragma mark ======= Private Method
 - (void)getData {
     // 先判断本地是否有access_token,如果有把token上传至后台，然后根据返回值进行操作
-    //    if (access_tken) {
-    //        // 上传至后台
-    //    } else {
-    //        // 需要用户去授权登录，将获取的code上传至后台，后台返回access_token保存至本地
-    //    }
+
+    if (WYAUserDefaultObjectForKey(@"access_token")) {
+        // 上传至后台
+
+    } else {
+        // 需要用户去授权登录，将获取的code上传至后台，后台返回access_token保存至本地
+    }
 }
 @end

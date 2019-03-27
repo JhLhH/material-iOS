@@ -9,6 +9,7 @@
 #import "WYAMineCollectionDynamicCell.h"
 
 #import "WYAMineCollectionDynamicModel.h"
+#import "WYAViewSettingModel.h"
 
 @interface WYAMineCollectionDynamicCell ()
 @property (nonatomic, strong) UIButton * userHeaderButton;       // 用户头像按钮
@@ -28,10 +29,21 @@
 
 @implementation WYAMineCollectionDynamicCell {
     CGFloat contentHeight;
+    
+    CGFloat userReleaseContentLabelWidth; // 用户发布内容宽度
+    CGFloat singleImageWidth; // 单张图片宽度
+    CGFloat userReleaseImagesViewWidth; // 承载图片父视图的宽度
+    CGFloat releaseImagePadding; // 图片间距
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+
+        userReleaseContentLabelWidth = ScreenWidth - 74 * SizeAdapter;
+        singleImageWidth = ScreenWidth - 190.5 * SizeAdapter;
+        userReleaseImagesViewWidth = ScreenWidth - 120 * SizeAdapter;
+        releaseImagePadding = 5 * SizeAdapter;
+
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self.contentView addSubview:self.userHeaderButton];
         [self.contentView addSubview:self.userNameLabel];
@@ -53,82 +65,83 @@
     [super layoutSubviews];
 
     [self.userHeaderButton mas_remakeConstraints:^(MASConstraintMaker * make) {
-        make.left.mas_equalTo(self.contentView.mas_left).with.offset(17 * SizeAdapter);
-        make.top.mas_equalTo(self.contentView.mas_top).with.offset(20 * SizeAdapter);
-        make.size.mas_equalTo(CGSizeMake(44 * SizeAdapter, 44 * SizeAdapter));
+        make.left.mas_equalTo(self.contentView.mas_left).with.offset(userHeaderLeft * SizeAdapter);
+        make.top.mas_equalTo(self.contentView.mas_top).with.offset(userHeaderTop * SizeAdapter);
+        make.size.mas_equalTo(CGSizeMake(userHeaderWidth * SizeAdapter, userHeaderWidth * SizeAdapter));
     }];
 
     [self.userNameLabel mas_remakeConstraints:^(MASConstraintMaker * make) {
-        make.top.mas_equalTo(self.userHeaderButton.mas_top).with.offset(2 * SizeAdapter);
-        make.left.mas_equalTo(self.userHeaderButton.mas_right).with.offset(11 * SizeAdapter);
-        make.width.mas_equalTo(100 * SizeAdapter);
-        make.height.mas_equalTo(15 * SizeAdapter);
+        make.top.mas_equalTo(self.userHeaderButton.mas_top).with.offset(userNameLabelTop * SizeAdapter);
+        make.left.mas_equalTo(self.userHeaderButton.mas_right).with.offset(userNameLabelLeft * SizeAdapter);
+        make.width.mas_equalTo(userNameLabelWidth * SizeAdapter);
+        make.height.mas_equalTo(userNameLabelHeight * SizeAdapter);
     }];
 
     [self.userLevelImageView mas_makeConstraints:^(MASConstraintMaker * make) {
         make.left.mas_equalTo(self.userNameLabel.mas_left);
-        make.top.mas_equalTo(self.userNameLabel.mas_bottom).with.offset(8 * SizeAdapter);
-        make.size.mas_equalTo(CGSizeMake(14 * SizeAdapter, 15 * SizeAdapter));
+        make.top.mas_equalTo(self.userNameLabel.mas_bottom).with.offset(userLevelImageViewTop * SizeAdapter);
+        make.size.mas_equalTo(CGSizeMake(userLevelImageViewWidth * SizeAdapter, userLevelImageViewHeight * SizeAdapter));
     }];
 
     [self.userLevelLabel mas_remakeConstraints:^(MASConstraintMaker * make) {
-        make.left.mas_equalTo(self.userLevelImageView.mas_right).with.offset(8 * SizeAdapter);
-        make.right.mas_equalTo(self.contentView.mas_right).with.offset(-26 * SizeAdapter);
+        make.left.mas_equalTo(self.userLevelImageView.mas_right).with.offset(userLevelLabelLeft * SizeAdapter);
+        make.right.mas_equalTo(self.contentView.mas_right).with.offset(-userLevelLabelRight * SizeAdapter);
         make.centerY.mas_equalTo(self.userLevelImageView.mas_centerY);
-        make.height.mas_equalTo(11 * SizeAdapter);
+        make.height.mas_equalTo(userLevelLabelHeight * SizeAdapter);
     }];
 
     [self.forwardingButton mas_remakeConstraints:^(MASConstraintMaker * make) {
-        make.right.mas_equalTo(self.contentView.mas_right).with.offset(-16 * SizeAdapter);
+        make.right.mas_equalTo(self.contentView.mas_right).with.offset(-forwardingButtonRight * SizeAdapter);
         make.centerY.mas_equalTo(self.userNameLabel.mas_centerY);
-        make.height.mas_equalTo(15 * SizeAdapter);
-        make.width.mas_equalTo(60 * SizeAdapter);
+        make.height.mas_equalTo(forwardingButtonHeight * SizeAdapter);
+        make.width.mas_equalTo(forwardingButtonWidth * SizeAdapter);
     }];
 
     [self.userReleaseContentLabel mas_remakeConstraints:^(MASConstraintMaker * make) {
         make.left.mas_equalTo(self.userNameLabel.mas_left);
-        make.right.mas_equalTo(self.contentView.mas_right).with.offset(-15 * SizeAdapter);
-        make.top.mas_equalTo(self.userLevelImageView.mas_bottom).with.offset(17 * SizeAdapter);
+        make.right.mas_equalTo(self.contentView.mas_right).with.offset(-userReleaseContentLabelRight * SizeAdapter);
+        make.top.mas_equalTo(self.userLevelImageView.mas_bottom).with.offset(userReleaseContentLabelTop * SizeAdapter);
         make.height.mas_equalTo(self->contentHeight);
     }];
 
     [self.showButton mas_remakeConstraints:^(MASConstraintMaker * make) {
         make.left.mas_equalTo(self.userReleaseContentLabel.mas_left);
-        make.top.mas_equalTo(self.userReleaseContentLabel.mas_bottom);
-        make.width.mas_equalTo(50 * SizeAdapter);
+        make.top.mas_equalTo(self.userReleaseContentLabel.mas_bottom).with.offset(self.showButton.hidden ? 0 : showButtonTop * SizeAdapter);
+        make.width.mas_equalTo(showButtonWidth * SizeAdapter);
         make.height.mas_equalTo(self.showButton.hidden
                                 ? 0
-                                : 30 * SizeAdapter);
+                                : showButtonHeight * SizeAdapter);
     }];
 
     [self.userReleaseImagesView mas_remakeConstraints:^(MASConstraintMaker * make) {
-        make.left.right.mas_equalTo(self.userReleaseContentLabel);
-        make.top.mas_equalTo(self.showButton.mas_bottom).with.offset(15 * SizeAdapter);
+        make.left.mas_equalTo(self.userReleaseContentLabel);
+        make.right.mas_equalTo(self.contentView.mas_right).with.offset(-userReleaseImagesViewRight * SizeAdapter);
+        make.top.mas_equalTo(self.showButton.mas_bottom).with.offset(userReleaseImagesViewTop * SizeAdapter);
         make.height.mas_equalTo([self userReleaseImagesViewHeightWith:self.model]);
     }];
 
     [self.userReleaseTimeLabel mas_remakeConstraints:^(MASConstraintMaker * make) {
         make.left.mas_equalTo(self.userReleaseImagesView.mas_left);
-        make.top.mas_equalTo(self.userReleaseImagesView.mas_bottom).with.offset(10 * SizeAdapter);
-        make.size.mas_equalTo(CGSizeMake(60 * SizeAdapter, 20 * SizeAdapter));
+        make.top.mas_equalTo(self.userReleaseImagesView.mas_bottom).with.offset(userReleaseTimeLabelTop * SizeAdapter);
+        make.size.mas_equalTo(CGSizeMake(userReleaseTimeLabelWidth * SizeAdapter, userReleaseTimeLabelHeight * SizeAdapter));
     }];
 
     [self.commentsButton mas_remakeConstraints:^(MASConstraintMaker * make) {
-        make.left.mas_equalTo(self.userReleaseTimeLabel.mas_right).with.offset(28 * SizeAdapter);
+        make.left.mas_equalTo(self.userReleaseTimeLabel.mas_right).with.offset(commentsButtonLeft * SizeAdapter);
         make.centerY.mas_equalTo(self.userReleaseTimeLabel.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(45 * SizeAdapter, 20 * SizeAdapter));
+        make.size.mas_equalTo(CGSizeMake(commentsButtonWidth * SizeAdapter, commentsButtonHeight * SizeAdapter));
     }];
 
     [self.collectionButton mas_remakeConstraints:^(MASConstraintMaker * make) {
-        make.left.mas_equalTo(self.commentsButton.mas_right).with.offset(36 * SizeAdapter);
+        make.left.mas_equalTo(self.commentsButton.mas_right).with.offset(collectionButtonLeft * SizeAdapter);
         make.centerY.mas_equalTo(self.userReleaseTimeLabel.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(35 * SizeAdapter, 20 * SizeAdapter));
+        make.size.mas_equalTo(CGSizeMake(collectionButtonWidth * SizeAdapter, collectionButtonHeight * SizeAdapter));
     }];
 
     [self.praiseButton mas_remakeConstraints:^(MASConstraintMaker * make) {
-        make.left.mas_equalTo(self.collectionButton.mas_right).with.offset(38 * SizeAdapter);
+        make.left.mas_equalTo(self.collectionButton.mas_right).with.offset(praiseButtonLeft * SizeAdapter);
         make.centerY.mas_equalTo(self.userReleaseTimeLabel.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(35 * SizeAdapter, 20 * SizeAdapter));
+        make.size.mas_equalTo(CGSizeMake(praiseButtonWidth * SizeAdapter, praiseButtonHeight * SizeAdapter));
     }];
 }
 
@@ -148,21 +161,21 @@
     CGFloat height = 0.0f;
     if (agentRingModel.urls.count > 0) {
         if (agentRingModel.urls.count < 2) {
-            height = 184 * SizeAdapter;
+            height = singleImageWidth;
         } else {
-            CGFloat itemHeight = (ScreenWidth - 106 * SizeAdapter) / 3;
+            CGFloat itemHeight = (userReleaseImagesViewWidth - 2 * releaseImagePadding) / 3;
             NSInteger row      = agentRingModel.urls.count / 3;
             NSInteger column   = agentRingModel.urls.count % 3;
             if (column == 0) {
                 // 整除的
                 if (row > 1) {
-                    height = itemHeight * row + 10 * SizeAdapter * (row - 1);
+                    height = itemHeight * row + releaseImagePadding * (row - 1);
                 } else {
                     height = itemHeight;
                 }
             } else {
                 if (row > 0) {
-                    height = itemHeight * (row + 1) + 10 * SizeAdapter * row;
+                    height = itemHeight * (row + 1) + releaseImagePadding * row;
                 } else {
                     height = itemHeight;
                 }
@@ -177,7 +190,7 @@
         if (self.userReleaseImagesView.subviews.count < 2) {
             UIView * view = [self.userReleaseImagesView.subviews firstObject];
 
-            CGFloat view_width  = (ScreenWidth - 106 * SizeAdapter) / 3 * 2;
+            CGFloat view_width  = singleImageWidth;
             CGFloat view_height = view_width;
             CGFloat view_x      = 0;
             CGFloat view_y      = 0;
@@ -190,10 +203,10 @@
                 CGFloat row    = index / 3;
                 CGFloat column = index % 3;
 
-                CGFloat view_width  = (self.contentView.cmam_width - 106 * SizeAdapter) / 3;
+                CGFloat view_width  = (userReleaseImagesViewWidth - 2 * releaseImagePadding) / 3;
                 CGFloat view_height = view_width;
-                CGFloat view_x      = (view_width + 10 * SizeAdapter) * column;
-                CGFloat view_y      = (view_width + 10 * SizeAdapter) * row;
+                CGFloat view_x      = (view_width + releaseImagePadding) * column;
+                CGFloat view_y      = (view_width + releaseImagePadding) * row;
 
                 CGRect view_rect = CGRectMake(view_x, view_y, view_width, view_height);
                 view.frame       = view_rect;
@@ -204,21 +217,30 @@
 
 #pragma mark ======= Public Method
 + (CGFloat)getCellHeightWithModel:(WYAMineCollectionDynamicModel *)model {
-    CGFloat height        = 85 * SizeAdapter;
-    CGFloat contantHeight = [model.content wya_heightWithFontSize:14 width:ScreenWidth - 88 * SizeAdapter] - 8 * SizeAdapter;
+    CGFloat height        = (userHeaderTop
+                             + userNameLabelTop
+                             + userNameLabelHeight
+                             + userLevelImageViewTop
+                             + userLevelImageViewHeight
+                             + userReleaseContentLabelTop) * SizeAdapter;
+
+    CGFloat contantHeight = [model.content wya_heightWithFontSize:userReleaseContentLabelFont width:ScreenWidth - 74 * SizeAdapter] - 10 * SizeAdapter;
     if (model.contentShow) {
         height = height + contantHeight;
     } else {
-        height = height + 40 * SizeAdapter;
+        height = height + userReleaseContentLabelNormalHeight * SizeAdapter;
     }
 
-    if (contantHeight > 40 * SizeAdapter) {
-        height = height + 30 * SizeAdapter;
+    if (contantHeight > userReleaseContentLabelNormalHeight * SizeAdapter) {
+        height = height + (showButtonTop + showButtonHeight) * SizeAdapter;
     }
 
     WYAMineCollectionDynamicCell * cell = [[WYAMineCollectionDynamicCell alloc] init];
-    CGFloat imageH                      = [cell userReleaseImagesViewHeightWith:model];
-    return height + imageH + 50 * SizeAdapter;
+    CGFloat imageH          = [cell userReleaseImagesViewHeightWith:model];
+
+    return height + imageH + (userReleaseTimeLabelTop
+                              + userReleaseTimeLabelHeight
+                              + userReleaseTimeLabelBottom) * SizeAdapter;
 }
 
 #pragma mark ======= Setter
@@ -237,8 +259,8 @@
         [self.praiseButton setTitle:model.personPraise forState:UIControlStateNormal];
 
         // 判断全文按钮是否显示
-        CGFloat height = [model.content wya_heightWithFontSize:14 width:ScreenWidth - 88 * SizeAdapter] - 8 * SizeAdapter;
-        if (height > 40 * SizeAdapter) {
+        CGFloat height = [model.content wya_heightWithFontSize:userReleaseContentLabelFont width:userReleaseContentLabelWidth] - userReleaseContentLabelPadding * SizeAdapter;
+        if (height > userReleaseContentLabelNormalHeight * SizeAdapter) {
             self.showButton.hidden = NO;
         } else {
             self.showButton.hidden = YES;
@@ -249,7 +271,7 @@
             contentHeight            = height;
             self.showButton.selected = YES;
         } else {
-            contentHeight            = 40 * SizeAdapter;
+            contentHeight            = userReleaseContentLabelNormalHeight * SizeAdapter;
             self.showButton.selected = NO;
         }
 
@@ -264,7 +286,7 @@
                 UIButton * object = [[UIButton alloc] init];
                 [object setBackgroundImage:[UIImage imageNamed:@"1"] forState:UIControlStateNormal];
                 object.tag                 = index;
-                object.layer.cornerRadius  = 5 * SizeAdapter;
+                object.layer.cornerRadius  = releaseImageCornerRadius * SizeAdapter;
                 object.layer.masksToBounds = YES;
                 [object addCallBackAction:^(UIButton * button) {
                     if (self.imageBlock) {
@@ -286,8 +308,10 @@
         _userHeaderButton = ({
             UIButton * object = [[UIButton alloc] init];
             [object setBackgroundImage:[UIImage wya_createImageWithColor:randomColor] forState:UIControlStateNormal];
-            object.layer.cornerRadius  = 22 * SizeAdapter;
+            object.layer.cornerRadius  = userHeaderCornerRadius * SizeAdapter;
             object.layer.masksToBounds = YES;
+            object.layer.borderColor = [UIColor wya_goldenColor].CGColor;
+            object.layer.borderWidth = userHeaderBorderWidth * SizeAdapter;
             object;
         });
     }
@@ -298,7 +322,7 @@
     if (!_userNameLabel) {
         _userNameLabel = ({
             UILabel * object = [[UILabel alloc] init];
-            object.font      = FONT(15);
+            object.font      = FONT(userNameLabelFont);
             object.textColor = [UIColor wya_textLightBlackColor];
             object;
         });
@@ -321,7 +345,7 @@
     if (!_userLevelLabel) {
         _userLevelLabel = ({
             UILabel * object = [[UILabel alloc] init];
-            object.font      = FONT(11);
+            object.font      = FONT(userLevelLabelFont);
             object.textColor = [UIColor wya_goldenLevelTextColor];
             object;
         });
@@ -332,13 +356,13 @@
 - (UIButton *)forwardingButton {
     if (!_forwardingButton) {
         _forwardingButton = ({
-            CGFloat space     = 6.f;
+            CGFloat space     = forwardingButtonSpace;
             UIButton * object = [[UIButton alloc] init];
             [object setTitle:@"转发" forState:UIControlStateNormal];
             [object setTitle:@"转发" forState:UIControlStateSelected];
             [object setTitleColor:[UIColor wya_textBlackColor] forState:UIControlStateNormal];
             [object setTitleColor:[UIColor wya_textBlackColor] forState:UIControlStateSelected];
-            object.titleLabel.font            = FONT(12);
+            object.titleLabel.font            = FONT(forwardingButtonFont);
             object.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
             [object setImage:[UIImage imageNamed:@"icon_zhuanfa"] forState:UIControlStateNormal];
             [object setImage:[UIImage imageNamed:@"icon_zhuanfablack"] forState:UIControlStateSelected];
@@ -359,7 +383,7 @@
     if (!_userReleaseContentLabel) {
         _userReleaseContentLabel = ({
             UILabel * object     = [[UILabel alloc] init];
-            object.font = FONT(14);
+            object.font = FONT(userReleaseContentLabelFont);
             object.textColor = [UIColor wya_textBlackColor];
             object.numberOfLines           = 0;
             object;
@@ -382,7 +406,7 @@
     if (!_userReleaseTimeLabel) {
         _userReleaseTimeLabel = ({
             UILabel * object     = [[UILabel alloc] init];
-            object.font          = FONT(10);
+            object.font          = FONT(userReleaseTimeLabelFont);
             object.textAlignment = NSTextAlignmentLeft;
             object.textColor     = [UIColor wya_textGrayColor];
             object;
@@ -394,13 +418,13 @@
 - (UIButton *)commentsButton {
     if (!_commentsButton) {
         _commentsButton = ({
-            CGFloat space     = 6 * SizeAdapter;
+            CGFloat space     = commentsButtonSpace * SizeAdapter;
             UIButton * object = [[UIButton alloc] init];
             [object setTitle:@"评论" forState:UIControlStateNormal];
             [object setTitle:@"评论" forState:UIControlStateSelected];
             [object setTitleColor:[UIColor wya_textBlackColor] forState:UIControlStateNormal];
             [object setTitleColor:[UIColor wya_textBlackColor] forState:UIControlStateSelected];
-            object.titleLabel.font = FONT(12);
+            object.titleLabel.font = FONT(commentsButtonFont);
             [object setImage:[UIImage imageNamed:@"icon_pinglun"] forState:UIControlStateNormal];
             [object setImage:[UIImage imageNamed:@"icon_pinglun_press"] forState:UIControlStateSelected];
             object.imageEdgeInsets = UIEdgeInsetsMake(0, -space / 2.0, 0, space / 2.0);
@@ -419,9 +443,9 @@
 - (UIButton *)collectionButton {
     if (!_collectionButton) {
         _collectionButton = ({
-            CGFloat space          = 6 * SizeAdapter;
+            CGFloat space          = collectionButtonSpace * SizeAdapter;
             UIButton * object      = [[UIButton alloc] init];
-            object.titleLabel.font = FONT(12);
+            object.titleLabel.font = FONT(collectionButtonFont);
             [object setTitleColor:[UIColor wya_textBlackColor] forState:UIControlStateNormal];
             [object setImage:[UIImage imageNamed:@"icon_collect"] forState:UIControlStateNormal];
             [object setImage:[UIImage imageNamed:@"icon_collect_press"] forState:UIControlStateSelected];
@@ -441,10 +465,10 @@
 - (UIButton *)praiseButton {
     if (!_praiseButton) {
         _praiseButton = ({
-            CGFloat space     = 6 * SizeAdapter;
+            CGFloat space     = praiseButtonSpace * SizeAdapter;
             UIButton * object = [[UIButton alloc] init];
             [object setTitleColor:[UIColor wya_textBlackColor] forState:UIControlStateNormal];
-            object.titleLabel.font = FONT(12);
+            object.titleLabel.font = FONT(praiseButtonFont);
             [object setImage:[UIImage imageNamed:@"icon_dianzan"] forState:UIControlStateNormal];
             [object setImage:[UIImage imageNamed:@"icon_dianzan_press"] forState:UIControlStateSelected];
             object.imageEdgeInsets = UIEdgeInsetsMake(0, -space / 2.0, 0, space / 2.0);
@@ -470,7 +494,7 @@
             [object setTitleColor:[UIColor wya_blueColor] forState:UIControlStateSelected];
             object.hidden                     = YES;
             object.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-            object.titleLabel.font            = FONT(15);
+            object.titleLabel.font            = FONT(showButtonFont);
             [object addCallBackAction:^(UIButton * button) {
                 self.model.contentShow = !self.model.contentShow;
                 button.selected        = self.model.contentShow;
