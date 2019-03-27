@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WYAImgTextBodyView : UIView
 @property (nonatomic, strong) NSArray * imageArray;
+@property(nonatomic, copy) void (^ImageButtonAction)(NSArray * views,NSInteger index);
 @end
 
 NS_ASSUME_NONNULL_END

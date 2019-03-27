@@ -11,7 +11,8 @@
 #import "WYASendMaterialImageEditCell.h"
 #import "WYAMaterialLabelView.h"
 #import "WYAmaterialLabelViewController.h"
-
+#import "WYASaveSendMaterialModel.h"
+#import "WYAMaterialViewModel.h"
 
 #define CameraCell @"WYAMaterialCameraCell"
 
@@ -24,6 +25,7 @@
 @property (nonatomic, strong) NSMutableArray * dataSource;
 @property (nonatomic, assign) BOOL allImage;
 @property (nonatomic, strong) WYAMaterialLabelView * associatedLabelView;// 关联标签
+@property (nonatomic, strong) WYASaveSendMaterialModel * sendSaveMaterialModel;
 @end
 
 @implementation WYASendMaterialViewController
@@ -32,8 +34,28 @@
     [super viewDidLoad];
     if (self.materialType == MaterialTypeCreate) {
         self.navTitle = @"新建";
+        // 获取历史数据
+        self.sendSaveMaterialModel = [WYASaveMaterialViewModel lookUpSendMaterialModel];
+        if (self.sendSaveMaterialModel) {
+            self.textView.text = self.sendSaveMaterialModel.text;
+            self.associatedLabelView.rightInfoString = self.sendSaveMaterialModel.labelString;
+            self.dataSource    = [NSKeyedUnarchiver unarchiveObjectWithData:self.sendSaveMaterialModel.imageDatas];
+            [self.collectionView reloadData];
+            [self changeCollectionViewFrame];
+        }
     }else{
         self.navTitle = @"编辑";
+        self.textView.text = self.editorModel.mineCreateBodyString;
+        self.associatedLabelView.rightInfoString = self.editorModel.labelString;
+        NSMutableArray * imageArray = [NSMutableArray array];
+        for (NSString * imgName in self.editorModel.mineCreateBodyImgArray) {
+            UIImage * image = [UIImage imageNamed:imgName];
+            [imageArray addObject:image];
+        }
+        self.dataSource    = imageArray;
+        [self.collectionView reloadData];
+        [self changeCollectionViewFrame];
+        // 获取需要编辑的数据模型
     }
     [self.navBar wya_addLeftNavBarButtonWithNormalTitle:@[@"取消"] normalColor:@[[UIColor wya_textWhitColorl]] highlightedColor:@[[UIColor wya_textGrayColor]]];
     [self.navBar wya_addRightNavBarButtonWithNormalTitle:@[@"发布"] normalColor:@[[UIColor wya_textWhitColorl]] highlightedColor:@[[UIColor wya_textGrayColor]]];
@@ -53,13 +75,46 @@
 - (void)wya_customLeftBarButtonItemPressed:(UIButton *)sender{
     if (self.materialType == MaterialTypeCreate) {
         // 在点击取消按钮时需要确认是否保存草稿
-        [self createPop];
+        if (![self.textView.text isEqualToString:@"请输入文字"] || self.dataSource.count > 0 || ![self.associatedLabelView.rightInfoString isEqualToString:@"去关联"]) {
+            [self createPop];
+        }else{
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     }else{
         // 是否放弃编辑
+        [self isContinueEditor];
     }
 }
 - (void)wya_customrRightBarButtonItemPressed:(UIButton *)sender{
-    
+    // 发布状态判断：发布成功、请等待总部审核、发布失败、含有敏感词汇请及时修改
+}
+
+- (void)isContinueEditor{
+    WYAAlertController * alert =
+    [WYAAlertController wya_alertWithTitle:@"是否继续编辑？"
+                                   Message:nil
+                          AlertLayoutStyle:WYAAlertLayoutStyleHorizontal];
+    alert.backgroundButton.enabled = NO;
+    alert.presentStyle             = WYAPopupPresentStyleBounce;
+    alert.dismissStyle             = WYAPopupDismissStyleShrink;
+    // 创建 action
+    WYAAlertAction * defaultAction =
+    [WYAAlertAction wya_actionWithTitle:@"放弃"
+                                  style:WYAAlertActionStyleCancel
+                                handler:^{
+                                    [self.navigationController popViewControllerAnimated:YES];
+                                }];
+
+    WYAAlertAction * cancelAction =
+    [WYAAlertAction wya_actionWithTitle:@"继续"
+                                  style:WYAAlertActionStyleDefault
+                                handler:^{
+
+                                }];
+
+    [alert wya_addAction:defaultAction];
+    [alert wya_addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 - (void)createPop{
     WYAAlertController * alert =
@@ -74,7 +129,8 @@
     [WYAAlertAction wya_actionWithTitle:@"不保留"
                                   style:WYAAlertActionStyleCancel
                                 handler:^{
-
+                                    // 判断是否有草稿，有就删除
+                                    [WYASaveMaterialViewModel deleteSendMaterialModel];
                                     [self.navigationController popViewControllerAnimated:YES];
                                 }];
 
@@ -82,16 +138,17 @@
     [WYAAlertAction wya_actionWithTitle:@"保留"
                                   style:WYAAlertActionStyleDefault
                                 handler:^{
-//                                    BOOL isSuccess;
-//                                    if (self.model) {
-//                                        isSuccess = [WYASendDynamicViewModel updateSendDynamicDraftWithText:self.textView.text images:self.dataSource];
-//                                    } else {
-//                                        isSuccess = [WYASendDynamicViewModel saveSendDynamicDraftWithText:self.textView.text images:self.dataSource];
-//                                    }
-                                    [UIView wya_showBottomToastWithMessage:@"保存失败"];
-                                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                    BOOL isSuccess;
+                                    if (![WYASaveMaterialViewModel lookUpSendMaterialModel]) {
+                                       isSuccess = [WYASaveMaterialViewModel saveSendMaterialWithText:self.textView.text images:self.dataSource labelText:self.associatedLabelView.rightInfoString];
+                                    }else{
+                                        isSuccess = [WYASaveMaterialViewModel updateSendMaterialWithText:self.textView.text images:self.dataSource labelText:self.associatedLabelView.rightInfoString];
+                                    }
+                                    if (isSuccess) {
                                         [self.navigationController popViewControllerAnimated:YES];
-                                    });
+                                    }else{
+                                        [UIView wya_showCenterToastWithMessage:@"保存失败"];
+                                    }
                                 }];
 
     [alert wya_addAction:defaultAction];
@@ -321,6 +378,16 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 - (void)associatedLabelViewPressed:(UIButton *)sender{
     WYAmaterialLabelViewController * vc = [[WYAmaterialLabelViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
+    if (self.materialType == MaterialTypeEditor) {
+        vc.selectedLabelString = self.editorModel.labelString;
+    }else if (self.materialType == MaterialTypeCreate){
+        if (self.sendSaveMaterialModel.labelString) {
+            vc.selectedLabelString = self.sendSaveMaterialModel.labelString;
+        }
+    }
+    vc.SelectedLabelActionBlock = ^(NSString * _Nonnull title) {
+        self.associatedLabelView.rightInfoString = title;
+    };
     [self.navigationController pushViewController:vc animated:YES];
 }
 @end

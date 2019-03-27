@@ -41,7 +41,7 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     CGFloat leftMargin = 16*SizeAdapter;
-    CGFloat width      = ScreenWidth - 2 * leftMargin;
+    CGFloat width      = ScreenWidth - 50*SizeAdapter;
     [self.bgButton mas_makeConstraints:^(MASConstraintMaker * make) {
         make.left.equalTo(self.contentView.mas_left).offset(10*SizeAdapter);
         make.top.equalTo(self.contentView.mas_top).offset(leftMargin);
@@ -79,13 +79,13 @@
 
     [self.readeNumLabel mas_makeConstraints:^(MASConstraintMaker * make) {
         make.right.equalTo(self.bgButton.mas_right).offset(-15*SizeAdapter);
-        make.top.equalTo(self.articleImageView.mas_bottom).offset(16*SizeAdapter);
+        make.centerY.mas_equalTo(self.timeLabel.mas_centerY);
         make.size.mas_equalTo(CGSizeMake(60*SizeAdapter, 12*SizeAdapter));
     }];
 
     [self.forwardingNumLabel mas_makeConstraints:^(MASConstraintMaker * make) {
         make.right.equalTo(self.readeNumLabel.mas_left).offset(-17*SizeAdapter);
-        make.top.equalTo(self.articleImageView.mas_bottom).offset(16*SizeAdapter);
+        make.centerY.mas_equalTo(self.timeLabel.mas_centerY);
         make.size.mas_equalTo(CGSizeMake(60*SizeAdapter, 12*SizeAdapter));
     }];
 

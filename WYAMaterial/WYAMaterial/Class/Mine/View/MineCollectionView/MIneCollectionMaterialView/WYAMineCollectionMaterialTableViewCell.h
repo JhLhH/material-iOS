@@ -16,6 +16,8 @@ typedef void (^ShowAllBodyAction)(NSIndexPath * cellIndexPath);
 typedef void (^CollectionAction)(WYAMineCollectionMaterialTableViewCell * target);
 /// 转发点击事件
 typedef void (^ForwardingAction)(WYAMineCollectionMaterialTableViewCell * target);
+/// 图片预览
+typedef void (^ShowImageAction)(WYAMineCollectionMaterialTableViewCell * target, NSArray * views, NSInteger index);
 
 @interface WYAMineCollectionMaterialTableViewCell : UITableViewCell
 @property (nonatomic, strong) WYAMineCollectionMaterialModel * model;
@@ -25,6 +27,8 @@ typedef void (^ForwardingAction)(WYAMineCollectionMaterialTableViewCell * target
 @property (nonatomic, copy) ForwardingAction forwardingActionBlock;
 /// 全文/收起
 @property (nonatomic, copy) ShowAllBodyAction showAllBodyActionBlock;
+/// 图片预览
+@property (nonatomic, copy) ShowImageAction  showImageActionBlock;
 
 @property (nonatomic, strong) NSIndexPath * cellIndexPath;
 /**

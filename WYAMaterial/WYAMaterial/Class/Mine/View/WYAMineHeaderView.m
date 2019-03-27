@@ -195,6 +195,8 @@
             object.layer.cornerRadius  = 47.5;
             object.layer.masksToBounds = YES;
             object.userInteractionEnabled = NO;
+            object.layer.borderColor = [UIColor wya_goldenColor].CGColor;
+            object.layer.borderWidth = 1;
             [object addTarget:self action:@selector(userIconButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
             object;
         });

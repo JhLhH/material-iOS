@@ -17,6 +17,9 @@ typedef void (^CollectionAction)(WYAMineCreateMaterialTableViewCell * target);
 /// 转发点击事件
 typedef void (^ForwardingAction)(WYAMineCreateMaterialTableViewCell * target);
 
+/// 图片预览
+typedef void (^ShowImageAction)(WYAMineCreateMaterialTableViewCell * target, NSArray * views, NSInteger index);
+
 @interface WYAMineCreateMaterialTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) WYAMineCreateMaterialModel * model;
@@ -26,6 +29,8 @@ typedef void (^ForwardingAction)(WYAMineCreateMaterialTableViewCell * target);
 @property (nonatomic, copy) ForwardingAction forwardingActionBlock;
 /// 全文/收起
 @property (nonatomic, copy) ShowAllBodyAction showAllBodyActionBlock;
+/// 图片预览
+@property (nonatomic, copy) ShowImageAction  showImageActionBlock;
 
 @property (nonatomic, strong) NSIndexPath * cellIndexPath;
 /// 是否在cell上显示下划线

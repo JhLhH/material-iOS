@@ -7,6 +7,7 @@
 //
 
 #import "WYAMaterialShareView.h"
+#import "WYASaveImageToFile.h"
 @interface WYAMaterialShareView()
 @property (nonatomic, strong) UIView * topView;
 @property (nonatomic, strong) UIButton *  friendCircleBtn; // 朋友圈
@@ -31,8 +32,8 @@
 - (void)setIsOnlyFriendCircle:(BOOL)isOnlyFriendCircle{
     _isOnlyFriendCircle = isOnlyFriendCircle;
     if (_isOnlyFriendCircle) {
-        self.handSendCircleBtnLabel.text = @"发送给好友";
-        self.handSendCircleBtnImageView.image = [UIImage imageNamed:@"icon_shoudong"];
+        self.handSendCircleBtnLabel.text = @"好友";
+        self.handSendCircleBtnImageView.image = [UIImage imageNamed:@"icon_haoyou"];
     }
     [self layoutIfNeeded];
 }
@@ -120,13 +121,58 @@
 #pragma mark ======= Event
 
 - (void)friendCircleBtnClicked:(UIButton *)sender{
-    if (self.shareWeChateActionBlock) {
-        self.shareWeChateActionBlock(self.friendCircleBtnLabel.text);
+    ///
+    if (self.imgArray.count == 1) {
+        [[UIPasteboard generalPasteboard] setString:self.contentString];
+//        NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1552901682&di=b23661d86c50223d02fb22c8c77d1e42&src=http://b-ssl.duitang.com/uploads/item/201602/24/20160224122640_XSZYB.thumb.700_0.jpeg"]];
+//        UIImage *image = [UIImage imageWithData:data];
+        NSData * imageData = UIImageJPEGRepresentation(self.imgArray[0], 0.7);
+
+        WXImageObject *imageObject = [WXImageObject object];
+        imageObject.imageData = imageData;
+
+        WXMediaMessage *message = [WXMediaMessage message];
+
+        SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+        req.bText = NO;
+        req.message = message;
+        req.scene = WXSceneTimeline;
+        [WXApi sendReq:req];
+
+        if (self.shareWeChateActionBlock) {
+            self.shareWeChateActionBlock();
+        }
+    }else if (self.imgArray.count > 1){
+        [UIView wya_showCenterToastWithMessage:@"图片数量不符合转发条件"];
+    }else{
+        // 纯文字转发
+        SendMessageToWXReq * req = [[SendMessageToWXReq alloc]init];
+        req.bText = YES;
+        req.text = self.contentString;
+        req.scene = WXSceneSession;
+        [WXApi sendReq:req];
+
+        if (self.shareWeChateActionBlock) {
+            self.shareWeChateActionBlock();
+        }
     }
+
 }
 - (void)handSendCircleBtn:(UIButton *)sender{
+    if([self.handSendCircleBtnLabel.text isEqualToString:@"手动发圈"]){
     if (self.openWeChateActionBlock) {
-        self.openWeChateActionBlock(self.handSendCircleBtnLabel.text);
+        [[UIPasteboard generalPasteboard] setString:self.contentString];
+        WYASaveImageToFile * saveImgManager = [[WYASaveImageToFile alloc]init];
+        for (UIImage * img in self.imgArray) {
+            [saveImgManager saveImage:img SaveBlock:^(BOOL isOK) {
+                NSLog(@"保存成功");
+            }];
+        }
+        self.openWeChateActionBlock();
+    }}else if([self.handSendCircleBtnLabel.text isEqualToString:@"好友"]){
+        if (self.sendWeChateFriendActionBlock) {
+            self.sendWeChateFriendActionBlock();
+        }
     }
 }
 - (void)cancleButton:(UIButton *)sender{

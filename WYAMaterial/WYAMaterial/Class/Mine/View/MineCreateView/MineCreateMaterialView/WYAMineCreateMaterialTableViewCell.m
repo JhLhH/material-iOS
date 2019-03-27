@@ -12,12 +12,16 @@
 
 #import <SDWebImage/UIButton+WebCache.h>
 
-#define ITEM_MARGIN 10 * SizeAdapter
-#define ITEM_WH (ScreenWidth - 88 * SizeAdapter - 3 * ITEM_MARGIN) / 3
+#define ITEM_MARGIN 5 * SizeAdapter
+#define ITEM_WH (ScreenWidth - 120 * SizeAdapter - 2 * ITEM_MARGIN) / 3
 
-#define DEFAULT_CONTENT_HEIGHT 80 * SizeAdapter
+#define DEFAULT_IMAGE_SIZE (ScreenWidth - 190.5 * SizeAdapter)
 
-#define CONTENT_WIDTH (ScreenWidth - 88 * SizeAdapter)
+#define CONTENT_WIDTH (ScreenWidth - 74 * SizeAdapter)
+
+#define IMAGE_WIDTH (ScreenWidth - 120 * SizeAdapter)
+
+#define DEFAULT_CONTENT_HEIGHT 80*SizeAdapter
 
 @interface WYAMineCreateMaterialTableViewCell ()
 @property (nonatomic, assign) CGFloat contentHeight;
@@ -72,48 +76,48 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     [self.userHeaderButton mas_remakeConstraints:^(MASConstraintMaker * make) {
-        make.left.equalTo(self.contentView.mas_left).offset(17 * SizeAdapter);
+        make.left.equalTo(self.contentView.mas_left).offset(12 * SizeAdapter);
         make.top.equalTo(self.contentView.mas_top).offset(18 * SizeAdapter);
-        make.size.mas_equalTo(CGSizeMake(44 * SizeAdapter, 44 * SizeAdapter));
+        make.size.mas_equalTo(CGSizeMake(40 * SizeAdapter, 40 * SizeAdapter));
     }];
 
     CGFloat userNameWidth = [_model.mineCreateUserName wya_widthWithFontSize:15 height:15 * SizeAdapter];
     [self.userNameLabel mas_remakeConstraints:^(MASConstraintMaker * make) {
-        make.left.equalTo(self.userHeaderButton.mas_right).offset(11 * SizeAdapter);
+        make.left.equalTo(self.userHeaderButton.mas_right).offset(10 * SizeAdapter);
         make.top.equalTo(self.contentView.mas_top).offset(20 * SizeAdapter);
         make.size.mas_equalTo(CGSizeMake(userNameWidth, 15 * SizeAdapter));
     }];
 
     [self.userLevelIconView mas_remakeConstraints:^(MASConstraintMaker * make) {
         make.left.equalTo(self.userHeaderButton.mas_right).offset(10 * SizeAdapter);
-        make.top.equalTo(self.userNameLabel.mas_bottom).offset(8 * SizeAdapter);
+        make.top.equalTo(self.userNameLabel.mas_bottom).offset(8.5 * SizeAdapter);
         make.size.mas_equalTo(CGSizeMake(15 * SizeAdapter, 15 * SizeAdapter));
     }];
 
-    CGFloat userLevelWidth = [_model.mineCreateUserInfoString wya_widthWithFontSize:11 height:10 * SizeAdapter];
+    CGFloat userLevelWidth = [_model.mineCreateBodyString wya_widthWithFontSize:11 height:10 * SizeAdapter];
     [self.userLevelLabel mas_remakeConstraints:^(MASConstraintMaker * make) {
         make.left.equalTo(self.userLevelIconView.mas_right).offset(8 * SizeAdapter);
-        make.top.equalTo(self.userNameLabel.mas_bottom).offset(10 * SizeAdapter);
-        make.size.mas_equalTo(CGSizeMake(userLevelWidth, 10 * SizeAdapter));
+        make.centerY.mas_equalTo(self.userLevelIconView.mas_centerY);
+        make.size.mas_equalTo(CGSizeMake(userLevelWidth, 11 * SizeAdapter));
     }];
 
     [self.userContentLabel mas_remakeConstraints:^(MASConstraintMaker * make) {
-        make.left.equalTo(self.contentView.mas_left).offset(73 * SizeAdapter);
-        make.top.equalTo(self.userLevelLabel.mas_bottom).offset(15 * SizeAdapter);
-        make.right.equalTo(self.contentView.mas_right).offset(-15 * SizeAdapter);
+        make.left.equalTo(self.contentView.mas_left).offset(62 * SizeAdapter);
+        make.top.equalTo(self.userLevelLabel.mas_bottom).offset(12 * SizeAdapter);
+        make.right.equalTo(self.contentView.mas_right).offset(-12 * SizeAdapter);
         make.height.mas_equalTo(self.contentHeight);
     }];
 
     [self.auditImgView mas_makeConstraints:^(MASConstraintMaker * make) {
-        make.right.equalTo(self.contentView.mas_right).offset(-14 * SizeAdapter);
+        make.right.equalTo(self.contentView.mas_right).offset(-12 * SizeAdapter);
         make.bottom.equalTo(self.userContentLabel.mas_top).offset(24 * SizeAdapter);
         make.size.mas_equalTo(CGSizeMake(60 * SizeAdapter, 60 * SizeAdapter));
     }];
 
     [self.showAllBodyButton mas_remakeConstraints:^(MASConstraintMaker * make) {
         make.left.mas_equalTo(self.userContentLabel.mas_left);
-        make.top.equalTo(self.userContentLabel.mas_bottom).offset(0);
-        make.size.mas_equalTo(CGSizeMake(40 * SizeAdapter, self.showAllBodyButton.hidden ? 0 : 10 * SizeAdapter));
+        make.top.equalTo(self.userContentLabel.mas_bottom).offset(5*SizeAdapter);
+        make.size.mas_equalTo(CGSizeMake(40 * SizeAdapter, self.showAllBodyButton.hidden ? 0 : 20 * SizeAdapter));
 
     }];
 
@@ -129,39 +133,42 @@
         CGFloat height = index * (ITEM_MARGIN + ITEM_WH);
         [self.userBodyImageView mas_remakeConstraints:^(MASConstraintMaker * make) {
             make.left.mas_equalTo(self.userContentLabel.mas_left);
-            make.top.equalTo(self.showAllBodyButton.mas_bottom).offset(15 * SizeAdapter);
-            make.size.mas_equalTo(CGSizeMake(CONTENT_WIDTH, height));
+            make.top.equalTo(self.showAllBodyButton.mas_bottom).offset(12 * SizeAdapter);
+            make.size.mas_equalTo(CGSizeMake(IMAGE_WIDTH, height));
         }];
     } else if(_model.mineCreateBodyImgArray.count == 1){
         [self.userBodyImageView mas_remakeConstraints:^(MASConstraintMaker * make) {
             make.left.mas_equalTo(self.userContentLabel.mas_left);
-            make.top.equalTo(self.showAllBodyButton.mas_bottom).offset(15 * SizeAdapter);
-            make.size.mas_equalTo(CGSizeMake(200 * SizeAdapter, 200 * SizeAdapter));
+            make.top.equalTo(self.showAllBodyButton.mas_bottom).offset(12 * SizeAdapter);
+            make.size.mas_equalTo(CGSizeMake(DEFAULT_IMAGE_SIZE, DEFAULT_IMAGE_SIZE));
         }];
     }else{
         [self.userBodyImageView mas_remakeConstraints:^(MASConstraintMaker * make) {
             make.left.mas_equalTo(self.userContentLabel.mas_left);
-            make.top.equalTo(self.showAllBodyButton.mas_bottom).offset(15 * SizeAdapter);
-            make.size.mas_equalTo(CGSizeMake(200 * SizeAdapter, 0));
+            make.top.equalTo(self.showAllBodyButton.mas_bottom).offset(12 * SizeAdapter);
+            make.size.mas_equalTo(CGSizeMake(0, 0));
         }];
     }
 
     [self.userTimeLabel mas_remakeConstraints:^(MASConstraintMaker * make) {
         make.left.mas_equalTo(self.userContentLabel.mas_left);
-        make.top.equalTo(self.userBodyImageView.mas_bottom).offset(20 * SizeAdapter);
-        make.size.mas_equalTo(CGSizeMake(60 * SizeAdapter, 8 * SizeAdapter));
+        make.top.equalTo(self.userBodyImageView.mas_bottom).offset(12 * SizeAdapter);
+        make.width.mas_equalTo(60 * SizeAdapter);
+        make.height.mas_equalTo(8*SizeAdapter);
     }];
 
     [self.forwardingButton mas_remakeConstraints:^(MASConstraintMaker * make) {
-        make.right.equalTo(self.contentView.mas_right).offset(-25 * SizeAdapter);
-        make.top.equalTo(self.userBodyImageView.mas_bottom).offset(17 * SizeAdapter);
-        make.size.mas_equalTo(CGSizeMake(50 * SizeAdapter, 15 * SizeAdapter));
+        make.right.equalTo(self.contentView.mas_right).offset(-12 * SizeAdapter);
+        make.centerY.mas_equalTo(self.userTimeLabel.mas_centerY);
+        make.width.mas_equalTo(50 * SizeAdapter);
+        make.height.mas_equalTo(15*SizeAdapter);
     }];
 
     [self.collectionButton mas_remakeConstraints:^(MASConstraintMaker * make) {
-        make.right.equalTo(self.forwardingButton.mas_left).offset(-26 * SizeAdapter);
-        make.top.equalTo(self.userBodyImageView.mas_bottom).offset(17 * SizeAdapter);
-        make.size.mas_equalTo(CGSizeMake(50 * SizeAdapter, 15 * SizeAdapter));
+        make.right.equalTo(self.forwardingButton.mas_left).offset(-27 * SizeAdapter);
+        make.centerY.mas_equalTo(self.userTimeLabel.mas_centerY);
+        make.width.mas_equalTo(50 * SizeAdapter);
+        make.height.mas_equalTo(15*SizeAdapter);
     }];
 
     [self.lineView mas_remakeConstraints:^(MASConstraintMaker * make) {
@@ -229,7 +236,7 @@
         _userHeaderButton = ({
             UIButton * object          = [[UIButton alloc] init];
             object.backgroundColor     = [UIColor wya_lightBlackColor];
-            object.layer.cornerRadius  = 22 * SizeAdapter;
+            object.layer.cornerRadius  = 20 * SizeAdapter;
             object.layer.masksToBounds = YES;
             object;
         });
@@ -318,6 +325,11 @@
     if (!_userBodyImageView) {
         _userBodyImageView = ({
             WYAMineCreateMaterialImgBodyView * object = [[WYAMineCreateMaterialImgBodyView alloc] init];
+            object.ImageButtonAction = ^(NSArray * _Nonnull views, NSInteger index) {
+                if (self.showImageActionBlock) {
+                    self.showImageActionBlock(self, views, index);
+                }
+            };
             object;
         });
     }
@@ -410,7 +422,10 @@
 + (CGFloat)getCellHeightWithModel:(WYAMineCreateMaterialModel *)model {
 
     CGFloat contentHeight = [model.mineCreateBodyString wya_heightWithFontSize:14 width:CONTENT_WIDTH];
-
+    CGFloat showAllHeight = 0;
+    if (contentHeight> DEFAULT_CONTENT_HEIGHT) {
+        showAllHeight = 25*SizeAdapter;
+    }
     if (!model.isShowContent) {
         if (contentHeight > DEFAULT_CONTENT_HEIGHT) {
             contentHeight = DEFAULT_CONTENT_HEIGHT;
@@ -429,7 +444,7 @@
         }
         bodyImgHeight = index * (ITEM_MARGIN + ITEM_WH);
     } else if(model.mineCreateBodyImgArray.count == 1){
-        bodyImgHeight = 200 * SizeAdapter;
+        bodyImgHeight = DEFAULT_IMAGE_SIZE;
     }else{
         bodyImgHeight = 0;
     }
@@ -437,12 +452,12 @@
     CGFloat bottomHeight;
 
     if ([model.mineCreateAuditType isEqualToString:@"审核失败"]) {
-        bottomHeight = 37 * SizeAdapter;
+        bottomHeight = 0 * SizeAdapter;
     } else {
-        bottomHeight = 52 * SizeAdapter;
+        bottomHeight = 47 * SizeAdapter;
     }
 
-    return 70 * SizeAdapter + contentHeight + 15 * SizeAdapter + bodyImgHeight + bottomHeight;
+    return 70.5 * SizeAdapter + contentHeight + showAllHeight + bodyImgHeight + bottomHeight;
 }
 
 @end

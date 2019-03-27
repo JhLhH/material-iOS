@@ -85,7 +85,18 @@
         [self.tableView reloadRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
 
     };
+    cell.showImageActionBlock = ^(WYAMineCollectionMaterialTableViewCell * _Nonnull target, NSArray * _Nonnull views, NSInteger index) {
+        [self showImageBrowserWithModel:target.model views:views index:index];
+    };
     return cell;
 }
+#pragma mark ======= 图片预览
+- (void)showImageBrowserWithModel:(WYAMineCollectionMaterialModel *)model views:(NSArray *)views index:(NSInteger)index {
 
+    [WYAImageBrowser showImageBrowserWithCurrentImageIndex:index imageCount:model.mineCollectionBodyImgArray.count datasource:nil placeHoldImageBlock:^UIImage *(WYAImageBrowser *browser, NSInteger index) {
+        return [UIImage imageNamed:@"1"];
+    } HighQualityImageURLBlock:nil AssetBlock:nil SourceImageViewBlock:^UIImageView *(WYAImageBrowser *browser, NSInteger index) {
+        return views[index];
+    }];
+}
 @end

@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-typedef void (^ShareWeChateActionBlock)(NSString * actionTitle);
-typedef void (^OpenWeChateActionBlock)(NSString * actionTitle);
+typedef void (^ShareWeChateActionBlock)(void);
+typedef void (^OpenWeChateActionBlock)(void);
+typedef void (^SendWeChateFriendActionBlock)(void);
 typedef void (^CancleActionBlock)(void);
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,9 +20,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) ShareWeChateActionBlock  shareWeChateActionBlock;
 /// 手动发圈
 @property (nonatomic, copy) ShareWeChateActionBlock  openWeChateActionBlock;
+/// 发送给好友
+@property (nonatomic, copy) SendWeChateFriendActionBlock  sendWeChateFriendActionBlock;
 /// 取消
 @property (nonatomic, copy) CancleActionBlock cancleActionBlock;
-
+/// 分享的图片
+@property (nonatomic, strong) NSArray <UIImage *> * imgArray;
+/// 文字
+@property (nonatomic, copy) NSString * contentString;
+/// 文章链接
+@property (nonatomic, copy) NSString * articleURL;
 + (instancetype)sharedInstance;
 @end
 

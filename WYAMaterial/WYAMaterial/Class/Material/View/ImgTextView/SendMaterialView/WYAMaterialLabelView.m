@@ -17,6 +17,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
+        self.rightInfoString = @"去关联";
         [self wya_setBackgroundColor:[UIColor wya_whiteColor] forState:UIControlStateNormal];
         [self wya_setBackgroundColor:[UIColor wya_lineColor] forState:UIControlStateHighlighted];
         [self addSubview:self.leftLabel];
@@ -34,11 +35,10 @@
         make.size.mas_equalTo(CGSizeMake(70*SizeAdapter, 16*SizeAdapter));
     }];
 
-    CGFloat width = [_rightInfoString wya_widthWithFontSize:16 height:12*SizeAdapter];
     [self.rightInfoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.arrowimgView.mas_left).offset(-7*SizeAdapter);
         make.centerY.mas_equalTo(self.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(width > 0 ? width : 60*SizeAdapter, 12*SizeAdapter));
+        make.size.mas_equalTo(CGSizeMake(ScreenWidth - 124*SizeAdapter, 12*SizeAdapter));
     }];
     [self.arrowimgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.mas_right).offset(-19*SizeAdapter);

@@ -17,7 +17,6 @@
 @interface WYAImgTextViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) NSMutableArray * dataSources;
-@property (nonatomic, strong) WYAAlertController * shareController;
 @end
 
 @implementation WYAImgTextViewController
@@ -29,20 +28,6 @@
     [self.view addSubview:self.tableView];
 }
 #pragma mark ======= Lazy
-
-- (WYAAlertController *)shareController{
-    if(!_shareController){
-        _shareController = ({
-            WYAMaterialShareView * shareView = [WYAMaterialShareView sharedInstance];
-            shareView.cancleActionBlock = ^{
-                [self dismissViewControllerAnimated:YES completion:nil];
-            };
-            WYAAlertController * object = [WYAAlertController wya_alertWithCustomView:shareView AlertStyle:WYAAlertStyleCustomSheet];
-            object;
-        });
-    }
-    return _shareController;
-}
 
 - (UITableView *)tableView {
     if (!_tableView) {
@@ -93,7 +78,18 @@
     cell.forwardingActionBlock = ^(WYAImageTextTableViewCell * _Nonnull target) {
         // 转发
         NSLog(@"转发");
-        [self presentViewController:self.shareController animated:YES completion:^{
+        WYAMaterialShareView * shareView = [WYAMaterialShareView sharedInstance];
+        shareView.contentString = target.model.bodyString;
+        NSMutableArray * tempArray = [NSMutableArray array];
+        for (NSString * imgName in target.model.bodyImgArray) {
+            [tempArray addObject:[UIImage imageNamed:imgName]];
+        }
+        shareView.imgArray = [tempArray copy];
+        shareView.cancleActionBlock = ^{
+            [self dismissViewControllerAnimated:YES completion:nil];
+        };
+        WYAAlertController * shareController = [WYAAlertController wya_alertWithCustomView:shareView AlertStyle:WYAAlertStyleCustomSheet];
+        [self presentViewController:shareController animated:YES completion:^{
             [UIView wya_showCenterToastWithMessage:@"文案已复制到剪切板"];
         }];
     };
@@ -102,7 +98,20 @@
         //3.传入数组，对当前cell进行刷新
         [self.tableView reloadRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
     };
+    cell.showImageActionBlock = ^(WYAImageTextTableViewCell * _Nonnull target, NSArray * _Nonnull views, NSInteger index) {
+        [self showImageBrowserWithModel:target.model views:views index:index];
+    };
     return cell;
 }
 
+#pragma mark ======= 图片预览
+
+- (void)showImageBrowserWithModel:(WYAImageTextModel *)model views:(NSArray *)views index:(NSInteger)index {
+
+    [WYAImageBrowser showImageBrowserWithCurrentImageIndex:index imageCount:model.bodyImgArray.count datasource:nil placeHoldImageBlock:^UIImage *(WYAImageBrowser *browser, NSInteger index) {
+        return [UIImage imageNamed:@"1"];
+    } HighQualityImageURLBlock:nil AssetBlock:nil SourceImageViewBlock:^UIImageView *(WYAImageBrowser *browser, NSInteger index) {
+        return views[index];
+    }];
+} 
 @end

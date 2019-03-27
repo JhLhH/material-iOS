@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSArray * datSource;
 @property (nonatomic, assign) CGFloat contentViewHeight;
 @property (nonatomic, strong) WYALabelView * contentView;
+@property (nonatomic, copy) NSString * selectedString;
 @end
 
 @implementation WYAmaterialLabelViewController
@@ -27,7 +28,16 @@
     [self.view addSubview:self.bgScrollView];
 }
 - (void)wya_customrRightBarButtonItemPressed:(UIButton *)sender{
-
+    [self.navigationController popViewControllerAnimated:YES];
+    if (self.SelectedLabelActionBlock) {
+        self.SelectedLabelActionBlock(self.selectedString);
+    }
+}
+- (void)wya_goBack{
+    [super wya_goBack];
+    if (self.SelectedLabelActionBlock) {
+        self.SelectedLabelActionBlock(self.selectedString);
+    }
 }
 #pragma mark ======= Lazy
 - (UIScrollView *)bgScrollView{
@@ -44,7 +54,7 @@
 - (NSArray *)datSource{
     if(!_datSource){
         _datSource = ({
-            NSArray * object = @[ @"测试", @"演讲速成手啊啊", @"高效率思维", @"提高效率", @"测试", @"商务英语", @"提高效率", @"测试", @"商务英语", @"高效率思维", @"高效率思维", @"高效率思维", @"高效率思维",@"测试", @"演讲速成手啊啊", @"高效率思维" ];
+            NSArray * object = @[ @"测试", @"演讲速成手啊啊", @"高效率思维", @"提高效率",@"哈哈哈"];
             object;
        });
     }
@@ -56,7 +66,13 @@
         _contentView = ({
             self.contentViewHeight   = 114 + (self.datSource.count / 3) * 40;
             WYALabelView * object  = [[WYALabelView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, self.contentViewHeight)];
+            if (self.selectedLabelString) {
+                object.selectedLabelString = self.selectedLabelString;
+            }
             object.labelArray      = self.datSource;
+            object.SelecrtedLabelAction = ^(NSString * _Nonnull labelTitle) {
+                self.selectedString = labelTitle;
+            };
             object;
         });
     }

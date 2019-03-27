@@ -6,7 +6,6 @@
 //  Copyright © 2018年 WeiYiAn. All rights reserved.
 //
 
-#import "WXApi.h"
 #import <UIKit/UIKit.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, WXApiDelegate>
