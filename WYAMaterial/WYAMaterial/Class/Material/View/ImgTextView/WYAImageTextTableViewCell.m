@@ -225,7 +225,7 @@
             UILabel * object     = [[UILabel alloc] init];
             object.textColor     = [UIColor wya_textBlackColor];
             object.font          = FONT(15);
-            object.textAlignment = NSTextAlignmentCenter;
+//            object.textAlignment = NSTextAlignmentLeft;
             object;
         });
     }

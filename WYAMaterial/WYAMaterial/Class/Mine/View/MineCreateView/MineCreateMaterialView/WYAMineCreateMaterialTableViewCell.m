@@ -250,7 +250,7 @@
             UILabel * object     = [[UILabel alloc] init];
             object.textColor     = [UIColor wya_blackColor];
             object.font          = FONT(15);
-            object.textAlignment = NSTextAlignmentCenter;
+//            object.textAlignment = NSTextAlignmentCenter;
             object;
         });
     }
